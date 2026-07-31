@@ -142,6 +142,23 @@ under that limit. Graph-wide inspection, layout, and render-all operations may
 otherwise be incomplete. Disabled nodes and output restrictions also remain in
 effect.
 
+Live testing against Nuke NC 17.0v4 also found *intermittent* Python
+node-access blackouts: `nuke.allNodes()` sporadically returns an empty list,
+`nuke.toNode()` returns `None` for existing nodes, and `nuke.createNode()`
+creates the node but returns `None` — even in graphs well under 10 nodes.
+Retry on empty or "Node not found" results, and see the "Field notes" section
+of `nuke-mcp-guidelines.md` for details and per-tool consequences.
+
+## One MCP client at a time
+
+The Nuke add-on accepts a single client connection. Each MCP client that
+registers this bridge keeps a long-lived `main.py` process holding that slot,
+so registering the bridge in several clients simultaneously (Claude Code,
+Claude Desktop, Codex, …) makes every client except the first fail with
+"Could not connect to Nuke". Unregister or close the other clients, kill their
+stale `main.py` processes, or stop and restart the server from the NukeMCP
+panel to free the slot.
+
 The server exposes arbitrary Python execution inside Nuke. Keep the listener on
 `localhost`, use trusted MCP clients, save your script before testing, and begin
 with disposable `.nknc` projects.

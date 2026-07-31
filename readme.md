@@ -367,9 +367,10 @@ If Claude cannot connect to Nuke, check the following:
 
 ### Common Errors
 
-- **"Could not connect to Nuke"**: Make sure the Nuke addon is running and using the correct port
+- **"Could not connect to Nuke"**: Make sure the Nuke addon is running and using the correct port. Also note the addon serves **one MCP client at a time** — if the bridge is registered in several MCP clients (Claude Code, Claude Desktop, Codex, …), the first connected `main.py` process holds the only slot and every other client gets this error. Kill stale `main.py` processes or restart the server from the NukeMCP panel.
 - **"Socket timeout while waiting for response"**: The operation in Nuke may be taking too long
-- **"Failed to create node"**: Check if the node type name is correct
+- **"Failed to create node"**: Check if the node type name is correct. On Nuke Non-commercial this error can also be spurious: the node may have been created with a default name even though the tool reported failure (see `nuke-mcp-guidelines.md`, "Field notes").
+- **Empty or wrong script info on Nuke Non-commercial**: `get_script_info` reporting 0 nodes, or "Node not found" for nodes that exist, is a known intermittent NC behavior — retry the call. Details and mitigations in `nuke-mcp-guidelines.md`.
 
 ## Development
 
