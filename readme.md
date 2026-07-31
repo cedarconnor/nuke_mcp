@@ -361,7 +361,7 @@ This pattern allows you to build specialized tools that provide higher-level fun
 If Claude cannot connect to Nuke, check the following:
 
 1. **Nuke is Running**: Make sure Nuke is open and running
-2. **Addon is Active**: Verify the NukeMCP panel shows "Running on port 9876"
+2. **Addon is Active**: Verify the NukeMCP panel shows "Running on port 9877"
 3. **Port Configuration**: Ensure the port matches in both Nuke and the MCP server
 4. **Firewall Settings**: Check if your firewall is blocking the connection
 

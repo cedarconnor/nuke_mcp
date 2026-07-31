@@ -1,0 +1,3 @@
+# FastMCP 2.x matches the API used by nuke_mcp_server.py.
+# Pin the tested release so installations in different MCP clients are reproducible.
+fastmcp==2.14.7

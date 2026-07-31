@@ -13,6 +13,7 @@ from typing import AsyncIterator, Dict, Any, List, Optional, Union
 logging.basicConfig(level=logging.DEBUG, 
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("NukeMCPServer")
+DEFAULT_NUKE_PORT = int(os.environ.get("NUKE_MCP_PORT", "9877"))
 
 # Workflow Rules for Nuke Compositing - with stability focus
 class NukeWorkflowRules:
@@ -477,7 +478,7 @@ def get_nuke_connection():
     
     # Create a new connection
     logger.info("Creating new connection to Nuke")
-    _nuke_connection = NukeConnection(host="localhost", port=9876)
+    _nuke_connection = NukeConnection(host="localhost", port=DEFAULT_NUKE_PORT)
     
     # Try connecting multiple times with a delay
     max_attempts = 3

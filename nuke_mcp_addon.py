@@ -8,8 +8,30 @@ import traceback
 import os
 from typing import Dict, Any, List, Optional, Union
 
+_DEBUG_LOG_PATH = os.environ.get("NUKE_MCP_DEBUG_LOG")
+DEFAULT_PORT = int(os.environ.get("NUKE_MCP_PORT", "9877"))
+
+
+def _debug_log(message):
+    """Write bridge diagnostics without depending on a visible Nuke console."""
+    if not _DEBUG_LOG_PATH:
+        return
+    try:
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        thread_name = threading.current_thread().name
+        with open(_DEBUG_LOG_PATH, "a", encoding="utf-8") as log_file:
+            log_file.write(
+                "[{0}] [{1}] {2}\n".format(timestamp, thread_name, message)
+            )
+    except Exception:
+        pass
+
+
+_debug_log("Loaded add-on module from {0}".format(os.path.abspath(__file__)))
+
+
 class NukeMCPServer:
-    def __init__(self, host='localhost', port=9876):
+    def __init__(self, host='localhost', port=DEFAULT_PORT):
         self.host = host
         self.port = port
         self.running = False
@@ -64,6 +86,7 @@ class NukeMCPServer:
                         self.client, address = self.socket.accept()
                         self.client.setblocking(False)
                         print(f"Connected to client: {address}")
+                        _debug_log("Accepted client connection from {0}".format(address))
                     except BlockingIOError:
                         pass  # No connection waiting
                     except Exception as e:
@@ -87,6 +110,11 @@ class NukeMCPServer:
                                         try:
                                             # Attempt to parse the buffer as JSON
                                             command = json.loads(buffer_str)
+                                            _debug_log(
+                                                "Parsed command: {0}".format(
+                                                    command.get("type")
+                                                )
+                                            )
                                             # If successful, clear the buffer and process command
                                             self.buffer = b''
                                             response = self.execute_command(command)
@@ -157,7 +185,64 @@ class NukeMCPServer:
                     # Track execution time for debugging
                     start_time = time.time()
                     
-                    result = handler(**params)
+                    # Socket requests are processed by self.server_thread. Nuke's
+                    # Python API must be called from Nuke's main/UI thread.
+                    # Capture exceptions inside the dispatched callable because
+                    # executeInMainThreadWithResult may otherwise only print them.
+                    def run_handler_on_main_thread():
+                        _debug_log(
+                            "Entered main-thread handler: {0}".format(cmd_type)
+                        )
+                        try:
+                            dispatched_result = {
+                                "ok": True,
+                                "result": handler(**params),
+                            }
+                            _debug_log(
+                                "Completed main-thread handler: {0}".format(cmd_type)
+                            )
+                            return dispatched_result
+                        except Exception as handler_error:
+                            _debug_log(
+                                "Main-thread handler failed: {0}: {1}".format(
+                                    cmd_type, handler_error
+                                )
+                            )
+                            return {
+                                "ok": False,
+                                "message": str(handler_error),
+                                "traceback": traceback.format_exc(),
+                            }
+
+                    _debug_log(
+                        "Dispatching command to Nuke main thread: {0}".format(
+                            cmd_type
+                        )
+                    )
+                    dispatched = nuke.executeInMainThreadWithResult(
+                        run_handler_on_main_thread
+                    )
+                    _debug_log(
+                        "Main-thread dispatch returned: {0}".format(cmd_type)
+                    )
+
+                    if not dispatched:
+                        raise RuntimeError(
+                            "Nuke main-thread dispatch returned no result"
+                        )
+
+                    if not dispatched.get("ok", False):
+                        error_traceback = dispatched.get("traceback", "")
+                        if error_traceback:
+                            print(error_traceback)
+                        raise RuntimeError(
+                            dispatched.get(
+                                "message",
+                                "Unknown error while executing the Nuke command",
+                            )
+                        )
+
+                    result = dispatched["result"]
                     
                     # Log execution time
                     end_time = time.time()
@@ -901,7 +986,7 @@ class NukeMCPPanel(nukescripts.PythonPanel):
         
         # Add port field
         self.port = nuke.Int_Knob('port', 'Port:')
-        self.port.setValue(9876)
+        self.port.setValue(DEFAULT_PORT)
         self.addKnob(self.port)
         
         # Add status field
