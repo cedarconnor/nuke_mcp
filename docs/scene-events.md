@@ -3,7 +3,8 @@
 Call `subscribe_events(event_types)` to set a filter for the current client connection, then poll
 `get_events(after_sequence=0, limit=100)`. There is no push channel or unsolicited stdio output.
 The default filter includes all event types; an empty list selects none. Reconnection resets the
-filter, so subscribe again. Filters do not own a separate history or change another client's view.
+filter, so subscribe again. A queued subscription whose original connection has closed fails with
+`session_disconnected`, even if the client reconnects with the same session ID. Filters do not own a separate history or change another client's view.
 
 Supported types are `node_created`, `node_deleted`, `knob_changed`, `script_loaded`, `script_saved`,
 `script_closed`, and `frame_changed`. These are callback observations, not completed-operation
@@ -36,6 +37,7 @@ because Nuke 17.0 has no dedicated frame-change callback and Root UI updates may
 Transient frames between samples may be missed. `frame_observation` is always `sampled`.
 Callbacks do no graph traversal, file access, or network work. Failure to observe callback identity,
 recursive observation, missing callback APIs, or registration/removal failures degrade revision coverage.
+Off-main-thread callbacks record safe metadata only and degrade coverage before any Nuke API read.
 
 ## Optimistic edits
 

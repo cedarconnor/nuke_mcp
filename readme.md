@@ -164,7 +164,7 @@ The listener is restricted to loopback. Use trusted local clients: the bridge ca
 
 ## Verification and known limits
 
-Task 14 has **190 passing offline tests** and passing offline/live two-client probes (37 tools). Native NC verified attributed knob events, sampled frame events, revision increments, guarded-edit refusal, and fixture restoration. Trustworthy commercial revision coverage remains unqualified. See the [Task 14 validation report](docs/validation/task-14.md).
+Task 14 has **197 passing offline tests** and passing offline/live two-client probes (37 tools). Native NC verified attributed knob events, sampled frame events, revision increments, guarded-edit refusal, and fixture restoration. Trustworthy commercial revision coverage remains unqualified. See the [Task 14 validation report](docs/validation/task-14.md).
 
 Milestone 5 has **168 passing offline tests**, including callback script-switch protection, deterministic adjustment order, changed toolset rejection, and Windows junction containment. Offline and live two-client stdio passed with all 35 tools. Native NC 17.0v4 planning and saved-clean original restoration passed, but node lookup became unavailable after creation. **Native two-shot publication and AOV pixel/render reconstruction remain unqualified.** No shot was published and no comp preview was rendered. See the [Milestone 5 validation report](docs/validation/milestone-5.md) and retained failure receipts.
 

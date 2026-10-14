@@ -12,17 +12,17 @@
   },
   "receipts": {
     "identity": {
-      "request_id": "020014af-b2f1-45d3-af68-b667d6cabb11",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "3558febd-e59a-4415-b6f8-fbebec1dfcd6",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
       "data": {
         "executed": true,
         "output": {
-          "pid": 149744,
-          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+          "pid": 143436,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
           "disposable": "1",
           "fps": 24.0,
           "frame": 0
@@ -37,16 +37,16 @@
       "revision": null
     },
     "capabilities": {
-      "request_id": "8b8988f2-21a8-4995-8116-69f1fb248c0c",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "3e7b35f1-8620-4c30-81bf-d37b6088b458",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
         "protocol_version": 2,
         "addon_version": "0.2.0",
-        "pid": 149744,
+        "pid": 143436,
         "nuke_version": "17.0v4",
         "gui": true,
         "host_flavor": "nuke",
@@ -96,7 +96,7 @@
           "native_pixel_recipe_qualified": false
         },
         "scene_events": {
-          "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+          "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
           "revision": 23,
           "script_generation": 1,
           "revision_available": false,
@@ -130,14 +130,14 @@
       "revision": null
     },
     "subscribe": {
-      "request_id": "c47ffbab-4882-4b5a-b7f9-d421cb379f88",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "fc513eaa-4e44-44cb-9869-ff7045f4d45f",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 23,
         "script_generation": 1,
         "revision_available": false,
@@ -160,14 +160,14 @@
       "revision": null
     },
     "initial_events": {
-      "request_id": "44c18dc1-f7eb-4596-8f0f-8e19840c18b3",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "b4aab1f8-f72c-4495-b96f-16eb87b7c7f4",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 23,
         "script_generation": 1,
         "revision_available": false,
@@ -181,10 +181,10 @@
             "sequence": 21,
             "first_sequence": 2,
             "revision": 21,
-            "timestamp": 399927.703,
-            "first_timestamp": 399927.687,
+            "timestamp": 400441.296,
+            "first_timestamp": 400441.281,
             "count": 20,
-            "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+            "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
             "request_id": null
           }
         ],
@@ -215,14 +215,14 @@
       "revision": null
     },
     "revision_edit": {
-      "request_id": "557f7bb3-5225-40c2-bcd2-092c92bdafe0",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "6483cf1b-60ce-4b63-963e-de4cf8ee2c47",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": false,
       "state": "failed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 23,
         "script_generation": 1,
         "revision_available": false,
@@ -243,9 +243,9 @@
       "revision": null
     },
     "root_change": {
-      "request_id": "d520f35a-ad9d-44b4-aec1-edb3c98addbe",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "aa8fafc8-256c-4722-a356-768389df6693",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -265,14 +265,14 @@
       "revision": null
     },
     "changed_events": {
-      "request_id": "1164dc79-0dd9-4cf3-b128-24a72e862987",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "0f14f4ab-633e-4c2b-b63b-26b19f94e00d",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 25,
         "script_generation": 1,
         "revision_available": false,
@@ -286,11 +286,11 @@
             "sequence": 24,
             "first_sequence": 24,
             "revision": 24,
-            "timestamp": 399941.687,
-            "first_timestamp": 399941.687,
+            "timestamp": 400452.421,
+            "first_timestamp": 400452.421,
             "count": 1,
-            "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
-            "request_id": "d520f35a-ad9d-44b4-aec1-edb3c98addbe",
+            "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
+            "request_id": "aa8fafc8-256c-4722-a356-768389df6693",
             "node_path": "root",
             "knob": "fps"
           },
@@ -299,10 +299,10 @@
             "sequence": 25,
             "first_sequence": 25,
             "revision": 25,
-            "timestamp": 399941.703,
-            "first_timestamp": 399941.703,
+            "timestamp": 400452.437,
+            "first_timestamp": 400452.437,
             "count": 1,
-            "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+            "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
             "request_id": null,
             "frame": 1
           }
@@ -334,9 +334,9 @@
       "revision": null
     },
     "restore": {
-      "request_id": "ff0981d4-8ad9-4ab1-8ee5-bf55a5ac8490",
-      "client_session_id": "7ece00b5-ae72-49f9-af5b-8298c2642ee1",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "46029c48-653d-4102-a744-eb3b07ebc38c",
+      "client_session_id": "5ebcdd86-e055-468d-a1ce-94942752e899",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -362,11 +362,11 @@
       "sequence": 24,
       "first_sequence": 24,
       "revision": 24,
-      "timestamp": 399941.687,
-      "first_timestamp": 399941.687,
+      "timestamp": 400452.421,
+      "first_timestamp": 400452.421,
       "count": 1,
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
-      "request_id": "d520f35a-ad9d-44b4-aec1-edb3c98addbe",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
+      "request_id": "aa8fafc8-256c-4722-a356-768389df6693",
       "node_path": "root",
       "knob": "fps"
     },
@@ -375,10 +375,10 @@
       "sequence": 25,
       "first_sequence": 25,
       "revision": 25,
-      "timestamp": 399941.703,
-      "first_timestamp": 399941.703,
+      "timestamp": 400452.437,
+      "first_timestamp": 400452.437,
       "count": 1,
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "request_id": null,
       "frame": 1
     }

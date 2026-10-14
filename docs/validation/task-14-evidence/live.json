@@ -3,9 +3,9 @@
   "port": 19877,
   "calls": [
     {
-      "request_id": "3219c86b-fed4-4ee5-bf6f-e2d3fca2cc12",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "b94b39be-72fe-4df2-8123-d38906e7246b",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -21,9 +21,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA36F90>",
+        "format": "<Format object at 0x000001F32C1B7B70>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -38,9 +38,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "1810a4ac-3de2-46b7-bbeb-f351865b6525",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "96dd28d7-6707-41ac-bf74-948499154c78",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -56,9 +56,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA35590>",
+        "format": "<Format object at 0x000001F32C1B5830>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -73,9 +73,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "f4e48106-5320-49e1-9c7b-8ee587737278",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "63bf2732-7206-408f-93d3-9f5ebed20deb",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -91,9 +91,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA36030>",
+        "format": "<Format object at 0x000001F32C1B54D0>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -108,9 +108,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "ba4b3dfa-db87-4477-882e-3992c17fe356",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "40bb4a0a-45fb-4909-82ea-3ab447ff1dc3",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -126,9 +126,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA36450>",
+        "format": "<Format object at 0x000001F32C1B7950>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -143,9 +143,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "53e02798-1fd6-4e76-a7b9-9374a552fa4b",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "d6eb00dd-ec9f-41b9-a454-35a49e34631f",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -161,9 +161,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA37CB0>",
+        "format": "<Format object at 0x000001F32C1B7AF0>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -178,9 +178,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "c3992177-d751-4fa1-9eb7-d3bd8c67fbaa",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "cb0d9df0-a2ce-4f28-838f-4b05049e1183",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -196,9 +196,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA359F0>",
+        "format": "<Format object at 0x000001F32C1B5F30>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -213,9 +213,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "7474574c-3554-49ef-9e28-8f4e8c74e07d",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "85f568eb-d5a2-41ae-a595-0ff1d0a0f31c",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -231,9 +231,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA35F50>",
+        "format": "<Format object at 0x000001F32C1B71D0>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -248,9 +248,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "a723d4b4-7671-400e-956f-7e843ab7df47",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "cf1ed26c-f514-40e4-9978-943300008b68",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -266,9 +266,9 @@
           "coverage": "unknown",
           "reason": "nc_observation_unreliable"
         },
-        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk",
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk",
         "fps": 24,
-        "format": "<Format object at 0x000001814FA36090>",
+        "format": "<Format object at 0x000001F32C1B6D90>",
         "first_frame": 1.0,
         "last_frame": 3.0
       },
@@ -285,16 +285,16 @@
   ],
   "capabilities": [
     {
-      "request_id": "3dc73de2-456d-4d67-91b3-412bbe063fe8",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "4c96ffbf-feb1-40d0-b2e2-ec316e53c6e1",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
         "protocol_version": 2,
         "addon_version": "0.2.0",
-        "pid": 149744,
+        "pid": 143436,
         "nuke_version": "17.0v4",
         "gui": true,
         "host_flavor": "nuke",
@@ -344,7 +344,7 @@
           "native_pixel_recipe_qualified": false
         },
         "scene_events": {
-          "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+          "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
           "revision": 27,
           "script_generation": 1,
           "revision_available": false,
@@ -378,16 +378,16 @@
       "revision": null
     },
     {
-      "request_id": "0059aa85-b057-413f-b340-29f65019a5f9",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "a99d7087-e9f3-403e-a035-192980a41ea4",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
         "protocol_version": 2,
         "addon_version": "0.2.0",
-        "pid": 149744,
+        "pid": 143436,
         "nuke_version": "17.0v4",
         "gui": true,
         "host_flavor": "nuke",
@@ -437,7 +437,7 @@
           "native_pixel_recipe_qualified": false
         },
         "scene_events": {
-          "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+          "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
           "revision": 27,
           "script_generation": 1,
           "revision_available": false,
@@ -473,14 +473,14 @@
   ],
   "events": {
     "subscription_0": {
-      "request_id": "b568f5f6-094c-44e5-aa41-8ee6fb1a6612",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "2977382f-9a68-43a1-9076-c1003b64eafe",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 27,
         "script_generation": 1,
         "revision_available": false,
@@ -502,14 +502,14 @@
       "revision": null
     },
     "subscription_1": {
-      "request_id": "4a6f9951-7700-4025-943b-d6b15f873f57",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "085ff65b-4359-4003-bfcd-692ae4dfab90",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 27,
         "script_generation": 1,
         "revision_available": false,
@@ -531,14 +531,14 @@
       "revision": null
     },
     "poll_0": {
-      "request_id": "34d9203e-b389-475b-8d58-36ea8727e06f",
-      "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "3b304cd3-3364-470e-8905-abe2e3a6a58b",
+      "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 27,
         "script_generation": 1,
         "revision_available": false,
@@ -552,10 +552,10 @@
             "sequence": 22,
             "first_sequence": 22,
             "revision": 22,
-            "timestamp": 399927.703,
-            "first_timestamp": 399927.703,
+            "timestamp": 400441.296,
+            "first_timestamp": 400441.296,
             "count": 1,
-            "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+            "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
             "request_id": null,
             "node_path": "root"
           }
@@ -586,14 +586,14 @@
       "revision": null
     },
     "poll_1": {
-      "request_id": "f21b0481-889b-4e7f-b98e-495780771b66",
-      "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-      "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+      "request_id": "6faf6d0c-f302-46fc-bf0e-cb5d2f4ffa79",
+      "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+      "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+        "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
         "revision": 27,
         "script_generation": 1,
         "revision_available": false,
@@ -607,10 +607,10 @@
             "sequence": 1,
             "first_sequence": 1,
             "revision": 1,
-            "timestamp": 399927.687,
-            "first_timestamp": 399927.687,
+            "timestamp": 400441.281,
+            "first_timestamp": 400441.281,
             "count": 1,
-            "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+            "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
             "request_id": null,
             "node_path": "root"
           }
@@ -642,9 +642,9 @@
     }
   },
   "expected_error": {
-    "request_id": "003b4db4-50e3-4da8-ae5f-073aa2662d9f",
-    "client_session_id": "5e6311e4-4637-4de1-ad77-26d3f43044df",
-    "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+    "request_id": "29976454-3653-41b0-8d22-6a5d009e3bc4",
+    "client_session_id": "c89a497e-e407-451b-9fdd-2d6849951c8f",
+    "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
     "ok": false,
     "state": "failed",
     "outcome": "not_started",
@@ -663,18 +663,18 @@
     "tool": "get_node_info"
   },
   "read_only_python": {
-    "request_id": "47cf9040-b9a9-4d4e-b893-86c40cc2ed12",
-    "client_session_id": "b580f191-0168-4d95-99a4-2d039842bcca",
-    "server_instance_id": "fd9ae4fd-de19-421c-a95b-c46871586051",
+    "request_id": "fca8202c-ba20-4777-a96a-da1f1be4597a",
+    "client_session_id": "dab72b6c-db0d-4463-973e-005027b31eac",
+    "server_instance_id": "ed258040-7506-4179-a8ab-90f33eba0e80",
     "ok": true,
     "state": "completed",
     "outcome": "applied",
     "data": {
       "executed": true,
       "output": {
-        "pid": 149744,
+        "pid": 143436,
         "main_thread": true,
-        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-final-host/events_fixture.nk"
+        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-reviewed-host/events_fixture.nk"
       }
     },
     "error": null,

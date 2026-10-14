@@ -7,18 +7,19 @@ Task 14 is a local delivery; Task 15 release qualification remains pending. Main
 
 ## Verified
 
-- **190 offline tests passed**, no skips. Coverage includes callback registration/removal/restart,
+- **197 offline tests passed**, no skips. Coverage includes callback registration/removal/restart,
   recursion and missing identity, bounded overflow, filtered cursor progress, 100 ms coalescing,
   revision increments before coalescing, request attribution through generator steps, per-client
   filters, stale workflows, unrelated changes between array components, and NC refusal.
 - Final real offline and live two-client stdio passed with **37 tools** and eight concurrent reads.
   New subscription and polling tools return structured read-only receipts. Offline clients received
   distinct filtered views of the same events, and NC guarded edits failed before mutation.
-- Native Nuke NC **17.0v4**, owned disposable process **149744**, instance
-  `fd9ae4fd-de19-421c-a95b-c46871586051`: knob events carried the request ID of the initiating edit,
+- Native Nuke NC **17.0v4**, owned disposable process **143436**, instance
+  `ed258040-7506-4179-a8ab-90f33eba0e80`: knob events carried the request ID of the initiating edit,
   sampled frame notifications arrived, revisions advanced, no knob values/callback code appeared,
   and a guarded batch was refused with `revision_unavailable`/`not_started`.
 - Native FPS and frame changes were read back, then restored with affirmative readback.
+- All three owned disposable processes exited after qualification; exit was verified.
 
 ## Initial native finding
 
@@ -26,7 +27,28 @@ The initial owned process **143280**, instance `507a5b30-aae0-4532-80a4-34736c4d
 checks except frame notification. Its Root-scoped `updateUI` callback did not report the held frame
 change. A failing regression reproduced a runtime with no Root UI notifications. The bridge now
 samples one scalar frame value on the existing main-thread queue timer in addition to `updateUI`.
-The final fresh native process passed all eight checks. Neither run replayed an uncertain mutation.
+A fresh process (149744) passed all eight checks. After the review fixes below, another fresh process
+(143436) passed all eight checks and the live two-client probe. No run replayed an uncertain mutation.
+
+## Independent review
+
+One fresh review of `3d3c84d..ce3afc4` identified three important issues. Each was reproduced with
+failing regressions and fixed in one pass, committed as `7859ef2`:
+
+1. Foreign revision conflicts stopped shot generation but recovery could still discard the foreign
+   edits. Recovery now retains the revision guard even while bypassing cancellation, refuses new
+   observation failures, and preserves foreign changes arriving during restoration preflight.
+   Exclusively owned changes still allow restoration. These cases were verified offline.
+2. Queued subscriptions could outlive disconnected clients and evict an active client's filter.
+   Subscriptions now bind to the exact admitting connection. Real-socket regressions cover eight
+   orphan subscriptions and reconnecting with the same session ID.
+3. Callbacks invoked on a worker thread could read Nuke APIs and still advertise revision coverage.
+   They now retain safe metadata only, avoid host API reads, and degrade revision availability.
+   This boundary was injected offline; native worker-thread callback delivery remains unqualified.
+
+The final 197-test suite, offline stdio, native event probe, and live two-client probe all ran after
+these fixes. No minor findings were deferred. The review deliberately did not re-audit unrelated
+inherited subsystems or certify commercial/native pixel behavior; those remain Task 15 work.
 
 ## Qualification boundaries and rulings
 
@@ -49,7 +71,8 @@ The final fresh native process passed all eight checks. Neither run replayed an 
 
 - [Offline stdio](task-14-evidence/stdio.json) and [native two-client stdio](task-14-evidence/live.json)
 - [Initial native result](task-14-evidence/native-initial.json) and [final native event result](task-14-evidence/native.json)
-- [Initial host close](task-14-evidence/close-initial.json) and [final host close](task-14-evidence/close.json)
+- [Initial host close](task-14-evidence/close-initial.json), [intermediate host close](task-14-evidence/close-before-review.json), and [final host close](task-14-evidence/close.json)
+- [Passing event probe before review](task-14-evidence/native-before-review.json)
 
 ```powershell
 python -m unittest discover -q

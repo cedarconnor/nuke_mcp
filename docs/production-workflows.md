@@ -16,7 +16,9 @@ It does not hash full plate contents. Metadata-preserving external edits are out
 The host must be GUI Nuke launched explicitly with `NUKE_MCP_DISPOSABLE_SESSION=1` and the
 current script must be clean. This opt-in authorizes **fresh-script replacement** within that owned
 session; do not set it on an artist's normal session. A saved clean original is restored on exit when
-its file identity is unchanged and the host has not switched outside workflow ownership. An unnamed
+its file identity is unchanged and the host has not switched outside workflow ownership. Foreign
+observed changes or newly degraded event coverage prevent restoration; the current graph is retained
+for inspection. The revision guard stays active during restoration preflight. An unnamed
 original leaves the owned result/partial graph for inspection. Dirty artist scripts are refused.
 
 Every script and Write path must remain under the manifest's absolute `output_root`, including

@@ -1,11 +1,11 @@
 {
   "mode": "offline_stdio",
-  "port": 64804,
+  "port": 59742,
   "calls": [
     {
-      "request_id": "d2f1def8-4381-498d-89df-f652d26f0fef",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "e77be90f-0fe6-4860-9b7e-e32894b9ba02",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -28,9 +28,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "dd26189e-0439-4883-bbec-a5d1d7b1f5b5",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "3e9ed0af-f94d-4bf2-9db8-5a5a711c7882",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -53,9 +53,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "b516dc5c-5581-49cf-8431-c1642aa63d95",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "d51593a0-0c36-45e2-907c-5514e0ead7d3",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -78,9 +78,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "5a06929d-602b-4b82-a1f9-bc824ca4aaab",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "1d72c0f9-e004-4fb4-8438-f424b4828f2c",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -103,9 +103,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "5446cabd-d269-4321-8b16-dd239e3876cc",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "253fcd1c-09b6-47f1-b32f-3a807b040be4",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -128,9 +128,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "627d5b18-9f4b-4518-a1f1-ba3e8a419f52",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "f878b492-2801-493e-8bfc-848d7d8ee0bc",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -153,9 +153,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "1c92e429-dc92-4a88-980f-69f3064bdc7c",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "8cd606f1-7b18-4aab-9e71-bc40019bfcd4",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -178,9 +178,9 @@
       "tool": "get_script_info"
     },
     {
-      "request_id": "ad163d4d-da05-4d51-9f7b-e92b51226c08",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "95beb6a3-6f74-4b4d-b0ff-96fd2105e87f",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -205,9 +205,9 @@
   ],
   "capabilities": [
     {
-      "request_id": "1e4d243c-7e37-4a13-a873-a2fb96cd4d9a",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "b94bfa08-6fe6-4821-8712-719bf443c75b",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -224,9 +224,9 @@
       "revision": null
     },
     {
-      "request_id": "4fe6e8e4-da71-445c-b09a-07b3b714ef9a",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "394ece05-1d78-4913-b64a-9033db8e3668",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -245,14 +245,14 @@
   ],
   "events": {
     "subscription_0": {
-      "request_id": "be677cc5-31ef-436c-8a26-04e7107586c8",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "90758e15-a00e-4c97-ac4c-6ee4060546a8",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 0,
         "script_generation": 0,
         "revision_available": false,
@@ -273,14 +273,14 @@
       "revision": null
     },
     "subscription_1": {
-      "request_id": "81510305-f16f-4e24-98ac-5eda6636fd18",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "35d8786e-9837-48b3-9859-f73ca8a83f37",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 0,
         "script_generation": 0,
         "revision_available": false,
@@ -301,14 +301,14 @@
       "revision": null
     },
     "poll_0": {
-      "request_id": "49298ad5-f910-4c40-ab68-b30aa0c6ebe4",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "9aa03604-92e9-4e3d-b804-b66d2aa39a4e",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 2,
         "script_generation": 0,
         "revision_available": false,
@@ -321,10 +321,10 @@
             "sequence": 1,
             "first_sequence": 1,
             "revision": 1,
-            "timestamp": 399957.734,
-            "first_timestamp": 399957.734,
+            "timestamp": 400468.671,
+            "first_timestamp": 400468.671,
             "count": 1,
-            "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+            "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
             "request_id": null,
             "node_path": "EventFixture"
           }
@@ -355,14 +355,14 @@
       "revision": null
     },
     "poll_1": {
-      "request_id": "e4a1939f-b0e1-40a9-a203-d5b3baed2ef3",
-      "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "44d5ed20-e544-4ba3-a361-705916e3a3f7",
+      "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 2,
         "script_generation": 0,
         "revision_available": false,
@@ -375,10 +375,10 @@
             "sequence": 2,
             "first_sequence": 2,
             "revision": 2,
-            "timestamp": 399957.734,
-            "first_timestamp": 399957.734,
+            "timestamp": 400468.671,
+            "first_timestamp": 400468.671,
             "count": 1,
-            "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+            "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
             "request_id": null,
             "node_path": "EventFixture"
           }
@@ -409,14 +409,14 @@
       "revision": null
     },
     "degraded_revision": {
-      "request_id": "3d6e52b9-7b14-43bc-9d14-c6ee2006daa6",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "76294833-e710-45d8-acb5-cfccb385ab5b",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": false,
       "state": "failed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 2,
         "script_generation": 0,
         "revision_available": false,
@@ -437,9 +437,9 @@
     }
   },
   "expected_error": {
-    "request_id": "9ff75651-0364-4523-96e7-4819b3ab3fcf",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "bffe83ef-2571-4689-b563-0a93943afc14",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": false,
     "state": "failed",
     "outcome": "not_started",
@@ -458,9 +458,9 @@
     "tool": "get_node_info"
   },
   "read_only_python": {
-    "request_id": "08537db8-84a4-48c1-a0fc-3e6a862b1110",
-    "client_session_id": "497144f4-555c-4cb3-b228-2a5baf36d002",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "7c5be5a9-eb16-4655-829a-d723d794decd",
+    "client_session_id": "2e272252-403b-46d0-9b16-73c3dc535cee",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": true,
     "state": "completed",
     "outcome": "applied",
@@ -482,9 +482,9 @@
   },
   "workflows": {
     "comp": {
-      "request_id": "b0e755ad-d039-4f52-b7ee-d79fdb2431b1",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "d7c1090f-b684-4067-a30d-2f33e6301e24",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -653,9 +653,9 @@
       "revision": null
     },
     "shot": {
-      "request_id": "9aea999a-ce13-4fb5-891a-d086ae56bb39",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "8813a8bf-d3b2-41ee-8526-b489189ccd1e",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -663,7 +663,7 @@
         "completed": [
           {
             "shot_id": "sh010",
-            "script_path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\sh010.nknc",
+            "script_path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\sh010.nknc",
             "published": true,
             "created_paths": [
               "Plate_0",
@@ -680,39 +680,39 @@
               },
               "graph_coverage": "unknown"
             },
-            "staging_path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\.stage-6d2a30ff17ee4cadb7beea7356365489.nknc",
+            "staging_path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\.stage-ccc7f6216c5f4a77a8538f03b3430875.nknc",
             "save": {
               "before": {
                 "path": "Root",
                 "modified": false
               },
-              "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\.stage-6d2a30ff17ee4cadb7beea7356365489.nknc",
+              "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\.stage-ccc7f6216c5f4a77a8538f03b3430875.nknc",
               "save_current": false,
               "after": {
-                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\.stage-6d2a30ff17ee4cadb7beea7356365489.nknc",
+                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\.stage-ccc7f6216c5f4a77a8538f03b3430875.nknc",
                 "modified": false
               },
-              "sha256": "3a944929a7b0681566df78ad1c36f3251ce69efec010b9df0436b220072494b1",
+              "sha256": "8001b99000804de2e24089b84b42aaf3c8fc91fc21da0ff74417e727c6898bb2",
               "bytes": 1127
             },
             "reload": {
               "before": {
-                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\.stage-6d2a30ff17ee4cadb7beea7356365489.nknc",
+                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\.stage-ccc7f6216c5f4a77a8538f03b3430875.nknc",
                 "modified": false
               },
-              "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\sh010.nknc",
+              "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\sh010.nknc",
               "discard_unsaved_changes": false,
               "after": {
-                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\sh010.nknc",
+                "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\sh010.nknc",
                 "modified": false
               }
             },
             "write_paths": [
-              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\out.-002.exr",
-              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\out.-001.exr",
-              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\out.0000.exr",
-              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\out.0001.exr",
-              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\out.0002.exr"
+              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\out.-002.exr",
+              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\out.-001.exr",
+              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\out.0000.exr",
+              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\out.0001.exr",
+              "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\out.0002.exr"
             ]
           }
         ],
@@ -722,9 +722,9 @@
           "reason": "Original was unnamed; owned result retained"
         },
         "request": {
-          "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
-          "request_id": "9aea999a-ce13-4fb5-891a-d086ae56bb39",
-          "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be"
+          "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
+          "request_id": "8813a8bf-d3b2-41ee-8526-b489189ccd1e",
+          "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90"
         },
         "outcome": "applied"
       },
@@ -739,20 +739,20 @@
   },
   "lifecycle": {
     "save_toolset": {
-      "request_id": "6b87964f-5b5a-4bbc-ac9b-b5d593e7e1cb",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "00561fdb-34ec-4ca4-9cc9-bd64e02a3dcb",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
       "data": {
         "name": "fixture",
-        "payload": "e52ac9371ef8436a9ff266145656c8a5.nknc",
+        "payload": "2ad83998b599455791a77bd2c8a6de1a.nknc",
         "published": true,
         "manifest": {
           "schema_version": 1,
           "name": "fixture",
-          "payload": "e52ac9371ef8436a9ff266145656c8a5.nknc",
+          "payload": "2ad83998b599455791a77bd2c8a6de1a.nknc",
           "sha256": "9cbaff97ae0fb2ee1149723fffe70d2cbdfa611d4d04549efd731dd49208e1e0",
           "host": {
             "version": "fixture",
@@ -799,9 +799,9 @@
       "revision": null
     },
     "list_toolsets": {
-      "request_id": "411d075c-c483-41b9-965c-de8f436c2ab5",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "56599c2e-c0e8-4b41-b3c0-ea2fec0bdd09",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -810,7 +810,7 @@
           {
             "name": "fixture",
             "sha256": "9cbaff97ae0fb2ee1149723fffe70d2cbdfa611d4d04549efd731dd49208e1e0",
-            "payload": "e52ac9371ef8436a9ff266145656c8a5.nknc",
+            "payload": "2ad83998b599455791a77bd2c8a6de1a.nknc",
             "host": {
               "version": "fixture",
               "extension": ".nknc",
@@ -830,9 +830,9 @@
       "revision": null
     },
     "load_toolset": {
-      "request_id": "f777addb-3ff8-4035-b66e-000d2da38df5",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "be4ced52-835a-4838-bb54-8c0ca37996f3",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -857,9 +857,9 @@
       "revision": null
     },
     "set_project_settings": {
-      "request_id": "efaee176-3d86-4f61-b3f6-9e783ade98f2",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "b082f1a4-6ac3-44f3-80d7-86e66dd8823a",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -883,9 +883,9 @@
       "revision": null
     },
     "save_script": {
-      "request_id": "4c6ad95d-d61d-479e-949a-802079d17dee",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "89ecfd56-25f7-4d86-afad-8450b8aba892",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -894,10 +894,10 @@
           "path": "Root",
           "modified": true
         },
-        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\shot.nknc",
+        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\shot.nknc",
         "save_current": false,
         "after": {
-          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\shot.nknc",
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\shot.nknc",
           "modified": false
         },
         "sha256": "c3f58af6cd49f9d7806d497a370e7a66426fb5234f38e55668f19a7a1c743774",
@@ -912,21 +912,21 @@
       "revision": null
     },
     "open_script": {
-      "request_id": "cca0d9ed-c610-4b7c-8751-f425d675c2c0",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "ad720d77-f333-41e5-9350-1db39face463",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
       "data": {
         "before": {
-          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\shot.nknc",
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\shot.nknc",
           "modified": false
         },
-        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\shot.nknc",
+        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\shot.nknc",
         "discard_unsaved_changes": false,
         "after": {
-          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpbntaaf3j\\shot.nknc",
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmpmi55l2ld\\shot.nknc",
           "modified": false
         }
       },
@@ -940,9 +940,9 @@
     }
   },
   "inspection": {
-    "request_id": "9472e5ce-175c-4ff7-9e4a-82ac1a436018",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "03e44a06-a94e-4987-9c91-2e44513cacf8",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": true,
     "state": "completed",
     "outcome": "not_started",
@@ -1027,9 +1027,9 @@
     "revision": null
   },
   "statistics": {
-    "request_id": "0355eefb-092c-4de9-9d34-cece748a7b8d",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "07b1d37d-b65f-4050-a9b8-2cb68d4bb438",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": true,
     "state": "completed",
     "outcome": "not_started",
@@ -1097,9 +1097,9 @@
     "revision": null
   },
   "verified_modify": {
-    "request_id": "829c04fa-05e9-410e-947b-8ac0c8ec2c1f",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "0185c6bf-d81d-472d-b085-24a7fd8e0a0f",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": true,
     "state": "completed",
     "outcome": "applied",
@@ -1141,9 +1141,9 @@
   },
   "batch": {
     "dry_run": {
-      "request_id": "c8dba958-fc60-4f76-9281-f22864dbba1e",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "4372bc10-e74c-448e-b197-c3cfa4840340",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "not_started",
@@ -1166,7 +1166,7 @@
         ],
         "atomic": false,
         "scene_revision": {
-          "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+          "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
           "revision": 2,
           "script_generation": 0,
           "revision_available": false,
@@ -1184,9 +1184,9 @@
       "revision": null
     },
     "apply": {
-      "request_id": "bce69c5f-a942-434f-8f48-26776102c643",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "2688a5ef-efb0-4c97-9980-f66f14ba94d4",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": true,
       "state": "completed",
       "outcome": "applied",
@@ -1216,7 +1216,7 @@
         ],
         "atomic": false,
         "scene_revision": {
-          "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+          "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
           "revision": 2,
           "script_generation": 0,
           "revision_available": false,
@@ -1234,14 +1234,14 @@
       "revision": null
     },
     "revision_refused": {
-      "request_id": "fed1ce66-b36a-4bb1-876e-97392cb96738",
-      "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-      "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+      "request_id": "9554bc7f-e4ce-4dc2-81f7-1727352c058e",
+      "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+      "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
       "ok": false,
       "state": "failed",
       "outcome": "not_started",
       "data": {
-        "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+        "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
         "revision": 2,
         "script_generation": 0,
         "revision_available": false,
@@ -1261,11 +1261,11 @@
       "revision": null
     }
   },
-  "render_seconds": 0.14000000001396984,
+  "render_seconds": 0.17199999996228144,
   "render": {
-    "request_id": "cffc2134-c688-48a2-81f6-f7e0c49c31e5",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "147c5a26-e328-4ed3-937f-ed5c6eabeeb9",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": true,
     "state": "completed",
     "outcome": "applied",
@@ -1284,9 +1284,9 @@
     "revision": null
   },
   "unsupported_node": {
-    "request_id": "352a8a6b-d60b-426d-bcef-a4ab5ae14da8",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "6f836d8f-3b04-4720-aaac-690e5ff72a8a",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": false,
     "state": "failed",
     "outcome": "not_started",
@@ -1305,9 +1305,9 @@
     "tool": "create_node"
   },
   "unavailable_host": {
-    "request_id": "793f0861-914b-4817-8183-b8e4620daacd",
-    "client_session_id": "9ca367bc-62cb-488e-a3ad-ebd24fd557be",
-    "server_instance_id": "498758d5-d7c3-43ad-b3c5-41b127b4084c",
+    "request_id": "7824c815-ac15-4415-961d-e7cad1c6884e",
+    "client_session_id": "a9e413a6-95a1-43b6-8c3f-d4852f576a90",
+    "server_instance_id": "bee63a75-5385-4d14-9a57-38d625694e1d",
     "ok": false,
     "state": "failed",
     "outcome": "unknown",
