@@ -46,6 +46,8 @@ class NukeMCPServer:
                  "position_node", "connect_nodes", "render", "viewer_playback",
                  "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
+        from nuke_mcp_bridge.capabilities import probe_capabilities
+        handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
         self.runtime = BridgeRuntime(handlers, OperationRegistry(), QtDispatcher())
         try:
             self.runtime.start(self.host, self.port)
@@ -489,85 +491,67 @@ class NukeMCPServer:
             traceback.print_exc()
             raise Exception(f"Failed to connect nodes: {str(e)}")
     
-    def render(self, frame_range=None, write_node=None, proxy_mode=False):
-        """Render frames from the Nuke script"""
+    def render(self, frame_range=None, write_node=None, proxy_mode=False,
+               first_frame=None, last_frame=None, step=1):
+        """Cooperative render: one native frame per main-thread queue tick."""
+        from nuke_mcp_bridge.protocol import BridgeError
+        if type(step) is not int or step < 1:
+            raise BridgeError("invalid_request", "Render step must be a positive integer")
+        if frame_range is not None:
+            frames = self._parse_frame_range(frame_range)
+        else:
+            first = int(nuke.root()["first_frame"].value()) if first_frame is None else first_frame
+            last = int(nuke.root()["last_frame"].value()) if last_frame is None else last_frame
+            if type(first) is not int or type(last) is not int or last < first:
+                raise BridgeError("invalid_request", "Render requires ordered integer frames")
+            if (last - first) // step + 1 > 100000:
+                raise BridgeError("invalid_request", "At most 100000 render frames")
+            frames = range(first, last + 1, step)
+        if write_node:
+            node = nuke.toNode(write_node)
+            if node is None or node.Class() != "Write":
+                raise BridgeError("write_node_unavailable", "Write node unavailable: " + write_node)
+            nodes = [node]
+        else:
+            if nuke.env.get("nc") or nuke.env.get("noncommercial"):
+                raise BridgeError("state_uncertain", "NC enumeration cannot establish all Write nodes; specify write_node")
+            nodes = nuke.allNodes("Write")
+            if not nodes:
+                raise BridgeError("write_node_unavailable", "No observable Write nodes")
+        original_frame, original_proxy = nuke.frame(), nuke.proxy()
+        completed = []
         try:
-            # Set proxy mode if requested
-            if proxy_mode:
-                nuke.setProxy(True)
-            else:
-                nuke.setProxy(False)
-            
-            # Process frame range
-            if frame_range:
-                # Parse frame range string to get the frames to render
-                frames = self._parse_frame_range(frame_range)
-                if not frames:
-                    raise ValueError(f"Invalid frame range: {frame_range}")
-                    
-                start_frame = frames[0]
-                end_frame = frames[-1]
-            else:
-                # Use script's frame range
-                start_frame = int(nuke.root()['first_frame'].value())
-                end_frame = int(nuke.root()['last_frame'].value())
-            
-            # Render specific Write node or all
-            if write_node:
-                node = nuke.toNode(write_node)
-                if not node:
-                    raise ValueError(f"Write node not found: {write_node}")
-                
-                # Check if it's a Write node
-                if node.Class() != "Write":
-                    raise ValueError(f"Node {write_node} is not a Write node")
-                
-                # Execute the render
-                nuke.execute(node, start_frame, end_frame)
-                return {
-                    "status": f"Rendered {write_node} for frames {start_frame}-{end_frame}",
-                    "frames": [start_frame, end_frame]
-                }
-            else:
-                # Render all Write nodes
-                write_nodes = nuke.allNodes('Write')
-                if not write_nodes:
-                    raise ValueError("No Write nodes found in script")
-                
-                nuke.executeMultiple(write_nodes, [[start_frame, end_frame]])
-                
-                # Return the names of the Write nodes that were rendered
-                rendered_nodes = [node.name() for node in write_nodes]
-                return {
-                    "status": f"Rendered {len(rendered_nodes)} Write nodes for frames {start_frame}-{end_frame}",
-                    "write_nodes": rendered_nodes,
-                    "frames": [start_frame, end_frame]
-                }
-            
-        except Exception as e:
-            print(f"Render error: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Render error: {str(e)}")
-    
+            nuke.setProxy(proxy_mode)
+            for frame in frames:
+                for node in nodes:
+                    nuke.execute(node, frame, frame)
+                completed.append(frame)
+                yield {"frames_completed": list(completed),
+                       "write_nodes": [node.name() for node in nodes],
+                       "status": "Rendered {0} frame(s)".format(len(completed))}
+        finally:
+            try:
+                nuke.setProxy(original_proxy)
+            finally:
+                nuke.frame(original_frame)
+
     def _parse_frame_range(self, frame_range_str):
-        """Parse a frame range string like '1-5,7,9-12'"""
-        frames = []
-        try:
-            parts = frame_range_str.split(',')
-            
-            for part in parts:
-                if '-' in part:
-                    # Range of frames
-                    start, end = map(int, part.split('-'))
-                    frames.extend(range(start, end + 1))
-                else:
-                    # Single frame
-                    frames.append(int(part))
-        except ValueError as e:
-            print(f"Error parsing frame range: {str(e)}")
-        
+        import re
+        from nuke_mcp_bridge.protocol import BridgeError
+        frames = set()
+        for part in frame_range_str.split(","):
+            match = re.fullmatch(r"\s*(-?\d+)(?:\s*-\s*(-?\d+))?\s*", part)
+            if not match:
+                raise BridgeError("invalid_request", "Invalid frame range")
+            first = int(match.group(1))
+            last = int(match.group(2)) if match.group(2) is not None else first
+            if last < first or last - first + 1 > 100000:
+                raise BridgeError("invalid_request", "Invalid or oversized frame range")
+            frames.update(range(first, last + 1))
+            if len(frames) > 100000:
+                raise BridgeError("invalid_request", "At most 100000 render frames")
         return sorted(frames)
-    
+
     def viewer_playback(self, action="play", start_frame=None, end_frame=None, viewer_index=1):
         """Control Nuke's Viewer playback"""
         try:

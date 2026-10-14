@@ -18,33 +18,34 @@ Nuke-MCP allows AI assistants to interact with Nuke through a socket connection,
 1. **Nuke Addon** (`nuke_mcp_addon.py`): A Nuke script that creates a socket server within Nuke
 2. **MCP Server** (`nuke_mcp_server.py`): A Python server that connects to the Nuke addon and exposes tools to AI systems
 3. **Entry Point** (`main.py`): A simple script to start the MCP server
+4. **Shared package** (`nuke_mcp_bridge/`): Protocol v2, receipts, main-thread scheduling, and capability reporting
 
 ## Installation
 
 ### Prerequisites
 
-- The Foundry's Nuke (any recent version should work)
-- Python 3.7+
-- FastMCP package
+- The Foundry's Nuke with a GUI and PySide6/PySide2 (Windows Nuke 17 is the initial qualification target)
+- External Python 3.11
+- FastMCP 2.14.7 (install the pinned requirements)
 - Claude Desktop
 
 ### Installing the FastMCP package
 
 ```bash
-pip install fastmcp
+pip install -r requirements.txt
 ```
 
 ### Installing Nuke-MCP
 
 1. Clone or download this repository
-2. Copy `nuke_mcp_addon.py` to your Nuke scripts folder or a location in your Nuke Python path
+2. Add the complete checkout to Nuke's Python path. The add-on and `nuke_mcp_bridge/` must stay together. See [installation and protocol migration](INSTALL_OTHER_CLIENTS.md).
 
 ## Usage
 
 ### Installing the Nuke Addon
 
-1. **Copy the Addon File**:
-   - Take the `nuke_mcp_addon.py` file and place it in a location where Nuke can find it:
+1. **Install the Addon and Shared Package**:
+   - Keep `nuke_mcp_addon.py` and the complete `nuke_mcp_bridge/` directory in a location where Nuke can find them:
      - Copy it to your Nuke scripts folder (usually in `~/.nuke/python` on Linux/Mac or in your home directory on Windows)
      - Or place it in a folder that's in your Nuke Python path
 

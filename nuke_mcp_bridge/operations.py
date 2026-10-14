@@ -155,7 +155,8 @@ class OperationRegistry:
             req = entry["request"]
             job = entry["job"]
             cancel = entry["cancel"] or self._stopping
-            expired = self.clock() >= entry["deadline"]
+            # A render's deadline governs admission, not the length of its frames.
+            expired = req["command"] != "render" and self.clock() >= entry["deadline"]
         try:
             if job is not None:
                 if cancel or expired:
@@ -200,6 +201,14 @@ class OperationRegistry:
                 error={"code": exc.code if isinstance(exc, BridgeError) else "host_error",
                        "message": str(exc)}))
         finally:
+            if entry["result"]["state"] in TERMINAL_STATES and entry["job"] is not None:
+                try:
+                    entry["job"].close()
+                except Exception as exc:
+                    with self._lock:
+                        entry["result"] = self._error(req, "cleanup_failed", str(exc), "unknown")
+                finally:
+                    entry["job"] = None
             with self._lock:
                 if entry["result"]["state"] in TERMINAL_STATES:
                     self._active = None

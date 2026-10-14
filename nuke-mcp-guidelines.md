@@ -1,5 +1,11 @@
 # Guidelines for Creating Nuke Nodes via MCP
 
+Protocol v2: inspect structured `state`/`outcome` and MCP `isError`, and retain
+request/instance IDs for `get_operation_status`. A timeout or disconnect does not
+prove cancellation. Never automatically retry a mutation, including handle-less
+NC creation. `get_capabilities` reports uncertainty; Milestone 1 does not provide
+verified edit readbacks or complete graph observation.
+
 When creating Nuke node graphs or compositing setups via the Nuke MCP interface, please follow these guidelines to prevent crashes:
 
 ## Critical Rules

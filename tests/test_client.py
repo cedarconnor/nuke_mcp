@@ -1,6 +1,7 @@
 import threading
 import time
 import unittest
+from uuid import uuid4
 from nuke_mcp_bridge.client import BridgeClient
 from nuke_mcp_bridge.operations import OperationRegistry
 from nuke_mcp_bridge.runtime import BridgeRuntime
@@ -68,3 +69,26 @@ class ClientTests(unittest.TestCase):
         status = self.client.status(accepted["request_id"], accepted["server_instance_id"])
         self.assertEqual(status["error"]["code"], "instance_changed")
         self.assertEqual(self.seen, [])
+
+    def test_wrong_receipt_identity_is_rejected_and_socket_closed(self):
+        send = self.runtime._send
+        def corrupt(sock, message):
+            if message.get('type') == 'reply':
+                message['result']['request_id'] = str(uuid4())
+            send(sock, message)
+        self.runtime._send = corrupt
+        result = self.client.submit('edit', {})
+        self.assertEqual(result['error']['code'], 'response_mismatch')
+        self.assertIsNone(self.client.sock)
+
+    def test_stale_outer_message_is_rejected_without_replay(self):
+        send = self.runtime._send
+        def corrupt(sock, message):
+            if message.get('type') == 'reply':
+                message['message_id'] = str(uuid4())
+            send(sock, message)
+        self.runtime._send = corrupt
+        result = self.client.submit('edit', {})
+        self.assertEqual(result['error']['code'], 'response_mismatch')
+        self.dispatcher.tick()
+        self.assertEqual(self.seen, [{}])

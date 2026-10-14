@@ -71,7 +71,13 @@ class BridgeClient:
                             else message["message_id"])
                 if reply.get("type") != "reply" or reply.get("message_id") != expected:
                     raise BridgeError("response_mismatch", "Uncorrelated response; connection closed", "unknown")
-                return reply["result"]
+                result = reply.get("result")
+                target = message["request"] if message["type"] == "request" else message
+                if (not isinstance(result, dict) or
+                        any(result.get(k) != target[k] for k in ("request_id", "server_instance_id")) or
+                        (message["type"] == "request" and result.get("client_session_id") != self.session_id)):
+                    raise BridgeError("response_mismatch", "Receipt identity does not match request", "unknown")
+                return result
             except Exception:
                 self.close()
                 raise

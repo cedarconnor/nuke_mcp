@@ -1,4 +1,5 @@
 from fastmcp import FastMCP, Context
+from nuke_mcp_bridge.mcp_adapter import bridge_tool, capture_receipt, register_tools
 import socket
 import json
 import asyncio
@@ -304,6 +305,7 @@ class NukeConnection:
 
     def send_command(self, command_type, params=None):
         result = self.client.call(command_type, params or {})
+        capture_receipt(result)
         if not result["ok"]:
             from nuke_mcp_bridge.protocol import BridgeError
             error = result.get("error") or {}
@@ -347,9 +349,10 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[Dict[str, Any]]:
         logger.info("NukeMCP server shut down")
 
 # Create the MCP server
-mcp = FastMCP("NukeMCP")
+mcp = FastMCP("NukeMCP", lifespan=server_lifespan)
+register_tools(mcp, lambda: get_nuke_connection().client)
 
-@mcp.tool()
+@bridge_tool(mcp)
 def get_script_info(ctx: Context) -> str:
     """Get detailed information about the current Nuke script"""
     try:
@@ -389,7 +392,7 @@ def get_script_info(ctx: Context) -> str:
         logger.error(f"Error in get_script_info: {str(e)}")
         return f"Error getting script info: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def get_node_info(ctx: Context, node_name: str) -> str:
     """
     Get detailed information about a specific node in the Nuke script.
@@ -447,7 +450,7 @@ def get_node_info(ctx: Context, node_name: str) -> str:
         logger.error(f"Error in get_node_info: {str(e)}")
         return f"Error getting node info: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def create_node(
     ctx: Context,
     node_type: str,
@@ -552,7 +555,7 @@ output = {
         logger.error(f"Error in create_node: {str(e)}")
         return f"Error creating node: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def modify_node(
     ctx: Context,
     name: str,
@@ -658,7 +661,7 @@ def modify_node(
         logger.error(f"Error in modify_node: {str(e)}")
         return f"Error modifying node: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def delete_node(ctx: Context, name: str) -> str:
     """
     Delete a node from the Nuke script.
@@ -678,7 +681,7 @@ def delete_node(ctx: Context, name: str) -> str:
         logger.error(f"Error in delete_node: {str(e)}")
         return f"Error deleting node: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def position_node(ctx: Context, name: str, x: int, y: int) -> str:
     """
     Position a node at specific coordinates in the Nuke node graph.
@@ -713,7 +716,7 @@ def position_node(ctx: Context, name: str, x: int, y: int) -> str:
         logger.error(f"Error in position_node: {str(e)}")
         return f"Error positioning node: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def connect_nodes(
     ctx: Context, 
     output_node: str, 
@@ -769,7 +772,7 @@ def connect_nodes(
         logger.error(f"Error in connect_nodes: {str(e)}")
         return f"Error connecting nodes: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def render(
     ctx: Context,
     frame_range: str = None,
@@ -799,7 +802,7 @@ def render(
         logger.error(f"Error in render: {str(e)}")
         return f"Error initiating render: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def viewer_playback(
     ctx: Context,
     action: str = "play",
@@ -829,7 +832,7 @@ def viewer_playback(
         logger.error(f"Error in viewer_playback: {str(e)}")
         return f"Error controlling viewer: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def execute_nuke_code(ctx: Context, code: str) -> str:
     """
     Execute arbitrary Python code in Nuke.
@@ -871,7 +874,7 @@ def execute_nuke_code(ctx: Context, code: str) -> str:
         logger.error(f"Error in execute_nuke_code: {str(e)}")
         return f"Error executing code: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def auto_layout_nodes(ctx: Context, selected_only: bool = False) -> str:
     """
     Automatically arrange nodes in the Nuke script for better readability.
@@ -930,7 +933,7 @@ output = {{"status": result}}
         logger.error(f"Error in auto_layout_nodes: {str(e)}")
         return f"Error arranging nodes: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def set_frames(
     ctx: Context,
     first_frame: int = None,
@@ -959,7 +962,7 @@ def set_frames(
         logger.error(f"Error in set_frames: {str(e)}")
         return f"Error setting frames: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def create_viewer(ctx: Context, input_node: str = None) -> str:
     """
     Create a Viewer node connected to the specified input node.
@@ -983,7 +986,7 @@ def create_viewer(ctx: Context, input_node: str = None) -> str:
         logger.error(f"Error in create_viewer: {str(e)}")
         return f"Error creating viewer: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def create_workflow_template(
     ctx: Context,
     template_type: str,
@@ -1167,7 +1170,7 @@ except Exception as e:
         logger.error(f"Error in create_workflow_template: {str(e)}")
         return f"Error creating workflow template: {str(e)}"
 
-@mcp.tool()
+@bridge_tool(mcp)
 def organize_node_graph(
     ctx: Context,
     selected_only: bool = False,

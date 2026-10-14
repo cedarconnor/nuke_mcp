@@ -1,5 +1,18 @@
 # Compatibility patch notes
 
+## Milestone 1: protocol v2 foundation
+
+The bridge now accepts eight loopback clients, frames UTF-8 JSON explicitly,
+correlates replies with request/session/instance IDs, and serializes host work
+through a main-thread Qt timer. Bounded receipts support status and cancellation
+without replaying uncertain mutations. All 15 existing tools carry structured
+results and real MCP errors. New tools report capabilities and submit/poll/cancel
+render jobs, with temporary frame/proxy state restored at completion.
+
+Deploy the add-on, shared package, and external server together. FastMCP remains
+pinned to 2.14.7. Verified node edits and complete graph observation are later
+milestones; existing NC limits remain. The sections below describe earlier patches.
+
 This branch contains a small compatibility and portability patch on top of
 `dughogan/nuke_mcp`.
 

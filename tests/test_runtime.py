@@ -41,11 +41,11 @@ class RuntimeTests(unittest.TestCase):
             if messages:
                 return messages[0]
 
-    def connect(self, version=2):
+    def connect(self, version=2, application="nuke-mcp"):
         sock = socket.create_connection(("127.0.0.1", self.runtime.port), timeout=2)
         self.addCleanup(sock.close)
         session = str(uuid4())
-        sock.sendall(encode_message(dict(type="hello", application="nuke-mcp",
+        sock.sendall(encode_message(dict(type="hello", application=application,
                                         protocol_version=version, client_session_id=session)))
         hello = self.receive(sock)
         return sock, session, hello
@@ -76,6 +76,11 @@ class RuntimeTests(unittest.TestCase):
             self.assertEqual(hello["type"], "hello")
         _, _, busy = self.connect()
         self.assertEqual(busy["error"]["code"], "busy")
+
+    def test_wrong_application_rejected_before_host_dispatch(self):
+        _, _, bad = self.connect(application='other-dcc')
+        self.assertEqual(bad['error']['code'], 'protocol_mismatch')
+        self.assertEqual(self.seen, [])
 
     def test_fragmented_and_coalesced_frames(self):
         sock, session, _ = self.connect()

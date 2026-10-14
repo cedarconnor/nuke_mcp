@@ -132,3 +132,32 @@ class OperationTests(unittest.TestCase):
         result = self.registry.admit(self.req())
         self.assertEqual(result["outcome"], "not_started")
         self.assertEqual(result["error"]["code"], "stopping")
+
+    def test_started_render_outlives_admission_deadline(self):
+        req = self.req(command="render", timeout_ms=10)
+        self.registry.admit(req)
+        def job():
+            yield {"frames_completed": [1]}
+            yield {"frames_completed": [1, 2]}
+        self.registry.tick(lambda r: job())
+        self.registry.tick(lambda r: None)
+        self.clock.advance(40)
+        self.registry.tick(lambda r: None)
+        self.registry.tick(lambda r: None)
+        result = self.registry.lookup(req['request_id'], self.instance)
+        self.assertEqual(result['state'], 'completed')
+        self.assertEqual(result['data']['frames_completed'], [1, 2])
+
+    def test_invalid_job_progress_closes_generator_on_main_thread(self):
+        req = self.req(command='render')
+        self.registry.admit(req)
+        closed = []
+        def job():
+            try:
+                yield {'bad': object()}
+            finally:
+                closed.append(True)
+        self.registry.tick(lambda r: job())
+        self.registry.tick(lambda r: None)
+        self.assertEqual(self.registry.lookup(req['request_id'], self.instance)['state'], 'failed')
+        self.assertEqual(closed, [True])

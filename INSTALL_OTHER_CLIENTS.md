@@ -11,6 +11,38 @@ on its main-thread timer. A client disconnect does not prove cancellation.
 Keep the returned request and server instance IDs to query operation status;
 never automatically repeat a timed-out mutation.
 
+## Operation results and rendering
+
+All 15 existing tools retain their names and arguments. Their MCP responses now
+include `structuredContent` receipts and use `isError=true` for failures. Inspect
+`state`, `outcome`, `error`, `request_id`, and `server_instance_id`; text alone is
+not proof of success. A local transport failure is marked `transport_error` and
+does not establish what happened inside Nuke.
+
+Four additional tools are available:
+
+- `get_capabilities()` reports host version/flavor, explicit NC mode, and unknown
+  or incomplete observations. It does not enumerate nodes or probe mutations.
+- `start_render(write_node, first_frame, last_frame, step=1)` returns immediately
+  after admission. Use an explicit Write path. Renders continue beyond the client
+  wait limit; cancellation is checked between frames, never inside a native frame.
+- `get_operation_status(request_id, server_instance_id)` reads the retained
+  receipt without calling Nuke. Receipts are bounded to 4096 / 30 minutes after
+  completion. Expiry or host restart means unknown, not permission to replay.
+- `cancel_operation(request_id, server_instance_id)` cancels queued work or
+  requests cancellation of the owning session's running render.
+
+The legacy `render` waits at most 30 seconds and returns the operation identity
+on timeout. Frame/proxy state is restored when the render finishes or stops.
+Ordinary queued work expires after 30 seconds by default (maximum 300 seconds).
+There is at most one active ordinary request per session and 64 queued requests
+across sessions. Status/cancellation remain available while a native frame blocks.
+
+Run `python tests/mcp_contract_probe.py --live --output live-two-client.json`
+for a read-only check using two separate stdio MCP processes. Run the same command
+without `--live` for a fake host; add `--slow` to exercise a job exceeding 15 seconds.
+Native render output and commercial Nuke require separate qualification.
+
 # Install this patched Nuke MCP in other clients
 
 This repository contains two cooperating components:
@@ -159,18 +191,13 @@ Live testing against Nuke NC 17.0v4 also found *intermittent* Python
 node-access blackouts: `nuke.allNodes()` sporadically returns an empty list,
 `nuke.toNode()` returns `None` for existing nodes, and `nuke.createNode()`
 creates the node but returns `None` — even in graphs well under 10 nodes.
-Retry on empty or "Node not found" results, and see the "Field notes" section
-of `nuke-mcp-guidelines.md` for details and per-tool consequences.
+Read-only inspection can be repeated, but never replay a mutation after an
+ambiguous result. See the "Field notes" section of `nuke-mcp-guidelines.md`.
 
-## Legacy v1 client limitation (superseded by v2)
+## Local trusted clients
 
-The Nuke add-on accepts a single client connection. Each MCP client that
-registers this bridge keeps a long-lived `main.py` process holding that slot,
-so registering the bridge in several clients simultaneously (Claude Code,
-Claude Desktop, Codex, …) makes every client except the first fail with
-"Could not connect to Nuke". Unregister or close the other clients, kill their
-stale `main.py` processes, or stop and restart the server from the NukeMCP
-panel to free the slot.
+Protocol v2 supports eight simultaneous clients. Upgrade all clients and the
+add-on together; an older bridge is incompatible and should be restarted.
 
 The server exposes arbitrary Python execution inside Nuke. Keep the listener on
 `localhost`, use trusted MCP clients, save your script before testing, and begin
