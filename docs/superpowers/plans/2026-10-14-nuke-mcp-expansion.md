@@ -10,7 +10,7 @@
 
 **Spec:** [Nuke MCP reliability and workflow expansion design](../specs/2026-10-14-nuke-mcp-expansion-design.md). Read it before implementing any task.
 
-**Status:** Proposed implementation sequence; no implementation is included in this planning change. Baseline is `987abf6`. Six milestones share one ordered plan because their mutation, identity, and observation contracts depend on the foundation. Do not introduce independent competing transport implementations.
+**Status:** Milestone 1 implemented on `codex/nuke-bridge-foundation`; Tasks 5–15 remain pending. See `docs/validation/milestone-1.md` for qualification and limits. Baseline is `987abf6`. Six milestones share one ordered plan because their mutation, identity, and observation contracts depend on the foundation. Do not introduce independent competing transport implementations.
 
 ## Global constraints
 
@@ -38,7 +38,7 @@
 | 5 Production workflows | 11–13 | Validated manifests, shot generation, AOV Groups | No overwrite or graph clearing; fixtures reproduce intended topology |
 | 6 Events and delivery | 14–15 | Scene revisions, event polling, qualified release | Offline suite plus separately recorded native and artist checks |
 
-All verification results remain pending until execution. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
+Milestone 1 results are recorded in the validation report; later milestone verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
 
 ## File responsibilities
 
@@ -94,7 +94,7 @@ git diff --check
 
 **Interfaces:** Produce `encode_message(message: dict) -> bytes`, `FrameDecoder.feed(chunk: bytes) -> list[dict]`, `validate_request(message: dict) -> Request`, `BridgeError`, and `make_result(...) -> Result`. Define `PROTOCOL_VERSION=2`, `MAX_MESSAGE_BYTES=8*1024*1024`. Pure functions import no Nuke or FastMCP.
 
-- [ ] Write tests for every split of a UTF-8 message, coalesced messages, escaped newlines/braces, invalid UTF-8/JSON, invalid IDs, unsupported version, and oversized/incomplete input.
+- [x] Write tests for every split of a UTF-8 message, coalesced messages, escaped newlines/braces, invalid UTF-8/JSON, invalid IDs, unsupported version, and oversized/incomplete input.
 
 ```python
 decoder = FrameDecoder()
@@ -104,10 +104,10 @@ self.assertEqual(decoder.feed(wire[:-1]), [first])
 self.assertEqual(decoder.feed(wire[-1:]), [{'n': 2}])
 ```
 
-- [ ] Run `python -m unittest tests.test_protocol -v` with the repository venv; expect failing protocol assertions/imports before implementation.
-- [ ] Implement the frame decoder, strict envelope validation, result factory, and stable public error codes from the spec. Cap bytes before attempting JSON parsing.
-- [ ] Rerun `tests.test_protocol`; all cases must pass without stdout diagnostics.
-- [ ] Commit as `feat: define framed bridge protocol and operation results`.
+- [x] Run `python -m unittest tests.test_protocol -v` with the repository venv; expect failing protocol assertions/imports before implementation.
+- [x] Implement the frame decoder, strict envelope validation, result factory, and stable public error codes from the spec. Cap bytes before attempting JSON parsing.
+- [x] Rerun `tests.test_protocol`; all cases must pass without stdout diagnostics.
+- [x] Commit as `feat: define framed bridge protocol and operation results`.
 
 ### Task 2 Request registry and bounded host scheduling
 
@@ -115,7 +115,7 @@ self.assertEqual(decoder.feed(wire[-1:]), [{'n': 2}])
 
 **Interfaces:** Consume `Request`, `Result`, `BridgeError`. Produce `OperationRegistry(clock, instance_id)`, `.admit(request) -> Result`, `.tick(dispatch: Callable) -> None`, `.lookup(request_id, instance_id) -> Result`, `.cancel(request_id) -> Result`, `.shutdown() -> None`. Dispatch receives the accepted request and returns domain data; registry tracks start/end and mutation outcome. Expose a thread-safe `record_result` path for long operations without executing host code on workers.
 
-- [ ] Write tests for 8 clients, 64 pending commands, one active request per client, FIFO ordering, canonical payload conflict, retained-ID deduplication, receipt expiry/capacity, unknown/restarted identities, and cancellation before dispatch.
+- [x] Write tests for 8 clients, 64 pending commands, one active request per client, FIFO ordering, canonical payload conflict, retained-ID deduplication, receipt expiry/capacity, unknown/restarted identities, and cancellation before dispatch.
 
 ```python
 registry.admit(request)
@@ -125,10 +125,10 @@ self.assertEqual(dispatch.call_count, 0)
 self.assertEqual(registry.lookup(request['request_id'], instance)['outcome'], 'not_started')
 ```
 
-- [ ] Run `python -m unittest tests.test_operations -v`; confirm red assertions for missing admission/deadline behavior.
-- [ ] Implement monotonic deadlines (30 seconds default, 300 seconds maximum), receipt retention (4096 / 30 minutes), and instance-bound status. Check lifecycle immediately before dispatch; never infer completion from disconnect. Retained duplicate IDs return the original receipt even after its deadline.
-- [ ] Rerun focused tests, including timeout while queued, shutdown before dispatch, and cancellation after a mutation begins; the latter must never return a false `not_started` receipt.
-- [ ] Commit as `feat: track request outcomes and serialize host operations`.
+- [x] Run `python -m unittest tests.test_operations -v`; confirm red assertions for missing admission/deadline behavior.
+- [x] Implement monotonic deadlines (30 seconds default, 300 seconds maximum), receipt retention (4096 / 30 minutes), and instance-bound status. Check lifecycle immediately before dispatch; never infer completion from disconnect. Retained duplicate IDs return the original receipt even after its deadline.
+- [x] Rerun focused tests, including timeout while queued, shutdown before dispatch, and cancellation after a mutation begins; the latter must never return a false `not_started` receipt.
+- [x] Commit as `feat: track request outcomes and serialize host operations`.
 
 ### Task 3 Multi-client runtime and correlated external client
 
@@ -136,7 +136,7 @@ self.assertEqual(registry.lookup(request['request_id'], instance)['outcome'], 'n
 
 **Interfaces:** Produce `BridgeRuntime(handlers, registry, host_dispatcher)`, `.start(host='127.0.0.1', port=9877)`, `.stop()`. The injected host dispatcher installs/removes a main-thread Qt timer. Produce `BridgeClient.connect() -> dict`, `.call(command, params, timeout_ms=30000) -> Result`, `.status(request_id, instance_id) -> Result`, `.close()`. There is one pending ordinary call per client session; status and cancellation remain available over the control path.
 
-- [ ] Write loopback tests with real sockets: two simultaneous clients, fragmented/coalesced traffic, braces in Python payloads, wrong application/version, stale responses, partial sends, port collision, reconnect, stop/restart, and deadline expiry before timer dispatch.
+- [x] Write loopback tests with real sockets: two simultaneous clients, fragmented/coalesced traffic, braces in Python payloads, wrong application/version, stale responses, partial sends, port collision, reconnect, stop/restart, and deadline expiry before timer dispatch.
 
 ```python
 fixture.delay_reply('first')
@@ -147,10 +147,10 @@ self.assertEqual(second['data']['pong'], True)
 self.assertEqual(fixture.mutation_execution_count, 1)
 ```
 
-- [ ] Run `python -m unittest tests.test_runtime tests.test_client -v`; verify the late-response and multi-client tests fail against the original behavior.
-- [ ] Replace brace counting and persistent single-client state with bounded readers/writers and the shared registry. Install the UI pump on the main thread, cache heartbeat data, close failed sockets, and stop all owned threads/timers without waiting on the main thread for itself. Refuse coordinated-version mismatch before dispatch. Integrate existing handlers without moving their Nuke calls to workers.
-- [ ] Run focused tests; assert the fake host sees only main-thread calls and teardown leaves no clients/timers. Update installation docs to deploy the package and add-on together; preserve loopback port configuration.
-- [ ] Commit as `feat: support correlated multi-client Nuke connections`.
+- [x] Run `python -m unittest tests.test_runtime tests.test_client -v`; verify the late-response and multi-client tests fail against the original behavior.
+- [x] Replace brace counting and persistent single-client state with bounded readers/writers and the shared registry. Install the UI pump on the main thread, cache heartbeat data, close failed sockets, and stop all owned threads/timers without waiting on the main thread for itself. Refuse coordinated-version mismatch before dispatch. Integrate existing handlers without moving their Nuke calls to workers.
+- [x] Run focused tests; assert the fake host sees only main-thread calls and teardown leaves no clients/timers. Update installation docs to deploy the package and add-on together; preserve loopback port configuration.
+- [x] Commit as `feat: support correlated multi-client Nuke connections`.
 
 ### Task 4 MCP results capabilities and render status
 
@@ -158,7 +158,7 @@ self.assertEqual(fixture.mutation_execution_count, 1)
 
 **Interfaces:** Produce `probe_capabilities(nuke) -> dict`, `register_tools(mcp, client) -> None`, and `to_mcp_result(result: Result, legacy_text: str)`. Public tools: `get_capabilities()`, `get_operation_status(request_id, server_instance_id)`, `cancel_operation(request_id, server_instance_id)`, `start_render(write_node, first_frame, last_frame, step=1)`. Retain the old `render` signature and its success text while adding operation identity on a bounded wait.
 
-- [ ] Write stdio tests for the original 15 tool names/signatures, real `isError=true`, structured receipt round-trip, host unavailable, unknown license mode, Nuke/NukeX/Studio classification, unsupported nodes, and render beyond the old 15-second wait.
+- [x] Write stdio tests for the original 15 tool names/signatures, real `isError=true`, structured receipt round-trip, host unavailable, unknown license mode, Nuke/NukeX/Studio classification, unsupported nodes, and render beyond the old 15-second wait.
 
 ```python
 reply = await session.call_tool('get_node_info', {'node_name': 'missing'})
@@ -166,10 +166,10 @@ self.assertTrue(reply.isError)
 # Probe also asserts request_id and error.code survive the actual MCP serialization.
 ```
 
-- [ ] Run `python -m unittest tests.test_mcp_adapter tests.test_capabilities -v` and `python tests/mcp_contract_probe.py`; confirm the failure contract is red before changing wrappers.
-- [ ] Implement the result adapter against installed FastMCP 2.14.7, testing its actual `CallToolResult` handling rather than assuming serialization. Wire lifespan cleanup. Remove graph enumeration as the transport ping. Render registration polls the same ledger, executes on the main thread, restores temporary proxy/frame state, and checks cancellation between frames; a blocked native frame stays running.
-- [ ] Rerun focused tests and the full Milestone 1 suite. Update the smoke test to read structured failures and report unavailable live Nuke distinctly. Document capability uncertainty and protocol migration.
-- [ ] Commit as `feat: expose capabilities and truthful MCP operation status`.
+- [x] Run `python -m unittest tests.test_mcp_adapter tests.test_capabilities -v` and `python tests/mcp_contract_probe.py`; confirm the failure contract is red before changing wrappers.
+- [x] Implement the result adapter against installed FastMCP 2.14.7, testing its actual `CallToolResult` handling rather than assuming serialization. Wire lifespan cleanup. Remove graph enumeration as the transport ping. Render registration polls the same ledger, executes on the main thread, restores temporary proxy/frame state, and checks cancellation between frames; a blocked native frame stays running.
+- [x] Rerun focused tests and the full Milestone 1 suite. Update the smoke test to read structured failures and report unavailable live Nuke distinctly. Document capability uncertainty and protocol migration.
+- [x] Commit as `feat: expose capabilities and truthful MCP operation status`.
 
 ## Milestone 2 Verified editing
 

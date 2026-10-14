@@ -1,0 +1,408 @@
+{
+  "mode": "live",
+  "port": 9877,
+  "calls": [
+    {
+      "request_id": "bc5dda66-111f-4510-a560-32767295402d",
+      "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D76B0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "664c1ebc-9be3-4e4b-81b1-2156bcc280d3",
+      "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AA0D6CB0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "943590aa-1c44-4264-b371-5851761d3500",
+      "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D6ED0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "d06b9dfc-e4d5-461e-a925-e4b7b59d613d",
+      "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D7930>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "1960b88b-13d0-4be9-9417-09578da5661f",
+      "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D6EB0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "5a2b398f-0833-447a-97d0-6396558dc4f0",
+      "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D4CB0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "6b4eb7fa-f3fa-4052-a4da-a6f15a14ab63",
+      "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D6130>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "91a65d99-f56c-4f4b-b5cb-03a16fb27271",
+      "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "Root",
+        "fps": 24,
+        "format": "<Format object at 0x00000266AE2D6BB0>",
+        "first_frame": 1.0,
+        "last_frame": 100.0,
+        "nodes": [
+          {
+            "name": "Viewer1",
+            "type": "Viewer",
+            "position": [
+              -40,
+              -9
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "573ba917-62b9-4f05-86c5-72ba7543bbe1",
+      "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 124752,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status"
+        ],
+        "unsupported_tool_groups": [
+          "verified_edits",
+          "shot_manifests",
+          "scene_events"
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "a73a763d-3ad3-477f-8846-8f4daacd900c",
+      "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+      "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 124752,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status"
+        ],
+        "unsupported_tool_groups": [
+          "verified_edits",
+          "shot_manifests",
+          "scene_events"
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "cc1f99c2-dd63-4598-9a15-89b5acd6b473",
+    "client_session_id": "4202de5b-e79c-43e2-9a8a-b17e961d0956",
+    "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+    "ok": false,
+    "state": "failed",
+    "outcome": "unknown",
+    "data": {},
+    "error": {
+      "code": "host_error",
+      "message": "Failed to get node info: Node not found: __MCP_PROBE_ABSENT__"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "d341916d-4957-43e9-9905-e83b9eb8f134",
+    "client_session_id": "63cc5152-99a5-428c-894b-9221aff9627f",
+    "server_instance_id": "185cb64f-550d-4149-928c-64a02c8e0a04",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 124752,
+        "main_thread": true,
+        "script": "Root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}
