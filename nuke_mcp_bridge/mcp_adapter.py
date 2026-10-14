@@ -8,6 +8,7 @@ from fastmcp.tools.tool import ToolResult
 from mcp.types import CallToolResult
 
 from .protocol import make_result, BridgeError
+from .operations import READ_ONLY
 
 _receipts = ContextVar("nuke_bridge_receipts", default=None)
 
@@ -31,6 +32,32 @@ def to_mcp_result(result, legacy_text):
     return BridgeToolResult(content=legacy_text, structured_content=result)
 
 
+def combine_receipts(receipts):
+    """Preserve every operation; an optional read cannot erase a later edit."""
+    result = dict(receipts[-1])
+    if len(receipts) == 1:
+        return result
+    result['operation_receipts'] = receipts
+    result['source'] = 'mcp_aggregate'
+    failed = [r for r in receipts if r['state'] in ('failed', 'cancelled', 'expired')]
+    mutations = [r for r in receipts if r.get('command') not in READ_ONLY]
+    required_failures = [r for r in failed if r.get('command') not in READ_ONLY or r is receipts[-1]]
+    result['warnings'] = list(result['warnings']) + [
+        'Earlier read failed: ' + str(r['error']) for r in failed if r not in required_failures]
+    if required_failures:
+        result.update(ok=False, state='failed', error=required_failures[-1]['error'])
+        if any(r['outcome'] == 'unknown' for r in mutations):
+            result['outcome'] = 'unknown'
+        elif any(r['outcome'] in ('applied', 'partial') for r in mutations):
+            result['outcome'] = 'partial'
+        else:
+            result['outcome'] = 'not_started'
+    elif mutations:
+        # Even a later successful read must not hide an earlier write outcome.
+        result['outcome'] = mutations[-1]['outcome']
+    return result
+
+
 def bridge_tool(mcp):
     def decorate(fn):
         @wraps(fn)
@@ -42,11 +69,8 @@ def bridge_tool(mcp):
                     text = fn(*args, **kwargs)
                 except Exception as exc:
                     text = "Error: " + str(exc)
-                failed = next((r for r in receipts if r["state"] in ("failed", "cancelled", "expired")), None)
-                if failed is not None:
-                    result = failed
-                elif receipts:
-                    result = receipts[-1]
+                if receipts:
+                    result = combine_receipts(receipts)
                 else:
                     result = make_result(dict(request_id=str(uuid4()), client_session_id=None,
                                               server_instance_id=None))

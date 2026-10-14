@@ -175,6 +175,15 @@ class OperationRegistry:
                     else:
                         self.record_result(key, make_result(req, state="running", outcome="partial",
                                                            data=progress or {}))
+                        # Stop can run in a native frame's nested UI event loop.
+                        # Its timer is already detached, so cleanup cannot wait
+                        # for another tick once that frame returns.
+                        if self._stopping or entry["cancel"]:
+                            job.close()
+                            self.record_result(key, make_result(
+                                req, state="cancelled", outcome="partial",
+                                data=entry["result"]["data"],
+                                error={"code": "cancelled", "message": "Stopped after current host step"}))
                         return
             else:
                 # Repeat the deadline/lifecycle check at the actual dispatch boundary.

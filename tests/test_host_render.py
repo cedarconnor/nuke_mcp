@@ -78,3 +78,16 @@ class HostRenderTests(unittest.TestCase):
         with self.assertRaises(BridgeError):
             list(self.server.render(write_node="missing", first_frame=1, last_frame=2))
         self.assertTrue(self.host.proxy())
+
+    def test_native_nc_environment_rejects_render_all_before_mutation(self):
+        class NativeEnvironment(dict):
+            def get(self, key, default=None):
+                if not isinstance(default, str):
+                    raise TypeError('default must be str')
+                return super().get(key, default)
+        self.host.env = NativeEnvironment(nc=True)
+        with self.assertRaises(BridgeError) as failure:
+            list(self.server.render(first_frame=1, last_frame=2))
+        self.assertEqual(failure.exception.code, 'state_uncertain')
+        self.assertEqual(failure.exception.outcome, 'not_started')
+        self.assertTrue(self.host.proxy())

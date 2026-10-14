@@ -305,7 +305,7 @@ class NukeConnection:
 
     def send_command(self, command_type, params=None):
         result = self.client.call(command_type, params or {})
-        capture_receipt(result)
+        capture_receipt(dict(result, command=command_type))
         if not result["ok"]:
             from nuke_mcp_bridge.protocol import BridgeError
             error = result.get("error") or {}

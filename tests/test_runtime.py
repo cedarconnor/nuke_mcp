@@ -82,6 +82,25 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(bad['error']['code'], 'protocol_mismatch')
         self.assertEqual(self.seen, [])
 
+    def test_stop_in_native_nested_loop_closes_job_after_frame_returns(self):
+        cleaned = []
+        def render():
+            try:
+                self.runtime.stop()  # Nuke UI stop action inside a native frame.
+                yield {'frames_completed': [1]}
+            finally:
+                cleaned.append(threading.current_thread())
+        self.runtime.handlers['render'] = render
+        req = request(self.runtime.registry.instance_id, command='render')
+        self.runtime.registry.admit(req)
+        self.runtime.tick()
+        self.runtime.tick()
+        self.assertEqual(cleaned, [threading.main_thread()])
+        result = self.runtime.registry.lookup(req['request_id'], self.runtime.registry.instance_id)
+        self.assertEqual(result['state'], 'cancelled')
+        self.assertEqual(result['outcome'], 'partial')
+        self.assertIsNone(self.dispatcher.tick)
+
     def test_fragmented_and_coalesced_frames(self):
         sock, session, _ = self.connect()
         req = request(self.runtime.registry.instance_id, session=session,

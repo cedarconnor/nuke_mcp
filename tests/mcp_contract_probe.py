@@ -48,6 +48,7 @@ async def probe(live=False, port=9877, slow=False):
             "get_script_info": lambda: {"name": "contract_fixture", "fps": 24, "format": "HD",
                                       "first_frame": 1, "last_frame": 3, "nodes": []},
             "get_node_info": missing, "render": render,
+            "modify_node": lambda **kwargs: {"name": kwargs['name']},
             "execute_code": lambda code: {"executed": True, "output": {"probe": "read-only"}},
         }
         runtime = BridgeRuntime(handlers, OperationRegistry(), ManualDispatcher())
@@ -106,6 +107,13 @@ async def probe(live=False, port=9877, slow=False):
             if live:
                 assert report["read_only_python"]["data"]["output"]["main_thread"] is True
             if not live:
+                changed = await sessions[0].call_tool('modify_node', {
+                    'name': 'FixtureGrade', 'parameters': {'label': 'fixture'}})
+                changed_receipt = data(changed)
+                assert not changed.isError and changed_receipt['outcome'] == 'applied', changed_receipt
+                assert [r['command'] for r in changed_receipt['operation_receipts']] == ['get_node_info', 'modify_node']
+                assert changed_receipt['request_id'] == changed_receipt['operation_receipts'][-1]['request_id']
+                report['optional_read_then_mutation'] = changed_receipt
                 accepted = data(await sessions[0].call_tool("start_render", {
                     "write_node": "Write1", "first_frame": 1, "last_frame": 1}))
                 assert accepted["state"] in ("queued", "running")

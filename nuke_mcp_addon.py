@@ -513,7 +513,8 @@ class NukeMCPServer:
                 raise BridgeError("write_node_unavailable", "Write node unavailable: " + write_node)
             nodes = [node]
         else:
-            if nuke.env.get("nc") or nuke.env.get("noncommercial"):
+            if (nuke.env.get("nc", "unknown") is True or
+                    nuke.env.get("noncommercial", "unknown") is True):
                 raise BridgeError("state_uncertain", "NC enumeration cannot establish all Write nodes; specify write_node")
             nodes = nuke.allNodes("Write")
             if not nodes:

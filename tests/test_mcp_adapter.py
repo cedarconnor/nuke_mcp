@@ -7,6 +7,42 @@ from nuke_mcp_bridge.mcp_adapter import to_mcp_result, bridge_tool, capture_rece
 
 
 class AdapterTests(unittest.TestCase):
+    def test_failed_optional_read_does_not_hide_successful_mutation(self):
+        first = dict(make_result(request(), state='failed', outcome='not_started',
+                     error={'code': 'busy', 'message': 'Session busy'}), command='get_node_info')
+        changed = dict(make_result(request(), outcome='applied'), command='modify_node')
+        mcp = FastMCP('test')
+        @bridge_tool(mcp)
+        def modify() -> str:
+            capture_receipt(first)
+            capture_receipt(changed)
+            return 'Modified node Grade1'
+        async def check():
+            result = (await (await mcp.get_tool('modify')).run({})).to_mcp_result()
+            self.assertFalse(result.isError)
+            self.assertEqual(result.structuredContent['request_id'], changed['request_id'])
+            self.assertEqual(result.structuredContent['outcome'], 'applied')
+            self.assertTrue(result.structuredContent['warnings'])
+            self.assertEqual(result.structuredContent['operation_receipts'], [first, changed])
+        asyncio.run(check())
+
+    def test_failure_after_applied_step_cannot_report_not_started(self):
+        first = dict(make_result(request(), outcome='applied'), command='modify_node')
+        failed = dict(make_result(request(), state='failed', outcome='not_started',
+                      error={'code': 'busy', 'message': 'Session busy'}), command='position_node')
+        mcp = FastMCP('test')
+        @bridge_tool(mcp)
+        def modify() -> str:
+            capture_receipt(first)
+            capture_receipt(failed)
+            return 'Error positioning node'
+        async def check():
+            result = (await (await mcp.get_tool('modify')).run({})).to_mcp_result()
+            self.assertTrue(result.isError)
+            self.assertEqual(result.structuredContent['outcome'], 'partial')
+            self.assertEqual(result.structuredContent['operation_receipts'], [first, failed])
+        asyncio.run(check())
+
     def test_error_retains_structured_receipt(self):
         receipt = make_result(request(), state="failed", outcome="unknown",
                               error={"code": "state_uncertain", "message": "Unknown"})
