@@ -2,7 +2,7 @@
 from pathlib import Path
 from . import manifests
 from .inspection import node_record, inspect_reads, observation
-from .mutations import main_thread,check_guard,resolve_node,connect_input,knob_value,same_value
+from .mutations import main_thread,check_guard,resolve_node,connect_input,knob_value,same_value,operation_guard
 from .protocol import BridgeError
 from .scripts import state
 from .shots import host_binding,expand_path,file_fact,set_field
@@ -106,6 +106,12 @@ def build_layered_comp(nuke,manifest,plan_digest):
     def connect(node,index,source):
         boundary();connect_input(nuke,'root.'+node.fullName(),index,'root.'+source.fullName())
         expected_inputs.append((node,index,source))
+    inherited_guard=operation_guard.get()
+    def identity_guard():
+        if inherited_guard:inherited_guard()
+        if nuke.root()!=root or root.name()!=script or nuke.frame()!=plan['frame']:
+            raise BridgeError('script_changed','Script/frame changed during construction','unknown')
+    guard_token=operation_guard.set(identity_guard)
     try:
         with selected_scope(nuke,scope):
             group=create(scope,'Group',manifest['group_name']);data['group_path']=group.fullName()
@@ -137,7 +143,10 @@ def build_layered_comp(nuke,manifest,plan_digest):
                     if [tuple(v) for v in knob.value()]!=mapping:raise BridgeError('state_uncertain','Shuffle2 mapping readback differs','unknown')
                     expected_knobs.append((shuffle,'mappings',mapping))
                 current=shuffle
-                for kind,params in layer.get('adjustments',{}).items():
+                # Schema-v1 adjustments are an object: canonical hashing ignores key order.
+                for kind in ('grade','blur'):
+                    if kind not in layer.get('adjustments',{}):continue
+                    params=layer['adjustments'][kind]
                     adjusted=create(group,{'grade':'Grade','blur':'Blur'}[kind],kind.title()+'_'+layer['id'])
                     connect(adjusted,0,current)
                     for key,value in params.items():field(adjusted,'white' if key=='gain' else key,value)
@@ -176,3 +185,4 @@ def build_layered_comp(nuke,manifest,plan_digest):
     except Exception as exc:
         data['cause']=getattr(exc,'data',{})
         raise BridgeError(getattr(exc,'code','comp_build_failed'),str(exc),'unknown' if started else 'not_started',data) from exc
+    finally:operation_guard.reset(guard_token)

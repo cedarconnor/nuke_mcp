@@ -3,6 +3,8 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import os
+import subprocess
 import unittest
 from unittest.mock import patch
 from nuke_mcp_bridge.protocol import BridgeError
@@ -111,3 +113,48 @@ class ShotTests(unittest.TestCase):
         self.assertEqual(self.host.script_path,other)
         self.assertTrue(self.host.modified)
         self.assertFalse(caught.exception.data['restoration']['ok'])
+
+    def test_constructor_script_switch_stops_before_configuration_and_publication(self):
+        plan=self.plan();constructor=self.host.nodes.Read
+        def switch(**kw):
+            node=constructor(**kw)
+            self.host.script_path=str(self.root/'artist.nknc')
+            self.host.add('ArtistOnly');self.host.modified=True
+            return node
+        self.host.nodes.Read=switch
+        with self.assertRaises(BridgeError) as caught:self.apply(plan)
+        self.assertFalse(Path(self.manifest['shots'][0]['script_path']).exists())
+        self.assertNotIn('ShotWrite',self.host.graph)
+        self.assertIn('ArtistOnly',self.host.graph)
+        self.assertEqual(self.host.script_path,str(self.root/'artist.nknc'))
+
+    def test_native_write_channel_mask_knob(self):
+        constructor=self.host.nodes.Write
+        def create(**kwargs):
+            node=constructor(**kwargs);node['channels'].kind='ChannelMask_Knob';return node
+        self.host.nodes.Write=create
+        result=self.apply(self.plan())
+        self.assertEqual(len(result['completed']),1)
+
+    def test_changed_toolset_refused_before_clear(self):
+        from nuke_mcp_bridge.toolsets import save_toolset
+        self.host.add('In','Input');self.host.add('Out','Output').setInput(0,self.host.graph['In'])
+        saved=save_toolset(self.host,self.library,['root.In','root.Out'],'asset')
+        self.manifest['shots'][0]['toolset']='asset'
+        plan=self.plan()
+        (self.library/saved['manifest']['payload']).write_text('changed')
+        with self.assertRaises(BridgeError):self.apply(plan)
+        self.assertEqual(self.host.script_clear_count,0)
+
+    def test_nested_windows_junction_output_escape(self):
+        if os.name!='nt':self.skipTest('Windows junction qualification requires Windows')
+        with tempfile.TemporaryDirectory() as outside:
+            nested=self.root/'nested';nested.mkdir();link=nested/'redirect'
+            done=subprocess.run(['powershell','-NoProfile','-Command',
+                "New-Item -ItemType Junction -Path '"+str(link).replace("'","''")+"' -Target '"+outside.replace("'","''")+"' | Out-Null"],capture_output=True,text=True)
+            if done.returncode:self.skipTest('Cannot create junction: '+done.stderr)
+            try:
+                self.manifest['shots'][0]['script_path']=str(link/'shot.nknc')
+                with self.assertRaises(BridgeError):self.plan()
+                self.assertEqual(self.host.script_clear_count,0)
+            finally:os.rmdir(link)

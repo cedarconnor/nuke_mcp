@@ -123,7 +123,18 @@ def set_field(nuke,node,key,value):
     check_guard();path=node.fullName()
     if resolve_node(nuke,'root.'+path)!=node:raise BridgeError('state_uncertain','Workflow node identity changed')
     knob=node.knob(key)
-    if knob is not None and knob.Class()=='Array_Knob' and key in ('first','last','white','gamma','size'):
+    if knob is not None and knob.Class() in ('Channel_Knob','ChannelMask_Knob') and key in ('channels','maskChannel','in','in1','out','out1'):
+        source=node.input(2 if key=='maskChannel' else 0)
+        channels=set(source.channels()) if source is not None else set()
+        choices=channels if key=='maskChannel' else {c.rsplit('.',1)[0] for c in channels}
+        if key=='channels' and {'rgba.red','rgba.green','rgba.blue'}<=channels:choices.add('rgb')
+        if key in ('out','out1'):choices={'rgba'}
+        if value not in choices:raise BridgeError('channels_unavailable','Requested channel or layer is unavailable')
+        if any(getattr(knob,method,lambda:False)() for method in ('isAnimated','hasExpression')):
+            raise BridgeError('dynamic_knob','Channel settings must be static')
+        knob.setValue(value)
+        if knob.value()!=value:raise BridgeError('state_uncertain','Channel readback differs','unknown')
+    elif knob is not None and knob.Class()=='Array_Knob' and key in ('first','last','white','gamma','size','number'):
         count=knob.arraySize()
         if not 1<=count<=4 or type(value) not in (int,float):raise BridgeError('unsafe_knob','Unsupported numeric workflow knob')
         for i in range(count):
@@ -181,6 +192,13 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
     output=Library(manifest['output_root']);library=Library(library_root)
     result={'completed':[],'current':None,'restoration':{'ok':False},'request':dict(operation_context.get()),'outcome':'applied'}
     started=False;failure=None;owned_paths={original['path'],'Root','root',''}
+    active=[nuke.root(),original['path']]
+    inherited_guard=operation_guard.get()
+    def workflow_boundary():
+        if inherited_guard:inherited_guard()
+        if nuke.root()!=active[0] or nuke.root().name()!=active[1]:
+            raise BridgeError('script_changed','Script ownership changed during shot generation','unknown')
+    workflow_token=operation_guard.set(workflow_boundary)
     try:
         for index,shot in enumerate(plan['manifest']['shots']):
             check_guard()
@@ -191,6 +209,8 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
             record={'shot_id':shot['shot_id'],'script_path':plan['shots'][index]['script_path'],'published':False,'created_paths':[]}
             result['current']=record
             record['fresh_script']=new_disposable_script(nuke)
+            active[:]=[nuke.root(),nuke.root().name()]
+            owned_paths={active[1]}
             set_project_settings(nuke,settings_for(shot),False)
             reads=[]
             for i,plate in enumerate(shot['plates']):
@@ -209,6 +229,7 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
             target=output.path(shot['script_path']);staging=target.parent/('.stage-'+uuid4().hex+extension(nuke))
             owned_paths.update((str(target),str(staging)))
             record['staging_path']=str(output.path(staging));record['save']=save_script(nuke,str(output.path(staging)))
+            active[:]=[nuke.root(),nuke.root().name()]
             check_guard()
             if host_binding(nuke)!=plan['host'] or shot_binding(nuke,shot,library,output,[0])!=plan['shots'][index]:
                 raise BridgeError('stale_plan','Shot changed before publication')
@@ -216,6 +237,7 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
             os.link(output.path(staging),output.path(shot['script_path']))
             record['published']=True
             record['reload']=open_script(nuke,str(output.path(shot['script_path'])))
+            active[:]=[nuke.root(),nuke.root().name()]
             node=verify_setup(nuke,shot)
             actual=[evaluated_write(nuke,node,w['frame']) for w in plan['shots'][index]['writes']]
             expected=[w['path'] for w in plan['shots'][index]['writes']]
@@ -224,6 +246,7 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
             result['completed'].append(record);result['current']=None
     except Exception as exc:failure=exc
     finally:
+        operation_guard.reset(workflow_token)
         if started and original_path:
             # Cleanup is allowed after cancellation, but only restores the saved original in this opted-in disposable session.
             token=operation_guard.set(None)
@@ -240,6 +263,7 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
             finally:operation_guard.reset(token)
         elif started:result['restoration']={'ok':True,'reason':'Original was unnamed; owned result retained'}
     if failure:
+        result['cause']=dict(getattr(failure,'data',{}))
         result['outcome']='partial' if result['completed'] or started else 'not_started'
         raise BridgeError(getattr(failure,'code','shot_setup_failed'),str(failure),result['outcome'],result) from failure
     return result

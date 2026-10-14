@@ -103,3 +103,24 @@ class CompositingTests(unittest.TestCase):
                 self.host.graph['AOV.Merge_light'].setInput(2,self.host.graph['AOV.Shuffle_base'])
         self.artist.setSelected=select
         with self.assertRaises(BridgeError):self.build(self.plan())
+
+    def test_adjustment_order_is_fixed_under_canonical_digest(self):
+        self.manifest['layers'][0]['adjustments']={'grade':{'gamma':2.},'blur':{'size':4.}}
+        plan=self.plan()
+        self.manifest['layers'][0]['adjustments']={'blur':{'size':4.},'grade':{'gamma':2.}}
+        self.assertEqual(self.plan()['digest'],plan['digest'])
+        self.build(plan)
+        self.assertEqual(self.host.graph['AOV.Blur_base'].input(0).fullName(),'AOV.Grade_base')
+
+    def test_numeric_callback_switch_stops_between_components(self):
+        self.manifest['layers'][0]['adjustments']={'grade':{'gain':2.}}
+        constructor=self.host.nodes.Grade
+        def create(**kw):
+            node=constructor(**kw);knob=node['white'];knob.kind='Array_Knob';knob.v=[1.,1.,1.,1.]
+            original=knob.setValue
+            def change(value,index=None):
+                original(value,index);self.host.script_path='C:/artist.nknc'
+            knob.setValue=change;return node
+        self.host.nodes.Grade=create
+        with self.assertRaises(BridgeError):self.build(self.plan())
+        self.assertEqual(self.host.graph['AOV.Grade_base']['white'].v,[2.,1.,1.,1.])
