@@ -254,8 +254,10 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
         operation_guard.reset(workflow_token)
         if started and original_path:
             # Cleanup is allowed after cancellation, but only restores the saved original in this opted-in disposable session.
-            token=operation_guard.set(None)
+            token=operation_guard.set(lambda:check_plan_stamp(plan['scene_revision'],allow_owned=True))
             try:
+                # Cleanup may bypass cancellation, never foreign edits or lost observation.
+                check_plan_stamp(plan['scene_revision'],allow_owned=True)
                 current=state(nuke)['path']
                 canonical=lambda p:str(Path(p).resolve()) if Path(p).is_absolute() else p
                 if canonical(current) not in {canonical(p) for p in owned_paths}:

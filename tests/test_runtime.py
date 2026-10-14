@@ -146,6 +146,40 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(result["state"], "completed")
         self.assertEqual(len(self.seen), 1)
 
+    def test_disconnected_subscriptions_cannot_evict_connected_filter(self):
+        from nuke_mcp_bridge.client import BridgeClient
+        keeper=BridgeClient(port=self.runtime.port);keeper.connect();self.addCleanup(keeper.close)
+        keeper.submit('subscribe_events',{'event_types':['node_deleted']});self.runtime.tick()
+        for _ in range(8):
+            client=BridgeClient(port=self.runtime.port);client.connect()
+            pending=client.submit('subscribe_events',{'event_types':[]});client.close()
+            deadline=time.monotonic()+2
+            while client.session_id in self.runtime._sessions and time.monotonic()<deadline:time.sleep(.005)
+            self.assertNotIn(client.session_id,self.runtime._sessions)
+            self.runtime.tick()
+        self.runtime.events.record({'type':'node_created','node_path':'A'})
+        polled=keeper.submit('get_events',{});self.runtime.tick()
+        result=keeper.status(polled['request_id'],self.runtime.registry.instance_id)
+        self.assertEqual(result['data']['events'],[])
+        self.assertEqual(result['data']['event_types'],['node_deleted'])
+        self.assertLessEqual(len(self.runtime._event_filters),1)
+
+    def test_old_subscription_cannot_modify_reconnected_same_session(self):
+        from nuke_mcp_bridge.client import BridgeClient
+        client=BridgeClient(port=self.runtime.port);client.connect();self.addCleanup(client.close)
+        pending=client.submit('subscribe_events',{'event_types':[]});client.close()
+        deadline=time.monotonic()+2
+        while client.session_id in self.runtime._sessions and time.monotonic()<deadline:time.sleep(.005)
+        self.assertNotIn(client.session_id,self.runtime._sessions)
+        client.connect();self.runtime.tick()
+        result=client.status(pending['request_id'],self.runtime.registry.instance_id)
+        self.assertFalse(result['ok'])
+        self.assertEqual(result['error']['code'],'session_disconnected')
+        self.runtime.events.record({'type':'node_created','node_path':'A'})
+        polled=client.submit('get_events',{});self.runtime.tick()
+        result=client.status(polled['request_id'],self.runtime.registry.instance_id)
+        self.assertEqual([x['type'] for x in result['data']['events']],['node_created'])
+
     def test_stop_rejects_queue_detaches_timer_and_releases_port(self):
         sock, session, _ = self.connect()
         req, _ = self.send_request(sock, session)

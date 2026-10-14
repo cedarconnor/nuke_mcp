@@ -52,6 +52,7 @@ class BridgeRuntime:
         self.event_host = event_host
         self._event_cleanup = None
         self._event_filters = OrderedDict()
+        self._subscription_connections = {}
 
     def start(self, host="127.0.0.1", port=9877):
         if host not in ("localhost", "127.0.0.1", "::1"):
@@ -94,7 +95,7 @@ class BridgeRuntime:
             return {"pong": True}
         handler = self.handlers.get(command)
         if command == 'subscribe_events':
-            handler = lambda event_types: self._subscribe(request['client_session_id'], event_types)
+            handler = lambda event_types: self._subscribe(request, event_types)
         elif command == 'get_events':
             with self._lock:
                 event_types = self._event_filters.get(request['client_session_id'])
@@ -107,14 +108,15 @@ class BridgeRuntime:
             return self._contextual_job(request, result)
         return result
 
-    def _subscribe(self, session, event_types):
+    def _subscribe(self, request, event_types):
         from .events import validate_types
         event_types = validate_types(event_types)
+        session = request['client_session_id']
         with self._lock:
+            connection = self._subscription_connections.pop(request['request_id'], None)
+            if connection is None or connection[0] not in self._clients or connection[1] != session:
+                raise BridgeError('session_disconnected', 'Subscription connection has closed; subscribe on the new connection')
             self._event_filters[session] = event_types
-            self._event_filters.move_to_end(session)
-            while len(self._event_filters) > 8:
-                self._event_filters.popitem(last=False)
         return dict(self.events.snapshot(), event_types=event_types, delivery='polling')
 
     @contextmanager
@@ -231,7 +233,15 @@ class BridgeRuntime:
             if not isinstance(request, dict) or request.get("client_session_id") != session:
                 raise BridgeError("invalid_request", "Request session does not match connection")
             message_id = validate_uuid(request.get("request_id"))
-            result = self.registry.admit(request)
+            with self._lock:
+                # Keep metadata only for admitted nonterminal subscription requests (queue <=64).
+                for key in list(self._subscription_connections):
+                    if self.registry.lookup(key, self.registry.instance_id)['state'] not in ('queued', 'running'):
+                        self._subscription_connections.pop(key, None)
+                result = self.registry.admit(request)
+                if request.get('command') == 'subscribe_events' and result['state'] == 'queued':
+                    # A duplicate admission must retain the original connection, even after reconnect.
+                    self._subscription_connections.setdefault(message_id, (sock, session))
         elif kind in ("status", "cancel"):
             message_id = validate_uuid(message.get("message_id"))
             request_id = validate_uuid(message.get("request_id"))
@@ -265,6 +275,7 @@ class BridgeRuntime:
         with self._lock:
             clients = list(self._clients.items())
             self._event_filters.clear()
+            self._subscription_connections.clear()
         for sock, _ in clients:
             try:
                 sock.shutdown(socket.SHUT_RDWR)

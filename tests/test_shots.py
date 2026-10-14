@@ -41,6 +41,92 @@ class ShotTests(unittest.TestCase):
         self.assertEqual(failure.exception.code,'stale_plan')
         self.assertEqual(self.host.script_clear_count,0)
 
+    def test_foreign_revision_conflict_preserves_artist_edits_during_recovery(self):
+        from nuke_mcp_bridge.events import EventBuffer,scene_events
+        from nuke_mcp_bridge.mutations import operation_context
+        buffer=EventBuffer(instance_id=self.registry.instance_id)
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        original=self.root/'original.nknc';original.write_text('{"graph":[]}')
+        self.host.script_path=str(original)
+        create=self.host.nodes.Read
+        def foreign_edit(**kwargs):
+            node=create(**kwargs)
+            self.host.add('ArtistUnrelated');self.host.dirty=True
+            context=operation_context.set(None)
+            try:buffer.record({'type':'node_created','node_path':'ArtistUnrelated'})
+            finally:operation_context.reset(context)
+            return node
+        self.host.nodes.Read=foreign_edit
+        with self.assertRaises(BridgeError) as failure:self.apply(self.plan())
+        self.assertEqual(failure.exception.code,'revision_conflict')
+        self.assertIn('ArtistUnrelated',self.host.graph)
+        self.assertTrue(self.host.dirty)
+        self.assertFalse(failure.exception.data['restoration']['ok'])
+        self.assertEqual(original.read_text(),'{"graph":[]}')
+
+    def test_exclusively_owned_events_still_allow_original_restoration(self):
+        from nuke_mcp_bridge.events import EventBuffer,scene_events
+        buffer=EventBuffer(instance_id=self.registry.instance_id)
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        original=self.root/'original.nknc';original.write_text('{"graph":[]}')
+        self.host.script_path=str(original)
+        create=self.host.nodes.Read
+        def owned_edit(**kwargs):
+            node=create(**kwargs)
+            buffer.record({'type':'node_created','node_path':node.fullName()})
+            return node
+        self.host.nodes.Read=owned_edit
+        result=self.apply(self.plan())
+        self.assertTrue(result['restoration']['ok'])
+        self.assertEqual(self.host.script_path,str(original))
+
+    def test_new_observation_failure_preserves_partial_script_during_recovery(self):
+        from nuke_mcp_bridge.events import EventBuffer,scene_events,install_callbacks
+        from tests.event_fakes import EventHost
+        buffer=EventBuffer(instance_id=self.registry.instance_id)
+        self.addCleanup(install_callbacks(EventHost(nc=True),buffer))
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        original=self.root/'original.nknc';original.write_text('{"graph":[]}')
+        self.host.script_path=str(original)
+        create=self.host.nodes.Read
+        def uncertain(**kwargs):
+            node=create(**kwargs)
+            self.host.add('ArtistUnrelated');self.host.dirty=True
+            buffer.degrade('callback_read_failed')
+            return node
+        self.host.nodes.Read=uncertain
+        with self.assertRaises(BridgeError) as failure:self.apply(self.plan())
+        self.assertEqual(failure.exception.code,'revision_unavailable')
+        self.assertIn('ArtistUnrelated',self.host.graph)
+        self.assertFalse(failure.exception.data['restoration']['ok'])
+
+    def test_foreign_edit_during_restoration_preflight_is_preserved(self):
+        from nuke_mcp_bridge.events import EventBuffer,scene_events
+        from nuke_mcp_bridge.mutations import operation_context
+        buffer=EventBuffer(instance_id=self.registry.instance_id)
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        original=self.root/'original.nknc';original.write_text('{"graph":[]}')
+        self.host.script_path=str(original)
+        create=self.host.nodes.Read;trigger=[False]
+        modified=self.host.root().modified
+        def inject_in_read():
+            if trigger[0]:
+                trigger[0]=False
+                self.host.add('ArtistUnrelated');self.host.dirty=True
+                context=operation_context.set(None)
+                try:buffer.record({'type':'node_created','node_path':'ArtistUnrelated'})
+                finally:operation_context.reset(context)
+            return modified()
+        self.host.root().modified=inject_in_read
+        def fail_create(**kwargs):
+            create(**kwargs);trigger[0]=True
+            raise RuntimeError('injected constructor failure')
+        self.host.nodes.Read=fail_create
+        with self.assertRaises(BridgeError) as failure:self.apply(self.plan())
+        self.assertIn('ArtistUnrelated',self.host.graph)
+        self.assertTrue(self.host.dirty)
+        self.assertFalse(failure.exception.data['restoration']['ok'])
+
     def test_plan_is_readonly_and_two_shot_publication(self):
         second=copy.deepcopy(self.manifest['shots'][0]);second.update(shot_id='sh020',script_path=str(self.root/'sh020.nknc'))
         second['write']['path']=str(self.root/'second.%04d.exr');self.manifest['shots'].append(second)

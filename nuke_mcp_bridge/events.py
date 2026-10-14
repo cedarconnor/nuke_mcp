@@ -150,7 +150,9 @@ def check_plan_stamp(stamp, allow_owned=False):
         return
     if buffer is None or buffer.instance_id != stamp['server_instance_id']:
         raise BridgeError('stale_plan', 'Event provider instance changed')
-    if buffer.snapshot()['revision_available'] != stamp['revision_available']:
+    current = buffer.snapshot()
+    if (current['revision_available'] != stamp['revision_available'] or
+            current['reasons'] != stamp['reasons']):
         raise BridgeError('revision_unavailable', 'Event observation changed after planning')
     buffer.check(stamp['revision'], allow_owned=allow_owned,
                  require_available=stamp['revision_available'])
@@ -178,6 +180,10 @@ def install_callbacks(nuke, buffer):
     def callback(kind):
         def observe():
             if not state['active']:
+                return
+            if threading.current_thread() is not threading.main_thread():
+                buffer.degrade('callback_off_main_thread')
+                buffer.record({'type': kind})
                 return
             if state['busy']:
                 buffer.degrade('recursive_callback')

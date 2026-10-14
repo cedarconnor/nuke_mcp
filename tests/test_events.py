@@ -10,6 +10,7 @@ from nuke_mcp_bridge.runtime import BridgeRuntime
 from nuke_mcp_bridge.mutations import operation_context
 from nuke_mcp_bridge.batch import execute_batch
 from nuke_mcp_bridge.protocol import BridgeError
+from nuke_mcp_bridge.client import BridgeClient
 
 if importlib.util.find_spec('nuke_mcp_bridge.events'):
     from nuke_mcp_bridge import events as e
@@ -122,6 +123,21 @@ class EventTests(unittest.TestCase):
         with self.assertRaises(BridgeError) as failure: self.buffer.require_revision()
         self.assertEqual(failure.exception.code, 'revision_unavailable')
 
+    def test_worker_callback_never_reads_host_and_degrades_revision(self):
+        import threading
+        host,_=self.installed()
+        reads=[]
+        def host_read():
+            reads.append(threading.current_thread().name)
+            return host
+        host.thisNode=host_read;host.frame=host_read
+        for suffix in ('OnCreate','UpdateUI'):
+            worker=threading.Thread(target=lambda:host.emit(suffix))
+            worker.start();worker.join()
+        self.assertEqual(reads,[])
+        self.assertFalse(self.buffer.snapshot()['revision_available'])
+        self.assertEqual([x['type'] for x in self.buffer.read()['events']],['node_created','frame_changed'])
+
     def test_nc_missing_callback_and_unknown_license_refuse_guarantees(self):
         for host in (EventHost(nc=True), EventHost(nc='unknown'), EventHost()):
             buffer = e.EventBuffer()
@@ -229,14 +245,17 @@ class EventTests(unittest.TestCase):
             yield {'frames_completed':[1]}
         runtime = BridgeRuntime({'render':render}, OperationRegistry(), ManualDispatcher(), event_host=host)
         runtime.start(port=0); self.addCleanup(runtime.stop)
-        a,b = str(uuid4()),str(uuid4())
+        a,b = BridgeClient(port=runtime.port),BridgeClient(port=runtime.port)
+        for client in (a,b):client.connect();self.addCleanup(client.close)
         def dispatch(command, session=a, **params):
-            return runtime._dispatch(request(runtime.registry.instance_id,session=session,
-                                             command=command,params=params))
+            req=session.submit(command,params);runtime.tick()
+            result=session.status(req['request_id'],runtime.registry.instance_id)
+            self.assertTrue(result['ok'],result)
+            return result['data']
         dispatch('subscribe_events',event_types=['knob_changed'])
         dispatch('subscribe_events',session=b,event_types=['node_deleted'])
-        req = request(runtime.registry.instance_id,session=a,command='render')
-        runtime.registry.admit(req); runtime.tick(); runtime.tick()
+        req = a.submit('render',{})
+        runtime.tick(); runtime.tick();runtime.tick()
         found = dispatch('get_events')['events']
         self.assertEqual(found[0]['request_id'],req['request_id'])
         self.assertEqual(dispatch('get_events',session=b)['events'],[])
@@ -251,10 +270,11 @@ class EventTests(unittest.TestCase):
         registry = OperationRegistry()
         runtime = BridgeRuntime({},registry,ManualDispatcher(),event_host=host)
         runtime.start(port=0);self.addCleanup(runtime.stop)
+        client=BridgeClient(port=runtime.port);client.connect();self.addCleanup(client.close)
         for command,params in [('subscribe_events',{'event_types':[]}),('get_events',{})]:
-            req=request(registry.instance_id,command=command,params=params)
-            registry.admit(req);runtime.tick()
+            req=client.submit(command,params);runtime.tick()
             result=registry.lookup(req['request_id'],registry.instance_id)
+            self.assertTrue(result['ok'],result)
             self.assertEqual(result['outcome'],'not_started')
         result=execute_batch(host,[dict(op='set_knob',node_path='A',knob='gain',value=2)],
                              revision_provider=runtime.events)
