@@ -93,12 +93,14 @@ def inspect_knob(node, name, value):
         raise BridgeError('dynamic_knob', 'Static edits cannot replace animation or expressions')
     if kind in NUMERIC:
         size = knob.arraySize()
+        if any(knob.isAnimated(i) or knob.hasExpression(i) for i in range(size)):
+            raise BridgeError('dynamic_knob', 'Static edits cannot replace animation or expressions')
         values = list(value) if isinstance(value, (tuple, list)) else [value]
         if (size > 1 and not isinstance(value, (tuple, list))) or len(values) != size:
             raise BridgeError('invalid_value', 'Provide exactly %s components' % size)
         if any(type(v) not in (int, float) for v in values):
             raise BridgeError('invalid_value', 'Numeric knob requires numbers')
-        if kind in ('Int_Knob', 'WH_Knob') and any(type(v) is not int for v in values):
+        if kind == 'Int_Knob' and any(type(v) is not int for v in values):
             raise BridgeError('invalid_value', 'Integer knob requires integers')
     elif kind == 'Boolean_Knob':
         if type(value) is not bool: raise BridgeError('invalid_value', 'Boolean knob requires true/false')
@@ -108,6 +110,13 @@ def inspect_knob(node, name, value):
     elif type(value) is not str:
         raise BridgeError('invalid_value', 'String knob requires text')
     return knob
+
+
+def knob_value(knob):
+    """Array_Knob.value() may collapse equal components to one scalar."""
+    if knob.Class() in NUMERIC and knob.arraySize() > 1:
+        return [knob.value(i) for i in range(knob.arraySize())]
+    return knob.value()
 
 
 def same_value(actual, expected):
@@ -126,7 +135,7 @@ def preflight(nuke, operation):
     kind = operation['op']
     if kind == 'set_knob':
         knob = inspect_knob(node, operation['knob'], operation['value'])
-        return dict(node=node, knob=knob, before=knob.value())
+        return dict(node=node, knob=knob, before=knob_value(knob))
     if kind == 'position':
         if any(type(operation[k]) is not int for k in ('x', 'y')):
             raise BridgeError('invalid_value', 'Position requires integer x and y')
@@ -157,16 +166,21 @@ def apply(nuke, operation):
         if kind == 'set_knob':
             knob, value = prepared['knob'], operation['value']
             if isinstance(value, (tuple, list)):
+                data['completed_components'] = []
                 for i, component in enumerate(value):
                     check_guard()
+                    current = preflight(nuke, operation)
+                    if current['node'] != node or current['knob'] != knob:
+                        raise BridgeError('state_uncertain', 'Array target changed during edit')
                     started = True
                     knob.setValue(component, i)
+                    data['completed_components'].append(i)
             else:
                 started = True
                 knob.setValue(value)
-            actual = knob.value()
+            actual = knob_value(knob)
             data.update(knob=operation['knob'], value=actual)
-            verified = same_value(actual, value)
+            verified = same_value(actual, value) and inspect_knob(node, operation['knob'], value) == knob
         elif kind == 'position':
             started = True
             node.setXYpos(operation['x'], operation['y'])
@@ -253,6 +267,7 @@ def create_node(nuke, node_type, name=None, position=None, inputs=None, paramete
     configuring = False
     result = None
     failure = None
+    path = None
     try:
         kwargs = {}
         if name is not None: kwargs['name'] = name
@@ -269,23 +284,13 @@ def create_node(nuke, node_type, name=None, position=None, inputs=None, paramete
         for op in ops: preflight(nuke, op)
         configuring = True
         for op in ops: apply(nuke, op)
-        # nuke.nodes constructors do not use selection to wire inputs.
-        expected_inputs = inputs or []
-        for i in range(node.inputs()):
-            actual = node.input(i)
-            expected = resolve_node(nuke, expected_inputs[i]) if i < len(expected_inputs) and expected_inputs[i] else None
-            if actual != expected: raise BridgeError('state_uncertain', 'Unexpected automatic input', 'unknown')
-        with nuke.root():
-            if nuke.toNode(path) != node: raise BridgeError('state_uncertain', 'Created node is not observable', 'unknown')
-        result = dict(name=node.name(), path=path, type=node.Class(), position=[node.xpos(), node.ypos()],
-                      parameters={key: node.knob(key).value() for key in parameters})
     except Exception as exc:
-        data = {'created_path': node.fullName() if node is not None else None}
+        data = dict(getattr(exc, 'data', {}), created_path=path)
         outcome = 'unknown'
         if node is not None and isinstance(exc, BridgeError) and exc.outcome == 'not_started' and not configuring:
             try:
                 with nuke.root():
-                    if nuke.toNode(node.fullName()) != node: raise RuntimeError('Owned handle not observable')
+                    if nuke.toNode(path) != node: raise RuntimeError('Owned handle not observable')
                 delete_owned(nuke, node)
                 outcome = 'rolled_back'
                 node = None
@@ -298,7 +303,34 @@ def create_node(nuke, node_type, name=None, position=None, inputs=None, paramete
             if node is not None: node.setSelected(False)
             for original in selected: original.setSelected(True)
             if any(not original.isSelected() for original in selected): raise RuntimeError('Selection restoration not verified')
+            if node is not None and node.isSelected(): raise RuntimeError('Created node remains selected')
         except Exception as exc:
-            failure = BridgeError('state_uncertain', 'Selection restoration failed: ' + str(exc), 'unknown', result or {})
+            data = dict(failure.data if failure else {}, created_path=path, selection_error=str(exc))
+            if failure:
+                data['prior_error'] = dict(code=failure.code, message=str(failure), outcome=failure.outcome)
+            failure = BridgeError('state_uncertain', 'Selection restoration failed: ' + str(exc), 'unknown', data)
     if failure: raise failure
+    # Selection and dependent-knob callbacks can invalidate earlier readbacks.
+    data = {'created_path': path}
+    try:
+        result = dict(name=node.name(), path=path, type=node.Class(), position=[node.xpos(), node.ypos()],
+                      parameters={key: knob_value(node.knob(key)) for key in parameters})
+        data.update(result)
+        with nuke.root():
+            if nuke.toNode(path) != node:
+                raise RuntimeError('Created node is not observable')
+        for key, value in parameters.items():
+            inspect_knob(node, key, value)
+            if not same_value(result['parameters'][key], value):
+                raise RuntimeError('Created parameter changed during callbacks: ' + key)
+        if position is not None and result['position'] != list(position):
+            raise RuntimeError('Created position changed during callbacks')
+        # nuke.nodes constructors do not use selection to wire inputs.
+        expected_inputs = inputs or []
+        for i in range(max(node.inputs(), len(expected_inputs))):
+            actual = node.input(i)
+            expected = resolve_node(nuke, expected_inputs[i]) if i < len(expected_inputs) and expected_inputs[i] else None
+            if actual != expected: raise RuntimeError('Unexpected created input')
+    except Exception as exc:
+        raise BridgeError('state_uncertain', 'Final creation verification failed: ' + str(exc), 'unknown', data) from exc
     return result

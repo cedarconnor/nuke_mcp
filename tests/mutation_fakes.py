@@ -8,9 +8,11 @@ class Knob:
         self.animated = self.expression = self.ignore = self.fail_after = False
     def Class(self): return self.kind
     def arraySize(self): return len(self.v) if isinstance(self.v, list) else 1
-    def isAnimated(self): return self.animated
-    def hasExpression(self): return self.expression
-    def value(self): return self.v[:] if isinstance(self.v, list) else self.v
+    def isAnimated(self, index=None): return self.animated
+    def hasExpression(self, index=None): return self.expression
+    def value(self, index=None):
+        if index is not None: return self.v[index] if isinstance(self.v, list) else self.v
+        return self.v[:] if isinstance(self.v, list) else self.v
     def values(self): return ['linear', 'sRGB']
     def setValue(self, value, index=None):
         assert threading.current_thread() is threading.main_thread()

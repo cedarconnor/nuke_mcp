@@ -4,6 +4,22 @@ from types import SimpleNamespace
 from tests import smoke_mcp
 
 class SmokeEvidenceTests(unittest.TestCase):
+    def test_batch_failure_keeps_evidence_and_verifies_cleanup(self):
+        calls=[]
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append(name)
+                data = {'path':arguments.get('name')} if name == 'create_node' else {}
+                fail = name == 'batch_edit'
+                return SimpleNamespace(isError=fail, content=[], structuredContent={
+                    'ok':not fail, 'data':data, 'outcome':'unknown' if fail else 'applied',
+                    'error':{'code':'state_uncertain'} if fail else None})
+        report=asyncio.run(smoke_mcp.mutation_probe(Session()))
+        self.assertFalse(report['passed'])
+        self.assertEqual(report['batch_dry_run']['outcome'], 'unknown')
+        self.assertEqual(report['cleanup'], 'verified_deleted')
+        self.assertEqual(calls, ['create_node','get_node_info','batch_edit','delete_node'])
+
     def test_failed_creation_is_recorded_without_retry_or_guessed_delete(self):
         calls=[]
         class Session:

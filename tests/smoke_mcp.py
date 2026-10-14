@@ -46,6 +46,18 @@ async def mutation_probe(session):
         info = await session.call_tool('get_node_info', arguments={'node_name': name})
         report['inspect'] = info.structuredContent
         checked_receipt(info)
+        operations = [
+            {'op':'set_knob', 'node_path':'root.' + name, 'knob':'label', 'value':'Verified batch smoke'},
+            {'op':'position', 'node_path':'root.' + name, 'x':120, 'y':80},
+        ]
+        dry = await session.call_tool('batch_edit', arguments={'operations':operations})
+        report['batch_dry_run'] = dry.structuredContent
+        checked_receipt(dry)
+        applied = await session.call_tool('batch_edit', arguments={'operations':operations, 'dry_run':False})
+        report['batch_apply'] = applied.structuredContent
+        receipt = checked_receipt(applied)
+        if [item['outcome'] for item in receipt['data']['items']] != ['applied', 'applied']:
+            raise RuntimeError('Batch did not verify both edits')
         report['passed'] = True
     except Exception as exc:
         report['error'] = str(exc)

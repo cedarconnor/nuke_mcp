@@ -95,3 +95,66 @@ class MutationTests(unittest.TestCase):
         self.failure(lambda: m.delete_node(self.host, 'Other'), 'unknown')
         self.assertNotIn('Other', self.host.graph)
         self.assertEqual(self.host.destroy_callbacks, [])
+
+    def test_uniform_array_readback_uses_components(self):
+        knob = self.node['translate']
+        original = knob.value
+        knob.value = lambda index=None: original(index) if index is not None else original(0)
+        result = m.set_knob(self.host, 'Grade1', 'translate', [2., 2.])
+        self.assertEqual(result['before'], [0., 0.])
+        self.assertEqual(result['value'], [2., 2.])
+
+    def test_wh_knob_accepts_fractional_dimensions(self):
+        self.node._knobs['size'] = Knob([0., 0.], 'WH_Knob')
+        self.assertEqual(m.set_knob(self.host, 'Grade1', 'size', [2.5, 2.5])['value'], [2.5, 2.5])
+
+    def test_array_stops_when_callback_introduces_animation(self):
+        knob = self.node['translate']
+        setter = knob.setValue
+        writes = []
+        def set_value(value, index=None):
+            writes.append(index)
+            setter(value, index)
+            knob.animated = True
+        knob.setValue = set_value
+        err = self.failure(lambda: m.set_knob(self.host, 'Grade1', 'translate', [2., 3.]), 'unknown')
+        self.assertEqual(writes, [0])
+        self.assertEqual(knob.v, [2., 0.])
+        self.assertEqual(err.data['path'], 'Grade1')
+        self.assertEqual(err.data['completed_components'], [0])
+
+    def test_creation_final_readback_after_dependent_and_selection_callbacks(self):
+        for trigger in ('label', 'selection'):
+            with self.subTest(trigger=trigger):
+                host = Host()
+                factory = host.nodes.Grade
+                def create(**kwargs):
+                    node = factory(**kwargs)
+                    if trigger == 'label':
+                        setter = node['label'].setValue
+                        def set_label(value):
+                            setter(value)
+                            node['gain'].v = 9.
+                        node['label'].setValue = set_label
+                    else:
+                        def select(value):
+                            node.selected = value
+                            node['gain'].v = 9.
+                        node.setSelected = select
+                    return node
+                host.nodes.Grade = create
+                err = self.failure(lambda: m.create_node(host, 'Grade', parameters={'gain':2., 'label':'trigger'}), 'unknown')
+                self.assertEqual(err.data['created_path'], 'Grade1')
+                self.assertEqual(err.data['parameters']['gain'], 9.)
+                self.assertEqual(host.create_count, 1)
+                self.assertEqual(host.deleted, [])
+
+    def test_creation_retains_cleanup_evidence_when_selection_restore_fails(self):
+        self.node.selected = True
+        def fail_select(value): raise RuntimeError('selection failed')
+        self.node.setSelected = fail_select
+        self.host.fail_delete = True
+        err = self.failure(lambda: m.create_node(self.host, 'Grade', parameters={'missing':1}), 'unknown')
+        self.assertTrue(err.data['created_path'])
+        self.assertIn('delete failed', err.data['cleanup_error'])
+        self.assertIn('selection failed', err.data['selection_error'])
