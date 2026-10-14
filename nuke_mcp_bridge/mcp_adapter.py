@@ -93,6 +93,24 @@ def bridge_tool(mcp):
 
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
+    def import_shot_csv(path: str, column_map: dict, defaults: dict) -> ToolResult:
+        """Convert a host CSV using explicit header-to-field mapping and defaults; resolve returned validation errors."""
+        result=client().call('import_shot_csv',dict(path=path,column_map=column_map,defaults=defaults))
+        return to_mcp_result(result,'CSV conversion: '+result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
+    def plan_shot_setup(manifest: dict) -> ToolResult:
+        """Validate schema-v1 shot paths, sources, host/settings and publication collisions without mutation."""
+        result=client().call('plan_shot_setup',dict(manifest=manifest))
+        return to_mcp_result(result,'Shot plan: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def apply_shot_setup(manifest: dict, plan_digest: str) -> ToolResult:
+        """Apply a fresh shot plan only in a clean, explicitly opted-in disposable GUI host. Never retry unknown outcomes."""
+        result=client().call('apply_shot_setup',dict(manifest=manifest,plan_digest=plan_digest))
+        return to_mcp_result(result,'Shot setup: '+result['state'])
+
     @mcp.tool(output_schema=None)
     def open_script(path: str, discard_unsaved_changes: bool = False) -> ToolResult:
         """Open an absolute trusted script path; refuse dirty work without explicit discard."""

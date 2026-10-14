@@ -13,6 +13,7 @@ NUMERIC = frozenset(('Double_Knob', 'Float_Knob', 'Int_Knob', 'XY_Knob', 'XYZ_Kn
     'WH_Knob', 'Color_Knob', 'AColor_Knob', 'UV_Knob', 'Scale_Knob'))
 STRINGS = frozenset(('String_Knob', 'Multiline_Eval_String_Knob', 'File_Knob', 'Eval_String_Knob'))
 operation_guard = ContextVar('nuke_edit_guard', default=None)
+operation_context = ContextVar('nuke_operation_context', default=None)
 
 
 def check_guard():

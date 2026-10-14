@@ -80,11 +80,14 @@ class BridgeRuntime:
         handler = self.handlers.get(command)
         if handler is None:
             raise BridgeError("unknown_command", "Unsupported command: " + command)
-        from .mutations import operation_guard
+        from .mutations import operation_guard, operation_context
         token = operation_guard.set(lambda: self.registry.check_edit_boundary(request['request_id']))
+        context_token = operation_context.set({'server_instance_id':self.registry.instance_id,
+                                               'request_id':request['request_id']})
         try:
             return handler(**request["params"])
         finally:
+            operation_context.reset(context_token)
             operation_guard.reset(token)
 
     @staticmethod

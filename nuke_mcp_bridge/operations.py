@@ -12,7 +12,8 @@ from uuid import uuid4
 from .protocol import BridgeError, TERMINAL_STATES, encode_message, make_result, validate_request
 
 READ_ONLY = frozenset(("ping", "get_capabilities", "get_script_info", "get_node_info",
-                       "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics", "list_toolsets"))
+                       "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics", "list_toolsets",
+                       "import_shot_csv", "plan_shot_setup"))
 
 
 class OperationRegistry:

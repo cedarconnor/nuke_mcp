@@ -47,7 +47,8 @@ class NukeMCPServer:
                  "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer",
                  "batch_edit", "legacy_workflow", "inspect_graph", "inspect_reads", "validate_reads",
                  "sample_channel_statistics", "list_toolsets", "save_toolset", "load_toolset",
-                 "open_script", "save_script", "set_project_settings")
+                 "open_script", "save_script", "set_project_settings", "import_shot_csv",
+                 "plan_shot_setup", "apply_shot_setup")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
         handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
@@ -218,6 +219,20 @@ class NukeMCPServer:
     def open_script(self, **kwargs):
         from nuke_mcp_bridge.scripts import open_script
         return open_script(nuke, **kwargs)
+
+    def import_shot_csv(self, **kwargs):
+        from nuke_mcp_bridge.manifests import import_shot_csv
+        return import_shot_csv(**kwargs)
+
+    def plan_shot_setup(self, manifest):
+        from nuke_mcp_bridge.shots import plan_shot_setup
+        from nuke_mcp_bridge.toolsets import library_root
+        return plan_shot_setup(nuke,manifest,library_root())
+
+    def apply_shot_setup(self, manifest, plan_digest):
+        from nuke_mcp_bridge.shots import apply_shot_setup
+        from nuke_mcp_bridge.toolsets import library_root
+        return apply_shot_setup(nuke,manifest,plan_digest,library_root(),self.runtime.registry)
 
     def save_script(self, **kwargs):
         from nuke_mcp_bridge.scripts import save_script
