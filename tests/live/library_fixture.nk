@@ -1,0 +1,16 @@
+Root {
+ first_frame 1
+ last_frame 3
+ format "4 4 0 0 4 4 1 MCP_4x4"
+}
+Constant {
+ inputs 0
+ color {0.25 0.5 0.75 1}
+ format "4 4 0 0 4 4 1 MCP_4x4"
+ name MCP_Source
+}
+Grade {
+ label roundtrip
+ name MCP_Grade
+ selected true
+}

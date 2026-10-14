@@ -93,6 +93,28 @@ def bridge_tool(mcp):
 
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
+    @mcp.tool(output_schema=None)
+    def open_script(path: str, discard_unsaved_changes: bool = False) -> ToolResult:
+        """Open an absolute trusted script path; refuse dirty work without explicit discard."""
+        result=client().call('open_script',dict(path=path,discard_unsaved_changes=discard_unsaved_changes))
+        return to_mcp_result(result,'Open script: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def save_script(path: str | None = None, overwrite: bool = False) -> ToolResult:
+        """Save current target, or save-as an absolute host-compatible path. Save-as refuses collisions by default."""
+        result=client().call('save_script',dict(path=path,overwrite=overwrite))
+        return to_mcp_result(result,'Save script: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def set_project_settings(settings: dict, dry_run: bool = True) -> ToolResult:
+        """Preflight/apply fps, first_frame, last_frame, format and exact color_management enums.
+
+        Format requires width, height, pixel_aspect. Color management maps existing
+        allowlisted knob names to exact observed enum labels. Apply is non-atomic.
+        """
+        result=client().call('set_project_settings',dict(settings=settings,dry_run=dry_run))
+        return to_mcp_result(result,'Project settings: '+result['state'])
+
     @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
     def list_toolsets() -> ToolResult:
         """List digest-verified entries in the host's configured trusted library."""

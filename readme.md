@@ -63,10 +63,16 @@ See [installation details](INSTALL_OTHER_CLIENTS.md) for additional client setup
 
 ## Tools
 
-The server exposes **24 tools**. The client supplies tool arguments; MCP context is handled internally.
+The server exposes **30 tools**. The client supplies tool arguments; MCP context is handled internally.
 
 | Tool | Purpose |
 | --- | --- |
+| `list_toolsets` | List verified entries in the configured trusted library. |
+| `save_toolset` | Publish node paths and metadata with a payload digest. |
+| `load_toolset` | Paste a verified trusted payload into a newly owned Group. |
+| `open_script` | Open an absolute script path, refusing unsaved work unless discard is explicit. |
+| `save_script` | Save the current target or an explicit save-as path with collision protection. |
+| `set_project_settings` | Preflight or apply FPS, frame range, format and exact color enum options. |
 | `batch_edit` | Preflight or apply up to 100 typed knob, connection, and position edits; dry-run by default. |
 | `get_capabilities` | Report host version, flavor, observable license mode, and supported tool groups. |
 | `get_script_info` | Inspect current script settings and observable nodes. |

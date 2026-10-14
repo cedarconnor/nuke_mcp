@@ -209,7 +209,7 @@ class OperationRegistry:
                         entry["job"] = data
                     return
                 result = make_result(req, data=data, observation=data.get('observation'),
-                                     outcome=(data['outcome'] if req['command'] in ('batch_edit', 'modify_node')
+                                     outcome=(data['outcome'] if req['command'] in ('batch_edit', 'modify_node', 'set_project_settings')
                                               and 'outcome' in data else
                                               "not_started" if req["command"] in READ_ONLY else "applied"))
             self.record_result(key, result)

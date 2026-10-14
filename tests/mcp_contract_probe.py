@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sys
 import time
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -35,12 +36,20 @@ def data(reply):
 async def probe(live=False, port=9877, slow=False):
     runtime = None
     pump = None
+    temp = None
     if not live:
         from tests.inspection_fakes import ImageHost as Host
         from nuke_mcp_bridge.batch import execute_batch
         from nuke_mcp_bridge.inspection import inspect_graph, inspect_reads, validate_reads
         from nuke_mcp_bridge.diagnostics import sample_channel_statistics
         fake_host = Host()
+        from tests.test_scripts import ScriptHost
+        from nuke_mcp_bridge.toolsets import list_toolsets, save_toolset, load_toolset
+        from nuke_mcp_bridge.scripts import open_script, save_script, set_project_settings
+        library_host=ScriptHost()
+        library_host.add('Grade1')
+        temp=tempfile.TemporaryDirectory()
+        library=Path(temp.name)/'library'
         fake_host.add('FixtureGrade')
         def missing(**kwargs):
             raise BridgeError("node_not_found", "Node not found")
@@ -50,6 +59,12 @@ async def probe(live=False, port=9877, slow=False):
                 yield {"frames_completed": []}
             yield {"frames_completed": [1], "status": "Rendering completed"}
         handlers = {
+            'list_toolsets':lambda:list_toolsets(library),
+            'save_toolset':lambda **kw:save_toolset(library_host,library,**kw),
+            'load_toolset':lambda **kw:load_toolset(library_host,library,**kw),
+            'open_script':lambda **kw:open_script(library_host,**kw),
+            'save_script':lambda **kw:save_script(library_host,**kw),
+            'set_project_settings':lambda **kw:set_project_settings(library_host,**kw),
             "get_capabilities": lambda: {"nuke_version": "fake", "license_mode": "unknown"},
             "get_script_info": lambda: {"name": "contract_fixture", "fps": 24, "format": "HD",
                                       "first_frame": 1, "last_frame": 3, "nodes": []},
@@ -91,8 +106,12 @@ async def probe(live=False, port=9877, slow=False):
                     assert name in tools, name
                     assert tools[name].inputSchema.get("required", []) == required, (name, tools[name].inputSchema)
                 for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit",
-                             "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics"):
+                             "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics",
+                             "list_toolsets", "save_toolset", "load_toolset", "open_script", "save_script", "set_project_settings"):
                     assert name in tools, name
+                assert len(tools)==30
+                assert 'root' not in tools['save_toolset'].inputSchema['properties']
+                assert 'new_disposable_script' not in tools
                 sessions.append(session)
             capabilities = await asyncio.gather(*(s.call_tool("get_capabilities", {}) for s in sessions))
             receipts = [data(r) for r in capabilities]
@@ -121,6 +140,19 @@ async def probe(live=False, port=9877, slow=False):
             if live:
                 assert report["read_only_python"]["data"]["output"]["main_thread"] is True
             if not live:
+                report['lifecycle']={}
+                for name,args in (
+                    ('save_toolset',{'node_paths':['root.Grade1'],'name':'fixture'}),
+                    ('list_toolsets',{}),
+                    ('load_toolset',{'name':'fixture','group_name':'Imported'}),
+                    ('set_project_settings',{'settings':{'fps':30.}}),
+                    ('save_script',{'path':str(Path(temp.name)/'shot.nknc')}),
+                    ('open_script',{'path':str(Path(temp.name)/'shot.nknc')})):
+                    reply=await sessions[0].call_tool(name,args)
+                    assert not reply.isError,data(reply)
+                    receipt=data(reply)
+                    assert receipt['outcome']==('not_started' if name in ('list_toolsets','set_project_settings') else 'applied'),receipt
+                    report['lifecycle'][name]=receipt
                 graph = await sessions[0].call_tool('inspect_graph', {'max_nodes':1})
                 assert not graph.isError and data(graph)['outcome']=='not_started', data(graph)
                 assert data(graph)['data']['nodes'][0]['path']=='FixtureGrade'
@@ -184,6 +216,7 @@ async def probe(live=False, port=9877, slow=False):
                 pass
         if runtime:
             runtime.stop()
+        if temp:temp.cleanup()
     return report
 
 

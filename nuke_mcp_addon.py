@@ -46,7 +46,8 @@ class NukeMCPServer:
                  "position_node", "connect_nodes", "render", "viewer_playback",
                  "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer",
                  "batch_edit", "legacy_workflow", "inspect_graph", "inspect_reads", "validate_reads",
-                 "sample_channel_statistics", "list_toolsets", "save_toolset", "load_toolset")
+                 "sample_channel_statistics", "list_toolsets", "save_toolset", "load_toolset",
+                 "open_script", "save_script", "set_project_settings")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
         handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
@@ -213,6 +214,18 @@ class NukeMCPServer:
     def list_toolsets(self):
         from nuke_mcp_bridge.toolsets import list_toolsets, library_root
         return list_toolsets(library_root())
+
+    def open_script(self, **kwargs):
+        from nuke_mcp_bridge.scripts import open_script
+        return open_script(nuke, **kwargs)
+
+    def save_script(self, **kwargs):
+        from nuke_mcp_bridge.scripts import save_script
+        return save_script(nuke, **kwargs)
+
+    def set_project_settings(self, **kwargs):
+        from nuke_mcp_bridge.scripts import set_project_settings
+        return set_project_settings(nuke, **kwargs)
 
     def save_toolset(self, **kwargs):
         from nuke_mcp_bridge.toolsets import save_toolset, library_root
