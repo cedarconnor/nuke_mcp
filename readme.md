@@ -1,387 +1,203 @@
-# Nuke-MCP
+# Nuke MCP
 
-A bridge between The Foundry's Nuke and AI systems using the Model Context Protocol (MCP).
+Control Foundry Nuke from an MCP-compatible assistant. Inspect scripts and nodes, edit connections and parameters, organize graphs, and submit renders through a local bridge.
 
-## Overview
+**Milestone 1 is implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside four new capability and operation-status tools.
 
-Nuke-MCP allows AI assistants to interact with Nuke through a socket connection, enabling them to:
+Live two-client communication has been verified on **Windows with Nuke Non-commercial 17.0v4 and external Python 3.11**. See the [validation report](docs/validation/milestone-1.md) for evidence and qualification limits.
 
-- Get information about Nuke scripts
-- Create, modify, and delete nodes
-- Position nodes in the node graph
-- Connect nodes together
-- Control playback and rendering
-- Execute arbitrary Python code in Nuke
+## Quick start
 
-## Components
+### 1. Install the external server
 
-1. **Nuke Addon** (`nuke_mcp_addon.py`): A Nuke script that creates a socket server within Nuke
-2. **MCP Server** (`nuke_mcp_server.py`): A Python server that connects to the Nuke addon and exposes tools to AI systems
-3. **Entry Point** (`main.py`): A simple script to start the MCP server
-4. **Shared package** (`nuke_mcp_bridge/`): Protocol v2, receipts, main-thread scheduling, and capability reporting
+You need Nuke with a GUI and bundled PySide6 or PySide2, external Python 3.11, and an MCP client that supports stdio servers.
 
-## Installation
-
-### Prerequisites
-
-- The Foundry's Nuke with a GUI and PySide6/PySide2 (Windows Nuke 17 is the initial qualification target)
-- External Python 3.11
-- FastMCP 2.14.7 (install the pinned requirements)
-- Claude Desktop
-
-### Installing the FastMCP package
-
-```bash
-pip install -r requirements.txt
+```powershell
+git clone https://github.com/cedarconnor/nuke_mcp.git D:/nuke_mcp
+cd D:/nuke_mcp
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### Installing Nuke-MCP
+Use your existing checkout if you already cloned the repository. Adjust the paths below if you install elsewhere. Dependencies stay in the external virtual environment; do not install them into Nuke's application directories. [requirements.txt](requirements.txt) pins FastMCP to `2.14.7`.
 
-1. Clone or download this repository
-2. Add the complete checkout to Nuke's Python path. The add-on and `nuke_mcp_bridge/` must stay together. See [installation and protocol migration](INSTALL_OTHER_CLIENTS.md).
+### 2. Load the add-on in Nuke
 
-## Usage
-
-### Installing the Nuke Addon
-
-1. **Install the Addon and Shared Package**:
-   - Keep `nuke_mcp_addon.py` and the complete `nuke_mcp_bridge/` directory in a location where Nuke can find them:
-     - Copy it to your Nuke scripts folder (usually in `~/.nuke/python` on Linux/Mac or in your home directory on Windows)
-     - Or place it in a folder that's in your Nuke Python path
-
-2. **Create a Startup Script** (Recommended):
-   - Create or edit an existing `init.py` file in your `.nuke` directory
-   - Add the following line to automatically load the addon when Nuke starts and making sure you're pointing to the python subfolder where the MCP tools live:
-     ```python
-     nuke.pluginAddPath("./python")
-     
-     import nuke_mcp_addon
-     ```
-
-3. **Manual Loading** (Alternative):
-   - If you don't want to load it automatically, you can manually load it each time by:
-     - Opening Nuke
-     - Make sure you have a python subfolder setup in the init.py where the MCP tools live
-     - Going to the Script Editor panel
-     - Running `import nuke_mcp_addon`
-
-### Docking the NukeMCP Panel
-
-By default, the NukeMCP panel opens as a floating window. If you prefer to have it docked in Nuke's interface, you can modify the `NukeMCPPanel` class in `nuke_mcp_addon.py`:
+Add this to `%USERPROFILE%/.nuke/init.py`, preserving any existing startup code:
 
 ```python
-# Find the NukeMCPPanel class definition (around line 380)
-class NukeMCPPanel(nukescripts.PythonPanel):
-    def __init__(self):
-        nukescripts.PythonPanel.__init__(self, 'Nuke MCP', 'com.example.NukeMCP')
-        # ... existing code ...
-
-# Add this method to enable docking
-    def addToPane(self):
-        pane = nuke.getPaneFor('Properties.1')
-        if not pane:
-            pane = nuke.getPaneFor('Viewer.1')
-        self.setMinimumSize(300, 200)  # Set a reasonable minimum size
-        return pane.addPermanentAsQWidget(self)
-
-# Modify the show_panel function to use docking
-def show_panel():
-    """Show the NukeMCP panel"""
-    global _panel
-    if _panel is None:
-        _panel = NukeMCPPanel()
-    
-    # Show as docked panel instead of floating window
-    pane = _panel.addToPane()
-    if pane:
-        _panel.setParent(pane)
+import nuke
+nuke.pluginAddPath(r"D:/nuke_mcp")
 ```
 
-You can also modify how the panel appears in the menu. Based on your menu.py file, you have:
+Add this to `%USERPROFILE%/.nuke/menu.py`:
 
 ```python
-# MCP Tools
-nuke.toolbar("Nodes").addCommand('NukeMCP/NukeMCP Panel', 'nuke_mcp_addon.show_panel()')
+import nuke_mcp_addon
 ```
 
-To ensure it's properly integrated with your existing toolbar structure, make sure this line is uncommented in your menu.py file.
+Restart Nuke normally, open **Nuke > NukeMCP > Show Panel**, and click **Start Server**. The panel should show `Running on port 9877`.
 
-## Troubleshooting
+Keep the complete checkout available to Nuke. The add-on requires the adjacent `nuke_mcp_bridge/` package; copying only `nuke_mcp_addon.py` is insufficient. The supplied [startup examples](nuke_startup/init.py) also support `NUKE_MCP_REPO` for choosing the repository location.
 
-To use Nuke-MCP with Claude Desktop, follow these steps:
+### 3. Configure your MCP client
 
-1. **Download and Install Claude Desktop**:
-   - Download Claude Desktop from Anthropic's website
-   - Install and set up your account
-
-2. **Enable Developer Mode**:
-   - Open Claude Desktop
-   - Go to Settings
-   - Enable Developer Mode (this might require specific permissions)
-
-3. **Edit the Configuration File**:
-   - In Claude Desktop settings, click "Edit Config" (or directly edit the `claude_desktop_config.json` file)
-   - Add the Nuke-MCP server configuration:
+Register `main.py` as a stdio server using the virtual environment's Python executable. For clients accepting an `mcpServers` configuration:
 
 ```json
 {
   "mcpServers": {
     "nuke": {
-      "command": "python",
-      "args": [
-        "/path/to/your/nuke-mcp/main.py"
-      ],
-      "trusted": true
+      "command": "D:/nuke_mcp/.venv/Scripts/python.exe",
+      "args": ["D:/nuke_mcp/main.py"]
     }
   }
 }
 ```
 
-4. **Replace the Path**:
-   - Update the path with the actual path to where you saved the `main.py` file
-   - Make sure to use the full absolute path
-   - For Windows, use either forward slashes or escaped backslashes:
-     ```
-     "args": ["Z:/path/to/nuke_mcp/main.py"]
-     ```
-     or
-     ```
-     "args": ["Z:\\path\\to\\nuke_mcp\\main.py"]
-     ```
-   - Note: The `"trusted": true` flag is required for full functionality
+Use absolute paths and preserve existing server entries. If your client asks for a working directory, use `D:/nuke_mcp`. Restart or reconnect the client after changing its configuration. Each client launches its own external server process; they can share the same Nuke listener.
 
-5. **Restart Claude Desktop**:
-   - Save the configuration file
-   - Restart Claude Desktop to apply the changes
+Call `get_capabilities` first, then `get_script_info`. Tool discovery alone does not establish that Nuke is connected.
 
-Now when you use Claude Desktop, you can instruct it to interact with Nuke through the MCP connection.
+See [installation details](INSTALL_OTHER_CLIENTS.md) for additional client setup and diagnostics.
 
-## System Architecture
+## Tools
 
-The system consists of three main components that work together:
+The server exposes **19 tools**. The client supplies tool arguments; MCP context is handled internally.
 
-1. **Nuke Addon**: Runs inside Nuke and creates a socket server that listens for commands
-2. **MCP Server**: Acts as middleware between AI systems and Nuke
-3. **AI Client**: Connects to the MCP Server to control Nuke (e.g., Claude Desktop)
+| Tool | Purpose |
+| --- | --- |
+| `get_capabilities` | Report host version, flavor, observable license mode, and supported tool groups. |
+| `get_script_info` | Inspect current script settings and observable nodes. |
+| `get_node_info` | Inspect a node by `node_name`. |
+| `create_node` | Create a `node_type`, with optional name, position, inputs, and parameters. |
+| `modify_node` | Update a named node's parameters, position, or inputs. |
+| `delete_node` | Delete a named node. |
+| `position_node` | Set a named node's `x` and `y` position. |
+| `connect_nodes` | Connect `output_node` to an input of `input_node`. |
+| `auto_layout_nodes` | Arrange all observable nodes or selected nodes. |
+| `organize_node_graph` | Organize nodes by category in a vertical or horizontal layout. |
+| `create_workflow_template` | Build a `keying`, `color_correction`, `lens_distortion`, or `3d_simple` template. |
+| `set_frames` | Set the project frame range or current frame. |
+| `create_viewer` | Create a Viewer, optionally connected to a node. |
+| `viewer_playback` | Play, stop, or step the active Viewer. |
+| `render` | Render with a bounded client wait; accepts `frame_range`, `write_node`, and `proxy_mode`. |
+| `start_render` | Queue a render using `write_node`, `first_frame`, `last_frame`, and optional `step`. |
+| `get_operation_status` | Query a retained receipt using `request_id` and `server_instance_id`. |
+| `cancel_operation` | Cancel queued work or request cancellation of the owning session's running render. |
+| `execute_nuke_code` | Execute Python in Nuke. This is unrestricted access for trusted local clients. |
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │             │     │             │
-│  AI Client  │◄───►│  MCP Server │◄───►│  Nuke Addon │
-│ (Claude)    │     │             │     │ (in Nuke)   │
-│             │     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-```
+The existing editing and template tools are retained; verified mutation readbacks and complete graph observation are planned for later milestones. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
 
-## Available Tools
+## Operation results and rendering
 
-The MCP server exposes the following tools:
+Tool responses include readable text and a `structuredContent` result. Check the structured result when deciding whether an operation completed:
 
-- `get_script_info()`: Get information about the current Nuke script
-- `get_node_info(node_name)`: Get details about a specific node
-- `create_node(node_type, name, position, inputs, parameters)`: Create a new node
-- `modify_node(name, parameters, position, inputs)`: Change an existing node
-- `delete_node(name)`: Delete a node
-- `position_node(name, x, y)`: Position a node in the node graph
-- `connect_nodes(output_node, input_node, input_index)`: Connect nodes
-- `render(frame_range, write_node, proxy_mode)`: Render frames
-- `viewer_playback(action, start_frame, end_frame)`: Control Viewer playback
-- `execute_nuke_code(code)`: Run Python code in Nuke
-- `auto_layout_nodes(selected_only)`: Automatically arrange nodes
-- `set_frames(first_frame, last_frame, current_frame)`: Set frame range
-- `create_viewer(input_node)`: Create a Viewer node
+- `request_id`, `client_session_id`, and `server_instance_id` identify the operation and host.
+- `state` is `queued`, `running`, `completed`, `failed`, `cancelled`, or `expired`.
+- `outcome` describes mutation evidence: `not_started`, `applied`, `partial`, `rolled_back`, or `unknown`. Successful read-only operations use `not_started` because they make no mutation.
+- `error`, `warnings`, and `observation` provide failure and visibility details. Compound calls retain their individual `operation_receipts`.
+- Failed operations use MCP `isError=true`. An accepted `queued` or `running` operation is not an MCP error, but it is not completed success either.
 
-## Examples
+A local connection failure is marked `transport_error`; it is not a host-issued receipt. **Never automatically repeat a mutation after a timeout, disconnect, or uncertain result.** Query its status using the original IDs instead.
 
-### Creating a Simple Blur Node
+### Submit and inspect a render
 
-```
-create_node(node_type="Blur", parameters={"size": 10})
+These are MCP tool-call examples, not functions to paste into Nuke's Script Editor. Configure an existing Write node's output path and settings first.
+
+Call `start_render` with:
+
+```json
+{"write_node": "Write1", "first_frame": 1001, "last_frame": 1010, "step": 1}
 ```
 
-### Building a Grade Node Chain
+Keep the returned `request_id` and `server_instance_id`, then call `get_operation_status` with those values:
 
-```
-create_node(node_type="Read", name="input", parameters={"file": "/path/to/image.exr"})
-create_node(node_type="Grade", name="grade1", position=[200, 0])
-create_node(node_type="Grade", name="grade2", position=[400, 0])
-create_node(node_type="Write", name="output", position=[600, 0], parameters={"file": "/path/to/output.exr"})
-connect_nodes(output_node="input", input_node="grade1")
-connect_nodes(output_node="grade1", input_node="grade2")
-connect_nodes(output_node="grade2", input_node="output")
+```json
+{"request_id": "<returned request UUID>", "server_instance_id": "<returned host UUID>"}
 ```
 
-### Rendering Output
+Pass the same arguments to `cancel_operation` from the owning client session to request cancellation. Cancellation is checked between native frames; a frame already executing cannot be safely interrupted by the bridge. Temporary frame and proxy state is restored when the job finishes or stops.
 
-```
-render(frame_range="1-10", write_node="output")
-```
+The legacy `render` tool retains its arguments and a bounded wait of about 30 seconds. A timeout does not establish that rendering stopped. `start_render` returns after admission so the client can poll while a longer render continues. Specify an explicit Write node in NC; render-all is refused because node enumeration may be incomplete.
 
-## Example Commands for Claude
+### Scheduling and receipt limits
 
-When working with Claude Desktop, you can give it natural language instructions to control Nuke. Here are some example commands:
+- Up to eight connected clients and 64 queued host operations.
+- One queued or running ordinary operation per client session; status and cancellation use a separate control path.
+- Ordinary admission deadlines default to 30 seconds, with a 300-second maximum. An admitted render can continue beyond the client wait limit once started.
+- Up to 4096 receipts, retained for at most 30 minutes after completion and subject to capacity eviction. Active work is not evicted.
 
-### Basic Script Analysis
-```
-"Can you tell me what's in my current Nuke script?"
-```
+`receipt_expired_or_unknown` and `instance_changed` do not authorize replay. Deduplication only applies to retained request IDs in the same host instance.
 
-### Creating a Complete Compositing Setup
-```
-"Create a compositing setup in Nuke with a Read node, Color Correct, Grade, and Write node, all properly connected."
-```
+## Configuration and upgrades
 
-### Building a Green Screen Keying Setup
-```
-"Create a professional green screen keying setup in Nuke with Keyer, Despill, Edge Blur, and compositing over a background."
-```
+| Setting | Where it applies | Purpose |
+| --- | --- | --- |
+| `NUKE_MCP_PORT` | Nuke and external MCP processes | Choose a matching loopback port; default `9877`. The Nuke panel also exposes the port. |
+| `NUKE_MCP_REPO` | Supplied Nuke startup scripts | Point to the complete checkout; default `D:/nuke_mcp`. |
+| `NUKE_MCP_DEBUG_LOG` | Nuke process | Optional absolute path for add-on diagnostics; disabled by default. |
 
-### Adding Special Effects
-```
-"Build a particle system in Nuke using Noise, ParticleEmitter, and Merge nodes to create a fire effect."
-```
+Upgrade the external server, add-on, and shared package together, then restart Nuke and all external MCP processes. Protocol v2 has no legacy wire fallback. Roll back both sides together if needed.
 
-### Enhancing an Existing Script
-```
-"Analyze my current Nuke script, then enhance it by creating a color grading chain with separate adjustments for shadows, midtones, and highlights. Add a subtle film grain effect and a gentle vignette."
-```
+The listener is restricted to loopback. Use trusted local clients: the bridge can change scripts, render files, and execute arbitrary Python. Remote access and remote authentication are outside this release's scope.
 
-### 3D Scene Setup
-```
-"Set up a 3D scene in Nuke with a Camera, 3D objects, and proper lighting."
-```
+## Verification and known limits
 
-## Extending the MCP Tools
+Milestone 1 has **45 passing offline tests** and recorded live verification with two independent stdio MCP processes connected to one Nuke NC 17.0v4 session. The live check completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error.
 
-You can extend the system by adding new tools to the `nuke_mcp_server.py` file. The MCP tools are defined using the `@mcp.tool()` decorator pattern.
+Commercial Nuke, NukeX/Studio, other platforms and versions, native rendered image correctness, and artist acceptance remain unqualified. The offline long-render test validates operation behavior against a fake host; it is not a native render-quality test.
 
-### Tool Structure
+NC node access can be incomplete or intermittent. An empty node list does not prove an empty graph, and a failed creation may still have changed the script. Read-only inspection can be repeated; an ambiguous mutation must not be retried automatically. See the [recorded validation and receipts](docs/validation/milestone-1.md).
 
-Each tool follows this basic structure:
+Run offline tests from the repository root:
 
-```python
-@mcp.tool()
-def tool_name(ctx: Context, param1: type, param2: type = default_value) -> str:
-    """
-    Tool description for documentation.
-    
-    Parameters:
-    - param1: Description of param1
-    - param2: Description of param2 with default value
-    """
-    try:
-        logger.info(f"Tool called: tool_name with params")
-        nuke = get_nuke_connection()
-        result = nuke.send_command("command_name", {
-            "param1": param1,
-            "param2": param2
-        })
-        
-        # Process result and format response
-        return "Human-readable response"
-    except Exception as e:
-        logger.error(f"Error in tool_name: {str(e)}")
-        return f"Error message: {str(e)}"
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py' -v
+.\.venv\Scripts\python.exe tests/mcp_contract_probe.py --slow
 ```
 
-### Adding a New Tool
+With Nuke and the panel server running, run the read-only live checks:
 
-To add a new tool:
-
-1. **Identify the functionality** you want to add
-2. **Add a new method in the Nuke addon** (in `nuke_mcp_addon.py`):
-   - Add the method to the `NukeMCPServer` class
-   - Add an entry to the `handlers` dictionary in the `execute_command` method
-
-3. **Create a corresponding tool** in `nuke_mcp_server.py`:
-   - Use the `@mcp.tool()` decorator
-   - Define parameters with type hints
-   - Add a descriptive docstring
-   - Implement the logic to call the corresponding Nuke command
-
-4. **Test the new tool** thoroughly
-
-### Example: Adding a Transform Node Tool
-
-Here's an example of how you might add a specialized tool for creating a Transform node:
-
-```python
-@mcp.tool()
-def create_transform(
-    ctx: Context,
-    name: str = None,
-    position: List[int] = None,
-    rotation: float = 0.0,
-    scale: float = 1.0,
-    center: List[float] = None
-) -> str:
-    """
-    Create a Transform node with specified parameters.
-    
-    Parameters:
-    - name: Optional name for the Transform node
-    - position: Optional [x, y] position coordinates for the node
-    - rotation: Rotation in degrees
-    - scale: Uniform scale factor
-    - center: Optional [x, y] center of transformation
-    """
-    try:
-        logger.info(f"Tool called: create_transform")
-        nuke = get_nuke_connection()
-        
-        # Prepare parameters for the Transform node
-        parameters = {
-            "rotate": rotation,
-            "scale": scale
-        }
-        
-        if center:
-            parameters["center"] = center
-        
-        # Call the generic create_node command
-        result = nuke.send_command("create_node", {
-            "node_type": "Transform",
-            "name": name,
-            "position": position,
-            "parameters": parameters
-        })
-        
-        actual_name = result.get("name", "unknown")
-        return f"Created Transform node named '{actual_name}' with rotation={rotation}° and scale={scale}"
-    except Exception as e:
-        logger.error(f"Error in create_transform: {str(e)}")
-        return f"Error creating Transform node: {str(e)}"
+```powershell
+.\.venv\Scripts\python.exe tests/smoke_mcp.py
+.\.venv\Scripts\python.exe tests/mcp_contract_probe.py --live --output live-two-client.json
 ```
-
-This pattern allows you to build specialized tools that provide higher-level functionality while leveraging the existing command infrastructure.
 
 ## Troubleshooting
 
-### Connection Issues
+| Symptom | Check or next step |
+| --- | --- |
+| Cannot connect | Start Nuke's panel server, verify the matching port, and check that both processes use the intended checkout. |
+| `protocol_mismatch` | Update both sides to the same v2 checkout and restart them. |
+| `busy` | Check the eight-client limit and queued/running work for the session. Query existing operations before submitting more work. |
+| Timeout or disconnect | Retain the original IDs and query operation status; do not replay the mutation. |
+| `instance_changed` | The original host instance is gone. Inspect current state before deciding on further work. |
+| Empty NC graph or missing node | Treat observation as incomplete. Repeat read-only inspection if useful; do not infer that a preceding mutation did nothing. |
+| Missing shared package | Make the complete checkout available to Nuke, including `nuke_mcp_bridge/`. |
 
-If Claude cannot connect to Nuke, check the following:
+## Architecture and development
 
-1. **Nuke is Running**: Make sure Nuke is open and running
-2. **Addon is Active**: Verify the NukeMCP panel shows "Running on port 9877"
-3. **Port Configuration**: Ensure the port matches in both Nuke and the MCP server
-4. **Firewall Settings**: Check if your firewall is blocking the connection
+```text
+MCP client A <-> main.py process A --\
+                                    > loopback protocol v2 -> Nuke add-on -> main-thread queue
+MCP client B <-> main.py process B --/
+```
 
-### Common Errors
+| Component | Responsibility |
+| --- | --- |
+| `main.py` | Stdio entry point. |
+| `nuke_mcp_server.py` | Existing tool signatures and compatibility wrappers. |
+| `nuke_mcp_addon.py` | Nuke panel, runtime startup, and host handlers. |
+| `nuke_mcp_bridge/` | Framing, correlated client, request registry, host scheduling, MCP result adapter, and capabilities. |
+| `tests/` | Offline regressions, actual stdio contract probes, and opt-in live checks. |
 
-- **"Could not connect to Nuke"**: Make sure the Nuke addon is running and using the correct port. Also note the addon serves **one MCP client at a time** — if the bridge is registered in several MCP clients (Claude Code, Claude Desktop, Codex, …), the first connected `main.py` process holds the only slot and every other client gets this error. Kill stale `main.py` processes or restart the server from the NukeMCP panel.
-- **"Socket timeout while waiting for response"**: The operation in Nuke may be taking too long
-- **"Failed to create node"**: Check if the node type name is correct. On Nuke Non-commercial this error can also be spurious: the node may have been created with a default name even though the tool reported failure (see `nuke-mcp-guidelines.md`, "Field notes").
-- **Empty or wrong script info on Nuke Non-commercial**: `get_script_info` reporting 0 nodes, or "Node not found" for nodes that exist, is a known intermittent NC behavior — retry the call. Details and mitigations in `nuke-mcp-guidelines.md`.
+For new host operations, register the handler in `NukeMCPServer.start()` and route Nuke API work through the runtime's main-thread queue. Preserve structured errors and operation identity through the MCP adapter. Keep socket-thread controls free of Nuke API calls and never add automatic mutation replay.
 
-## Development
+The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: verified editing, deeper inspection, reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
 
-This is an initial implementation. Future improvements could include:
-
-- Support for more specialized Nuke functionality (Roto, Tracking, etc.)
-- Better error handling and timeout management
-- Support for template-based workflows
-- Integration with additional asset management systems
+See [patch notes](PATCH_NOTES.md) for compatibility history. This project builds on `dughogan/nuke_mcp`.
 
 ## License
 
-[MIT License](LICENSE)
+MIT.
