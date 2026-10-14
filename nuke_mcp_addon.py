@@ -234,136 +234,9 @@ class NukeMCPServer:
             return {"error": str(e)}
     
     def create_node(self, node_type, name=None, position=None, inputs=None, parameters=None):
-        """Create a new node in Nuke with improved stability"""
-        try:
-            # Default parameters
-            if position is None:
-                position = [0, 0]
-            if parameters is None:
-                parameters = {}
-            
-            # Normalize node type - handle common mistakes
-            corrected_node_type = self._normalize_node_type(node_type)
-            if corrected_node_type and corrected_node_type != node_type:
-                print(f"Automatically corrected node type from '{node_type}' to '{corrected_node_type}'")
-                node_type = corrected_node_type
-            
-            # Validate node type before attempting creation
-            valid_node_types = self._get_valid_node_types()
-            if node_type not in valid_node_types:
-                import difflib
-                similar_types = difflib.get_close_matches(node_type, valid_node_types, n=3, cutoff=0.6)
-                
-                error_msg = f"Invalid node type: '{node_type}'"
-                if similar_types:
-                    error_msg += f". Did you mean one of these: {', '.join(similar_types)}?"
-                else:
-                    error_msg += f". Valid types include: {', '.join(sorted(valid_node_types[:10]))}..."
-                
-                raise ValueError(error_msg)
-            
-            # Special case for BackdropNode which requires a different creation pattern
-            if node_type == "BackdropNode":
-                node = nuke.nodes.BackdropNode(
-                    xpos=position[0],
-                    ypos=position[1]
-                )
-            else:
-                # Standard node creation
-                node = nuke.createNode(node_type, inpanel=False)
-            
-            # Verify node was created
-            if not node:
-                raise ValueError(f"Failed to create node of type {node_type}")
-            
-            # Set name if provided
-            if name:
-                safe_name = self._validate_node_name(name)
-                if safe_name:
-                    # Check if name already exists
-                    existing = nuke.toNode(safe_name)
-                    if existing:
-                        suffix = 1
-                        while nuke.toNode(f"{safe_name}_{suffix}"):
-                            suffix += 1
-                        safe_name = f"{safe_name}_{suffix}"
-                    
-                    node.setName(safe_name)
-            
-            # Set position
-            node.setXYpos(position[0], position[1])
-            
-            # Set parameters - only if they exist, with type conversion
-            for param_name, param_value in parameters.items():
-                # CRITICAL: Verify the parameter exists before setting
-                if param_name in node.knobs():
-                    try:
-                        # Get knob class to handle type conversion properly
-                        knob = node[param_name]
-                        knob_class = knob.Class()
-                        
-                        # Handle different knob types with appropriate type conversion
-                        if knob_class in ["Int_Knob", "WH_Knob"] and isinstance(param_value, str):
-                            # Try to convert string to int for integer knobs
-                            try:
-                                node[param_name].setValue(int(param_value))
-                                print(f"Converted string '{param_value}' to int for parameter {param_name}")
-                            except ValueError:
-                                print(f"Warning: Could not convert '{param_value}' to int for {param_name}")
-                        elif knob_class in ["Double_Knob", "XY_Knob", "XYZ_Knob", "AColor_Knob", "WH_Knob"] and isinstance(param_value, str):
-                            # Try to convert string to float for float knobs
-                            try:
-                                node[param_name].setValue(float(param_value))
-                                print(f"Converted string '{param_value}' to float for parameter {param_name}")
-                            except ValueError:
-                                print(f"Warning: Could not convert '{param_value}' to float for {param_name}")
-                        elif knob_class == "Boolean_Knob" and isinstance(param_value, str):
-                            # Convert string to boolean
-                            bool_value = param_value.lower() in ["true", "yes", "1", "on"]
-                            node[param_name].setValue(bool_value)
-                            print(f"Converted string '{param_value}' to boolean {bool_value} for parameter {param_name}")
-                        elif knob_class in ["Color_Knob", "AColor_Knob"] and isinstance(param_value, list):
-                            # Handle color knobs (list of floats)
-                            for i, comp in enumerate(param_value):
-                                if i < 4:  # RGBA has max 4 components
-                                    if isinstance(comp, str):
-                                        try:
-                                            node[param_name].setValue(float(comp), i)
-                                        except ValueError:
-                                            print(f"Warning: Could not convert '{comp}' to float for {param_name}[{i}]")
-                                    else:
-                                        node[param_name].setValue(comp, i)
-                        else:
-                            # Default setting
-                            node[param_name].setValue(param_value)
-                    except Exception as e:
-                        print(f"Warning: Error setting parameter {param_name} to {param_value}: {str(e)}")
-                        traceback.print_exc()
-                        # Continue with other parameters instead of failing
-                else:
-                    print(f"Warning: Parameter {param_name} does not exist on {node_type}")
-            
-            # Connect inputs only AFTER all parameters are set
-            if inputs:
-                for input_idx, input_name in enumerate(inputs):
-                    if input_name:
-                        input_node = nuke.toNode(input_name)
-                        if input_node:
-                            node.setInput(input_idx, input_node)
-                        else:
-                            print(f"Warning: Input node {input_name} not found")
-            
-            # Return node information
-            return {
-                "name": node.name(),
-                "type": node.Class(),
-                "position": [node.xpos(), node.ypos()],
-            }
-        except Exception as e:
-            print(f"Error creating node: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to create node: {str(e)}")
-    
+        from nuke_mcp_bridge.mutations import create_node
+        return create_node(nuke, node_type, name, position, inputs, parameters)
+
     def modify_node(self, name, parameters=None, position=None, inputs=None):
         """Modify an existing node"""
         try:
@@ -423,74 +296,21 @@ class NukeMCPServer:
             raise Exception(f"Failed to modify node: {str(e)}")
             
     def delete_node(self, name):
-        """Delete a node"""
-        try:
-            # Get the node
-            node = nuke.toNode(name)
-            if not node:
-                raise ValueError(f"Node not found: {name}")
-            
-            # Store the name to return
-            node_name = node.name()
-            node_type = node.Class()
-            
-            # Delete the node
-            nuke.delete(node)
-            
-            return {
-                "deleted": node_name,
-                "type": node_type
-            }
-        except Exception as e:
-            print(f"Error deleting node: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to delete node: {str(e)}")
-    
+        from nuke_mcp_bridge.mutations import delete_node
+        return delete_node(nuke, name)
+
     def position_node(self, name, position):
-        """Position a node at specific coordinates"""
-        try:
-            # Get the node
-            node = nuke.toNode(name)
-            if not node:
-                raise ValueError(f"Node not found: {name}")
-            
-            # Set position
-            node.setXYpos(position[0], position[1])
-            
-            return {
-                "name": node.name(),
-                "position": [node.xpos(), node.ypos()]
-            }
-        except Exception as e:
-            print(f"Error positioning node: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to position node: {str(e)}")
-    
+        from nuke_mcp_bridge.mutations import position_node
+        from nuke_mcp_bridge.protocol import BridgeError
+        if not isinstance(position, (list, tuple)) or len(position) != 2:
+            raise BridgeError('invalid_value', 'Position requires x and y')
+        return position_node(nuke, name, *position)
+
     def connect_nodes(self, output_node, input_node, input_index=0):
-        """Connect nodes together"""
-        try:
-            # Get the nodes
-            out_node = nuke.toNode(output_node)
-            in_node = nuke.toNode(input_node)
-            
-            if not out_node:
-                raise ValueError(f"Output node not found: {output_node}")
-            if not in_node:
-                raise ValueError(f"Input node not found: {input_node}")
-            
-            # Connect the nodes
-            in_node.setInput(input_index, out_node)
-            
-            return {
-                "output_node": output_node,
-                "input_node": input_node,
-                "input_index": input_index
-            }
-        except Exception as e:
-            print(f"Error connecting nodes: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to connect nodes: {str(e)}")
-    
+        from nuke_mcp_bridge.mutations import connect_input
+        result = connect_input(nuke, input_node, input_index, output_node)
+        return dict(result, output_node=result['source_path'], input_node=result['path'])
+
     def render(self, frame_range=None, write_node=None, proxy_mode=False,
                first_frame=None, last_frame=None, step=1):
         """Cooperative render: one native frame per main-thread queue tick."""

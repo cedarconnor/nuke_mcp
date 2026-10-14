@@ -94,3 +94,14 @@ Recommended test scripts contain fewer than 10 nodes.
 - Repository: <https://github.com/dughogan/nuke_mcp>
 - Patched from upstream commit: `761ea9e45cb8816a85e0a0b55a132d7b454affe3`
 - Local compatibility branch: `codex/nuke-nc-compat`
+
+## Milestone 2 typed edits (in progress)
+
+Node creation, deletion, positioning, and connections now use validated host
+primitives. Static knob setters reject callbacks, unsupported types, animation,
+expressions, non-finite values, and ambiguous array shapes. Edits return actual
+paths and readback values; a missing NC handle stays uncertain without retry.
+Deletion requires a destruction callback for the exact target handle. Creation
+cleanup can delete only its returned, observable owned handle; failed recovery
+is reported explicitly. Node factories resolve installed classes at execution.
+Backdrop creation also follows this path instead of interpolating raw Python.

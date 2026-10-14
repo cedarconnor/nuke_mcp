@@ -451,109 +451,17 @@ def get_node_info(ctx: Context, node_name: str) -> str:
         return f"Error getting node info: {str(e)}"
 
 @bridge_tool(mcp)
-def create_node(
-    ctx: Context,
-    node_type: str,
-    name: str = None,
-    position: List[int] = None,
-    inputs: List[str] = None,
-    parameters: Dict[str, Any] = None
-) -> str:
-    """
-    Create a new node in the Nuke script with workflow rule enforcement.
-    
-    Parameters:
-    - node_type: Type of node to create (e.g., "Blur", "Grade", "Merge2")
-    - name: Optional name for the new node
-    - position: Optional [x, y] position coordinates
-    - inputs: Optional list of node names to connect as inputs
-    - parameters: Optional dictionary of parameter name/value pairs
-    """
+def create_node(ctx: Context, node_type: str, name: str = None,
+                position: List[int] = None, inputs: List[str] = None,
+                parameters: Dict[str, Any] = None) -> str:
+    """Create a node with explicit inputs and verified readback; no uncertain replay."""
     try:
-        # Check workflow rules before creation
-        issues, modified_params = NukeWorkflowRules.validate_node_creation(node_type, name, parameters)
-        
-        # Get suggestions for this node type
-        suggestions = NukeWorkflowRules.get_node_type_suggestions(node_type)
-        
-        # Apply auto-fixes to parameters based on best practices
-        if modified_params is None:
-            modified_params = {}
-        else:
-            modified_params = NukeWorkflowRules.apply_auto_fixes(node_type, modified_params)
-        
-        # Special case handling for BackdropNode
-        if node_type == "BackdropNode":
-            # BackdropNode requires special creation method
-            # We'll handle this by sending a special execute_code command
-            backdrop_code = f"""
-import nuke
-# Create backdrop node
-backdrop = nuke.nodes.BackdropNode(
-    xpos={position[0] if position else 0},
-    ypos={position[1] if position else 0}
-)
-
-# Set parameters
-backdrop_name = backdrop.name()
-"""
-            if modified_params:
-                for param_name, param_value in modified_params.items():
-                    # Add parameter settings
-                    if isinstance(param_value, str):
-                        backdrop_code += f'backdrop["{param_name}"].setValue("{param_value}")\n'
-                    else:
-                        backdrop_code += f'backdrop["{param_name}"].setValue({param_value})\n'
-            
-            backdrop_code += """
-# Return the result
-output = {
-    "name": backdrop_name,
-    "type": "BackdropNode",
-    "position": [backdrop.xpos(), backdrop.ypos()]
-}
-"""
-            
-            logger.info(f"Creating BackdropNode using execute_code")
-            nuke = get_nuke_connection()
-            result = nuke.send_command("execute_code", {"code": backdrop_code})
-            
-            if result.get("executed", False):
-                output = result.get("output", {})
-                node_info = output.get("output", {})
-                actual_name = node_info.get("name", "BackdropNode")
-                message = f"Created BackdropNode named '{actual_name}'"
-                return message
-            else:
-                error = result.get("error", "Unknown error")
-                raise Exception(f"Failed to create BackdropNode: {error}")
-        
-        # Standard node creation for all other node types
-        logger.info(f"Tool called: create_node of type {node_type}")
-        nuke = get_nuke_connection()
-        result = nuke.send_command("create_node", {
-            "node_type": node_type,
-            "name": name,
-            "position": position,
-            "inputs": inputs,
-            "parameters": modified_params
-        })
-        
-        actual_name = result.get("name", "unknown")
-        message = f"Created {node_type} node named '{actual_name}'"
-        
-        # Add warnings about rule suggestions if any
-        if issues:
-            message += f"\n\nWorkflow notes:\n- " + "\n- ".join(issues)
-        
-        # Add node-specific suggestions
-        if suggestions:
-            message += f"\n\nBest practices for {node_type}:\n- " + "\n- ".join(suggestions)
-            
-        return message
-    except Exception as e:
-        logger.error(f"Error in create_node: {str(e)}")
-        return f"Error creating node: {str(e)}"
+        result = get_nuke_connection().send_command('create_node', {
+            'node_type': node_type, 'name': name, 'position': position,
+            'inputs': inputs, 'parameters': parameters})
+        return "Created {0} node named '{1}'".format(result['type'], result['path'])
+    except Exception as exc:
+        return 'Error creating node: ' + str(exc)
 
 @bridge_tool(mcp)
 def modify_node(
@@ -683,94 +591,22 @@ def delete_node(ctx: Context, name: str) -> str:
 
 @bridge_tool(mcp)
 def position_node(ctx: Context, name: str, x: int, y: int) -> str:
-    """
-    Position a node at specific coordinates in the Nuke node graph.
-    
-    Parameters:
-    - name: Name of the node to position
-    - x: X coordinate in the node graph
-    - y: Y coordinate in the node graph
-    """
+    """Set a node's exact position and verify readback."""
     try:
-        logger.info(f"Tool called: position_node for node {name} at ({x}, {y})")
-        nuke = get_nuke_connection()
-        
-        # Check workflow rules for positioning
-        issues, position = NukeWorkflowRules.validate_node_position(name, [x, y])
-        if issues:
-            logger.warning(f"Positioning suggestions for {name}:\n- " + "\n- ".join(issues))
-            # Use the suggested position from validation
-            x, y = position
-        
-        result = nuke.send_command("position_node", {
-            "name": name,
-            "position": [x, y]
-        })
-        
-        message = f"Positioned node '{name}' at X={x}, Y={y}"
-        if issues:
-            message += "\n\nOrganization tips:\n- " + "\n- ".join(issues)
-            
-        return message
-    except Exception as e:
-        logger.error(f"Error in position_node: {str(e)}")
-        return f"Error positioning node: {str(e)}"
+        result = get_nuke_connection().send_command('position_node', {'name': name, 'position': [x, y]})
+        return "Positioned node '{0}' at {1}".format(result['path'], result['position'])
+    except Exception as exc:
+        return 'Error positioning node: ' + str(exc)
 
 @bridge_tool(mcp)
-def connect_nodes(
-    ctx: Context, 
-    output_node: str, 
-    input_node: str, 
-    input_index: int = 0
-) -> str:
-    """
-    Connect nodes together in the Nuke script with workflow rule enforcement.
-    
-    Parameters:
-    - output_node: Name of the node whose output to connect
-    - input_node: Name of the node to connect the output to
-    - input_index: Input index on the receiving node (default: 0)
-    """
+def connect_nodes(ctx: Context, output_node: str, input_node: str, input_index: int = 0) -> str:
+    """Connect explicit node paths at the requested input and verify readback."""
     try:
-        # Check workflow rules for connections
-        issues, fixed_input_index = NukeWorkflowRules.validate_node_connection(output_node, input_node, input_index)
-        
-        # Apply workflow policy - warn or enforce
-        warnings = []
-        fixes_applied = False
-        
-        if issues:
-            warnings = ["Connection workflow notes:"] + issues
-            logger.warning("\n- ".join(warnings))
-            
-            # Check if input index was modified
-            if fixed_input_index != input_index:
-                input_index = fixed_input_index
-                fixes_applied = True
-                warnings.append(f"Automatically adjusted input index to {input_index} for proper structure")
-        
-        logger.info(f"Tool called: connect_nodes from {output_node} to {input_node} at index {input_index}")
-        nuke = get_nuke_connection()
-        result = nuke.send_command("connect_nodes", {
-            "output_node": output_node,
-            "input_node": input_node,
-            "input_index": input_index
-        })
-        
-        message = f"Connected output of '{output_node}' to input {input_index} of '{input_node}'"
-        
-        # If we fixed something automatically, mention it
-        if fixes_applied:
-            message += " (with automatic workflow fixes)"
-        
-        # Add warnings about rule suggestions if any
-        if warnings:
-            message += f"\n\nWorkflow notes:\n- " + "\n- ".join(issues)
-            
-        return message
-    except Exception as e:
-        logger.error(f"Error in connect_nodes: {str(e)}")
-        return f"Error connecting nodes: {str(e)}"
+        result = get_nuke_connection().send_command('connect_nodes', {
+            'output_node': output_node, 'input_node': input_node, 'input_index': input_index})
+        return "Connected {0} to {1} input {2}".format(result['output_node'], result['input_node'], input_index)
+    except Exception as exc:
+        return 'Error connecting nodes: ' + str(exc)
 
 @bridge_tool(mcp)
 def render(

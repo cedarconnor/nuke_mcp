@@ -30,6 +30,39 @@ def result_text(result) -> str:
     )
 
 
+async def mutation_probe(session):
+    name = 'MCP_SMOKE_' + uuid4().hex
+    report = {'name': name, 'passed': False, 'cleanup': 'not_attempted_unverified_creation'}
+    created = False
+    try:
+        result = await session.call_tool('create_node', arguments={
+            'node_type': 'Grade', 'name': name, 'position': [0, 0],
+            'parameters': {'label': 'Temporary MCP smoke test'}})
+        report['create'] = result.structuredContent
+        receipt = checked_receipt(result)
+        if receipt['data'].get('path') != name:
+            raise RuntimeError('Creation identity uncertain; no guessed cleanup')
+        created = True
+        info = await session.call_tool('get_node_info', arguments={'node_name': name})
+        report['inspect'] = info.structuredContent
+        checked_receipt(info)
+        report['passed'] = True
+    except Exception as exc:
+        report['error'] = str(exc)
+    finally:
+        if created:
+            try:
+                deletion = await session.call_tool('delete_node', arguments={'name': 'root.' + name})
+                report['delete'] = deletion.structuredContent
+                checked_receipt(deletion)
+                report['cleanup'] = 'verified_deleted'
+            except Exception as exc:
+                report['cleanup'] = 'uncertain'
+                report['cleanup_error'] = str(exc)
+                report['passed'] = False
+    return report
+
+
 async def smoke_test(mutate: bool = False) -> None:
     server = StdioServerParameters(
         command=sys.executable,
@@ -65,68 +98,11 @@ async def smoke_test(mutate: bool = False) -> None:
             }
 
             if mutate:
-                smoke_node = "MCP_SMOKE_" + uuid4().hex
-                created = False
-                report['mutation'] = {}
-                try:
-                    create_result = await session.call_tool(
-                        "create_node",
-                        arguments={
-                            "node_type": "Grade",
-                            "name": smoke_node,
-                            "position": [0, 0],
-                            "parameters": {"label": "Temporary MCP smoke test"},
-                        },
-                    )
-                    create_text = result_text(create_result)
-                    create_receipt = checked_receipt(create_result)
-                    if create_receipt['data'].get('name') != smoke_node:
-                        raise RuntimeError('Creation identity uncertain; no automatic retry or guessed cleanup')
-                    if create_result.isError or "Error creating node" in create_text:
-                        raise RuntimeError(
-                            "Temporary Grade creation failed: {0}".format(
-                                create_text
-                            )
-                        )
-                    created = True
-
-                    info_result = await session.call_tool(
-                        "get_node_info",
-                        arguments={"node_name": smoke_node},
-                    )
-                    info_text = result_text(info_result)
-                    checked_receipt(info_result)
-                    if info_result.isError or smoke_node not in info_text:
-                        raise RuntimeError(
-                            "Temporary Grade inspection failed: {0}".format(
-                                info_text
-                            )
-                        )
-
-                    report["mutation"] = {
-                        "create": create_text,
-                        "inspect": info_text,
-                    }
-                finally:
-                    if created:
-                        delete_result = await session.call_tool(
-                            "delete_node",
-                            arguments={"name": smoke_node},
-                        )
-                        delete_text = result_text(delete_result)
-                        checked_receipt(delete_result)
-                        if (
-                            delete_result.isError
-                            or "Error deleting node" in delete_text
-                        ):
-                            raise RuntimeError(
-                                "Temporary Grade cleanup failed: {0}".format(
-                                    delete_text
-                                )
-                            )
-                        report["mutation"]["delete"] = delete_text
+                report['mutation'] = await mutation_probe(session)
 
             print(json.dumps(report, indent=2))
+            if mutate and not report['mutation']['passed']:
+                raise RuntimeError('Live mutation qualification incomplete; see the structured report')
 
 
 if __name__ == "__main__":
