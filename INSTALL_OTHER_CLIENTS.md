@@ -221,4 +221,3 @@ payload. Interrupted writes and old payloads may leave unreferenced files; listi
 An overwrite replaces the manifest after staging, preserving the old entry until publication.
 Loads preserve observed selection and verify relative topology and a bounded static knob subset.
 Unknown outcomes may leave an owned Group; inspect the receipt and never automatically retry.
-
