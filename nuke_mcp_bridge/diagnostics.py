@@ -5,10 +5,14 @@ from .mutations import main_thread, check_guard, resolve_node
 from .inspection import bounded_int
 
 
-def resolve_channels(node, requested):
+def channel_syntax(requested):
     if not isinstance(requested, list) or not 1 <= len(requested) <= 16 or any(
             not isinstance(c, str) or not c or len(c)>256 for c in requested):
         raise BridgeError('invalid_request', 'Request 1..16 channel or layer names')
+
+
+def resolve_channels(node, requested):
+    channel_syntax(requested)
     available = node.channels()
     if len(available)>2048: raise BridgeError('limit_exceeded', 'Channel discovery exceeds 2048 channels')
     resolved = []
@@ -37,8 +41,8 @@ def region(node, roi):
 def summarize(channel, values, total):
     finite = [v for v in values if math.isfinite(v)]
     count = len(finite)
-    # Scaling before summing avoids overflow for large finite samples.
-    mean = math.fsum(v/count for v in finite) if count else None
+    scale = max((abs(v) for v in finite), default=0.)
+    mean = scale * (math.fsum(v/scale for v in finite)/count) if scale else (0. if count else None)
     return dict(channel=channel, sample_count=len(values), expected_samples=total,
                 finite_count=count, nonfinite_count=len(values)-count,
                 min=min(finite) if count else None, max=max(finite) if count else None,
@@ -51,12 +55,14 @@ def sample_channel_statistics(nuke, node_path, channels, frame, roi=None,
     main_thread()
     bounded_int(frame,-2147483648,2147483647,'frame')
     bounded_int(max_samples_per_channel,1,4096,'max_samples_per_channel')
+    channel_syntax(channels)
+    if roi is not None and (not isinstance(roi,(list,tuple)) or len(roi)!=4 or
+            any(type(v) is not int for v in roi) or roi[0]<0 or roi[1]<0 or roi[2]<=0 or roi[3]<=0):
+        raise BridgeError('invalid_roi','ROI is [x,y,width,height] with nonnegative origin and positive integer size')
     node = resolve_node(nuke,node_path)
-    resolved = resolve_channels(node,channels)
-    area = region(node,roi)
     original_frame = nuke.frame()
-    values = {c:[] for c in resolved}
-    result = dict(path=node.fullName(), frame=frame, channels=resolved, roi=area,
+    resolved, values = [], {}
+    result = dict(path=node.fullName(), frame=frame, channels=[], roi=roi,
                   statistics=[], samples_completed=0, complete=False,
                   observation={'coverage':'partial','reason':'filtered_grid_samples'})
     failure = None
@@ -71,9 +77,11 @@ def sample_channel_statistics(nuke, node_path, channels, frame, roi=None,
             changed_frame = True
             nuke.frame(frame)
         if nuke.frame()!=frame: raise RuntimeError('Requested frame was not established')
-        # Formats and channels can depend on frame; repeat observation at the target frame.
+        # Formats and channels belong to the requested frame, not the artist's current frame.
         area = region(node,roi)
-        if resolve_channels(node,channels)!=resolved: raise RuntimeError('Channels changed at target frame')
+        resolved = resolve_channels(node,channels)
+        values = {c:[] for c in resolved}
+        result['channels'] = resolved
         result['roi'] = area
         x,y,w,h = area
         nx = min(w,max(1,int(math.sqrt(max_samples_per_channel*w/h))))
@@ -97,7 +105,6 @@ def sample_channel_statistics(nuke, node_path, channels, frame, roi=None,
     except Exception as exc:
         failure = exc
     finally:
-        result['statistics'] = [summarize(c,values[c],per_channel) for c in resolved]
         try:
             if changed_frame: nuke.frame(original_frame)
             if nuke.frame()!=original_frame: raise RuntimeError('Original frame not restored')
@@ -107,6 +114,11 @@ def sample_channel_statistics(nuke, node_path, channels, frame, roi=None,
             result['restoration_error'] = str(exc)[:256]
             if failure: result['prior_error'] = str(failure)[:256]
             raise BridgeError('restoration_failed','Frame restoration failed','unknown',result) from exc
+    try:
+        result['statistics'] = [summarize(c,values[c],per_channel) for c in resolved]
+    except Exception as exc:
+        result['complete'] = False
+        raise BridgeError('statistics_failed',str(exc),'not_started',result) from exc
     if failure:
         raise BridgeError(getattr(failure,'code','sampling_failed'),str(failure),'not_started',result) from failure
     return result

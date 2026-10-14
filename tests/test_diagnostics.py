@@ -2,6 +2,9 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+import sys
+from types import SimpleNamespace
+from unittest.mock import patch
 from tests.inspection_fakes import ImageHost
 from nuke_mcp_bridge.protocol import BridgeError
 from nuke_mcp_bridge.mutations import operation_guard
@@ -46,20 +49,51 @@ class DiagnosticTests(unittest.TestCase):
         self.assertIsNone(stat['min'])
         self.assertIsNone(stat['mean'])
         self.assertIsNone(stat['zero_fraction'])
-    def test_channel_expansion_and_limits_before_frame_change(self):
+    def test_channel_expansion_and_limits_preserve_frame(self):
         self.node._channels = ['layer.c'+str(i) for i in range(17)]
         for channels in (['layer'],['missing']):
             with self.assertRaises(BridgeError): sample(self.host,'Constant1',channels,1)
         for count in (0,4097,True):
             with self.assertRaises(BridgeError): sample(self.host,'Constant1',['layer.c0'],1,max_samples_per_channel=count)
-        self.assertEqual(self.host.frame_writes,[])
+        self.assertEqual(self.host.current_frame,10)
         self.node._channels = ['rgba.red','rgba.alpha']
         result = sample(self.host,'Constant1',['rgba','rgba.red'],1,max_samples_per_channel=1)
         self.assertEqual(result['channels'], ['rgba.red','rgba.alpha'])
     def test_invalid_roi_and_frame_fail_before_sampling(self):
         for roi in ([0,0,0,1],[-1,0,1,1],[0,0,5,4],[0,0,1.5,1],[0,0,True,1]):
-            with self.assertRaises(BridgeError): sample(self.host,'Constant1',['rgba.red'],1,roi=roi)
+            with self.assertRaises(BridgeError) as error: sample(self.host,'Constant1',['rgba.red'],1,roi=roi)
+            self.assertEqual(error.exception.code, 'invalid_roi')
+            self.assertEqual(self.host.current_frame,10)
         with self.assertRaises(BridgeError): sample(self.host,'Constant1',['rgba.red'],1.5)
+        self.assertEqual(self.host.current_frame,10)
+
+    def test_extreme_finite_statistics_do_not_overflow_or_leak_frame(self):
+        self.host.sampler = lambda *args: sys.float_info.max
+        result = sample(self.host,'Constant1',['rgba.red'],1001,roi=[0,0,3,1],max_samples_per_channel=3)
+        self.assertEqual(result['statistics'][0]['mean'],sys.float_info.max)
+        self.assertEqual(self.host.current_frame,10)
+
+    def test_summary_exception_still_restores_frame_and_retains_counts(self):
+        with patch('nuke_mcp_bridge.diagnostics.summarize',side_effect=OverflowError('summary failure')):
+            with self.assertRaises(BridgeError) as error:
+                sample(self.host,'Constant1',['rgba.red'],1001,max_samples_per_channel=1)
+        self.assertEqual(self.host.current_frame,10)
+        self.assertEqual(error.exception.data['samples_completed'],1)
+        self.assertEqual(error.exception.code,'statistics_failed')
+
+    def test_roi_and_channels_resolve_at_requested_frame(self):
+        self.node.format = lambda: SimpleNamespace(width=lambda:8 if self.host.current_frame==1001 else 4,
+                                                    height=lambda:4)
+        self.node.channels = lambda: ['target.red','target.alpha'] if self.host.current_frame==1001 else ['current.red']
+        result = sample(self.host,'Constant1',['target'],1001,roi=[4,0,4,4],max_samples_per_channel=4)
+        self.assertEqual(result['roi'],[4,0,4,4])
+        self.assertEqual(result['channels'],['target.red','target.alpha'])
+        self.assertEqual(result['samples_completed'],8)
+        self.assertEqual(self.host.current_frame,10)
+
+    def test_invalid_argument_syntax_does_not_change_frame(self):
+        with self.assertRaises(BridgeError): sample(self.host,'Constant1',[],1001)
+        with self.assertRaises(BridgeError): sample(self.host,'Constant1',['rgba.red'],1001,roi=[0,0,1.5,1])
         self.assertEqual(self.host.frame_writes,[])
     def test_cancel_and_deadline_preserve_partial_statistics_and_restore_frame(self):
         calls = 0

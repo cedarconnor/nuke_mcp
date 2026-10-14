@@ -129,6 +129,15 @@ def read_nodes(nuke, node_paths):
 
 def evaluated_path(nuke, node, frame, view):
     """Nuke evaluates expressions in an explicit context; expand normalized tokens only."""
+    mode = node.knob('frame_mode')
+    timing = node.knob('frame')
+    if mode is not None and (mode.value() not in ('expression', 'none') or
+            (timing is not None and timing.value() not in ('', 'frame', None))):
+        raise ValueError('Read timing remapping is not qualified; path is unknown')
+    for bound, behavior, outside in (('first','before',lambda a,b:a<b), ('last','after',lambda a,b:a>b)):
+        limit, handling = node.knob(bound), node.knob(behavior)
+        if limit is not None and handling is not None and outside(frame,limit.value()):
+            raise ValueError('Read timing outside its declared range is not qualified')
     context = nuke.OutputContext()
     context.setFrame(frame)
     index = context.viewFromName(view)
@@ -159,42 +168,53 @@ def inspect_reads(nuke, node_paths=None, channel_limit=256):
     views = list(nuke.views())
     if not 1 <= len(views) <= 64: raise BridgeError('limit_exceeded', 'Expected 1..64 views')
     used = 0
-    for node in nodes:
-        check_guard()
-        item = dict(path=node.fullName(), type=node.Class(), errors=[], multipart={}, truncated=False)
-        for field, key in [('file','raw_path'), ('first','first_frame'), ('last','last_frame'), ('colorspace','colorspace')]:
-            try: item[key] = json_value(node[field].value())
-            except Exception as exc: item['errors'].append(error_field(field, exc))
-        try:
-            fmt = node.format()
-            item['format'] = json_value([fmt.width(), fmt.height(), fmt.pixelAspect()])
-        except Exception as exc: item['errors'].append(error_field('format', exc))
-        try:
-            channels = node.channels()
-            item['channels'] = [json_value(c) for c in channels[:channel_limit]]
-            item['layers'] = sorted({c.rsplit('.',1)[0] for c in item['channels']})
-            item['truncated'] = len(channels)>channel_limit
-        except Exception as exc: item['errors'].append(error_field('channels', exc))
-        for name in ('part', 'layer'):
+    item = None
+    try:
+        for node in nodes:
+            check_guard()
+            item = dict(path=node.fullName(), type=node.Class(), errors=[], multipart={}, truncated=False)
+            for field, key in [('file','raw_path'), ('first','first_frame'), ('last','last_frame'), ('colorspace','colorspace')]:
+                try: item[key] = json_value(node[field].value())
+                except Exception as exc: item['errors'].append(error_field(field, exc))
             try:
-                knob = node.knob(name)
-                if knob is not None:
-                    item['multipart'][name] = {'value':json_value(knob.value())}
-                    if knob.Class() == 'Enumeration_Knob':
-                        choices = knob.values()
-                        item['multipart'][name]['choices'] = [json_value(v) for v in choices[:channel_limit]]
-                        item['truncated'] |= len(choices)>channel_limit
-            except Exception as exc: item['errors'].append(error_field(name, exc))
-        item['evaluated_paths'] = []
-        for view in views:
-            try: item['evaluated_paths'].append(dict(view=view, path=evaluated_path(nuke,node,result['frame'],view)))
-            except Exception as exc: item['errors'].append(error_field('evaluated_path:'+view, exc))
-        next_used = append_bounded(result['reads'], item, used)
-        if next_used is None:
-            result['truncated'] = True
-            break
-        used = next_used
-        result['truncated'] |= item['truncated']
+                fmt = node.format()
+                item['format'] = json_value([fmt.width(), fmt.height(), fmt.pixelAspect()])
+            except Exception as exc: item['errors'].append(error_field('format', exc))
+            try:
+                channels = node.channels()
+                item['channels'] = [json_value(c) for c in channels[:channel_limit]]
+                item['layers'] = sorted({c.rsplit('.',1)[0] for c in item['channels']})
+                item['truncated'] = len(channels)>channel_limit
+            except Exception as exc: item['errors'].append(error_field('channels', exc))
+            for name in ('part', 'layer'):
+                try:
+                    knob = node.knob(name)
+                    if knob is not None:
+                        item['multipart'][name] = {'value':json_value(knob.value())}
+                        if knob.Class() == 'Enumeration_Knob':
+                            choices = knob.values()
+                            item['multipart'][name]['choices'] = [json_value(v) for v in choices[:channel_limit]]
+                            item['truncated'] |= len(choices)>channel_limit
+                except Exception as exc: item['errors'].append(error_field(name, exc))
+            item['evaluated_paths'] = []
+            for view in views:
+                check_guard()
+                try: item['evaluated_paths'].append(dict(view=view, path=evaluated_path(nuke,node,result['frame'],view)))
+                except Exception as exc: item['errors'].append(error_field('evaluated_path:'+view, exc))
+            next_used = append_bounded(result['reads'], item, used)
+            if next_used is None:
+                result['truncated'] = True
+                break
+            used = next_used
+            result['truncated'] |= item['truncated']
+    except BridgeError as exc:
+        if item is not None and (not result['reads'] or result['reads'][-1] is not item):
+            item['truncated'] = True
+            item['errors'].append(error_field('interrupted', exc))
+            append_bounded(result['reads'], item, used)
+        result['truncated'] = True
+        result['observation'] = observation(nuke, len(result['reads']), True)
+        raise BridgeError(exc.code, str(exc), 'not_started', result) from exc
     result['observation'] = observation(nuke, len(result['reads']), result['truncated'] or any(r['errors'] for r in result['reads']))
     return result
 

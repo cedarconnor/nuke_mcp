@@ -106,3 +106,31 @@ class InspectionTests(unittest.TestCase):
             self.assertGreater(error.exception.data['checked_paths'], 0)
             self.assertEqual(error.exception.outcome, 'not_started')
         finally: operation_guard.reset(token)
+
+    def test_read_cancellation_retains_completed_nodes(self):
+        a = self.host.add('A','Read')
+        self.host.add('B','Read')
+        count = 0
+        original = a['file'].getEvaluatedValue
+        def evaluated(context):
+            nonlocal count
+            count += 1
+            return original(context)
+        a['file'].getEvaluatedValue = evaluated
+        def guard():
+            if count == 2: raise BridgeError('deadline_expired','deadline')
+        token = operation_guard.set(guard)
+        try:
+            with self.assertRaises(BridgeError) as error: inspect.inspect_reads(self.host)
+            self.assertEqual([n['path'] for n in error.exception.data['reads']],['A'])
+            self.assertEqual(error.exception.data['observation']['coverage'],'partial')
+        finally: operation_guard.reset(token)
+
+    def test_unqualified_read_timing_is_unknown_instead_of_wrong_missing_path(self):
+        node = self.host.add('Read1','Read')
+        node._knobs['frame_mode'] = Knob('offset','Enumeration_Knob')
+        node._knobs['frame'] = Knob('100','String_Knob')
+        result = inspect.validate_reads(self.host,1,1)
+        self.assertEqual(result['missing_paths'],0)
+        self.assertEqual(result['unknown_paths'],2)
+        self.assertIn('timing',result['checks'][0]['reason'])
