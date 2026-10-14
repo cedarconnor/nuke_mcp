@@ -31,7 +31,9 @@ def probe_capabilities(nuke):
         "diagnostic_limits": {"channels":16, "samples_per_channel":4096, "method":"cubic_filtered_grid"},
         "inspection_limits": {"nodes":1000, "knobs_per_node":128, "channels_per_read":2048,
                               "evaluated_paths":10000, "evidence_bytes":4*1024*1024},
-        "unsupported_tool_groups": ["shot_manifests", "scene_events", "scene_revisions"],
+        "workflow_limits": {"shots":100,"plates_per_shot":32,"layers":32,"evaluated_paths":10000,
+                            "shot_session_opt_in":"NUKE_MCP_DISPOSABLE_SESSION=1","native_pixel_recipe_qualified":False},
+        "unsupported_tool_groups": ["scene_events", "scene_revisions"],
         "edit_limits": {"batch_operations": 100, "static_knobs_only": True,
                         "legacy_compound_workflows": "unverified", "creation_scope": "root"},
     }

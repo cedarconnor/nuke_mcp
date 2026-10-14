@@ -48,7 +48,7 @@ class NukeMCPServer:
                  "batch_edit", "legacy_workflow", "inspect_graph", "inspect_reads", "validate_reads",
                  "sample_channel_statistics", "list_toolsets", "save_toolset", "load_toolset",
                  "open_script", "save_script", "set_project_settings", "import_shot_csv",
-                 "plan_shot_setup", "apply_shot_setup")
+                 "plan_shot_setup", "apply_shot_setup", "plan_layered_comp", "build_layered_comp")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
         handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
@@ -223,6 +223,14 @@ class NukeMCPServer:
     def import_shot_csv(self, **kwargs):
         from nuke_mcp_bridge.manifests import import_shot_csv
         return import_shot_csv(**kwargs)
+
+    def plan_layered_comp(self, manifest):
+        from nuke_mcp_bridge.compositing import plan_layered_comp
+        return plan_layered_comp(nuke,manifest)
+
+    def build_layered_comp(self, manifest, plan_digest):
+        from nuke_mcp_bridge.compositing import build_layered_comp
+        return build_layered_comp(nuke,manifest,plan_digest)
 
     def plan_shot_setup(self, manifest):
         from nuke_mcp_bridge.shots import plan_shot_setup

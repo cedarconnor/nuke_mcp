@@ -38,3 +38,29 @@ Completion is per script. A later failure preserves earlier outputs and reports 
 and restoration evidence. A published artifact remains even if reload verification fails. Reconcile
 the original request receipt and files; never replay uncertain mutations or overwrite existing outputs.
 The workflow saves scripts; it does not render.
+
+## Layered/AOV Groups
+
+`plan_layered_comp(manifest)` binds full source paths, observed channels, supported knob snapshots,
+host instance, script identity and frame. `build_layered_comp(manifest, plan_digest)` revalidates and
+builds only a new named Group. It never clears the script, saves it, renders, or guesses a beauty recipe.
+It reports created paths and individual verified operations; ambiguous creation is not retried/deleted.
+
+Node and mask sources must share a scope; the new Group is created in that scope. Expose Group
+outputs when sources live in different Groups. Identical short names are never guessed. A file
+source needs one existing observed Read with the exact raw file path and colorspace, allowing
+channel preflight without a hidden temporary node. Build creates its own Read inside the new Group.
+
+Each requested layer must expose red, green, blue **and alpha**. No alpha is invented. Prefer classic
+Shuffle when available, otherwise Shuffle2 with verified mapping readback; unknown knob layouts
+fail inside the owned Group with partial evidence. Grade gain maps to `white`, gamma to `gamma`,
+and Blur size is explicit. Merge input 0/B is the accumulated comp; input 1/A is the new layer;
+input 2 is the explicit mask with its requested channel. Supported operations are over/plus/multiply/screen.
+Optional Write creates a node only; saving and rendering remain separate.
+
+Channel/knob observations and class discovery are bounded, especially under NC. A plan reserves no
+state. This milestone does not claim a graph revision guarantee or pixel-correct production recipe;
+native numeric reconstruction and artist-viewable render evidence are separate qualification gates.
+
+API semantics were checked against Foundry's [Shuffle reference](https://learn.foundry.com/nuke/content/reference_guide/channel_nodes/shuffle.html)
+and [Grade knob reference](https://learn.foundry.com/nuke/9.0/content/reference_guide/color_nodes/grade.html).

@@ -94,6 +94,18 @@ def bridge_tool(mcp):
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
     @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
+    def plan_layered_comp(manifest: dict) -> ToolResult:
+        """Validate explicit source layers/channels, masks and Merge ordering without graph changes."""
+        result=client().call('plan_layered_comp',dict(manifest=manifest))
+        return to_mcp_result(result,'Layered comp plan: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def build_layered_comp(manifest: dict, plan_digest: str) -> ToolResult:
+        """Build a fresh planned Group. Preserve unrelated nodes; saving/rendering remain separate."""
+        result=client().call('build_layered_comp',dict(manifest=manifest,plan_digest=plan_digest))
+        return to_mcp_result(result,'Layered comp build: '+result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
     def import_shot_csv(path: str, column_map: dict, defaults: dict) -> ToolResult:
         """Convert a host CSV using explicit header-to-field mapping and defaults; resolve returned validation errors."""
         result=client().call('import_shot_csv',dict(path=path,column_map=column_map,defaults=defaults))

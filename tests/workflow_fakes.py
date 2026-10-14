@@ -20,13 +20,14 @@ class WorkflowNode(LibraryNode):
             file_type=Enum('exr',['exr']),datatype=Enum('half',['half','float']),
             compression=Enum('Zip (1 scanline)',['Zip (1 scanline)']),channels=Enum('rgba',['rgba','rgb']),
             operation=Enum('over',['over','plus','multiply','screen']),maskChannel=Enum('rgba.alpha',['rgba.alpha']),
-            **{'in':Enum('rgba',['rgba','diffuse']), 'red':Enum('red',['red']), 'green':Enum('green',['green']),
+            **{'in':Enum('rgba',['rgba','diffuse']), 'out':Enum('rgba',['rgba']), 'red':Enum('red',['red']), 'green':Enum('green',['green']),
                'blue':Enum('blue',['blue']), 'alpha':Enum('alpha',['alpha']),
                'white':Knob(1.),'gamma':Knob(1.),'size':Knob(0.),'number':Knob(0,'Int_Knob')})
     def file_value(self,frame):
         path=self['file'].value().replace('[file dirname [value root.name]]',str(Path(self.host.script_path).parent))
         return path%frame if '%' in path else path
     def channels(self):return self._channels[:]
+    def format(self):return SimpleNamespace(width=lambda:4,height=lambda:4,pixelAspect=lambda:1.)
 
 class WorkflowHost(ScriptHost):
     GUI=True
