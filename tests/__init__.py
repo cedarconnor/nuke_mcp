@@ -1,0 +1,1 @@
+"""Offline bridge contract tests."""
