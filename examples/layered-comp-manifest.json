@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "group_name": "AOV",
+  "layers": [
+    {
+      "id": "base",
+      "source_node_path": "GroupA.Same",
+      "channel_layer": "rgba"
+    },
+    {
+      "id": "light",
+      "source_node_path": "GroupB.Same",
+      "channel_layer": "rgba",
+      "operation": "plus"
+    }
+  ]
+}

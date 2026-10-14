@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "output_root": "C:/USER_DELIVERY_ROOT",
+  "shots": [
+    {
+      "shot_id": "sh010",
+      "script_path": "C:/USER_DELIVERY_ROOT/sh010.nknc",
+      "plates": [
+        {
+          "path": "C:/plates/plate.%04d.exr",
+          "colorspace": "linear",
+          "first": -2,
+          "last": 2
+        }
+      ],
+      "frame_range": {
+        "work_first": -2,
+        "cut_in": -1,
+        "cut_out": 1,
+        "work_last": 2
+      },
+      "fps": {
+        "numerator": 24000,
+        "denominator": 1001
+      },
+      "format": {
+        "width": 1920,
+        "height": 1080,
+        "pixel_aspect": 1.0
+      },
+      "color_settings": {
+        "colorManagement": "Nuke"
+      },
+      "write": {
+        "path": "C:/USER_DELIVERY_ROOT/out.%04d.exr",
+        "channels": "rgba",
+        "file_type": "exr",
+        "datatype": "half",
+        "compression": "Zip (1 scanline)",
+        "colorspace": "linear"
+      }
+    }
+  ]
+}

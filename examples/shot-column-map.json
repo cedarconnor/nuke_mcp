@@ -1,0 +1,6 @@
+{
+  "Shot": "shot_id",
+  "Script": "script_path",
+  "Plate": "plates.0.path",
+  "WorkFirst": "frame_range.work_first"
+}
