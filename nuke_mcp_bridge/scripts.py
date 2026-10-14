@@ -31,12 +31,18 @@ def path_matches(nuke, target):
     return isinstance(name,str) and Path(name).is_absolute() and Path(name).resolve()==target
 
 
-def restore_identity(nuke, before, data):
+def restore_identity(nuke, before, data, owned_root):
     """Restore only save target/dirty metadata, never imply graph or disk rollback."""
     try:
         root=nuke.root()
+        current=state(nuke)
+        if root!=owned_root or current['modified'] or current['path'] not in (before['path'],data['target']):
+            data['identity_restored']=False
+            data['restoration_error']='Script changed during save; retaining current identity and unsaved state'
+            return
         root.setName(before['path'])
-        root.setModified(before['modified'])
+        # Never clear new edits made by a rename callback while restoring metadata.
+        if before['modified']:root.setModified(True)
         data['identity_restored']=state(nuke)==before
     except Exception as exc:
         data['identity_restored']=False
@@ -47,6 +53,7 @@ def save_script(nuke, path=None, overwrite=False):
     main_thread()
     if type(overwrite) is not bool:raise BridgeError('invalid_request','overwrite must be boolean')
     before=state(nuke)
+    owned_root=nuke.root()
     current=path is None
     requested=before['path'] if current else path
     target=script_path(nuke,requested)
@@ -64,7 +71,7 @@ def save_script(nuke, path=None, overwrite=False):
             for block in iter(lambda:stream.read(1024*1024),b''):digest.update(block)
         return dict(data,after=state(nuke),sha256=digest.hexdigest(),bytes=target.stat().st_size)
     except Exception as exc:
-        restore_identity(nuke,before,data)
+        restore_identity(nuke,before,data,owned_root)
         raise BridgeError('script_save_failed',str(exc),'unknown',data) from exc
 
 
@@ -135,7 +142,12 @@ def validate_settings(nuke, settings):
     values.update(color)
     prepared={}
     for key,value in values.items():
-        knob=inspect_knob(root,key,value)
+        knob=root.knob(key)
+        if key in ('fps','first_frame','last_frame') and knob is not None and knob.Class()=='Array_Knob':
+            # Nuke 17 exposes these scalar numeric root fields as Array_Knob.
+            if knob.arraySize()!=1 or knob.isAnimated(0) or knob.hasExpression(0):
+                raise BridgeError('dynamic_knob','Project numeric fields must be static scalar knobs')
+        else:knob=inspect_knob(root,key,value)
         if key in color and knob.Class()!='Enumeration_Knob':
             raise BridgeError('knob_unavailable','Color settings require an observed enumeration')
         prepared[key]={'knob':knob,'before':knob_value(knob),'value':value}
@@ -156,6 +168,7 @@ def set_project_settings(nuke, settings, dry_run=True):
     main_thread()
     if type(dry_run) is not bool:raise BridgeError('invalid_request','dry_run must be boolean')
     root,prepared=validate_settings(nuke,settings)
+    script_identity=root.name()
     data={'dry_run':dry_run,'before':{k:v['before'] for k,v in prepared.items()},
           'requested':{k:v['value'] for k,v in prepared.items()},'completed':[]}
     if dry_run:return dict(data,outcome='not_started')
@@ -163,6 +176,7 @@ def set_project_settings(nuke, settings, dry_run=True):
     try:
         for key,row in prepared.items():
             check_guard()
+            if nuke.root()!=root or root.name()!=script_identity:raise RuntimeError('Script changed during settings apply')
             current_root,current=validate_settings(nuke,settings)
             if current_root!=root or current[key]['knob']!=row['knob'] or current[key]['before']!=row['before']:
                 raise RuntimeError('Setting target changed before write: '+key)
@@ -172,12 +186,14 @@ def set_project_settings(nuke, settings, dry_run=True):
                 value=nuke.addFormat('%s %s %s mcp_%s' % (value['width'],value['height'],value['pixel_aspect'],uuid4().hex))
                 if value is None:raise RuntimeError('Host did not create requested format')
                 check_guard()
+                if nuke.root()!=root or root.name()!=script_identity or root.knob(key)!=row['knob']:
+                    raise RuntimeError('Format target changed during format registration')
             row['knob'].setValue(value)
             actual=format_value(root) if key=='format' else knob_value(row['knob'])
             if not same_value(actual,row['value']):raise RuntimeError('Setting readback mismatch: '+key)
             data['completed'].append(key)
         _,final=validate_settings(nuke,settings)
-        if nuke.root()!=root or any(final[k]['knob']!=r['knob'] or not same_value(final[k]['before'],r['value']) for k,r in prepared.items()):
+        if nuke.root()!=root or root.name()!=script_identity or any(final[k]['knob']!=r['knob'] or not same_value(final[k]['before'],r['value']) for k,r in prepared.items()):
             raise RuntimeError('Final project settings readback differs')
         return dict(data,after={k:v['before'] for k,v in final.items()},outcome='applied')
     except Exception as exc:

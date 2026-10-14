@@ -34,7 +34,9 @@ or blanket rollback is performed. Readback verifies the actual host script path.
 absolute save-as path. `save_script(path, overwrite=False)` refuses existing targets and missing
 parent directories. Results include the observed file size and digest. Failed saves attempt to
 restore the original target and dirty flag, but cannot roll back filesystem writes or callback
-effects. The receipt reports that distinction. The internal disposable-script helper is not an MCP tool.
+effects. Recovery retains unsaved callback edits and does not relabel a detected script switch;
+`identity_restored` is false when restoration cannot be established. The receipt reports that
+distinction. The internal disposable-script helper is not an MCP tool.
 
 ## Project settings
 
@@ -50,7 +52,7 @@ Only use the exact enum labels available in your host. Allowed color knob names 
 `colorManagement`, `OCIO_config`, `workingSpaceLUT`, `monitorLut`, `int8Lut`, `int16Lut`,
 `logLut`, and `floatLut`; unavailable or non-enumerated knobs are refused. No configuration
 is guessed or downloaded. Static settings cannot replace expressions or animation.
-Apply checks each write and the final values. Earlier writes and newly registered formats may
+Apply binds the script path and checks each write and the final values. Earlier writes and newly registered formats may
 remain after failure; `completed` is evidence of intermediate verification, not atomic rollback.
 
 Host API references: [nodeCopy](https://learn.foundry.com/nuke/developers/latest/pythondevguide/_autosummary/nuke.nodeCopy.html),

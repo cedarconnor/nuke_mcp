@@ -32,7 +32,8 @@ def contained_path(root, candidate):
 
 def extension(nuke):
     env = getattr(nuke,'env',{})
-    mode = env.get('nc',env.get('noncommercial'))
+    mode = env.get('nc','unknown')
+    if mode=='unknown':mode=env.get('noncommercial','unknown')
     if type(mode) is not bool:
         raise BridgeError('license_unknown','Cannot choose a script extension without observed NC mode')
     return '.nknc' if mode else '.nk'

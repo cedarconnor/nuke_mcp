@@ -1,0 +1,960 @@
+{
+  "mode": "live",
+  "port": 19877,
+  "calls": [
+    {
+      "request_id": "1570c5c8-b553-4185-b32d-f9a158dde405",
+      "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [
+          {
+            "path": "MCP_Grade",
+            "name": "MCP_Grade",
+            "type": "Grade",
+            "position": [
+              -40,
+              39
+            ],
+            "selected": true,
+            "inputs": [
+              {
+                "index": 0,
+                "path": null
+              }
+            ],
+            "parameters": {
+              "blackpoint": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "blackpoint_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "whitepoint": {
+                "type": "AColor_Knob",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              "whitepoint_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "black": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "black_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "white": {
+                "type": "AColor_Knob",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              "white_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "multiply": {
+                "type": "AColor_Knob",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              "multiply_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "add": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "add_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "gamma": {
+                "type": "AColor_Knob",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              "gamma_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "reverse": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "black_clamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "white_clamp": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "inject": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "invert_mask": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "fringe": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "maskFromFlag": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "process_mask": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "invert_unpremult": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "enable_mix_luminance": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": "roundtrip"
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "hide_input": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "channel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "layer",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "Mask",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "maskChannelMask",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "maskChannelInput",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "maskFrom",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "maskChannel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "mask",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "unpremult",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "mix_luminance",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "mix",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "enable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": true,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 3
+          },
+          {
+            "path": "MCP_Source",
+            "name": "MCP_Source",
+            "type": "Constant",
+            "position": [
+              -40,
+              -33
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "color": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ]
+              },
+              "color_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "full_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "proxy_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "last",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeStart",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeEnd",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": false,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 0
+          }
+        ],
+        "errors": [],
+        "truncated": true,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D523A290>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "partial",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "91d38aa7-9728-44d5-a258-dc8801610217",
+      "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D52393F0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "fb8d852a-d27b-4065-9e4d-311eebe65eb5",
+      "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D523AA70>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "6e51ea6e-e2d0-4eb1-ba9e-8728c59ef316",
+      "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D523B9F0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "1cd4be2c-0c82-4267-a46c-ef19c54db3f6",
+      "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D5239250>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "93bca7ee-3bac-4cd6-b30e-b01a1f0138ea",
+      "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D5239070>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "50e5a31a-acf0-4e9c-a80f-0da83b96fb1c",
+      "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D523B5B0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "00d5ba61-4bff-40a6-a7d8-f1c7351ad7e6",
+      "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+        "fps": 30,
+        "format": "<Format object at 0x000001A9D523AED0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "4540b9c6-b2a2-45a2-bcac-1d97aa4b09d7",
+      "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 154456,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics",
+          "toolsets",
+          "script_lifecycle",
+          "project_settings"
+        ],
+        "toolset_limits": {
+          "nodes": 1000,
+          "selected_paths": 100,
+          "payload_bytes": 16777216,
+          "trusted_code": true,
+          "verification": "observed topology and bounded static knob subset"
+        },
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "22bb6fb1-ab3a-4754-8e3d-2c1597b13211",
+      "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 154456,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics",
+          "toolsets",
+          "script_lifecycle",
+          "project_settings"
+        ],
+        "toolset_limits": {
+          "nodes": 1000,
+          "selected_paths": 100,
+          "payload_bytes": 16777216,
+          "trusted_code": true,
+          "verification": "observed topology and bounded static knob subset"
+        },
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "3fc258a1-2e2e-4797-a09f-26c438273ec3",
+    "client_session_id": "1d5e393b-ebb5-4ab9-82f7-9cab174cd71a",
+    "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: __MCP_PROBE_ABSENT__"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "dab37fbd-78b7-454c-a0a1-60afaf6bcb46",
+    "client_session_id": "37faa8aa-82b7-46e1-a10e-b42b8af18ca8",
+    "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154456,
+        "main_thread": true,
+        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}

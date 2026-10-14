@@ -1,0 +1,853 @@
+{
+  "mode": "offline_stdio",
+  "port": 53841,
+  "calls": [
+    {
+      "request_id": "d8eeece4-cecd-476e-a5c0-07f4f9040949",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "8d0afed1-bd90-42ff-985c-0e1b9fbcfc77",
+      "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "0a827bb5-43e4-407f-9690-b5667ddba061",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "faae2180-b295-4f0f-a2c6-2a8b7a939667",
+      "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "877968f9-d76f-499f-8656-bd88168ec2b0",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "e7360ae8-7038-4ba3-b159-377268bcc3f0",
+      "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "ab1805f7-2a14-4d11-85f7-137ab48229a0",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "953c3ac5-b894-470b-b408-b718f7ba602b",
+      "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "contract_fixture",
+        "fps": 24,
+        "format": "HD",
+        "first_frame": 1,
+        "last_frame": 3,
+        "nodes": []
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "46bbe4cd-131e-4128-b3bb-b00067663a3e",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nuke_version": "fake",
+        "license_mode": "unknown"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "12a14e0a-f365-4b56-9955-0a8a3187c380",
+      "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nuke_version": "fake",
+        "license_mode": "unknown"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "b24d9089-db9a-463f-ac4b-f2379a990925",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "node_not_found",
+      "message": "Node not found"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "7968ba7f-6377-437e-bd94-486c23120994",
+    "client_session_id": "c9590ff4-f450-40c1-9743-d92e177e2acd",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "probe": "read-only"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "lifecycle": {
+    "save_toolset": {
+      "request_id": "79835a6c-14b8-447e-b986-d85dfedc9cd0",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "name": "fixture",
+        "payload": "bc9a0d703fce4653a1bb6b45aeacb251.nknc",
+        "published": true,
+        "manifest": {
+          "schema_version": 1,
+          "name": "fixture",
+          "payload": "bc9a0d703fce4653a1bb6b45aeacb251.nknc",
+          "sha256": "9cbaff97ae0fb2ee1149723fffe70d2cbdfa611d4d04549efd731dd49208e1e0",
+          "host": {
+            "version": "fixture",
+            "extension": ".nknc",
+            "license_mode": "noncommercial"
+          },
+          "verification": "observed topology and bounded static knob subset",
+          "dependencies": [
+            "Grade"
+          ],
+          "nodes": [
+            {
+              "path": "Grade1",
+              "class": "Grade",
+              "inputs": [],
+              "parameters": {
+                "gain": 1.0,
+                "label": "",
+                "translate": [
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "inputs": [
+            "Grade1"
+          ],
+          "outputs": [
+            "Grade1"
+          ]
+        },
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "partial",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null
+    },
+    "list_toolsets": {
+      "request_id": "128498fd-9cc5-4da6-84f9-b72524086410",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "entries": [
+          {
+            "name": "fixture",
+            "sha256": "9cbaff97ae0fb2ee1149723fffe70d2cbdfa611d4d04549efd731dd49208e1e0",
+            "payload": "bc9a0d703fce4653a1bb6b45aeacb251.nknc",
+            "host": {
+              "version": "fixture",
+              "extension": ".nknc",
+              "license_mode": "noncommercial"
+            }
+          }
+        ],
+        "errors": [],
+        "truncated": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "load_toolset": {
+      "request_id": "05c492d0-d91d-4e60-87e1-7f9215b156b8",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "name": "fixture",
+        "group_path": "Imported",
+        "sha256": "9cbaff97ae0fb2ee1149723fffe70d2cbdfa611d4d04549efd731dd49208e1e0",
+        "created_paths": [
+          "Imported.Grade1"
+        ],
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "partial",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null
+    },
+    "set_project_settings": {
+      "request_id": "ece19cc0-ef2d-4f22-8f85-974c936f21a8",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "dry_run": true,
+        "before": {
+          "fps": 24.0
+        },
+        "requested": {
+          "fps": 30.0
+        },
+        "completed": [],
+        "outcome": "not_started"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "save_script": {
+      "request_id": "efe6e4a9-0ce4-4056-bab2-6c58fcb574e1",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "Root",
+          "modified": true
+        },
+        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmp8k7d_khj\\shot.nknc",
+        "save_current": false,
+        "after": {
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmp8k7d_khj\\shot.nknc",
+          "modified": false
+        },
+        "sha256": "c3f58af6cd49f9d7806d497a370e7a66426fb5234f38e55668f19a7a1c743774",
+        "bytes": 15
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "open_script": {
+      "request_id": "b886ee7e-f973-4b71-9fc8-e6c1df4b9cb5",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmp8k7d_khj\\shot.nknc",
+          "modified": false
+        },
+        "target": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmp8k7d_khj\\shot.nknc",
+        "discard_unsaved_changes": false,
+        "after": {
+          "path": "C:\\Users\\Cedar\\AppData\\Local\\Temp\\tmp8k7d_khj\\shot.nknc",
+          "modified": false
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "inspection": {
+    "request_id": "78118493-25b6-44ee-a465-59f73e9ff10f",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "nodes": [
+        {
+          "path": "FixtureGrade",
+          "name": "FixtureGrade",
+          "type": "Grade",
+          "position": [
+            0,
+            0
+          ],
+          "selected": false,
+          "inputs": [],
+          "parameters": {
+            "gain": {
+              "type": "Double_Knob",
+              "value": 1.0
+            },
+            "label": {
+              "type": "String_Knob",
+              "value": ""
+            },
+            "translate": {
+              "type": "XY_Knob",
+              "value": [
+                0.0,
+                0.0
+              ]
+            },
+            "first": {
+              "type": "Int_Knob",
+              "value": -2
+            },
+            "last": {
+              "type": "Int_Knob",
+              "value": 2
+            },
+            "colorspace": {
+              "type": "Enumeration_Knob",
+              "value": "linear"
+            },
+            "file": {
+              "type": "File_Knob",
+              "value": "/plates/%04d.exr"
+            },
+            "part": {
+              "type": "Enumeration_Knob",
+              "value": "beauty"
+            }
+          },
+          "omitted_knobs": [
+            {
+              "name": "knobChanged",
+              "reason": "unsupported_type"
+            }
+          ],
+          "errors": [],
+          "truncated": false,
+          "inputs_omitted_by_limit": 0,
+          "knobs_omitted_by_limit": 0
+        }
+      ],
+      "errors": [],
+      "truncated": false,
+      "scope": {
+        "recurse_groups": true,
+        "selected_only": false
+      },
+      "observation": {
+        "coverage": "partial",
+        "reason": "bounded_or_unavailable_fields"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "partial",
+      "reason": "bounded_or_unavailable_fields"
+    },
+    "revision": null
+  },
+  "statistics": {
+    "request_id": "979550a6-9467-4d38-b983-264d2bc0fe6b",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "path": "FixtureGrade",
+      "frame": 1001,
+      "channels": [
+        "rgba.red"
+      ],
+      "roi": [
+        0,
+        0,
+        4,
+        4
+      ],
+      "statistics": [
+        {
+          "channel": "rgba.red",
+          "sample_count": 4,
+          "expected_samples": 4,
+          "finite_count": 4,
+          "nonfinite_count": 0,
+          "min": 0.5,
+          "max": 0.5,
+          "mean": 0.5,
+          "zero_fraction": 0.0,
+          "zero_fraction_denominator": "finite_samples",
+          "complete": true
+        }
+      ],
+      "samples_completed": 4,
+      "complete": true,
+      "observation": {
+        "coverage": "partial",
+        "reason": "filtered_grid_samples"
+      },
+      "sampling": {
+        "method": "nuke.Node.sample_cubic_filtered_grid",
+        "grid": [
+          2,
+          2
+        ],
+        "tile_size": [
+          2.0,
+          2.0
+        ],
+        "first_center": [
+          1.0,
+          1.0
+        ],
+        "samples_per_channel": 4,
+        "requested_max": 4,
+        "samples_every_pixel": false,
+        "extrema_scope": "filtered_samples_only",
+        "limitations": "Filtered samples do not prove all pixels are black or establish full-image extrema."
+      },
+      "frame_restored": true
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "partial",
+      "reason": "filtered_grid_samples"
+    },
+    "revision": null
+  },
+  "verified_modify": {
+    "request_id": "2883e0a2-7c20-4313-ae8b-c2e217208fa2",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "dry_run": false,
+      "outcome": "applied",
+      "items": [
+        {
+          "index": 0,
+          "operation": {
+            "op": "set_knob",
+            "node_path": "FixtureGrade",
+            "knob": "label",
+            "value": "fixture"
+          },
+          "state": "completed",
+          "outcome": "applied",
+          "before": "",
+          "data": {
+            "path": "FixtureGrade",
+            "name": "FixtureGrade",
+            "before": "",
+            "knob": "label",
+            "value": "fixture"
+          }
+        }
+      ],
+      "atomic": false
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "modify_node",
+    "tool": "modify_node"
+  },
+  "batch": {
+    "dry_run": {
+      "request_id": "3d6491a7-d1f3-4e13-85d9-9285d40961c6",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "dry_run": true,
+        "outcome": "not_started",
+        "items": [
+          {
+            "index": 0,
+            "operation": {
+              "op": "set_knob",
+              "node_path": "FixtureGrade",
+              "knob": "gain",
+              "value": 2
+            },
+            "state": "validated",
+            "outcome": "not_started",
+            "before": 1.0
+          }
+        ],
+        "atomic": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "apply": {
+      "request_id": "d237c0c1-3b08-44fe-968b-625b30622828",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "dry_run": false,
+        "outcome": "applied",
+        "items": [
+          {
+            "index": 0,
+            "operation": {
+              "op": "set_knob",
+              "node_path": "FixtureGrade",
+              "knob": "gain",
+              "value": 2
+            },
+            "state": "completed",
+            "outcome": "applied",
+            "before": 1.0,
+            "data": {
+              "path": "FixtureGrade",
+              "name": "FixtureGrade",
+              "before": 1.0,
+              "knob": "gain",
+              "value": 2
+            }
+          }
+        ],
+        "atomic": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "revision_refused": {
+      "request_id": "9b3c7eb2-7f17-48c6-a44b-4ee4d0c09ab2",
+      "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+      "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "revision_unavailable",
+        "message": "No trustworthy scene revision provider installed"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "render_seconds": 0.09299999999348074,
+  "render": {
+    "request_id": "c5d4ac39-da77-4aa2-960d-8b7ba56c83fe",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "frames_completed": [
+        1
+      ],
+      "status": "Rendering completed"
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  "unsupported_node": {
+    "request_id": "bb5c007b-5460-4247-8ced-f52598a437b4",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "unknown_command",
+      "message": "Unsupported command: create_node"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "create_node",
+    "tool": "create_node"
+  },
+  "unavailable_host": {
+    "request_id": "6f0efcb0-46b9-4940-bef9-f38e41738388",
+    "client_session_id": "b0ce71a6-882a-41b2-ba48-a15aecf80e79",
+    "server_instance_id": "0d10aee8-961e-496c-8d94-bb2a30f8013d",
+    "ok": false,
+    "state": "failed",
+    "outcome": "unknown",
+    "data": {},
+    "error": {
+      "code": "transport_error",
+      "message": "[WinError 10053] An established connection was aborted by the software in your host machine"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "transport_error": true
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}

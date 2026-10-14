@@ -266,7 +266,7 @@ self.assertEqual(host.current_frame, original_frame)
 
 **Interfaces:** Produce `list_toolsets(root) -> dict`, `save_toolset(nuke, root, node_paths, name, overwrite=False) -> dict`, `load_toolset(nuke, root, name, group_name, position=None) -> dict`, and `contained_path(root, candidate) -> pathlib.Path` (canonical root containment for existing parents and prospective destinations, rechecked immediately before use). Public root comes from `NUKE_MCP_LIBRARY_ROOT` or the spec's default. Metadata schema v1 records payload digest, host/license mode, dependencies, and input/output identities. Task 12 reuses `contained_path`.
 
-- [ ] Write tests for selection restoration, duplicate names, nested Groups, missing dependencies, `.nk`/`.nknc`, conflicting overwrite, interrupted publication, payload changes, traversal, and nested Windows junction escapes. Unavailable junction creation must be an explicit skip and a release gap on Windows.
+- [x] Write tests for selection restoration, duplicate names, nested Groups, missing dependencies, `.nk`/`.nknc`, conflicting overwrite, interrupted publication, payload changes, traversal, and nested Windows junction escapes. Unavailable junction creation must be an explicit skip and a release gap on Windows.
 
 ```python
 before = existing_payload.read_bytes()
@@ -276,10 +276,10 @@ self.assertEqual(existing_payload.read_bytes(), before)
 self.assertEqual(host.selection, original_selection)
 ```
 
-- [ ] Run `python -m unittest tests.test_toolsets -v`; capture expected failures.
-- [ ] Implement root-contained names, canonical path validation immediately before file operations, staged payload/metadata publication with one authoritative manifest, and digest verification before paste. Preserve trusted-code semantics of `.nk` files. Load only into a new explicitly owned Group; no implicit selection-based target.
-- [ ] Rerun focused tests; corrupt metadata/payload pairs must never appear as valid library entries. Add a native save/load round-trip scenario comparing topology and known knob values.
-- [ ] Commit as `feat: manage verified artist toolsets`.
+- [x] Run `python -m unittest tests.test_toolsets -v`; capture expected failures.
+- [x] Implement root-contained names, canonical path validation immediately before file operations, staged payload/metadata publication with one authoritative manifest, and digest verification before paste. Preserve trusted-code semantics of `.nk` files. Load only into a new explicitly owned Group; no implicit selection-based target.
+- [x] Rerun focused tests; corrupt metadata/payload pairs must never appear as valid library entries. Add a native save/load round-trip scenario comparing topology and known knob values.
+- [x] Commit as `feat: manage verified artist toolsets`.
 
 ### Task 10 Explicit script lifecycle and project settings
 
@@ -287,7 +287,7 @@ self.assertEqual(host.selection, original_selection)
 
 **Interfaces:** Produce `open_script(nuke, path, discard_unsaved_changes=False) -> dict`, `save_script(nuke, path=None, overwrite=False) -> dict`, `set_project_settings(nuke, settings, dry_run=True) -> dict`. Also provide the internal `new_disposable_script(nuke) -> dict` used only by Task 12 after its clean-session preconditions.
 
-- [ ] Write tests for unsaved current work, save-current vs save-as, host-specific extension, readback path mismatch, file collisions, missing directories, unavailable OCIO enumeration options, invalid dimensions/FPS, partial settings failure, and restoring a previously saved clean script.
+- [x] Write tests for unsaved current work, save-current vs save-as, host-specific extension, readback path mismatch, file collisions, missing directories, unavailable OCIO enumeration options, invalid dimensions/FPS, partial settings failure, and restoring a previously saved clean script.
 
 ```python
 host.modified = True
@@ -297,10 +297,10 @@ self.assertEqual(host.script_clear_count, 0)
 self.assertEqual(host.script_path, original_path)
 ```
 
-- [ ] Run `python -m unittest tests.test_scripts -v`; confirm dirty-script and overwrite guards fail before implementation.
-- [ ] Implement lifecycle operations with explicit targets/readback, static setting validation, and host-compatible extensions. Preserve original save target/dirty state around failed save-as where the host supports it; otherwise surface partial state. Do not infer a usable color transform from a similarly named option.
-- [ ] Rerun focused and Milestone 4 tests. Document that clean-script replacement and arbitrary-code/toolset execution remain deliberate operations and do not receive blanket rollback guarantees.
-- [ ] Commit as `feat: add explicit script and project lifecycle tools`.
+- [x] Run `python -m unittest tests.test_scripts -v`; confirm dirty-script and overwrite guards fail before implementation.
+- [x] Implement lifecycle operations with explicit targets/readback, static setting validation, and host-compatible extensions. Preserve original save target/dirty state around failed save-as where the host supports it; otherwise surface partial state. Do not infer a usable color transform from a similarly named option.
+- [x] Rerun focused and Milestone 4 tests. Document that clean-script replacement and arbitrary-code/toolset execution remain deliberate operations and do not receive blanket rollback guarantees.
+- [x] Commit as `feat: add explicit script and project lifecycle tools`.
 
 ## Milestone 5 Production workflows
 

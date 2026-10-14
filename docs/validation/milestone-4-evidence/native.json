@@ -1,0 +1,292 @@
+{
+  "passed": false,
+  "receipts": {
+    "identity": {
+      "request_id": "a0714fda-9961-479d-b7c5-b407ae8fd458",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 154456,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/library_fixture.nk",
+          "selection": [
+            "MCP_Grade"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "settings_dry": {
+      "request_id": "435110f4-2d6b-40f5-bbb9-a40e47c599f1",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "dry_run": true,
+        "before": {
+          "fps": 24.0
+        },
+        "requested": {
+          "fps": 30.0
+        },
+        "completed": [],
+        "outcome": "not_started"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "settings_apply": {
+      "request_id": "8650ada4-c823-4942-a3cf-c0b0402c1e02",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "dry_run": false,
+        "before": {
+          "fps": 24.0,
+          "first_frame": 1.0,
+          "last_frame": 3.0,
+          "format": {
+            "width": 4,
+            "height": 4,
+            "pixel_aspect": 1.0
+          }
+        },
+        "requested": {
+          "fps": 30.0,
+          "first_frame": 1,
+          "last_frame": 3,
+          "format": {
+            "width": 4,
+            "height": 4,
+            "pixel_aspect": 1.0
+          }
+        },
+        "completed": [
+          "fps",
+          "first_frame",
+          "last_frame",
+          "format"
+        ],
+        "after": {
+          "fps": 30.0,
+          "first_frame": 1.0,
+          "last_frame": 3.0,
+          "format": {
+            "width": 4,
+            "height": 4,
+            "pixel_aspect": 1.0
+          }
+        },
+        "outcome": "applied"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "toolset_save": {
+      "request_id": "90973fe1-acd8-4507-96bc-48b91a71b7bf",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "partial",
+      "data": {
+        "name": "roundtrip",
+        "payload": "1a46f1a3004346af9dc2977a69dda4b9.nknc",
+        "published": false
+      },
+      "error": {
+        "code": "toolset_save_failed",
+        "message": "Host did not copy selected nodes"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "toolset_list": {
+      "request_id": "6ad07568-764e-40a9-b52d-6dec741e43dd",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "entries": [],
+        "errors": [],
+        "truncated": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "selection": {
+      "request_id": "165f6449-989a-42d9-a952-be3bf6f90e24",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "selection": [
+            "MCP_Grade"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "script_save": {
+      "request_id": "51acabf2-e72c-4a16-93d6-6dd7b0763015",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/library_fixture.nk",
+          "modified": true
+        },
+        "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone4-host\\roundtrip.nknc",
+        "save_current": false,
+        "after": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+          "modified": false
+        },
+        "sha256": "737cfa2ef654a5da046659dac70919e122d07aef931b4387d58058e3edf59dd8",
+        "bytes": 2498
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "collision": {
+      "request_id": "b481aed4-5f52-45d5-89a9-95ad8a210918",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "file_exists",
+        "message": "Save-as target exists"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "save_current": {
+      "request_id": "b76467b4-b5e8-483c-a22a-78158400208c",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+          "modified": false
+        },
+        "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone4-host\\roundtrip.nknc",
+        "save_current": true,
+        "after": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+          "modified": false
+        },
+        "sha256": "1025b8648c4e6939f6d37cc75d214c5dad0ed1af9b2506355da70ef047580893",
+        "bytes": 2498
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "reopen": {
+      "request_id": "22337f1a-ff08-4625-b6dc-ce3e0a02e173",
+      "client_session_id": "a2f82f8a-a2ed-4315-b5ab-d017ad12f4f9",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+          "modified": false
+        },
+        "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone4-host\\roundtrip.nknc",
+        "discard_unsaved_changes": false,
+        "after": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone4-host/roundtrip.nknc",
+          "modified": false
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "checks": {
+    "dry_run": true,
+    "settings": true,
+    "toolset_save": false,
+    "library_listing": false,
+    "selection": true,
+    "script_save": true,
+    "collision": true,
+    "save_current": true,
+    "saved_clean_reopen": true
+  }
+}

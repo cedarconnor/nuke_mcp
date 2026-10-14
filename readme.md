@@ -98,7 +98,7 @@ The server exposes **30 tools**. The client supplies tool arguments; MCP context
 | `cancel_operation` | Cancel queued work or request cancellation of the owning session's running render. |
 | `execute_nuke_code` | Execute Python in Nuke. This is unrestricted access for trusted local clients. |
 
-Typed node edits validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). [Inspection and diagnostics](docs/inspection.md) report coverage and sampling limits explicitly. NC cannot guarantee complete graph observation. Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
+Typed node edits validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). [Inspection and diagnostics](docs/inspection.md) report coverage and sampling limits explicitly. [Toolsets and lifecycle](docs/toolsets-and-lifecycle.md) documents library setup, trusted payloads, save/open guards, and project settings. NC cannot guarantee complete graph observation. Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
 
 ## Operation results and rendering
 
@@ -154,6 +154,8 @@ Upgrade the external server, add-on, and shared package together, then restart N
 The listener is restricted to loopback. Use trusted local clients: the bridge can change scripts, render files, and execute arbitrary Python. Remote access and remote authentication are outside this release's scope.
 
 ## Verification and known limits
+
+Milestone 4 has **137 passing offline tests**, including Windows junction containment, and passing offline and live two-client stdio probes exposing all 30 tools. Native NC 17.0v4 verified project settings, save-as, save-current, collision refusal, and saved-clean reopening. Native toolset round-trip remains **unqualified**: `nodeCopy` returned false after writing a payload; the entry was not published and the operation was not replayed. See the [Milestone 4 validation report](docs/validation/milestone-4.md), including the boundary between native evidence and regression tests.
 
 Milestone 3 has **107 passing offline tests** and passing offline and live two-client stdio probes. The live check used Nuke NC 17.0v4, completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error. See the [Milestone 3 validation report](docs/validation/milestone-3.md).
 

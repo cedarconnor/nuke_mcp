@@ -1,0 +1,157 @@
+{
+  "passed": false,
+  "receipts": {
+    "identity": {
+      "request_id": "0eb47dfc-ab89-402e-8814-b203c850633a",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 154456,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/library_fixture.nk",
+          "selection": [
+            "MCP_Grade"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "settings_dry": {
+      "request_id": "8ebd08bd-0613-4cf3-bf27-5c93b31c10c6",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "unsafe_knob",
+        "message": "Unsupported typed knob class: Array_Knob"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "settings_apply": {
+      "request_id": "8faf51e1-f4e5-46da-9dc7-ccde481e0cad",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "unsafe_knob",
+        "message": "Unsupported typed knob class: Array_Knob"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "toolset_save": {
+      "request_id": "77a691bb-8ea5-4e43-beab-4e0aff9efc95",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {},
+      "error": {
+        "code": "host_error",
+        "message": "GlobalsEnvironment.get() argument 2 must be str, not None"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "toolset_list": {
+      "request_id": "d6ef6c9b-c5ac-4051-8bdb-8a99b24744e9",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "entries": [],
+        "errors": [],
+        "truncated": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "selection": {
+      "request_id": "c4cc28d7-dc11-4327-8125-e88df7b1e7a7",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "selection": [
+            "MCP_Grade"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "script_save": {
+      "request_id": "682948b2-cb8f-4d74-aaff-70aa59c7aee3",
+      "client_session_id": "72e5b234-f3b8-4a62-9cfc-d4f27ddbc98e",
+      "server_instance_id": "9a579463-ba1a-4e87-8b8a-a654b2ee9e74",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {},
+      "error": {
+        "code": "host_error",
+        "message": "GlobalsEnvironment.get() argument 2 must be str, not None"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "checks": {
+    "dry_run": false,
+    "settings": false,
+    "toolset_save": false,
+    "library_listing": false,
+    "selection": true,
+    "script_save": false
+  }
+}

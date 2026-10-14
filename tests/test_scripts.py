@@ -82,6 +82,16 @@ class ScriptTests(unittest.TestCase):
     def test_commercial_extension(self):
         self.host.env['nc']=False
         s.save_script(self.host,str(self.dir/'shot.nk'))
+
+    def test_native_environment_requires_default_and_fps_is_array_knob(self):
+        class Environment(dict):
+            def get(self,key,default=None):
+                if not isinstance(default,str):raise TypeError('default must be str')
+                return super().get(key,default)
+        self.host.env=Environment(nc=True)
+        self.host.root()['fps'].kind='Array_Knob'
+        s.set_project_settings(self.host,{'fps':30.},False)
+        s.save_script(self.host,str(self.target))
     def test_failed_save_as_restores_original_target_and_dirty_flag(self):
         for dirty in (True,False):
             self.host.script_path=str(self.dir/'original.nknc')
@@ -130,3 +140,41 @@ class ScriptTests(unittest.TestCase):
     def test_internal_new_refuses_dirty(self):
         with self.assertRaises(BridgeError):s.new_disposable_script(self.host)
         self.assertEqual(self.host.script_clear_count,0)
+
+    def test_failed_save_does_not_clear_callback_edits_or_relabel_switched_script(self):
+        for switched in (False,True):
+            self.host.script_path=str(self.dir/'original.nknc')
+            self.host.modified=False
+            def callback(path,overwrite):
+                self.host.script_path=str(self.dir/'other.nknc') if switched else path
+                self.host.root()['fps'].v=48
+                self.host.modified=True
+                raise RuntimeError('callback changed script')
+            self.host.scriptSaveAs=callback
+            with self.assertRaises(BridgeError) as caught:s.save_script(self.host,str(self.target))
+            self.assertTrue(self.host.modified)
+            self.assertFalse(caught.exception.data['identity_restored'])
+            if switched:self.assertEqual(self.host.script_path,str(self.dir/'other.nknc'))
+
+    def test_setting_callback_script_switch_stops_later_edits(self):
+        knob=self.host.root()['fps']
+        def callback(value):
+            knob.v=value
+            self.host.script_path=str(self.dir/'artist.nknc')
+        knob.setValue=callback
+        with self.assertRaises(BridgeError):
+            s.set_project_settings(self.host,{'fps':30.,'last_frame':200},False)
+        self.assertEqual(self.host.root()['last_frame'].value(),100)
+
+    def test_restore_name_callback_cannot_clear_new_edits(self):
+        self.host.script_path=str(self.dir/'original.nknc')
+        self.host.modified=False
+        self.host.fail_save=True
+        def rename(path):
+            self.host.script_path=path
+            self.host.root()['fps'].v=48
+            self.host.modified=True
+        self.host.root().setName=rename
+        with self.assertRaises(BridgeError) as caught:s.save_script(self.host,str(self.target))
+        self.assertTrue(self.host.modified)
+        self.assertFalse(caught.exception.data['identity_restored'])
