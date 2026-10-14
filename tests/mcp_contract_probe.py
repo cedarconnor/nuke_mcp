@@ -84,7 +84,8 @@ async def probe(live=False, port=9877, slow=False):
                 for name, required in LEGACY.items():
                     assert name in tools, name
                     assert tools[name].inputSchema.get("required", []) == required, (name, tools[name].inputSchema)
-                for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit"):
+                for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit",
+                             "inspect_graph", "inspect_reads", "validate_reads"):
                     assert name in tools, name
                 sessions.append(session)
             capabilities = await asyncio.gather(*(s.call_tool("get_capabilities", {}) for s in sessions))

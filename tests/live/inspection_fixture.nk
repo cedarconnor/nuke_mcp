@@ -1,0 +1,44 @@
+Root {
+ first_frame 1
+ last_frame 3
+ format "4 4 0 0 4 4 1 MCP_4x4"
+}
+Constant {
+ inputs 0
+ color {0.25 0.5 0.75 1}
+ format "4 4 0 0 4 4 1 MCP_4x4"
+ name MCP_Constant
+}
+Expression {
+ expr0 "(x+0.5)/4"
+ name MCP_Ramp
+}
+Group {
+ inputs 0
+ name GroupA
+}
+ Constant {
+  inputs 0
+  color {0 0 0 1}
+  format "4 4 0 0 4 4 1 MCP_4x4"
+  name SameName
+ }
+end_group
+Group {
+ inputs 0
+ name GroupB
+}
+ Constant {
+  inputs 0
+  color {1 1 1 1}
+  format "4 4 0 0 4 4 1 MCP_4x4"
+  name SameName
+ }
+end_group
+Read {
+ inputs 0
+ file "C:/NUKE_MCP_DISPOSABLE_MISSING/plate.%04d.exr"
+ first 1
+ last 3
+ name MCP_MissingRead
+}

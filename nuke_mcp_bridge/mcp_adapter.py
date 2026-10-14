@@ -93,6 +93,28 @@ def bridge_tool(mcp):
 
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
+    def inspect_graph(max_nodes: int = 256, max_knobs_per_node: int = 64,
+                      recurse_groups: bool = True, selected_only: bool = False) -> ToolResult:
+        """Observe full-path graph connections and bounded knob snapshots. Check coverage and omissions."""
+        result = client().call('inspect_graph', dict(max_nodes=max_nodes, max_knobs_per_node=max_knobs_per_node,
+                              recurse_groups=recurse_groups, selected_only=selected_only))
+        return to_mcp_result(result, 'Graph inspection: ' + result['observation']['coverage'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
+    def inspect_reads(node_paths: list[str] | None = None, channel_limit: int = 256) -> ToolResult:
+        """Observe Read/DeepRead files, channels, multipart choices and unavailable fields."""
+        result = client().call('inspect_reads', dict(node_paths=node_paths, channel_limit=channel_limit))
+        return to_mcp_result(result, 'Read inspection: ' + result['observation']['coverage'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
+    def validate_reads(first_frame: int, last_frame: int, step: int = 1,
+                       node_paths: list[str] | None = None) -> ToolResult:
+        """Check up to 10000 frame/view paths. Unknown expressions are separate from missing files; no relinking."""
+        result = client().call('validate_reads', dict(first_frame=first_frame, last_frame=last_frame,
+                                                     step=step, node_paths=node_paths))
+        return to_mcp_result(result, 'Read validation: ' + result['state'])
+
     @mcp.tool(output_schema=None)
     def batch_edit(operations: list[dict], dry_run: bool = True, expected_revision: int | None = None) -> ToolResult:
         """Preflight 1..100 set_knob/connect/position operations. Dry-run by default.

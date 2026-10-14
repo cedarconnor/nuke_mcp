@@ -11,7 +11,8 @@ from uuid import uuid4
 
 from .protocol import BridgeError, TERMINAL_STATES, encode_message, make_result, validate_request
 
-READ_ONLY = frozenset(("ping", "get_capabilities", "get_script_info", "get_node_info"))
+READ_ONLY = frozenset(("ping", "get_capabilities", "get_script_info", "get_node_info",
+                       "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics"))
 
 
 class OperationRegistry:
@@ -207,7 +208,7 @@ class OperationRegistry:
                     with self._lock:
                         entry["job"] = data
                     return
-                result = make_result(req, data=data,
+                result = make_result(req, data=data, observation=data.get('observation'),
                                      outcome=(data['outcome'] if req['command'] in ('batch_edit', 'modify_node')
                                               and 'outcome' in data else
                                               "not_started" if req["command"] in READ_ONLY else "applied"))
@@ -217,6 +218,7 @@ class OperationRegistry:
             self.record_result(key, make_result(
                 req, state="failed", outcome=outcome,
                 data=exc.data if isinstance(exc, BridgeError) else entry["result"]["data"],
+                observation=exc.data.get('observation') if isinstance(exc, BridgeError) else None,
                 error={"code": exc.code if isinstance(exc, BridgeError) else "host_error",
                        "message": str(exc)}))
         finally:

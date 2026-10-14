@@ -6,6 +6,14 @@ from nuke_mcp_bridge.protocol import BridgeError
 
 
 class OperationTests(unittest.TestCase):
+    def test_inspection_receipt_is_read_only_and_preserves_coverage(self):
+        req = self.req(command='inspect_graph')
+        self.registry.admit(req)
+        self.registry.tick(lambda r: {'nodes':[], 'observation':{'coverage':'unknown','reason':'nc'}})
+        result = self.registry.lookup(req['request_id'], self.instance)
+        self.assertEqual(result['outcome'], 'not_started')
+        self.assertEqual(result['observation'], {'coverage':'unknown','reason':'nc'})
+
     def test_batch_dry_run_receipt_is_not_applied(self):
         req = self.req(command='batch_edit', params={'dry_run': True})
         self.registry.admit(req)

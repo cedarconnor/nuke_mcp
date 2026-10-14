@@ -382,7 +382,9 @@ def get_script_info(ctx: Context) -> str:
             else:
                 node_types[node_type] = 1
         
-        output += f"Total Nodes: {len(nodes)}\n"
+        output += f"Observed Nodes: {len(nodes)}\n"
+        observed = result.get('observation', {'coverage':'unknown', 'reason':'not_reported'})
+        output += f"Observation: {observed['coverage']} ({observed['reason']}); truncated={result.get('truncated', False)}\n"
         output += "Node Types:\n"
         for node_type, count in sorted(node_types.items()):
             output += f"  - {node_type}: {count}\n"
@@ -411,7 +413,9 @@ def get_node_info(ctx: Context, node_name: str) -> str:
         inputs = result.get("inputs", [])
         parameters = result.get("parameters", {})
         
-        output = f"Node: {node_name} ({node_type})\n"
+        output = f"Node: {result.get('path', node_name)} ({node_type})\n"
+        observed = result.get('observation', {'coverage':'unknown', 'reason':'not_reported'})
+        output += f"Observation: {observed['coverage']} ({observed['reason']}); truncated={result.get('truncated', False)}\n"
         output += f"Position: X={position[0]}, Y={position[1]}\n\n"
         
         # Show inputs
@@ -419,7 +423,7 @@ def get_node_info(ctx: Context, node_name: str) -> str:
         if inputs:
             for i, input_info in enumerate(inputs):
                 if input_info:
-                    output += f"  {i}: {input_info.get('name')} ({input_info.get('type')})\n"
+                    output += f"  {input_info.get('index', i)}: {input_info.get('path', input_info.get('name'))}\n"
                 else:
                     output += f"  {i}: None\n"
         else:

@@ -45,7 +45,7 @@ class NukeMCPServer:
         names = ("get_script_info", "create_node", "modify_node", "delete_node",
                  "position_node", "connect_nodes", "render", "viewer_playback",
                  "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer",
-                 "batch_edit", "legacy_workflow")
+                 "batch_edit", "legacy_workflow", "inspect_graph", "inspect_reads", "validate_reads")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
         handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
@@ -205,35 +205,31 @@ class NukeMCPServer:
         
         return safe_name
     
+    def inspect_graph(self, **kwargs):
+        from nuke_mcp_bridge.inspection import inspect_graph
+        return inspect_graph(nuke, **kwargs)
+
+    def inspect_reads(self, **kwargs):
+        from nuke_mcp_bridge.inspection import inspect_reads
+        return inspect_reads(nuke, **kwargs)
+
+    def validate_reads(self, **kwargs):
+        from nuke_mcp_bridge.inspection import validate_reads
+        return validate_reads(nuke, **kwargs)
+
     def get_script_info(self):
-        """Get information about the current Nuke script"""
+        """Legacy overview uses the same bounded graph observation."""
+        from nuke_mcp_bridge.inspection import error_field
+        result = self.inspect_graph()
         try:
-            # Basic script info
-            script_info = {
-                "name": nuke.root().name(),
-                "fps": nuke.root().fps(),
-                "format": str(nuke.root().format()),
-                "first_frame": nuke.root()["first_frame"].value(),
-                "last_frame": nuke.root()["last_frame"].value(),
-                "nodes": [],
-            }
-            
-            # Collect information about nodes
-            for node in nuke.allNodes():
-                node_info = {
-                    "name": node.name(),
-                    "type": node.Class(),
-                    "position": [node.xpos(), node.ypos()],
-                    "selected": node.isSelected(),
-                }
-                script_info["nodes"].append(node_info)
-            
-            return script_info
-        except Exception as e:
-            print(f"Error in get_script_info: {str(e)}")
-            traceback.print_exc()
-            return {"error": str(e)}
-    
+            root = nuke.root()
+            result.update(name=root.name(), fps=root.fps(), format=str(root.format()),
+                          first_frame=root['first_frame'].value(), last_frame=root['last_frame'].value())
+        except Exception as exc:
+            result['errors'].append(error_field('script', exc))
+            result['observation'] = {'coverage':'unknown', 'reason':'script_unavailable'}
+        return result
+
     def create_node(self, node_type, name=None, position=None, inputs=None, parameters=None):
         from nuke_mcp_bridge.mutations import create_node
         return create_node(nuke, node_type, name, position, inputs, parameters)
@@ -458,68 +454,12 @@ output["status"] = result
             raise Exception(f"Auto layout error: {str(e)}")
     
     def get_node_info(self, name):
-        """Get detailed information about a specific node"""
-        try:
-            # Get the node
-            node = nuke.toNode(name)
-            if not node:
-                raise ValueError(f"Node not found: {name}")
-            
-            # Collect node information
-            node_info = {
-                "name": node.name(),
-                "type": node.Class(),
-                "position": [node.xpos(), node.ypos()],
-                "selected": node.isSelected(),
-                "inputs": [],
-                "parameters": {}
-            }
-            
-            # Get inputs
-            for i in range(node.inputs()):
-                input_node = node.input(i)
-                if input_node:
-                    node_info["inputs"].append({
-                        "index": i,
-                        "name": input_node.name(),
-                        "type": input_node.Class()
-                    })
-                else:
-                    node_info["inputs"].append(None)
-            
-            # Get parameters (knobs)
-            for knob in node.knobs():
-                try:
-                    if node[knob].visible():
-                        k = node[knob]
-                        
-                        # Get the value based on knob type
-                        value = None
-                        if k.Class() in ["Int_Knob", "Double_Knob", "Boolean_Knob", "String_Knob"]:
-                            value = k.value()
-                        elif k.Class() == "XY_Knob":
-                            value = [k.value(0), k.value(1)]
-                        elif k.Class() == "XYZ_Knob":
-                            value = [k.value(0), k.value(1), k.value(2)]
-                        elif k.Class() == "Color_Knob":
-                            value = [k.value(0), k.value(1), k.value(2), k.value(3)]
-                        
-                        # Only include parameter if we could get a value
-                        if value is not None:
-                            node_info["parameters"][knob] = {
-                                "value": value,
-                                "type": k.Class()
-                            }
-                except Exception as e:
-                    print(f"Error getting parameter {knob}: {str(e)}")
-                    pass
-            
-            return node_info
-        except Exception as e:
-            print(f"Error getting node info: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to get node info: {str(e)}")
-    
+        from nuke_mcp_bridge.inspection import node_record, observation
+        from nuke_mcp_bridge.mutations import resolve_node
+        result = node_record(resolve_node(nuke, name))
+        result['observation'] = observation(nuke, 1, result['truncated'] or bool(result['errors'] or result['omitted_knobs']))
+        return result
+
     def set_frames(self, first_frame=None, last_frame=None, current_frame=None):
         """Set frame range and current frame"""
         try:
