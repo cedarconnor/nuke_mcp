@@ -196,8 +196,7 @@ ambiguous result. See the "Field notes" section of `nuke-mcp-guidelines.md`.
 
 ## Local trusted clients
 
-Milestone 3 adds four tools (`inspect_graph`, `inspect_reads`, `validate_reads`,
-`sample_channel_statistics`) for a total of 24. Deploy the matching add-on and
+Milestones 1–5 expose 35 tools, including inspection, toolsets, lifecycle, and shot/AOV workflows. Deploy the matching add-on and
 shared package, then restart both Nuke and external MCP processes. Inspect
 structured coverage, omissions and per-file status; sampled statistics do not
 establish full-image extrema or blackness. See [inspection documentation](docs/inspection.md)
@@ -221,3 +220,12 @@ payload. Interrupted writes and old payloads may leave unreferenced files; listi
 An overwrite replaces the manifest after staging, preserving the old entry until publication.
 Loads preserve observed selection and verify relative topology and a bounded static knob subset.
 Unknown outcomes may leave an owned Group; inspect the receipt and never automatically retry.
+
+## Disposable shot workflow sessions
+
+Set `NUKE_MCP_DISPOSABLE_SESSION=1` only in a newly owned disposable Nuke GUI process;
+leave it unset for normal artist sessions. Shot application requires a clean script and explicitly
+replaces it while generating scripts. The option is off by default and is not needed for planning
+or layered Group construction. Use the matching checkout in the host and external MCP processes.
+See [workflow contracts](docs/production-workflows.md) and the
+[native qualification limits](docs/validation/milestone-5.md). No permanent startup change is required.

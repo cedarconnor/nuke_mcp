@@ -2,7 +2,7 @@
 
 Control Foundry Nuke from an MCP-compatible assistant. Inspect scripts and nodes, edit connections and parameters, organize graphs, and submit renders through a local bridge.
 
-**Milestones 1–3 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside nine capability, operation-status, batch-edit, inspection, and diagnostic tools. Native qualification limits are recorded below.
+**Milestones 1–5 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available among 35 tools covering verified edits, inspection, toolsets, script lifecycle, and manifest-driven shot/AOV workflows. Native qualification limits are recorded below.
 
 Live two-client communication has been verified on **Windows with Nuke Non-commercial 17.0v4 and external Python 3.11**. See the [validation report](docs/validation/milestone-1.md) for evidence and qualification limits.
 
@@ -63,10 +63,15 @@ See [installation details](INSTALL_OTHER_CLIENTS.md) for additional client setup
 
 ## Tools
 
-The server exposes **30 tools**. The client supplies tool arguments; MCP context is handled internally.
+The server exposes **35 tools**. The client supplies tool arguments; MCP context is handled internally.
 
 | Tool | Purpose |
 | --- | --- |
+| `import_shot_csv` | Convert CSV with explicit column mappings into a validated shot manifest. |
+| `plan_shot_setup` | Inspect and bind a shot manifest to host, source, and destination state. |
+| `apply_shot_setup` | Generate and publish shot scripts in an explicitly disposable session. |
+| `plan_layered_comp` | Preflight sources, channels, masks, and a layered/AOV manifest. |
+| `build_layered_comp` | Build a new owned Group from a matching plan digest. |
 | `list_toolsets` | List verified entries in the configured trusted library. |
 | `save_toolset` | Publish node paths and metadata with a payload digest. |
 | `load_toolset` | Paste a verified trusted payload into a newly owned Group. |
@@ -98,7 +103,7 @@ The server exposes **30 tools**. The client supplies tool arguments; MCP context
 | `cancel_operation` | Cancel queued work or request cancellation of the owning session's running render. |
 | `execute_nuke_code` | Execute Python in Nuke. This is unrestricted access for trusted local clients. |
 
-Typed node edits validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). [Inspection and diagnostics](docs/inspection.md) report coverage and sampling limits explicitly. [Toolsets and lifecycle](docs/toolsets-and-lifecycle.md) documents library setup, trusted payloads, save/open guards, and project settings. NC cannot guarantee complete graph observation. Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
+Typed node edits validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). [Inspection and diagnostics](docs/inspection.md) report coverage and sampling limits explicitly. [Toolsets and lifecycle](docs/toolsets-and-lifecycle.md) documents library setup, trusted payloads, save/open guards, and project settings. [Shot and compositing workflows](docs/production-workflows.md) explains manifests, plan digests, disposable sessions, and publication limits. NC cannot guarantee complete graph observation. Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
 
 ## Operation results and rendering
 
@@ -147,6 +152,8 @@ The legacy `render` tool retains its arguments and a bounded wait of about 30 se
 | --- | --- | --- |
 | `NUKE_MCP_PORT` | Nuke and external MCP processes | Choose a matching loopback port; default `9877`. The Nuke panel also exposes the port. |
 | `NUKE_MCP_REPO` | Supplied Nuke startup scripts | Point to the complete checkout; default `D:/nuke_mcp`. |
+| `NUKE_MCP_LIBRARY_ROOT` | Nuke process | Trusted toolset library; defaults to `%USERPROFILE%/.nuke/nuke_mcp_toolsets`. |
+| `NUKE_MCP_DISPOSABLE_SESSION` | Owned disposable Nuke process only | Set to `1` to allow shot workflows to replace a clean script; disabled by default. |
 | `NUKE_MCP_DEBUG_LOG` | Nuke process | Optional absolute path for add-on diagnostics; disabled by default. |
 
 Upgrade the external server, add-on, and shared package together, then restart Nuke and all external MCP processes. Protocol v2 has no legacy wire fallback. Roll back both sides together if needed.
@@ -154,6 +161,8 @@ Upgrade the external server, add-on, and shared package together, then restart N
 The listener is restricted to loopback. Use trusted local clients: the bridge can change scripts, render files, and execute arbitrary Python. Remote access and remote authentication are outside this release's scope.
 
 ## Verification and known limits
+
+Milestone 5 has **168 passing offline tests**, including callback script-switch protection, deterministic adjustment order, changed toolset rejection, and Windows junction containment. Offline and live two-client stdio passed with all 35 tools. Native NC 17.0v4 planning and saved-clean original restoration passed, but node lookup became unavailable after creation. **Native two-shot publication and AOV pixel/render reconstruction remain unqualified.** No shot was published and no comp preview was rendered. See the [Milestone 5 validation report](docs/validation/milestone-5.md) and retained failure receipts.
 
 Milestone 4 has **137 passing offline tests**, including Windows junction containment, and passing offline and live two-client stdio probes exposing all 30 tools. Native NC 17.0v4 verified project settings, save-as, save-current, collision refusal, and saved-clean reopening. Native toolset round-trip remains **unqualified**: `nodeCopy` returned false after writing a payload; the entry was not published and the operation was not replayed. See the [Milestone 4 validation report](docs/validation/milestone-4.md), including the boundary between native evidence and regression tests.
 
@@ -215,7 +224,7 @@ MCP client B <-> main.py process B --/
 
 For new host operations, register the handler in `NukeMCPServer.start()` and route Nuke API work through the runtime's main-thread queue. Preserve structured errors and operation identity through the MCP adapter. Keep socket-thread controls free of Nuke API calls and never add automatic mutation replay.
 
-The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
+The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining Milestone 6: scene revisions, event polling, and release qualification. These remain planned capabilities; the native qualification gaps above are still open.
 
 See [patch notes](PATCH_NOTES.md) for compatibility history. This project builds on `dughogan/nuke_mcp`.
 

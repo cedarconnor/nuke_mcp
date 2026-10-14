@@ -10,7 +10,7 @@
 
 **Spec:** [Nuke MCP reliability and workflow expansion design](../specs/2026-10-14-nuke-mcp-expansion-design.md). Read it before implementing any task.
 
-**Status:** Milestones 1–3 (Tasks 1–8) implemented; Tasks 9–15 remain pending. See `docs/validation/milestone-1.md`, `milestone-2.md`, and `milestone-3.md` for separate evidence and native qualification limits. Milestones 2–3 remain local on stacked branches. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
+**Status:** Milestones 1–5 (Tasks 1–13) implemented; Tasks 14–15 remain pending. See `docs/validation/milestone-1.md` through `milestone-5.md` for separate evidence and native qualification limits. Milestones 2–5 remain local on stacked branches. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
 
 ## Global constraints
 
@@ -38,7 +38,7 @@
 | 5 Production workflows | 11–13 | Validated manifests, shot generation, AOV Groups | No overwrite or graph clearing; fixtures reproduce intended topology |
 | 6 Events and delivery | 14–15 | Scene revisions, event polling, qualified release | Offline suite plus separately recorded native and artist checks |
 
-Milestones 1–3 results are recorded in their validation reports; later milestone verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
+Milestones 1–5 results are recorded in their validation reports; Milestone 6 verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
 
 ## File responsibilities
 
@@ -310,7 +310,7 @@ self.assertEqual(host.script_path, original_path)
 
 **Interfaces:** Produce `validate_shot_manifest(manifest) -> dict`, `import_shot_csv(path, column_map, defaults) -> dict`, `validate_comp_manifest(manifest) -> dict`, `plan_digest(plan) -> str`. Validation is pure and cannot import Nuke or write files. Use canonical JSON and SHA-256 for digests.
 
-- [ ] Write tests for exact schema version, required fields, rational FPS, negative frames, handles/cut containment, duplicate CSV headers/shot IDs, conflicting rows, unsupported keys, explicit OCIO settings, merge A/B ordering, masks, invalid numbers, and deterministic digest changes.
+- [x] Write tests for exact schema version, required fields, rational FPS, negative frames, handles/cut containment, duplicate CSV headers/shot IDs, conflicting rows, unsupported keys, explicit OCIO settings, merge A/B ordering, masks, invalid numbers, and deterministic digest changes.
 
 ```python
 normalized = validate_shot_manifest(valid_manifest)
@@ -318,10 +318,10 @@ self.assertEqual(normalized['shots'][0]['fps'], {'numerator': 24000, 'denominato
 self.assertEqual(plan_digest(normalized), plan_digest(reordered_same_json))
 ```
 
-- [ ] Run `python -m unittest tests.test_manifests -v`; confirm validation and deterministic hashing fail before implementation.
-- [ ] Implement schema v1 and explicit column maps. Return field-located errors; never invent missing shot names, plate colorspaces, or work ranges. Cap shot batches at 100. Produce examples with placeholder paths and clearly marked user-provided color settings.
-- [ ] Rerun tests; every example must parse and validate with its documented fixture substitutions. Invalid manifests cause no filesystem or host calls.
-- [ ] Commit as `feat: define shot and compositing manifests`.
+- [x] Run `python -m unittest tests.test_manifests -v`; confirm validation and deterministic hashing fail before implementation.
+- [x] Implement schema v1 and explicit column maps. Return field-located errors; never invent missing shot names, plate colorspaces, or work ranges. Cap shot batches at 100. Produce examples with placeholder paths and clearly marked user-provided color settings.
+- [x] Rerun tests; every example must parse and validate with its documented fixture substitutions. Invalid manifests cause no filesystem or host calls.
+- [x] Commit as `feat: define shot and compositing manifests`.
 
 ### Task 12 Shot planning and safe sequential publication
 
@@ -329,7 +329,7 @@ self.assertEqual(plan_digest(normalized), plan_digest(reordered_same_json))
 
 **Interfaces:** Produce `plan_shot_setup(nuke, manifest, library_root) -> dict`, `apply_shot_setup(nuke, manifest, plan_digest, library_root, operations) -> dict`. The returned plan binds the validated manifest, instance/capabilities, toolset/config identities, evaluated source path metadata, and target state. Public tools omit injected dependencies.
 
-- [ ] Write tests for dry-run immutability, dirty-session refusal, explicit fresh-script receipt under NC, changed input/library/target state, output collisions, path/junction escapes, two-shot partial failure, interrupted save, status reconciliation, final-path identity and relative Write expressions after staged publication, and original clean-script restoration.
+- [x] Write tests for dry-run immutability, dirty-session refusal, explicit fresh-script receipt under NC, changed input/library/target state, output collisions, path/junction escapes, two-shot partial failure, interrupted save, status reconciliation, final-path identity and relative Write expressions after staged publication, and original clean-script restoration.
 
 ```python
 plan = plan_shot_setup(host, manifest, library)
@@ -340,10 +340,10 @@ self.assertEqual(host.created_nodes, [])
 self.assertFalse(fixture.final_script.exists())
 ```
 
-- [ ] Run `python -m unittest tests.test_shots -v`; confirm mutation/publication guards are red.
-- [ ] Implement fresh disposable script setup, explicit Read/toolset/Write wiring, staging and verified save publication. Revalidate each shot immediately before mutation and destination publication. Reload each published script and verify final identity and script-relative output paths before marking complete. Record each script independently; no automatic rerun on unknown outcomes. Protect output roots with the containment helper from Task 9 and restore the original saved clean script on all exits where possible.
-- [ ] Rerun focused tests and manually inspect the proposed plan output for an example two-shot delivery. Add a native two-shot scenario; preserve prior successful outputs if the second fails and make the partial result explicit.
-- [ ] Commit as `feat: generate shot scripts from validated plans`.
+- [x] Run `python -m unittest tests.test_shots -v`; confirm mutation/publication guards are red.
+- [x] Implement fresh disposable script setup, explicit Read/toolset/Write wiring, staging and verified save publication. Revalidate each shot immediately before mutation and destination publication. Reload each published script and verify final identity and script-relative output paths before marking complete. Record each script independently; no automatic rerun on unknown outcomes. Protect output roots with the containment helper from Task 9 and restore the original saved clean script on all exits where possible.
+- [x] Rerun focused tests and manually inspect the proposed plan output for an example two-shot delivery. Add a native two-shot scenario; preserve prior successful outputs if the second fails and make the partial result explicit.
+- [x] Commit as `feat: generate shot scripts from validated plans`.
 
 ### Task 13 Layered and AOV compositing inside owned Groups
 
@@ -351,7 +351,7 @@ self.assertFalse(fixture.final_script.exists())
 
 **Interfaces:** Produce `plan_layered_comp(nuke, manifest) -> dict`, `build_layered_comp(nuke, manifest, plan_digest) -> dict`. Consume Task 11 schema, Task 7 channel observation, and Task 5 mutation primitives. Return Group path, source/output paths, created paths, operation receipts, and partial status where needed.
 
-- [ ] Write tests for absent channels, two identically named nested sources, node-name collisions, available Shuffle class/knob variants, explicit over/plus ordering, alpha/mask routing, interrupted creation, selection restoration, and preservation of every unrelated node.
+- [x] Write tests for absent channels, two identically named nested sources, node-name collisions, available Shuffle class/knob variants, explicit over/plus ordering, alpha/mask routing, interrupted creation, selection restoration, and preservation of every unrelated node.
 
 ```python
 result = build_layered_comp(host, manifest, approved_digest)
@@ -361,10 +361,11 @@ self.assertEqual(result['group_path'], 'MCP_AOV')
 self.assertEqual(host.render_count, 0)
 ```
 
-- [ ] Run `python -m unittest tests.test_compositing -v`; verify topology/preservation tests fail.
-- [ ] Implement preflighted Group construction with explicit input indices and requested operations only. Bind source channels and host instance in the digest; invalidate on changes. Build basic channel reconstruction first; do not silently add Cryptomatte, lighting assumptions, or screen-space effects.
-- [ ] Rerun focused and Milestone 5 tests. Native checks must compare known synthetic pass reconstruction numerically and retain an artist-viewable render before claiming an approved comp recipe.
-- [ ] Commit as `feat: build manifest-driven AOV groups`.
+- [x] Run `python -m unittest tests.test_compositing -v`; verify topology/preservation tests fail.
+- [x] Implement preflighted Group construction with explicit input indices and requested operations only. Bind source channels and host instance in the digest; invalidate on changes. Build basic channel reconstruction first; do not silently add Cryptomatte, lighting assumptions, or screen-space effects.
+- [x] Rerun focused and Milestone 5 tests (168 passed). Native fixture attempted; lookup loss stopped construction.
+- [ ] Native qualification: compare known synthetic pass reconstruction numerically and retain an artist-viewable render before claiming an approved comp recipe. This gate remains open; see the Milestone 5 report.
+- [x] Commit as `feat: build manifest-driven AOV groups`.
 
 ## Milestone 6 Events and release qualification
 

@@ -1,0 +1,24 @@
+Root {
+ first_frame 1
+ last_frame 2
+ format "4 4 0 0 4 4 1 MCP_4"
+}
+Read {
+ inputs 0
+ file "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png"
+ first 1
+ last 2
+ name MCP_Base
+}
+Write {
+ file "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/review.exr"
+ file_type exr
+ name MCP_Review
+}
+Constant {
+ inputs 0
+ color {0.05 0.1 0.15 0}
+ format "4 4 0 0 4 4 1 MCP_4"
+ name MCP_Light
+}
+

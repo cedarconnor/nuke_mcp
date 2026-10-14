@@ -8,6 +8,11 @@ coverage and omissions. `get_capabilities` reports uncertainty; NC still cannot
 establish complete graph observation. Use full Group paths and read the
 [inspection and sampling limits](docs/inspection.md) before drawing conclusions.
 
+For manifest workflows, plan first and pass the returned digest with the same manifest.
+Shot application is limited to an explicitly disposable clean session and refuses existing output
+files. Layered Groups require observed channels and explicit merge/mask choices. Unknown results
+are not permission to rebuild. See [workflow contracts](docs/production-workflows.md).
+
 When creating Nuke node graphs or compositing setups via the Nuke MCP interface, please follow these guidelines to prevent crashes:
 
 ## Critical Rules

@@ -1,0 +1,2286 @@
+{
+  "mode": "live",
+  "port": 19877,
+  "calls": [
+    {
+      "request_id": "c63162f0-8aa2-45b9-81d1-f41541c7c9b7",
+      "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [
+          {
+            "path": "MCP_AOV",
+            "name": "MCP_AOV",
+            "type": "Group",
+            "position": [
+              290,
+              -14
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "hide_input": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "group_view_position": {
+                "type": "Enumeration_Knob",
+                "value": "top-left"
+              },
+              "show_group_view": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "disable_group_view": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "lock_connections": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "mapsize": {
+                "type": "WH_Knob",
+                "value": [
+                  0.15,
+                  0.15
+                ]
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeStart",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeEnd",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "export_as_gizmo",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "window",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": false,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 0
+          },
+          {
+            "path": "MCP_Light",
+            "name": "MCP_Light",
+            "type": "Constant",
+            "position": [
+              180,
+              -33
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "color": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.0
+                ]
+              },
+              "color_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "full_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "proxy_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "last",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeStart",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeEnd",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": false,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 0
+          },
+          {
+            "path": "MCP_Review",
+            "name": "MCP_Review",
+            "type": "Write",
+            "position": [
+              70,
+              45
+            ],
+            "selected": false,
+            "inputs": [
+              {
+                "index": 0,
+                "path": "MCP_Base"
+              }
+            ],
+            "parameters": {
+              "file": {
+                "type": "File_Knob",
+                "value": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/review.exr"
+              },
+              "proxy": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "frame_mode": {
+                "type": "Enumeration_Knob",
+                "value": "expression"
+              },
+              "frame": {
+                "type": "String_Knob",
+                "value": ""
+              },
+              "file_type": {
+                "type": "Enumeration_Knob",
+                "value": "exr"
+              },
+              "write_ACES_compliant_EXR": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "autocrop": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_hash": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "datatype": {
+                "type": "Enumeration_Knob",
+                "value": "16 bit half"
+              },
+              "compression": {
+                "type": "Enumeration_Knob",
+                "value": "Zip (1 scanline)"
+              },
+              "heroview": {
+                "type": "Enumeration_Knob",
+                "value": "main"
+              },
+              "left_view": {
+                "type": "Enumeration_Knob",
+                "value": "main"
+              },
+              "right_view": {
+                "type": "Enumeration_Knob",
+                "value": "2"
+              },
+              "metadata": {
+                "type": "Enumeration_Knob",
+                "value": "default metadata"
+              },
+              "noprefix": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "interleave": {
+                "type": "Enumeration_Knob",
+                "value": "channels, layers and views"
+              },
+              "standard layer name format": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_full_layer_names": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "truncateChannelNames": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_tiles": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "premultiplied": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "raw": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "transformType": {
+                "type": "Enumeration_Knob",
+                "value": "colorspace"
+              },
+              "colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "default"
+              },
+              "create_directories": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "use_limit": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "reading": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "checkHashOnRead": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "on_error": {
+                "type": "Enumeration_Knob",
+                "value": "error"
+              },
+              "executing": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "read_all_lines": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "in_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "out_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "reverse_transform": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "ocioColorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "display": {
+                "type": "Enumeration_Knob",
+                "value": "default"
+              },
+              "view": {
+                "type": "Enumeration_Knob",
+                "value": "sRGB"
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "layer",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "views",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "dw_compression_level",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "stereo",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first_part",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_width",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_height",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "linear",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "apply through alpha",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ocioDisplay",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ocioView",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "render_order",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "Render",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "last",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "version",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "reload",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "swap",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value4",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": true,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 50
+          },
+          {
+            "path": "MCP_Base",
+            "name": "MCP_Base",
+            "type": "Read",
+            "position": [
+              70,
+              -39
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "file_type": {
+                "type": "Enumeration_Knob",
+                "value": "png"
+              },
+              "file": {
+                "type": "File_Knob",
+                "value": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png"
+              },
+              "localizationPolicy": {
+                "type": "Enumeration_Knob",
+                "value": "fromAutoLocalizePath"
+              },
+              "localizationPriority": {
+                "type": "Int_Knob",
+                "value": 0
+              },
+              "proxy": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "first": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "before": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "last": {
+                "type": "Int_Knob",
+                "value": 2
+              },
+              "after": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "frame_mode": {
+                "type": "Enumeration_Knob",
+                "value": "expression"
+              },
+              "frame": {
+                "type": "String_Knob",
+                "value": ""
+              },
+              "origfirst": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origlast": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origset": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "on_error": {
+                "type": "Enumeration_Knob",
+                "value": "error"
+              },
+              "colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "default (sRGB)"
+              },
+              "premultiplied": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "raw": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "auto_alpha": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "grayscale_to_rgb": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "sequence": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "metadatafiltermode": {
+                "type": "Enumeration_Knob",
+                "value": "keys and values"
+              },
+              "in_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "out_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "reverse_transform": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "container_codec",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateLocalization",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "cacheLocal",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "proxy_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rescan_range",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "version",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "reload",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "transfer",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "linear",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "import sequence",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "edit_num",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "shownmetadata",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "metadatafilter",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "timecode",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "edge_code",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "swap",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": true,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 15
+          }
+        ],
+        "errors": [],
+        "truncated": true,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702CBC9990>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "partial",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "18d3b756-5461-45bd-adc0-ade16aec1179",
+      "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [
+          {
+            "path": "MCP_AOV",
+            "name": "MCP_AOV",
+            "type": "Group",
+            "position": [
+              290,
+              -14
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "hide_input": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "group_view_position": {
+                "type": "Enumeration_Knob",
+                "value": "top-left"
+              },
+              "show_group_view": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "disable_group_view": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "lock_connections": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "mapsize": {
+                "type": "WH_Knob",
+                "value": [
+                  0.15,
+                  0.15
+                ]
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeStart",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeEnd",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "export_as_gizmo",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "window",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": false,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 0
+          },
+          {
+            "path": "MCP_Light",
+            "name": "MCP_Light",
+            "type": "Constant",
+            "position": [
+              180,
+              -33
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "color": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.0
+                ]
+              },
+              "color_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "full_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "proxy_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "last",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "selected",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "xpos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ypos",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "indicators",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rootNodeUpdated",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "disable",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "postage_stamp_frame",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeStart",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "lifetimeEnd",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": false,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 0
+          },
+          {
+            "path": "MCP_Review",
+            "name": "MCP_Review",
+            "type": "Write",
+            "position": [
+              70,
+              45
+            ],
+            "selected": false,
+            "inputs": [
+              {
+                "index": 0,
+                "path": "MCP_Base"
+              }
+            ],
+            "parameters": {
+              "file": {
+                "type": "File_Knob",
+                "value": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/review.exr"
+              },
+              "proxy": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "frame_mode": {
+                "type": "Enumeration_Knob",
+                "value": "expression"
+              },
+              "frame": {
+                "type": "String_Knob",
+                "value": ""
+              },
+              "file_type": {
+                "type": "Enumeration_Knob",
+                "value": "exr"
+              },
+              "write_ACES_compliant_EXR": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "autocrop": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_hash": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "datatype": {
+                "type": "Enumeration_Knob",
+                "value": "16 bit half"
+              },
+              "compression": {
+                "type": "Enumeration_Knob",
+                "value": "Zip (1 scanline)"
+              },
+              "heroview": {
+                "type": "Enumeration_Knob",
+                "value": "main"
+              },
+              "left_view": {
+                "type": "Enumeration_Knob",
+                "value": "main"
+              },
+              "right_view": {
+                "type": "Enumeration_Knob",
+                "value": "2"
+              },
+              "metadata": {
+                "type": "Enumeration_Knob",
+                "value": "default metadata"
+              },
+              "noprefix": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "interleave": {
+                "type": "Enumeration_Knob",
+                "value": "channels, layers and views"
+              },
+              "standard layer name format": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_full_layer_names": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "truncateChannelNames": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "write_tiles": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "premultiplied": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "raw": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "transformType": {
+                "type": "Enumeration_Knob",
+                "value": "colorspace"
+              },
+              "colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "default"
+              },
+              "create_directories": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "use_limit": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "reading": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "checkHashOnRead": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "on_error": {
+                "type": "Enumeration_Knob",
+                "value": "error"
+              },
+              "executing": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "read_all_lines": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "in_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "out_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "reverse_transform": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "ocioColorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "display": {
+                "type": "Enumeration_Knob",
+                "value": "default"
+              },
+              "view": {
+                "type": "Enumeration_Knob",
+                "value": "sRGB"
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "channels",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "layer",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "views",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "dw_compression_level",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "stereo",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first_part",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_width",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_height",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "linear",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "apply through alpha",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ocioDisplay",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "ocioView",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "render_order",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "Render",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "first",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "last",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "version",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "reload",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "swap",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value4",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": true,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 50
+          },
+          {
+            "path": "MCP_Base",
+            "name": "MCP_Base",
+            "type": "Read",
+            "position": [
+              70,
+              -39
+            ],
+            "selected": false,
+            "inputs": [],
+            "parameters": {
+              "file_type": {
+                "type": "Enumeration_Knob",
+                "value": "png"
+              },
+              "file": {
+                "type": "File_Knob",
+                "value": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png"
+              },
+              "localizationPolicy": {
+                "type": "Enumeration_Knob",
+                "value": "fromAutoLocalizePath"
+              },
+              "localizationPriority": {
+                "type": "Int_Knob",
+                "value": 0
+              },
+              "proxy": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "first": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "before": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "last": {
+                "type": "Int_Knob",
+                "value": 2
+              },
+              "after": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "frame_mode": {
+                "type": "Enumeration_Knob",
+                "value": "expression"
+              },
+              "frame": {
+                "type": "String_Knob",
+                "value": ""
+              },
+              "origfirst": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origlast": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origset": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "on_error": {
+                "type": "Enumeration_Knob",
+                "value": "error"
+              },
+              "colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "default (sRGB)"
+              },
+              "premultiplied": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "raw": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "auto_alpha": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "grayscale_to_rgb": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "sequence": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "metadatafiltermode": {
+                "type": "Enumeration_Knob",
+                "value": "keys and values"
+              },
+              "in_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "out_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "reverse_transform": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              }
+            },
+            "omitted_knobs": [
+              {
+                "name": "container_codec",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateLocalization",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "cacheLocal",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "proxy_format",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "rescan_range",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "version",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "reload",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "transfer",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "linear",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value1",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value2",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value3",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "key4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "value4",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "import sequence",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "edit_num",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "shownmetadata",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "metadatafilter",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "timecode",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "edge_code",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "swap",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "name",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "help",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onCreate",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "onDestroy",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "knobChanged",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "updateUI",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "autolabel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "panel",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "tile_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "gl_color",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_size",
+                "reason": "unsupported_type"
+              },
+              {
+                "name": "note_font_color",
+                "reason": "unsupported_type"
+              }
+            ],
+            "errors": [],
+            "truncated": true,
+            "inputs_omitted_by_limit": 0,
+            "knobs_omitted_by_limit": 15
+          }
+        ],
+        "errors": [],
+        "truncated": true,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702CA9AC50>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "partial",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "77375eac-4b62-4b9c-b27e-f45011237031",
+      "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702CBCA3F0>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "25c6918a-bc47-41c5-96b5-62484be607e6",
+      "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702CBCB910>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "eac6fe3d-73b7-4da0-83ba-1752a997c0d8",
+      "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702DA410B0>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "1532d9a4-1ce7-499e-b8d2-a67d23765daa",
+      "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702DA42590>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "58000384-3fc3-458c-973a-7912c33c34b1",
+      "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702DA41190>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "99ada5ed-cd6d-4ace-9de1-15264aa22441",
+      "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+        "fps": 24,
+        "format": "<Format object at 0x000001702DA42ED0>",
+        "first_frame": 1.0,
+        "last_frame": 2.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "6e314d42-ec10-495a-be1a-8a0722846529",
+      "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 155152,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics",
+          "toolsets",
+          "script_lifecycle",
+          "project_settings",
+          "shot_workflows",
+          "layered_compositing"
+        ],
+        "toolset_limits": {
+          "nodes": 1000,
+          "selected_paths": 100,
+          "payload_bytes": 16777216,
+          "trusted_code": true,
+          "verification": "observed topology and bounded static knob subset"
+        },
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "workflow_limits": {
+          "shots": 100,
+          "plates_per_shot": 32,
+          "layers": 32,
+          "evaluated_paths": 10000,
+          "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+          "native_pixel_recipe_qualified": false
+        },
+        "unsupported_tool_groups": [
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "0c78998d-d1bf-4be1-9f13-e8abb2c9b889",
+      "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 155152,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics",
+          "toolsets",
+          "script_lifecycle",
+          "project_settings",
+          "shot_workflows",
+          "layered_compositing"
+        ],
+        "toolset_limits": {
+          "nodes": 1000,
+          "selected_paths": 100,
+          "payload_bytes": 16777216,
+          "trusted_code": true,
+          "verification": "observed topology and bounded static knob subset"
+        },
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "workflow_limits": {
+          "shots": 100,
+          "plates_per_shot": 32,
+          "layers": 32,
+          "evaluated_paths": 10000,
+          "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+          "native_pixel_recipe_qualified": false
+        },
+        "unsupported_tool_groups": [
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "9542caf6-e684-4bb8-9d4f-3f2543c31bf3",
+    "client_session_id": "fd15f47a-35b4-4e74-adab-2819de36f629",
+    "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: __MCP_PROBE_ABSENT__"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "f1fb9ba8-2684-4ddd-a739-eeb21d813e93",
+    "client_session_id": "99b6aa5e-a5fa-46b8-b7c7-de9559567fde",
+    "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 155152,
+        "main_thread": true,
+        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}

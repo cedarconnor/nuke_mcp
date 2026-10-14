@@ -1,0 +1,816 @@
+{
+  "passed": false,
+  "receipts": {
+    "identity": {
+      "request_id": "0d1dafb9-ce34-40b7-8d05-4d765d243bfa",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 155152,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/workflow_fixture.nk",
+          "disposable": "1",
+          "nodes": [
+            "MCP_Light",
+            "MCP_Review",
+            "MCP_Base"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "facts": {
+      "request_id": "1cd5cfee-3035-49de-8f13-7422beef511b",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "plate": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png",
+          "plate_colorspace": "linear",
+          "write": {
+            "file_type": "exr",
+            "datatype": "16 bit half",
+            "compression": "Zip (1 scanline)",
+            "colorspace": "linear",
+            "channels": "rgb"
+          },
+          "color": {
+            "colorManagement": "Nuke"
+          }
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "fixture_color_options": {
+      "request_id": "6b973623-f3b2-416e-bcc6-1357e99de997",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "read": [
+            "default",
+            "linear",
+            "sRGB",
+            "rec709",
+            "Cineon",
+            "Gamma1.8",
+            "Gamma2.2",
+            "Gamma2.4",
+            "Gamma2.6",
+            "Panalog",
+            "REDLog",
+            "ViperLog",
+            "AlexaV3LogC",
+            "PLogLin",
+            "SLog",
+            "SLog1",
+            "SLog2",
+            "SLog3",
+            "CLog",
+            "Log3G10",
+            "Log3G12",
+            "HybridLogGamma",
+            "Protune",
+            "BT1886",
+            "st2084",
+            "Blackmagic Film Generation 5",
+            "ARRILogC4",
+            "REDSpace\t\u0007"
+          ],
+          "write": [
+            "default",
+            "linear",
+            "sRGB",
+            "rec709",
+            "Cineon",
+            "Gamma1.8",
+            "Gamma2.2",
+            "Gamma2.4",
+            "Gamma2.6",
+            "Panalog",
+            "REDLog",
+            "ViperLog",
+            "AlexaV3LogC",
+            "PLogLin",
+            "SLog",
+            "SLog1",
+            "SLog2",
+            "SLog3",
+            "CLog",
+            "Log3G10",
+            "Log3G12",
+            "HybridLogGamma",
+            "Protune",
+            "BT1886",
+            "st2084",
+            "Blackmagic Film Generation 5",
+            "ARRILogC4",
+            "REDSpace\t\u0007"
+          ]
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "save_original": {
+      "request_id": "8f15608b-b01a-445c-bb32-7930a13ea0d3",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "before": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/workflow_fixture.nk",
+          "modified": false
+        },
+        "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\original.nknc",
+        "save_current": false,
+        "after": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+          "modified": false
+        },
+        "sha256": "9c1752363e14ae33ccfd1ce4061af0652c9883bf9e4f4d57d43a7320bda42b89",
+        "bytes": 3426
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "shot_plan": {
+      "request_id": "11fa38de-095a-4b61-9733-e928a9dc04ca",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "schema_version": 1,
+        "manifest": {
+          "schema_version": 1,
+          "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host",
+          "shots": [
+            {
+              "shot_id": "shot_1",
+              "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.nknc",
+              "plates": [
+                {
+                  "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png",
+                  "colorspace": "linear",
+                  "first": 1,
+                  "last": 2
+                }
+              ],
+              "frame_range": {
+                "work_first": 1,
+                "cut_in": 1,
+                "cut_out": 2,
+                "work_last": 2
+              },
+              "fps": {
+                "numerator": 24,
+                "denominator": 1
+              },
+              "format": {
+                "width": 4,
+                "height": 4,
+                "pixel_aspect": 1.0
+              },
+              "color_settings": {
+                "colorManagement": "Nuke"
+              },
+              "write": {
+                "file_type": "exr",
+                "datatype": "16 bit half",
+                "compression": "Zip (1 scanline)",
+                "colorspace": "linear",
+                "channels": "rgb",
+                "path": "[file dirname [value root.name]]/shot_1.%04d.exr"
+              }
+            },
+            {
+              "shot_id": "shot_2",
+              "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_2.nknc",
+              "plates": [
+                {
+                  "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png",
+                  "colorspace": "linear",
+                  "first": 1,
+                  "last": 2
+                }
+              ],
+              "frame_range": {
+                "work_first": 1,
+                "cut_in": 1,
+                "cut_out": 2,
+                "work_last": 2
+              },
+              "fps": {
+                "numerator": 24,
+                "denominator": 1
+              },
+              "format": {
+                "width": 4,
+                "height": 4,
+                "pixel_aspect": 1.0
+              },
+              "color_settings": {
+                "colorManagement": "Nuke"
+              },
+              "write": {
+                "file_type": "exr",
+                "datatype": "16 bit half",
+                "compression": "Zip (1 scanline)",
+                "colorspace": "linear",
+                "channels": "rgb",
+                "path": "[file dirname [value root.name]]/shot_2.%04d.exr"
+              }
+            }
+          ]
+        },
+        "host": {
+          "instance": "b0285955-1af5-4089-9188-552e1d85be7d",
+          "version": "17.0v4",
+          "license": ".nknc",
+          "gui": true,
+          "ocio": ""
+        },
+        "original_script": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+          "modified": false
+        },
+        "library_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\library",
+        "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host",
+        "disposable": true,
+        "shots": [
+          {
+            "shot_id": "shot_1",
+            "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.nknc",
+            "sources": [
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\plate.png",
+                "exists": true,
+                "size": 75,
+                "mtime_ns": 1792011658021821200,
+                "frame": 1
+              },
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\plate.png",
+                "exists": true,
+                "size": 75,
+                "mtime_ns": 1792011658021821200,
+                "frame": 2
+              }
+            ],
+            "writes": [
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.0001.exr",
+                "exists": false,
+                "frame": 1
+              },
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.0002.exr",
+                "exists": false,
+                "frame": 2
+              }
+            ],
+            "toolset": null
+          },
+          {
+            "shot_id": "shot_2",
+            "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_2.nknc",
+            "sources": [
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\plate.png",
+                "exists": true,
+                "size": 75,
+                "mtime_ns": 1792011658021821200,
+                "frame": 1
+              },
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\plate.png",
+                "exists": true,
+                "size": 75,
+                "mtime_ns": 1792011658021821200,
+                "frame": 2
+              }
+            ],
+            "writes": [
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_2.0001.exr",
+                "exists": false,
+                "frame": 1
+              },
+              {
+                "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_2.0002.exr",
+                "exists": false,
+                "frame": 2
+              }
+            ],
+            "toolset": null
+          }
+        ],
+        "provenance": "source existence, size and mtime; plate contents are not hashed",
+        "proposed_nodes": [
+          "Read per plate",
+          "optional toolset Group",
+          "Write"
+        ],
+        "errors": [],
+        "digest": "33b2000cdea332386ca491dc574b26294cd872052cddf5c72ab52394f7cb36bc"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "shot_apply": {
+      "request_id": "86dfc916-d873-4d48-8e61-1fb558aa4725",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": false,
+      "state": "failed",
+      "outcome": "partial",
+      "data": {
+        "completed": [],
+        "current": {
+          "shot_id": "shot_1",
+          "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.nknc",
+          "published": false,
+          "created_paths": [
+            "Plate_0"
+          ],
+          "fresh_script": {
+            "before": {
+              "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+              "modified": false
+            },
+            "after": {
+              "path": "Root",
+              "modified": false
+            },
+            "graph_coverage": "unknown"
+          }
+        },
+        "restoration": {
+          "ok": true,
+          "receipt": {
+            "before": {
+              "path": "Root",
+              "modified": true
+            },
+            "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\original.nknc",
+            "discard_unsaved_changes": true,
+            "after": {
+              "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+              "modified": false
+            }
+          }
+        },
+        "request": {
+          "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+          "request_id": "86dfc916-d873-4d48-8e61-1fb558aa4725"
+        },
+        "outcome": "partial"
+      },
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: Plate_0"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "comp_plan": {
+      "request_id": "dcf43a0f-9505-435d-8a9b-e711506141cb",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "manifest": {
+          "schema_version": 1,
+          "group_name": "MCP_AOV",
+          "layers": [
+            {
+              "id": "base",
+              "source_node_path": "root.MCP_Base",
+              "channel_layer": "rgba"
+            },
+            {
+              "id": "light",
+              "source_node_path": "root.MCP_Light",
+              "channel_layer": "rgba",
+              "operation": "plus"
+            }
+          ]
+        },
+        "host": {
+          "instance": "b0285955-1af5-4089-9188-552e1d85be7d",
+          "version": "17.0v4",
+          "license": ".nknc",
+          "gui": true,
+          "ocio": ""
+        },
+        "script": {
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/original.nknc",
+          "modified": false
+        },
+        "frame": 0,
+        "group_path": "MCP_AOV",
+        "scope": "",
+        "shuffle": "Shuffle",
+        "sources": [
+          {
+            "path": "MCP_Base",
+            "class": "Read",
+            "channels": [
+              "rgba.alpha",
+              "rgba.blue",
+              "rgba.green",
+              "rgba.red"
+            ],
+            "inputs": [],
+            "parameters": {
+              "file_type": {
+                "type": "Enumeration_Knob",
+                "value": "png"
+              },
+              "file": {
+                "type": "File_Knob",
+                "value": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png"
+              },
+              "localizationPolicy": {
+                "type": "Enumeration_Knob",
+                "value": "fromAutoLocalizePath"
+              },
+              "localizationPriority": {
+                "type": "Int_Knob",
+                "value": 0
+              },
+              "proxy": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "first": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "before": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "last": {
+                "type": "Int_Knob",
+                "value": 2
+              },
+              "after": {
+                "type": "Enumeration_Knob",
+                "value": "hold"
+              },
+              "frame_mode": {
+                "type": "Enumeration_Knob",
+                "value": "expression"
+              },
+              "frame": {
+                "type": "String_Knob",
+                "value": ""
+              },
+              "origfirst": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origlast": {
+                "type": "Int_Knob",
+                "value": 1
+              },
+              "origset": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "on_error": {
+                "type": "Enumeration_Knob",
+                "value": "error"
+              },
+              "colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "default (sRGB)"
+              },
+              "premultiplied": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "raw": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "auto_alpha": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "grayscale_to_rgb": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "sequence": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "metadatafiltermode": {
+                "type": "Enumeration_Knob",
+                "value": "keys and values"
+              },
+              "in_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "out_colorspace": {
+                "type": "Enumeration_Knob",
+                "value": "scene_linear"
+              },
+              "reverse_transform": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "knob_coverage": "bounded supported subset"
+          },
+          {
+            "path": "MCP_Light",
+            "class": "Constant",
+            "channels": [
+              "rgba.alpha",
+              "rgba.blue",
+              "rgba.green",
+              "rgba.red"
+            ],
+            "inputs": [],
+            "parameters": {
+              "color": {
+                "type": "AColor_Knob",
+                "value": [
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.0
+                ]
+              },
+              "color_panelDropped": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "label": {
+                "type": "Multiline_Eval_String_Knob",
+                "value": ""
+              },
+              "icon": {
+                "type": "File_Knob",
+                "value": ""
+              },
+              "cached": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "dope_sheet": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "bookmark": {
+                "type": "Boolean_Knob",
+                "value": false
+              },
+              "postage_stamp": {
+                "type": "Boolean_Knob",
+                "value": true
+              },
+              "useLifetime": {
+                "type": "Boolean_Knob",
+                "value": false
+              }
+            },
+            "knob_coverage": "bounded supported subset"
+          }
+        ],
+        "masks": {},
+        "merge_inputs": {
+          "B": 0,
+          "A": 1,
+          "mask": 2
+        },
+        "knob_layout": "validated on owned nodes at build; discovery is advisory",
+        "errors": [],
+        "digest": "1380fd8e0eebf705bd59daef887b44b5d98caf121694c468b76bcd27f6f37d65"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "comp_build": {
+      "request_id": "8925c966-2c39-4846-ae3a-16d72a7c5675",
+      "client_session_id": "ac670112-366c-4ac8-b5b8-c022396d953b",
+      "server_instance_id": "b0285955-1af5-4089-9188-552e1d85be7d",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {
+        "group_path": null,
+        "created_paths": [
+          "MCP_AOV"
+        ],
+        "operations": [],
+        "source_paths": [],
+        "output_path": null,
+        "write_path": null,
+        "cause": {}
+      },
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_AOV"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "checks": {
+    "shot_plan": true,
+    "two_shots": false,
+    "original_restored": true,
+    "comp_plan": true,
+    "comp_build": false
+  },
+  "shot_manifest": {
+    "schema_version": 1,
+    "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host",
+    "shots": [
+      {
+        "shot_id": "shot_1",
+        "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_1.nknc",
+        "plates": [
+          {
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png",
+            "colorspace": "linear",
+            "first": 1,
+            "last": 2
+          }
+        ],
+        "frame_range": {
+          "work_first": 1,
+          "cut_in": 1,
+          "cut_out": 2,
+          "work_last": 2
+        },
+        "fps": {
+          "numerator": 24,
+          "denominator": 1
+        },
+        "format": {
+          "width": 4,
+          "height": 4,
+          "pixel_aspect": 1.0
+        },
+        "color_settings": {
+          "colorManagement": "Nuke"
+        },
+        "write": {
+          "file_type": "exr",
+          "datatype": "16 bit half",
+          "compression": "Zip (1 scanline)",
+          "colorspace": "linear",
+          "channels": "rgb",
+          "path": "[file dirname [value root.name]]/shot_1.%04d.exr"
+        }
+      },
+      {
+        "shot_id": "shot_2",
+        "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\milestone5-final-host\\shot_2.nknc",
+        "plates": [
+          {
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone5-final-host/plate.png",
+            "colorspace": "linear",
+            "first": 1,
+            "last": 2
+          }
+        ],
+        "frame_range": {
+          "work_first": 1,
+          "cut_in": 1,
+          "cut_out": 2,
+          "work_last": 2
+        },
+        "fps": {
+          "numerator": 24,
+          "denominator": 1
+        },
+        "format": {
+          "width": 4,
+          "height": 4,
+          "pixel_aspect": 1.0
+        },
+        "color_settings": {
+          "colorManagement": "Nuke"
+        },
+        "write": {
+          "file_type": "exr",
+          "datatype": "16 bit half",
+          "compression": "Zip (1 scanline)",
+          "colorspace": "linear",
+          "channels": "rgb",
+          "path": "[file dirname [value root.name]]/shot_2.%04d.exr"
+        }
+      }
+    ]
+  },
+  "comp_manifest": {
+    "schema_version": 1,
+    "group_name": "MCP_AOV",
+    "layers": [
+      {
+        "id": "base",
+        "source_node_path": "root.MCP_Base",
+        "channel_layer": "rgba"
+      },
+      {
+        "id": "light",
+        "source_node_path": "root.MCP_Light",
+        "channel_layer": "rgba",
+        "operation": "plus"
+      }
+    ]
+  }
+}

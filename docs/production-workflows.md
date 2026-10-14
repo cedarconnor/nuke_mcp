@@ -51,7 +51,8 @@ outputs when sources live in different Groups. Identical short names are never g
 source needs one existing observed Read with the exact raw file path and colorspace, allowing
 channel preflight without a hidden temporary node. Build creates its own Read inside the new Group.
 
-Each requested layer must expose red, green, blue **and alpha**. No alpha is invented. Prefer classic
+Each requested layer must expose red, green, blue **and alpha**. No alpha is invented. Adjustments
+always run **Grade then Blur**, regardless of JSON object key order. Prefer classic
 Shuffle when available, otherwise Shuffle2 with verified mapping readback; unknown knob layouts
 fail inside the owned Group with partial evidence. Grade gain maps to `white`, gamma to `gamma`,
 and Blur size is explicit. Merge input 0/B is the accumulated comp; input 1/A is the new layer;

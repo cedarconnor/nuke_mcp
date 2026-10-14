@@ -1,5 +1,20 @@
 # Compatibility patch notes
 
+## Milestone 5: manifest-driven production workflows
+
+Adds five tools for schema-v1 manifests, explicit CSV conversion, shot planning/publication,
+and layered/AOV Groups. Plans bind observed inputs to a canonical digest. Shot application requires
+an explicitly disposable clean session, refuses existing outputs, publishes staged files without
+clobbering, and restores an unchanged saved original when ownership remains provable.
+Group builds preserve unrelated nodes and use fixed Grade-then-Blur adjustment ordering.
+Callback script switches stop further writes; uncertain creation is retained without retry.
+
+All 168 offline tests and offline/live two-client stdio passed (35 tools). Native NC lookup loss
+prevented two-shot publication and full AOV construction, so pixel/render qualification remains open.
+See [Milestone 5 evidence](docs/validation/milestone-5.md) and [workflow contracts](docs/production-workflows.md).
+Earlier local additions are documented in the [Milestone 2](docs/validation/milestone-2.md),
+[Milestone 3](docs/validation/milestone-3.md), and [Milestone 4](docs/validation/milestone-4.md) reports.
+
 ## Milestone 1: protocol v2 foundation
 
 The bridge now accepts eight loopback clients, frames UTF-8 JSON explicitly,
