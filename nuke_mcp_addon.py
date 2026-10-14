@@ -31,236 +31,54 @@ _debug_log("Loaded add-on module from {0}".format(os.path.abspath(__file__)))
 
 
 class NukeMCPServer:
-    def __init__(self, host='localhost', port=DEFAULT_PORT):
-        self.host = host
-        self.port = port
+    def __init__(self, host="localhost", port=DEFAULT_PORT):
+        self.host, self.port = host, port
         self.running = False
-        self.socket = None
-        self.client = None
-        self.buffer = b''  # Buffer for incomplete data
-        
-        # Cache for valid node types
+        self.runtime = None
         self._valid_node_types = None
-    
+
     def start(self):
-        """Start the socket server"""
-        self.running = True
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        
-        try:
-            self.socket.bind((self.host, self.port))
-            self.socket.listen(1)
-            self.socket.setblocking(False)
-            
-            # Start the server loop in a separate thread
-            self.server_thread = threading.Thread(target=self._server_loop)
-            self.server_thread.daemon = True
-            self.server_thread.start()
-            
-            print(f"NukeMCP server started on {self.host}:{self.port}")
+        from nuke_mcp_bridge.operations import OperationRegistry
+        from nuke_mcp_bridge.runtime import BridgeRuntime, QtDispatcher
+        if self.running:
             return True
-        except Exception as e:
-            print(f"Failed to start server: {str(e)}")
-            self.stop()
-            return False
-            
-    def stop(self):
-        """Stop the socket server"""
-        self.running = False
-        if self.socket:
-            self.socket.close()
-        if self.client:
-            self.client.close()
-        self.socket = None
-        self.client = None
-        print("NukeMCP server stopped")
-
-    def _server_loop(self):
-        """Main server loop that runs in a separate thread"""
-        while self.running:
-            try:
-                # Accept new connections
-                if not self.client and self.socket:
-                    try:
-                        self.client, address = self.socket.accept()
-                        self.client.setblocking(False)
-                        print(f"Connected to client: {address}")
-                        _debug_log("Accepted client connection from {0}".format(address))
-                    except BlockingIOError:
-                        pass  # No connection waiting
-                    except Exception as e:
-                        print(f"Error accepting connection: {str(e)}")
-                
-                # Process existing connection
-                if self.client:
-                    try:
-                        # Try to receive data
-                        try:
-                            data = self.client.recv(8192)
-                            if data:
-                                self.buffer += data
-                                # Try to process complete messages
-                                try:
-                                    # Improved JSON check - count braces to verify completeness
-                                    buffer_str = self.buffer.decode('utf-8', errors='replace')
-                                    
-                                    # Simple check for JSON completeness
-                                    if buffer_str.count('{') == buffer_str.count('}') and buffer_str.strip().startswith('{'):
-                                        try:
-                                            # Attempt to parse the buffer as JSON
-                                            command = json.loads(buffer_str)
-                                            _debug_log(
-                                                "Parsed command: {0}".format(
-                                                    command.get("type")
-                                                )
-                                            )
-                                            # If successful, clear the buffer and process command
-                                            self.buffer = b''
-                                            response = self.execute_command(command)
-                                            response_json = json.dumps(response)
-                                            self.client.sendall(response_json.encode('utf-8'))
-                                        except json.JSONDecodeError:
-                                            # Incomplete JSON, continue receiving
-                                            pass
-                                except Exception as e:
-                                    print(f"Error processing message: {str(e)}")
-                                    # Clear buffer on error to avoid getting stuck
-                                    self.buffer = b''
-                            else:
-                                # Connection closed by client
-                                print("Client disconnected")
-                                self.client.close()
-                                self.client = None
-                                self.buffer = b''
-                        except BlockingIOError:
-                            pass  # No data available
-                        except Exception as e:
-                            print(f"Error receiving data: {str(e)}")
-                            self.client.close()
-                            self.client = None
-                            self.buffer = b''
-                            
-                    except Exception as e:
-                        print(f"Error with client: {str(e)}")
-                        if self.client:
-                            self.client.close()
-                            self.client = None
-                        self.buffer = b''
-                        
-            except Exception as e:
-                print(f"Server error: {str(e)}")
-            
-            # Sleep to prevent CPU hogging
-            time.sleep(0.1)
-
-    def execute_command(self, command):
-        """Execute a command received from the client"""
+        names = ("get_script_info", "create_node", "modify_node", "delete_node",
+                 "position_node", "connect_nodes", "render", "viewer_playback",
+                 "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer")
+        handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
+        self.runtime = BridgeRuntime(handlers, OperationRegistry(), QtDispatcher())
         try:
-            cmd_type = command.get("type")
-            params = command.get("params", {})
-            
-            # Define handlers for different command types
-            handlers = {
-                "get_script_info": self.get_script_info,
-                "create_node": self.create_node,
-                "modify_node": self.modify_node,
-                "delete_node": self.delete_node,
-                "position_node": self.position_node,
-                "connect_nodes": self.connect_nodes,
-                "render": self.render,
-                "viewer_playback": self.viewer_playback,
-                "execute_code": self.execute_code,
-                "auto_layout": self.auto_layout,
-                "get_node_info": self.get_node_info,
-                "set_frames": self.set_frames,
-                "create_viewer": self.create_viewer
-            }
-            
-            handler = handlers.get(cmd_type)
-            if handler:
-                try:
-                    print(f"Executing handler for {cmd_type}")
-                    
-                    # Track execution time for debugging
-                    start_time = time.time()
-                    
-                    # Socket requests are processed by self.server_thread. Nuke's
-                    # Python API must be called from Nuke's main/UI thread.
-                    # Capture exceptions inside the dispatched callable because
-                    # executeInMainThreadWithResult may otherwise only print them.
-                    def run_handler_on_main_thread():
-                        _debug_log(
-                            "Entered main-thread handler: {0}".format(cmd_type)
-                        )
-                        try:
-                            dispatched_result = {
-                                "ok": True,
-                                "result": handler(**params),
-                            }
-                            _debug_log(
-                                "Completed main-thread handler: {0}".format(cmd_type)
-                            )
-                            return dispatched_result
-                        except Exception as handler_error:
-                            _debug_log(
-                                "Main-thread handler failed: {0}: {1}".format(
-                                    cmd_type, handler_error
-                                )
-                            )
-                            return {
-                                "ok": False,
-                                "message": str(handler_error),
-                                "traceback": traceback.format_exc(),
-                            }
+            self.runtime.start(self.host, self.port)
+            self.running = True
+            _debug_log("Protocol v2 started: " + self.runtime.registry.instance_id)
+            return True
+        except Exception:
+            self.runtime.stop()
+            self.runtime = None
+            raise
 
-                    _debug_log(
-                        "Dispatching command to Nuke main thread: {0}".format(
-                            cmd_type
-                        )
-                    )
-                    dispatched = nuke.executeInMainThreadWithResult(
-                        run_handler_on_main_thread
-                    )
-                    _debug_log(
-                        "Main-thread dispatch returned: {0}".format(cmd_type)
-                    )
+    @staticmethod
+    def _checked_handler(handler):
+        def checked(**params):
+            from nuke_mcp_bridge.protocol import BridgeError
+            result = handler(**params)
+            if isinstance(result, dict) and (result.get("error") or
+                    result.get("executed") is False or result.get("status") == "error"):
+                raise BridgeError("host_error", str(result.get("error") or result.get("message")),
+                                  outcome="unknown", data=result)
+            # Legacy execute_code nests workflow outcomes in output.
+            output = result.get("output") if isinstance(result, dict) else None
+            if isinstance(output, dict) and (output.get("status") == "error" or output.get("error")):
+                raise BridgeError("host_error", str(output.get("error")), outcome="unknown", data=result)
+            return result
+        return checked
 
-                    if not dispatched:
-                        raise RuntimeError(
-                            "Nuke main-thread dispatch returned no result"
-                        )
+    def stop(self):
+        if self.runtime:
+            self.runtime.stop()
+            self.runtime = None
+        self.running = False
 
-                    if not dispatched.get("ok", False):
-                        error_traceback = dispatched.get("traceback", "")
-                        if error_traceback:
-                            print(error_traceback)
-                        raise RuntimeError(
-                            dispatched.get(
-                                "message",
-                                "Unknown error while executing the Nuke command",
-                            )
-                        )
-
-                    result = dispatched["result"]
-                    
-                    # Log execution time
-                    end_time = time.time()
-                    execution_time = end_time - start_time
-                    print(f"Handler execution complete in {execution_time:.2f} seconds")
-                    
-                    return {"status": "success", "result": result}
-                except Exception as e:
-                    print(f"Error in handler: {str(e)}")
-                    traceback.print_exc()
-                    return {"status": "error", "message": str(e)}
-            else:
-                return {"status": "error", "message": f"Unknown command type: {cmd_type}"}
-        except Exception as e:
-            print(f"Error executing command: {str(e)}")
-            traceback.print_exc()
-            return {"status": "error", "message": str(e)}
-    
     def _get_valid_node_types(self):
         """Return a list of valid Nuke node types to prevent crashes."""
         # Use cached list if available

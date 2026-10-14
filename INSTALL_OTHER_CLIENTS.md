@@ -1,3 +1,16 @@
+# Protocol v2 coordinated upgrade
+
+The external MCP server and Nuke add-on must come from the same v2 checkout.
+Keep `nuke_mcp_bridge/` beside `nuke_mcp_addon.py`; copying only the add-on is
+not sufficient. Set `NUKE_MCP_REPO` to the complete checkout, then restart Nuke
+and each external MCP process. The default remains loopback port 9877.
+To roll back, restore both components together. There is no legacy wire fallback.
+
+The v2 listener accepts up to eight clients and serializes Nuke API operations
+on its main-thread timer. A client disconnect does not prove cancellation.
+Keep the returned request and server instance IDs to query operation status;
+never automatically repeat a timed-out mutation.
+
 # Install this patched Nuke MCP in other clients
 
 This repository contains two cooperating components:
@@ -149,7 +162,7 @@ creates the node but returns `None` — even in graphs well under 10 nodes.
 Retry on empty or "Node not found" results, and see the "Field notes" section
 of `nuke-mcp-guidelines.md` for details and per-tool consequences.
 
-## One MCP client at a time
+## Legacy v1 client limitation (superseded by v2)
 
 The Nuke add-on accepts a single client connection. Each MCP client that
 registers this bridge keeps a long-lived `main.py` process holding that slot,
