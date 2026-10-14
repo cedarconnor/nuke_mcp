@@ -94,6 +94,24 @@ def bridge_tool(mcp):
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
     @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
+    def list_toolsets() -> ToolResult:
+        """List digest-verified entries in the host's configured trusted library."""
+        result=client().call('list_toolsets', {})
+        return to_mcp_result(result, 'Toolset library: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def save_toolset(node_paths: list[str], name: str, overwrite: bool = False) -> ToolResult:
+        """Publish selected full paths as a verified library toolset; preserve selection."""
+        result=client().call('save_toolset', dict(node_paths=node_paths,name=name,overwrite=overwrite))
+        return to_mcp_result(result, 'Save toolset: '+result['state'])
+
+    @mcp.tool(output_schema=None)
+    def load_toolset(name: str, group_name: str, position: list[int] | None = None) -> ToolResult:
+        """Execute a trusted library payload in a newly owned Group. Never retry unknown outcomes."""
+        result=client().call('load_toolset', dict(name=name,group_name=group_name,position=position))
+        return to_mcp_result(result, 'Load toolset: '+result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
     def sample_channel_statistics(node_path: str, channels: list[str], frame: int,
                                   roi: list[int] | None = None, max_samples_per_channel: int = 1024) -> ToolResult:
         """Sample up to 16 channels with a filtered grid, at most 4096 samples each.

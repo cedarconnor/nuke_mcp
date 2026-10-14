@@ -209,3 +209,16 @@ add-on together; an older bridge is incompatible and should be restarted.
 The server exposes arbitrary Python execution inside Nuke. Keep the listener on
 `localhost`, use trusted MCP clients, save your script before testing, and begin
 with disposable `.nknc` projects.
+# Toolset library
+
+Set `NUKE_MCP_LIBRARY_ROOT` in the **Nuke host process** to choose the library directory.
+The default is `%USERPROFILE%/.nuke/nuke_mcp_toolsets`. Public tools cannot override this root.
+Only use trusted libraries: Nuke payloads can execute code. SHA-256 checks detect changed bytes,
+not malicious code. Do not allow concurrent untrusted writers to the library.
+
+Each entry has an authoritative schema-v1 JSON manifest referring to an immutable `.nk` or `.nknc`
+payload. Interrupted writes and old payloads may leave unreferenced files; listing ignores them.
+An overwrite replaces the manifest after staging, preserving the old entry until publication.
+Loads preserve observed selection and verify relative topology and a bounded static knob subset.
+Unknown outcomes may leave an owned Group; inspect the receipt and never automatically retry.
+
