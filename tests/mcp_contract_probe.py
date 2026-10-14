@@ -46,10 +46,26 @@ async def probe(live=False, port=9877, slow=False):
         from tests.test_scripts import ScriptHost
         from nuke_mcp_bridge.toolsets import list_toolsets, save_toolset, load_toolset
         from nuke_mcp_bridge.scripts import open_script, save_script, set_project_settings
+        from nuke_mcp_bridge import shots,compositing,manifests
+        from tests.workflow_fakes import WorkflowHost
+        from tests.test_manifests import shot_manifest
+        from unittest.mock import patch
+        workflow_host=WorkflowHost().setup()
+        workflow_host.add('Base');workflow_host.add('Light')
         library_host=ScriptHost()
         library_host.add('Grade1')
         temp=tempfile.TemporaryDirectory()
         library=Path(temp.name)/'library'
+        workflow_manifest=shot_manifest(temp.name)
+        plate=Path(temp.name)/'plate.exr';plate.write_bytes(b'fixture')
+        workflow_manifest['shots'][0]['plates'][0]['path']=str(plate)
+        csv_path=Path(temp.name)/'shots.csv';csv_path.write_text('Shot\nsh010\n')
+        def apply_shots(**kwargs):
+            with patch.dict(os.environ,{'NUKE_MCP_DISPOSABLE_SESSION':'1'}):
+                return shots.apply_shot_setup(workflow_host,library_root=library,operations=runtime.registry,**kwargs)
+        def plan_shots(**kwargs):
+            with patch.dict(os.environ,{'NUKE_MCP_DISPOSABLE_SESSION':'1'}):
+                return shots.plan_shot_setup(workflow_host,library_root=library,**kwargs)
         fake_host.add('FixtureGrade')
         def missing(**kwargs):
             raise BridgeError("node_not_found", "Node not found")
@@ -59,6 +75,11 @@ async def probe(live=False, port=9877, slow=False):
                 yield {"frames_completed": []}
             yield {"frames_completed": [1], "status": "Rendering completed"}
         handlers = {
+            'import_shot_csv':lambda **kw:manifests.import_shot_csv(**kw),
+            'plan_shot_setup':plan_shots,
+            'apply_shot_setup':apply_shots,
+            'plan_layered_comp':lambda **kw:compositing.plan_layered_comp(workflow_host,**kw),
+            'build_layered_comp':lambda **kw:compositing.build_layered_comp(workflow_host,**kw),
             'list_toolsets':lambda:list_toolsets(library),
             'save_toolset':lambda **kw:save_toolset(library_host,library,**kw),
             'load_toolset':lambda **kw:load_toolset(library_host,library,**kw),
@@ -107,9 +128,10 @@ async def probe(live=False, port=9877, slow=False):
                     assert tools[name].inputSchema.get("required", []) == required, (name, tools[name].inputSchema)
                 for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit",
                              "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics",
-                             "list_toolsets", "save_toolset", "load_toolset", "open_script", "save_script", "set_project_settings"):
+                             "list_toolsets", "save_toolset", "load_toolset", "open_script", "save_script", "set_project_settings",
+                             "import_shot_csv","plan_shot_setup","apply_shot_setup","plan_layered_comp","build_layered_comp"):
                     assert name in tools, name
-                assert len(tools)==30
+                assert len(tools)==35
                 assert 'root' not in tools['save_toolset'].inputSchema['properties']
                 assert 'new_disposable_script' not in tools
                 sessions.append(session)
@@ -140,6 +162,26 @@ async def probe(live=False, port=9877, slow=False):
             if live:
                 assert report["read_only_python"]["data"]["output"]["main_thread"] is True
             if not live:
+                comp={'schema_version':1,'group_name':'MCP_Layers','layers':[
+                    {'id':'base','source_node_path':'root.Base','channel_layer':'rgba'},
+                    {'id':'light','source_node_path':'root.Light','channel_layer':'rgba','operation':'plus'}]}
+                report['workflows']={}
+                comp_plan=await sessions[0].call_tool('plan_layered_comp',{'manifest':comp})
+                assert not comp_plan.isError and data(comp_plan)['outcome']=='not_started',data(comp_plan)
+                built=await sessions[0].call_tool('build_layered_comp',{'manifest':comp,'plan_digest':data(comp_plan)['data']['digest']})
+                assert not built.isError,data(built)
+                report['workflows']['comp']=data(built)
+                converted=await sessions[0].call_tool('import_shot_csv',{'path':str(csv_path),'column_map':{'Shot':'shot_id'},
+                    'defaults':{'schema_version':1,'output_root':temp.name,'shot_defaults':workflow_manifest['shots'][0]}})
+                assert not converted.isError and not data(converted)['data']['errors'],data(converted)
+                shot_plan=await sessions[0].call_tool('plan_shot_setup',{'manifest':workflow_manifest})
+                assert not shot_plan.isError and data(shot_plan)['outcome']=='not_started',data(shot_plan)
+                applied_shot=await sessions[0].call_tool('apply_shot_setup',{'manifest':workflow_manifest,'plan_digest':data(shot_plan)['data']['digest']})
+                assert not applied_shot.isError,data(applied_shot)
+                report['workflows']['shot']=data(applied_shot)
+                status=await sessions[1].call_tool('get_operation_status',{'request_id':data(applied_shot)['request_id'],
+                    'server_instance_id':data(applied_shot)['server_instance_id']})
+                assert data(status)['data']==data(applied_shot)['data']
                 report['lifecycle']={}
                 for name,args in (
                     ('save_toolset',{'node_paths':['root.Grade1'],'name':'fixture'}),

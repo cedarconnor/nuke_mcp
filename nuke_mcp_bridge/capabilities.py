@@ -25,7 +25,7 @@ def probe_capabilities(nuke):
         "license_mode": license_mode,
         "graph_observation": "partial_or_unknown" if nc is True else "unknown",
         "node_class_discovery": "advisory",
-        "tool_groups": ["legacy_core", "capabilities", "operation_status", "verified_edits", "batch_edit", "inspection", "channel_statistics", "toolsets", "script_lifecycle", "project_settings"],
+        "tool_groups": ["legacy_core", "capabilities", "operation_status", "verified_edits", "batch_edit", "inspection", "channel_statistics", "toolsets", "script_lifecycle", "project_settings", "shot_workflows", "layered_compositing"],
         "toolset_limits": {"nodes":1000, "selected_paths":100, "payload_bytes":16*1024*1024,
                            "trusted_code":True, "verification":"observed topology and bounded static knob subset"},
         "diagnostic_limits": {"channels":16, "samples_per_channel":4096, "method":"cubic_filtered_grid"},
