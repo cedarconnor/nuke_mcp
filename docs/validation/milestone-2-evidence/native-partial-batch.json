@@ -1,0 +1,376 @@
+{
+  "tool_count": 20,
+  "tools": [
+    "auto_layout_nodes",
+    "batch_edit",
+    "cancel_operation",
+    "connect_nodes",
+    "create_node",
+    "create_viewer",
+    "create_workflow_template",
+    "delete_node",
+    "execute_nuke_code",
+    "get_capabilities",
+    "get_node_info",
+    "get_operation_status",
+    "get_script_info",
+    "modify_node",
+    "organize_node_graph",
+    "position_node",
+    "render",
+    "set_frames",
+    "start_render",
+    "viewer_playback"
+  ],
+  "get_script_info": "Script: C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk\nFrame Range: 1.0 - 3.0 @ 24 fps\nFormat: <Format object at 0x000002432C40ADF0>\n\nTotal Nodes: 0\nNode Types:\n",
+  "receipt": {
+    "request_id": "dbf5e607-7425-4443-ba89-41b0ad653eb9",
+    "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+      "fps": 24,
+      "format": "<Format object at 0x000002432C40ADF0>",
+      "first_frame": 1.0,
+      "last_frame": 3.0,
+      "nodes": []
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_script_info",
+    "tool": "get_script_info"
+  },
+  "capabilities": {
+    "request_id": "c2860c8c-89a1-4f32-8fb2-efc94d49abc4",
+    "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 146716,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit"
+      ],
+      "unsupported_tool_groups": [
+        "shot_manifests",
+        "scene_events",
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  "mutation": {
+    "name": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+    "passed": false,
+    "cleanup": "verified_deleted",
+    "create": {
+      "request_id": "79999411-0708-425c-87b4-014ef676b127",
+      "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "name": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+        "path": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+        "type": "Grade",
+        "position": [
+          0,
+          0
+        ],
+        "parameters": {
+          "label": "Temporary MCP smoke test"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "create_node",
+      "tool": "create_node"
+    },
+    "inspect": {
+      "request_id": "61cee8d0-4a4f-4ef8-aa7d-4ada184afdb6",
+      "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+        "type": "Grade",
+        "position": [
+          0,
+          0
+        ],
+        "selected": false,
+        "inputs": [],
+        "parameters": {
+          "reverse": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "black_clamp": {
+            "value": true,
+            "type": "Boolean_Knob"
+          },
+          "white_clamp": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "inject": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "invert_mask": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "fringe": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "maskFromFlag": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "process_mask": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "invert_unpremult": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "enable_mix_luminance": {
+            "value": true,
+            "type": "Boolean_Knob"
+          },
+          "name": {
+            "value": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+            "type": "String_Knob"
+          },
+          "selected": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "hide_input": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "cached": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "dope_sheet": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "bookmark": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "postage_stamp": {
+            "value": false,
+            "type": "Boolean_Knob"
+          },
+          "useLifetime": {
+            "value": false,
+            "type": "Boolean_Knob"
+          }
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_node_info",
+      "tool": "get_node_info"
+    },
+    "batch_dry_run": {
+      "request_id": "eed47994-176c-4cdd-a540-82387f3ee46c",
+      "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "dry_run": true,
+        "outcome": "not_started",
+        "items": [
+          {
+            "index": 0,
+            "operation": {
+              "op": "set_knob",
+              "node_path": "root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "knob": "label",
+              "value": "Verified batch smoke"
+            },
+            "state": "validated",
+            "outcome": "not_started",
+            "before": "Temporary MCP smoke test"
+          },
+          {
+            "index": 1,
+            "operation": {
+              "op": "position",
+              "node_path": "root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "x": 120,
+              "y": 80
+            },
+            "state": "validated",
+            "outcome": "not_started",
+            "before": [
+              0,
+              0
+            ]
+          }
+        ],
+        "atomic": false
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "batch_apply": {
+      "request_id": "df99b41c-34a4-4b38-bce6-fc93614d0424",
+      "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": false,
+      "state": "failed",
+      "outcome": "partial",
+      "data": {
+        "dry_run": false,
+        "outcome": "partial",
+        "items": [
+          {
+            "index": 0,
+            "operation": {
+              "op": "set_knob",
+              "node_path": "root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "knob": "label",
+              "value": "Verified batch smoke"
+            },
+            "state": "completed",
+            "outcome": "applied",
+            "before": "Temporary MCP smoke test",
+            "data": {
+              "path": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "name": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "before": "Temporary MCP smoke test",
+              "knob": "label",
+              "value": "Verified batch smoke"
+            }
+          },
+          {
+            "index": 1,
+            "operation": {
+              "op": "position",
+              "node_path": "root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "x": 120,
+              "y": 80
+            },
+            "state": "failed",
+            "outcome": "unknown",
+            "before": [
+              0,
+              0
+            ],
+            "error": {
+              "code": "state_uncertain",
+              "message": "Edit readback did not match requested state"
+            },
+            "data": {
+              "path": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "name": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+              "before": [
+                0,
+                0
+              ],
+              "position": [
+                120,
+                80
+              ]
+            }
+          }
+        ],
+        "atomic": false
+      },
+      "error": {
+        "code": "batch_failed",
+        "message": "Stopped at item 1; earlier applied edits remain"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "error": "HOST_OPERATION_FAILED: {\"request_id\": \"df99b41c-34a4-4b38-bce6-fc93614d0424\", \"client_session_id\": \"b8b6ace2-d634-453d-a957-de491f0c8238\", \"server_instance_id\": \"c7ed6c29-19af-4aa2-b312-adeed48a6b66\", \"ok\": false, \"state\": \"failed\", \"outcome\": \"partial\", \"data\": {\"dry_run\": false, \"outcome\": \"partial\", \"items\": [{\"index\": 0, \"operation\": {\"op\": \"set_knob\", \"node_path\": \"root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"knob\": \"label\", \"value\": \"Verified batch smoke\"}, \"state\": \"completed\", \"outcome\": \"applied\", \"before\": \"Temporary MCP smoke test\", \"data\": {\"path\": \"MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"name\": \"MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"before\": \"Temporary MCP smoke test\", \"knob\": \"label\", \"value\": \"Verified batch smoke\"}}, {\"index\": 1, \"operation\": {\"op\": \"position\", \"node_path\": \"root.MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"x\": 120, \"y\": 80}, \"state\": \"failed\", \"outcome\": \"unknown\", \"before\": [0, 0], \"error\": {\"code\": \"state_uncertain\", \"message\": \"Edit readback did not match requested state\"}, \"data\": {\"path\": \"MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"name\": \"MCP_SMOKE_df759b0cafef4eef807bfe01e3540118\", \"before\": [0, 0], \"position\": [120, 80]}}], \"atomic\": false}, \"error\": {\"code\": \"batch_failed\", \"message\": \"Stopped at item 1; earlier applied edits remain\"}, \"warnings\": [], \"observation\": {\"coverage\": \"unknown\", \"reason\": \"not_inspected\"}, \"revision\": null}",
+    "delete": {
+      "request_id": "ce34b6c8-a44b-42ec-81f3-9c4059ae4399",
+      "client_session_id": "b8b6ace2-d634-453d-a957-de491f0c8238",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "deleted": "MCP_SMOKE_df759b0cafef4eef807bfe01e3540118",
+        "type": "Grade"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "delete_node",
+      "tool": "delete_node"
+    }
+  }
+}

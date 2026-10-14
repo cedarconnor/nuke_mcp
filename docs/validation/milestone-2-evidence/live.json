@@ -1,0 +1,424 @@
+{
+  "mode": "live",
+  "port": 9877,
+  "calls": [
+    {
+      "request_id": "077753d0-67e3-4743-a508-3364f2d441c9",
+      "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A110>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "5fcb60b3-add1-4538-b63e-44b9aa59a6ef",
+      "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A8D0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "1e1e2c08-20a0-48ed-adaa-5a4a818397bd",
+      "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40B0F0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "dd9ff3cd-4fb2-4765-bf93-b52cba3914cf",
+      "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A990>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "2a275d7d-f139-4c13-90b4-b4eaaba892cf",
+      "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A7B0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "26ccc92d-e6ad-4ab8-9eef-9c318b168408",
+      "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40BBB0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "e311864c-f1e9-43c1-9c45-faa8d00c4c7d",
+      "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A1D0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "3faeb7a5-8e51-4620-89ff-e330df7dc682",
+      "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002432C40A4B0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "nodes": [
+          {
+            "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+            "type": "Blur",
+            "position": [
+              180,
+              -15
+            ],
+            "selected": false
+          }
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "490e4f80-7343-44a1-ac62-da0ec538675f",
+      "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 146716,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit"
+        ],
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "39922fea-4fec-4f89-9b6f-164f78e2dcfe",
+      "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 146716,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit"
+        ],
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "ed01d709-7b57-4a69-b353-e43cf7960be5",
+    "client_session_id": "6b687893-2505-4f9e-8a91-e439025ab316",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": false,
+    "state": "failed",
+    "outcome": "unknown",
+    "data": {},
+    "error": {
+      "code": "host_error",
+      "message": "Failed to get node info: Node not found: __MCP_PROBE_ABSENT__"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "79fa0bf4-7125-41a1-a78b-e375acef1d8b",
+    "client_session_id": "69715ad5-fa46-44f9-914d-d698d48849c2",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 146716,
+        "main_thread": true,
+        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}

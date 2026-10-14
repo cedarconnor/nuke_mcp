@@ -8,9 +8,13 @@ Returned `path` is the actual identity to use in subsequent calls.
 
 Static setters support ordinary numeric, boolean, string/file, and enumeration
 knobs. Provide every component of an array (for example `[1,1,1,1]` for a
-four-component gain knob); enum values use labels. Animated/expression knobs,
+four-component color knob); enum values use labels. Animated/expression knobs,
 callback/executable knobs, non-finite numbers, and unsupported types are refused.
 Requested parameters are no longer silently rewritten by workflow auto-fixes.
+Array snapshots use indexed readback, including when equal components collapse
+to a scalar in the host's default read API. Array writes revalidate the target
+and static state before each component. Creation verifies requested values,
+position, and connections after selection restoration and dependent callbacks.
 
 ## batch_edit
 
@@ -58,3 +62,5 @@ API references: Foundry's [Node API](https://learn.foundry.com/nuke/developers/l
 [Knob API](https://learn.foundry.com/nuke/developers/latest/pythondevguide/_autosummary/nuke.Knob.html),
 and [node creation guide](https://learn.foundry.com/nuke/developers/140/pythonreference/basics.html).
 Native version qualification is reported separately from fake-host tests.
+See the [Milestone 2 validation report](validation/milestone-2.md) for the
+current NC limitations and failed mutation receipts.

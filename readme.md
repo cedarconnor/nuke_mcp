@@ -145,7 +145,9 @@ The listener is restricted to loopback. Use trusted local clients: the bridge ca
 
 ## Verification and known limits
 
-Milestone 1 has **45 passing offline tests** and recorded live verification with two independent stdio MCP processes connected to one Nuke NC 17.0v4 session. The live check completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error.
+Milestone 2 has **80 passing offline tests** and passing offline and live two-client stdio probes. The live check used Nuke NC 17.0v4, completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error. See the [Milestone 2 validation report](docs/validation/milestone-2.md).
+
+Native mutation qualification is incomplete. One disposable test verified creation, batch dry-run, a label edit, and deletion, but reported the position edit as unknown. The final mutation smoke test returned partial creation because NC lookup became unavailable; it preserved cleanup evidence and did not retry. These results are not a full native edit pass.
 
 Commercial Nuke, NukeX/Studio, other platforms and versions, native rendered image correctness, and artist acceptance remain unqualified. The offline long-render test validates operation behavior against a fake host; it is not a native render-quality test.
 
@@ -164,6 +166,10 @@ With Nuke and the panel server running, run the read-only live checks:
 .\.venv\Scripts\python.exe tests/smoke_mcp.py
 .\.venv\Scripts\python.exe tests/mcp_contract_probe.py --live --output live-two-client.json
 ```
+
+In a disposable script only, `python tests/smoke_mcp.py --mutate` also checks
+creation, batch dry-run/apply, and owned deletion. A failed or uncertain check
+exits nonzero and preserves its receipt; uncertain creation is not retried.
 
 ## Troubleshooting
 

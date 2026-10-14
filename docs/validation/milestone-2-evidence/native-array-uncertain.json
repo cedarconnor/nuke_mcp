@@ -1,0 +1,24 @@
+{
+  "request_id": "6a5c8959-fb88-4449-b3eb-a2567cedd6c3",
+  "client_session_id": "5a73fc36-9893-496d-9cd0-d76abcaabfbc",
+  "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+  "ok": false,
+  "state": "failed",
+  "outcome": "unknown",
+  "data": {
+    "executed": true,
+    "output": {
+      "error": "No owned handle; do not retry"
+    }
+  },
+  "error": {
+    "code": "host_error",
+    "message": "No owned handle; do not retry"
+  },
+  "warnings": [],
+  "observation": {
+    "coverage": "unknown",
+    "reason": "not_inspected"
+  },
+  "revision": null
+}

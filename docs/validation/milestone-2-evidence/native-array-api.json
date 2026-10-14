@@ -1,0 +1,55 @@
+{
+  "request_id": "4a14746c-03f6-4222-81a7-a2e5c45955b9",
+  "client_session_id": "76852e60-98f4-4887-a938-0647956e7a3b",
+  "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+  "ok": true,
+  "state": "completed",
+  "outcome": "applied",
+  "data": {
+    "executed": true,
+    "output": {
+      "path": "MCP_ARRAY_910f3410d7144dc19bcc6a3737224a04",
+      "array_api": {
+        "kind": "WH_Knob",
+        "size": 2,
+        "unindexed": 0.0,
+        "indexed": [
+          0.0,
+          0.0
+        ]
+      },
+      "array_error": {
+        "code": "invalid_value",
+        "outcome": "not_started",
+        "message": "Integer knob requires integers",
+        "data": {}
+      },
+      "position_edit": {
+        "path": "MCP_ARRAY_910f3410d7144dc19bcc6a3737224a04",
+        "name": "MCP_ARRAY_910f3410d7144dc19bcc6a3737224a04",
+        "before": [
+          70,
+          -9
+        ],
+        "position": [
+          210,
+          130
+        ]
+      },
+      "identity": {
+        "missing": false,
+        "equal": true,
+        "identical": true,
+        "path": "MCP_ARRAY_910f3410d7144dc19bcc6a3737224a04"
+      },
+      "cleanup": "verified_deleted"
+    }
+  },
+  "error": null,
+  "warnings": [],
+  "observation": {
+    "coverage": "unknown",
+    "reason": "not_inspected"
+  },
+  "revision": null
+}

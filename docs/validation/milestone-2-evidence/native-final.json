@@ -1,0 +1,135 @@
+{
+  "tool_count": 20,
+  "tools": [
+    "auto_layout_nodes",
+    "batch_edit",
+    "cancel_operation",
+    "connect_nodes",
+    "create_node",
+    "create_viewer",
+    "create_workflow_template",
+    "delete_node",
+    "execute_nuke_code",
+    "get_capabilities",
+    "get_node_info",
+    "get_operation_status",
+    "get_script_info",
+    "modify_node",
+    "organize_node_graph",
+    "position_node",
+    "render",
+    "set_frames",
+    "start_render",
+    "viewer_playback"
+  ],
+  "get_script_info": "Script: C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk\nFrame Range: 1.0 - 3.0 @ 24 fps\nFormat: <Format object at 0x000002432C40B5D0>\n\nTotal Nodes: 1\nNode Types:\n  - Blur: 1\n",
+  "receipt": {
+    "request_id": "794c1269-f9f1-4214-af0e-1d4574ecd51e",
+    "client_session_id": "8b09b14f-99e8-43f2-ada5-35b47d659b94",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/milestone2-host/empty-fixture.nk",
+      "fps": 24,
+      "format": "<Format object at 0x000002432C40B5D0>",
+      "first_frame": 1.0,
+      "last_frame": 3.0,
+      "nodes": [
+        {
+          "name": "MCP_WH_8560cff70a8b4d5995e068f8c97d59da",
+          "type": "Blur",
+          "position": [
+            180,
+            -15
+          ],
+          "selected": false
+        }
+      ]
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_script_info",
+    "tool": "get_script_info"
+  },
+  "capabilities": {
+    "request_id": "0e8d600f-a72c-46ee-a0d6-f372aa751f57",
+    "client_session_id": "8b09b14f-99e8-43f2-ada5-35b47d659b94",
+    "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 146716,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit"
+      ],
+      "unsupported_tool_groups": [
+        "shot_manifests",
+        "scene_events",
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  "mutation": {
+    "name": "MCP_SMOKE_890fc01e347041929287d71f8fd342f5",
+    "passed": false,
+    "cleanup": "not_attempted_unverified_creation",
+    "create": {
+      "request_id": "9dfca1f5-2606-4ec1-ac9f-706a03f8145b",
+      "client_session_id": "8b09b14f-99e8-43f2-ada5-35b47d659b94",
+      "server_instance_id": "c7ed6c29-19af-4aa2-b312-adeed48a6b66",
+      "ok": false,
+      "state": "failed",
+      "outcome": "partial",
+      "data": {
+        "created_path": "MCP_SMOKE_890fc01e347041929287d71f8fd342f5",
+        "cleanup_error": "Owned handle not observable"
+      },
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_SMOKE_890fc01e347041929287d71f8fd342f5"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "create_node",
+      "tool": "create_node"
+    },
+    "error": "HOST_OPERATION_FAILED: {\"request_id\": \"9dfca1f5-2606-4ec1-ac9f-706a03f8145b\", \"client_session_id\": \"8b09b14f-99e8-43f2-ada5-35b47d659b94\", \"server_instance_id\": \"c7ed6c29-19af-4aa2-b312-adeed48a6b66\", \"ok\": false, \"state\": \"failed\", \"outcome\": \"partial\", \"data\": {\"created_path\": \"MCP_SMOKE_890fc01e347041929287d71f8fd342f5\", \"cleanup_error\": \"Owned handle not observable\"}, \"error\": {\"code\": \"state_uncertain\", \"message\": \"Node lookup unavailable; absence is not established: MCP_SMOKE_890fc01e347041929287d71f8fd342f5\"}, \"warnings\": [], \"observation\": {\"coverage\": \"unknown\", \"reason\": \"not_inspected\"}, \"revision\": null, \"command\": \"create_node\", \"tool\": \"create_node\"}"
+  }
+}

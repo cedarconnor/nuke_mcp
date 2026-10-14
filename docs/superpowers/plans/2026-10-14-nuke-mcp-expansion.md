@@ -179,7 +179,7 @@ self.assertTrue(reply.isError)
 
 **Interfaces:** Produce `resolve_node(nuke, node_path)`, `create_node(nuke, node_type, name=None, position=None, inputs=None, parameters=None) -> dict`, `set_knob(nuke, node_path, knob, value) -> dict`, `connect_input(nuke, node_path, input_index, source_path) -> dict`, `position_node(nuke, node_path, x, y) -> dict`, `delete_node(nuke, node_path) -> dict`. Outcomes travel through `BridgeError` and the registry. Each routine validates, changes, reads back, and returns actual identity/value.
 
-- [ ] Write tests for handle-less creation, partial creation, NC empty enumeration, duplicate short names, unavailable classes, pre-existing selection auto-connections, array knobs, NaN/Inf, executable knobs, animated/expression targets, failed readback, and failed recovery.
+- [x] Write tests for handle-less creation, partial creation, NC empty enumeration, duplicate short names, unavailable classes, pre-existing selection auto-connections, array knobs, NaN/Inf, executable knobs, animated/expression targets, failed readback, and failed recovery.
 
 ```python
 host.create_returns_none_after_mutation = True
@@ -190,10 +190,10 @@ self.assertEqual(host.create_count, 1)
 self.assertEqual(host.unrelated_delete_count, 0)
 ```
 
-- [ ] Run `python -m unittest tests.test_mutations -v`; ensure the NC scenario fails before implementing recovery policy.
-- [ ] Implement exact lookup and explicit connection wiring, restoring selection after creation. Resolve requested classes at execution rather than rejecting every class absent from the old allowlist. Use uniquely attributable recovery only; never blanket-delete a before/after difference from unreliable enumeration. Reject static writes to dynamic knobs. Preserve meaningful NC restrictions.
-- [ ] Rerun tests; prove original graph state is unchanged on validation failure and report partial/unknown where rollback cannot be verified. Add a disposable native single-Grade scenario to `tests/smoke_mcp.py` with cleanup uncertainty reported rather than hidden.
-- [ ] Commit as `feat: verify Nuke edits and report uncertain mutations`.
+- [x] Run `python -m unittest tests.test_mutations -v`; ensure the NC scenario fails before implementing recovery policy.
+- [x] Implement exact lookup and explicit connection wiring, restoring selection after creation. Resolve requested classes at execution rather than rejecting every class absent from the old allowlist. Use uniquely attributable recovery only; never blanket-delete a before/after difference from unreliable enumeration. Reject static writes to dynamic knobs. Preserve meaningful NC restrictions.
+- [x] Rerun tests; prove original graph state is unchanged on validation failure and report partial/unknown where rollback cannot be verified. Add a disposable native single-Grade scenario to `tests/smoke_mcp.py` with cleanup uncertainty reported rather than hidden.
+- [x] Commit as `feat: verify Nuke edits and report uncertain mutations`.
 
 ### Task 6 Bulk edits and migration of compound legacy operations
 
@@ -201,7 +201,7 @@ self.assertEqual(host.unrelated_delete_count, 0)
 
 **Interfaces:** Produce `validate_batch(nuke, operations) -> dict`, `execute_batch(nuke, operations, dry_run=True, expected_revision=None, revision_provider=None) -> dict`. Public `batch_edit(operations, dry_run=True, expected_revision=None)` supports at most 100 set-knob/connect/position operations. Revision guarantees remain unavailable until Task 14 installs a trustworthy provider.
 
-- [ ] Write tests for dry-run immutability, full preflight before any writes, one undo group, stop-on-first-runtime-failure, exact per-item results, duplicate/conflicting operations, and preservation of successful prior operations without false atomicity.
+- [x] Write tests for dry-run immutability, full preflight before any writes, one undo group, stop-on-first-runtime-failure, exact per-item results, duplicate/conflicting operations, and preservation of successful prior operations without false atomicity.
 
 ```python
 result = execute_batch(host, three_edits, dry_run=False)
@@ -210,10 +210,10 @@ self.assertEqual([r['outcome'] for r in result['items']],
 self.assertEqual(host.global_undo_count, 0)
 ```
 
-- [ ] Run `python -m unittest tests.test_batch -v`; verify new cases fail.
-- [ ] Implement the shared executor using Task 5 primitives and revalidation at apply. Route legacy `modify_node` through it; make template/layout/organization wrappers return explicit partial outcomes until they can use owned mutation primitives. Do not let these escape through unreported arbitrary-code success.
-- [ ] Rerun focused and Milestone 2 tests, including an injected artist change before apply; expected revisions must fail explicitly while no provider is available.
-- [ ] Commit as `feat: add preflighted batch edits with per-node outcomes`.
+- [x] Run `python -m unittest tests.test_batch -v`; verify new cases fail.
+- [x] Implement the shared executor using Task 5 primitives and revalidation at apply. Route legacy `modify_node` through it; make template/layout/organization wrappers return explicit partial outcomes until they can use owned mutation primitives. Do not let these escape through unreported arbitrary-code success.
+- [x] Rerun focused and Milestone 2 tests, including an injected artist change before apply; expected revisions must fail explicitly while no provider is available.
+- [x] Commit as `feat: add preflighted batch edits with per-node outcomes`.
 
 ## Milestone 3 Inspection and diagnostics
 
