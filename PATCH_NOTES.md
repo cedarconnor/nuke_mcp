@@ -110,3 +110,13 @@ Batch edits default to dry-run, validate all items first, use one undo group, an
 retain applied items on failure. Legacy modify uses the same executor. Template,
 layout, and organization tools explicitly report unverified outcomes. Expected
 scene revisions are unavailable until a trustworthy provider is installed.
+
+## Milestone 3 inspection and diagnostics
+
+Added bounded nested graph/Read inspection, sequence-path existence checks, and
+filtered channel statistics. Legacy inspection now summarizes the same full-path
+observations and discloses incomplete coverage. Read checks distinguish missing
+files from unknown evaluation, including unqualified timing remapping. Statistics
+resolve channels and ROI at the requested frame, preserve partial progress, and
+restore the original frame even if summary calculation fails. The server now has
+24 tools; native Read and pixel qualification remain limited by NC lookup failures.

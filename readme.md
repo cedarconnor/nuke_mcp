@@ -2,7 +2,7 @@
 
 Control Foundry Nuke from an MCP-compatible assistant. Inspect scripts and nodes, edit connections and parameters, organize graphs, and submit renders through a local bridge.
 
-**Milestones 1 and 2 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside five capability, operation-status, and batch-edit tools.
+**Milestones 1–3 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside nine capability, operation-status, batch-edit, inspection, and diagnostic tools. Native qualification limits are recorded below.
 
 Live two-client communication has been verified on **Windows with Nuke Non-commercial 17.0v4 and external Python 3.11**. See the [validation report](docs/validation/milestone-1.md) for evidence and qualification limits.
 
@@ -63,7 +63,7 @@ See [installation details](INSTALL_OTHER_CLIENTS.md) for additional client setup
 
 ## Tools
 
-The server exposes **20 tools**. The client supplies tool arguments; MCP context is handled internally.
+The server exposes **24 tools**. The client supplies tool arguments; MCP context is handled internally.
 
 | Tool | Purpose |
 | --- | --- |
@@ -71,6 +71,10 @@ The server exposes **20 tools**. The client supplies tool arguments; MCP context
 | `get_capabilities` | Report host version, flavor, observable license mode, and supported tool groups. |
 | `get_script_info` | Inspect current script settings and observable nodes. |
 | `get_node_info` | Inspect a node by `node_name`. |
+| `inspect_graph` | Inspect bounded nested graph paths, indexed connections, knob values and omissions. |
+| `inspect_reads` | Inspect Read paths, format, colorspace, channels/layers and multipart choices. |
+| `validate_reads` | Check up to 10000 frame/view paths, separating missing files from unknown evaluation. |
+| `sample_channel_statistics` | Measure a filtered grid on up to 16 channels, with finite statistics and frame restoration. |
 | `create_node` | Create a `node_type`, with optional name, position, inputs, and parameters. |
 | `modify_node` | Update a named node's parameters, position, or inputs. |
 | `delete_node` | Delete a named node. |
@@ -88,7 +92,7 @@ The server exposes **20 tools**. The client supplies tool arguments; MCP context
 | `cancel_operation` | Cancel queued work or request cancellation of the owning session's running render. |
 | `execute_nuke_code` | Execute Python in Nuke. This is unrestricted access for trusted local clients. |
 
-Typed node edits now validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Complete graph observation remains planned. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
+Typed node edits validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). [Inspection and diagnostics](docs/inspection.md) report coverage and sampling limits explicitly. NC cannot guarantee complete graph observation. Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
 
 ## Operation results and rendering
 
@@ -145,7 +149,9 @@ The listener is restricted to loopback. Use trusted local clients: the bridge ca
 
 ## Verification and known limits
 
-Milestone 2 has **80 passing offline tests** and passing offline and live two-client stdio probes. The live check used Nuke NC 17.0v4, completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error. See the [Milestone 2 validation report](docs/validation/milestone-2.md).
+Milestone 3 has **107 passing offline tests** and passing offline and live two-client stdio probes. The live check used Nuke NC 17.0v4, completed eight paired script reads, verified distinct request IDs and a shared host instance, confirmed main-thread execution, and checked an expected missing-node MCP error. See the [Milestone 3 validation report](docs/validation/milestone-3.md).
+
+Native inspection initially observed the expected nested paths and truncation. Later NC lookup failures prevented full Read/sequence and known-signal pixel-statistics qualification. These checks remain unqualified; passing transport checks do not establish complete native inspection. Retimed Read paths currently return unknown rather than guessing their timeline mapping.
 
 Native mutation qualification is incomplete. One disposable test verified creation, batch dry-run, a label edit, and deletion, but reported the position edit as unknown. The final mutation smoke test returned partial creation because NC lookup became unavailable; it preserved cleanup evidence and did not retry. These results are not a full native edit pass.
 
@@ -201,7 +207,7 @@ MCP client B <-> main.py process B --/
 
 For new host operations, register the handler in `NukeMCPServer.start()` and route Nuke API work through the runtime's main-thread queue. Preserve structured errors and operation identity through the MCP adapter. Keep socket-thread controls free of Nuke API calls and never add automatic mutation replay.
 
-The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: deeper inspection, reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
+The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
 
 See [patch notes](PATCH_NOTES.md) for compatibility history. This project builds on `dughogan/nuke_mcp`.
 

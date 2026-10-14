@@ -1,0 +1,216 @@
+{
+  "passed": false,
+  "checks": {
+    "nested_paths": false,
+    "nc_coverage_label": true,
+    "truncation": false,
+    "read_identity": false,
+    "missing_sequence": false,
+    "constant_signal": false,
+    "ramp_signal": false,
+    "sample_limits_disclosed": false,
+    "state_preserved": true
+  },
+  "receipts": {
+    "before": {
+      "request_id": "a1b59a5f-3ffe-4ade-8c26-463256a0fb60",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 152572,
+          "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+          "frame": 0,
+          "proxy": false,
+          "selection": []
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "graph": {
+      "request_id": "3c048287-e1ed-44df-88fb-6f95c5951b6a",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null
+    },
+    "bounded": {
+      "request_id": "8b6aa8a3-ac96-4c25-b34c-693d0e6fbe36",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null
+    },
+    "reads": {
+      "request_id": "a22384ec-45bd-4893-930f-0394960384ad",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "sequence": {
+      "request_id": "9284aa3f-028c-47d8-afe1-6070ec89a829",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "constant": {
+      "request_id": "462dff20-7f91-41cf-8af1-6df8889cb2b4",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_Constant"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "ramp": {
+      "request_id": "8b6ed774-5a2a-466b-b574-56c12ffc378c",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_Ramp"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "after": {
+      "request_id": "cfa2dc1f-2c1b-42d0-b507-e648a7085fc8",
+      "client_session_id": "89aa03b8-48f9-4276-8ac2-14d5090b3733",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 152572,
+          "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+          "frame": 0,
+          "proxy": false,
+          "selection": []
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "errors": {
+    "reads": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+    },
+    "sequence": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+    },
+    "constant": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: MCP_Constant"
+    },
+    "ramp": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: MCP_Ramp"
+    }
+  }
+}

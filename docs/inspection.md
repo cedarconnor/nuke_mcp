@@ -22,6 +22,9 @@ tokens are then expanded. All project views are checked, with a 64-view ceiling.
 Only the full-resolution `file` knob is inspected; proxy settings are unchanged.
 Unresolved expressions, unknown relative-path bases and I/O errors are `unknown`,
 distinct from `missing`. Missing files are evidence, not a failed transport call.
+Nontrivial Read timing (offset/start-at/frame expressions) and requests outside
+Read ranges with before/after handling are also unknown until native mapping is
+qualified. Identity timing is supported; this is not a retimed-dependency audit.
 This tool does not relink, render, change frame or change selection.
 
 Read `observation.coverage`, errors and `truncated` before drawing conclusions.
@@ -57,3 +60,9 @@ with expected RGBA means `[0.25,0.5,0.75,1]`, an Expression ramp with expected
 red mean `0.5`, two nested Constants with the same short name, and an explicitly
 missing Read sequence. Use a 2x2 grid and tolerance `1e-6` for known signals;
 record actual native results separately rather than substituting offline tests.
+
+After loading that fixture in an explicitly disposable host, run
+`python tests/live/inspection_probe.py --pid <owned-host-pid> --port 19877 --output evidence.json`.
+The probe verifies the process and fixture before sampling, preserves failure
+receipts, checks before/after state, and exits nonzero unless every check passes.
+See [recorded native limits](validation/milestone-3.md).

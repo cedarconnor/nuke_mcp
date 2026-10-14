@@ -10,7 +10,7 @@
 
 **Spec:** [Nuke MCP reliability and workflow expansion design](../specs/2026-10-14-nuke-mcp-expansion-design.md). Read it before implementing any task.
 
-**Status:** Milestone 1 implemented on `codex/nuke-bridge-foundation`; Tasks 5–15 remain pending. See `docs/validation/milestone-1.md` for qualification and limits. Baseline is `987abf6`. Six milestones share one ordered plan because their mutation, identity, and observation contracts depend on the foundation. Do not introduce independent competing transport implementations.
+**Status:** Milestones 1–3 (Tasks 1–8) implemented; Tasks 9–15 remain pending. See `docs/validation/milestone-1.md`, `milestone-2.md`, and `milestone-3.md` for separate evidence and native qualification limits. Milestones 2–3 remain local on stacked branches. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
 
 ## Global constraints
 
@@ -38,7 +38,7 @@
 | 5 Production workflows | 11–13 | Validated manifests, shot generation, AOV Groups | No overwrite or graph clearing; fixtures reproduce intended topology |
 | 6 Events and delivery | 14–15 | Scene revisions, event polling, qualified release | Offline suite plus separately recorded native and artist checks |
 
-Milestone 1 results are recorded in the validation report; later milestone verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
+Milestones 1–3 results are recorded in their validation reports; later milestone verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
 
 ## File responsibilities
 
@@ -223,7 +223,7 @@ self.assertEqual(host.global_undo_count, 0)
 
 **Interfaces:** Produce `inspect_graph(nuke, max_nodes=256, max_knobs_per_node=64, recurse_groups=True, selected_only=False) -> dict`, `inspect_reads(nuke, node_paths=None, channel_limit=256) -> dict`, `validate_reads(nuke, first_frame, last_frame, step=1, node_paths=None) -> dict`. Expose same public names without the injected host argument. Observation reports include coverage and reason.
 
-- [ ] Write tests for recursive Group paths, disconnected inputs, supported/omitted knobs, bounded data, unavailable file/enum knobs, multipart channels, selection scope, NC blackouts, negative frame numbers, views, Unicode paths, expressions, and exactly 10000 evaluated path checks.
+- [x] Write tests for recursive Group paths, disconnected inputs, supported/omitted knobs, bounded data, unavailable file/enum knobs, multipart channels, selection scope, NC blackouts, negative frame numbers, views, Unicode paths, expressions, and exactly 10000 evaluated path checks.
 
 ```python
 result = inspect_graph(host, max_nodes=1)
@@ -232,10 +232,10 @@ self.assertEqual(result['observation']['coverage'], 'partial')
 self.assertEqual(result['nodes'][0]['path'], 'GroupA.Grade1')
 ```
 
-- [ ] Run `python -m unittest tests.test_inspection -v`; verify failing bounded/nested cases.
-- [ ] Implement pure JSON inspection with full-path connections and explicit omission. Evaluate sequence paths through Nuke on the main thread for requested frames/views; unresolved paths stay unknown, not missing. Return per-frame evidence and refuse requests exceeding limits. Legacy text summarizes the same data.
-- [ ] Rerun focused tests and compare legacy overview text against structured content. Add read-only native inspection fixtures; no host changes during inspection.
-- [ ] Commit as `feat: inspect nested graphs and validate Read sequences`.
+- [x] Run `python -m unittest tests.test_inspection -v`; verify failing bounded/nested cases.
+- [x] Implement pure JSON inspection with full-path connections and explicit omission. Evaluate sequence paths through Nuke on the main thread for requested frames/views; unresolved paths stay unknown, not missing. Return per-frame evidence and refuse requests exceeding limits. Legacy text summarizes the same data.
+- [x] Rerun focused tests and compare legacy overview text against structured content. Add read-only native inspection fixtures; no host changes during inspection.
+- [x] Commit as `feat: inspect nested graphs and validate Read sequences`.
 
 ### Task 8 Channel statistics and diagnostics
 
@@ -243,7 +243,7 @@ self.assertEqual(result['nodes'][0]['path'], 'GroupA.Grade1')
 
 **Interfaces:** Produce `sample_channel_statistics(nuke, node_path, channels, frame, roi=None, max_samples_per_channel=1024, should_stop=None) -> dict`. Public tool omits the injected host/cancellation arguments. Use exactly the spec's 16-channel/4096-sample ceilings and explicit filtered-grid metadata.
 
-- [ ] Write tests for Constant/ramp/alpha fixtures, unavailable layers, layer expansion beyond 16, NaN/Inf, all-zero samples, sparse nonzero pixels outside the grid, invalid/out-of-bounds ROI, cancellation, and frame restoration after failure.
+- [x] Write tests for Constant/ramp/alpha fixtures, unavailable layers, layer expansion beyond 16, NaN/Inf, all-zero samples, sparse nonzero pixels outside the grid, invalid/out-of-bounds ROI, cancellation, and frame restoration after failure.
 
 ```python
 result = sample_channel_statistics(host, 'Grade1', ['rgba.red'], 1001,
@@ -253,10 +253,10 @@ self.assertEqual(result['statistics'][0]['mean'], 0.5)
 self.assertEqual(host.current_frame, original_frame)
 ```
 
-- [ ] Run `python -m unittest tests.test_diagnostics -v`; confirm red sample-contract tests.
-- [ ] Implement bounded sampling, finite statistics, zero fraction, progress/partial results, and actual sample method description. Do not label sampled extrema as full-image extrema or average-zero tiles as proof of black pixels.
-- [ ] Rerun focused and Milestone 3 tests. Prepare native known-signal fixtures with documented expected tolerances and separately record native results at qualification.
-- [ ] Commit as `feat: add bounded channel and AOV diagnostics`.
+- [x] Run `python -m unittest tests.test_diagnostics -v`; confirm red sample-contract tests.
+- [x] Implement bounded sampling, finite statistics, zero fraction, progress/partial results, and actual sample method description. Do not label sampled extrema as full-image extrema or average-zero tiles as proof of black pixels.
+- [x] Rerun focused and Milestone 3 tests. Prepare native known-signal fixtures with documented expected tolerances and separately record native results at qualification.
+- [x] Commit as `feat: add bounded channel and AOV diagnostics`.
 
 ## Milestone 4 Reusable assets and lifecycle
 

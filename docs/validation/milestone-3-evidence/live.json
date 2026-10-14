@@ -1,0 +1,452 @@
+{
+  "mode": "live",
+  "port": 19877,
+  "calls": [
+    {
+      "request_id": "5a9e43ae-a0c8-48dd-accf-0bae23b57725",
+      "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D998DB0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "005c293e-3ee2-472c-8671-6aa335473ed4",
+      "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D9990F0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "0ce9e09e-bca1-4bf3-8930-32875d696e92",
+      "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D999170>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "1054ca09-1b89-4411-8592-9568e2bdcaff",
+      "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D998F90>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "08e8c042-4ea2-4d50-b00e-31f2b3ad5608",
+      "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D9993B0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "2ae006a8-555f-44bd-a08c-ebad70f48eb8",
+      "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D999430>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "2c36a43b-a798-411e-8d38-0140c16e2595",
+      "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D9995D0>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    },
+    {
+      "request_id": "73ef50ab-38a4-4ebf-836b-c5d60fadb2ce",
+      "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "nodes": [],
+        "errors": [],
+        "truncated": false,
+        "scope": {
+          "recurse_groups": true,
+          "selected_only": false
+        },
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk",
+        "fps": 24,
+        "format": "<Format object at 0x000002382D99AF30>",
+        "first_frame": 1.0,
+        "last_frame": 3.0
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      },
+      "revision": null,
+      "command": "get_script_info",
+      "tool": "get_script_info"
+    }
+  ],
+  "capabilities": [
+    {
+      "request_id": "77529021-7534-4589-85f1-f6f23566e569",
+      "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 152572,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics"
+        ],
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    {
+      "request_id": "dbe2fcae-b0ff-4e8c-a353-c1e84f6956ff",
+      "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+      "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 152572,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics"
+        ],
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "unsupported_tool_groups": [
+          "shot_manifests",
+          "scene_events",
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ],
+  "expected_error": {
+    "request_id": "d2881cb4-a291-4ee9-83f2-85921cf82227",
+    "client_session_id": "434cab2f-cc77-4499-9dbf-9afd3535cdc2",
+    "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: __MCP_PROBE_ABSENT__"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "get_node_info",
+    "tool": "get_node_info"
+  },
+  "read_only_python": {
+    "request_id": "27e945bf-bdf5-4bad-99fc-8f05cdc8c9f4",
+    "client_session_id": "e7221f05-123b-4b6e-8628-d2b21c9598ce",
+    "server_instance_id": "929bdbc4-5024-45dd-90b2-d005ae7c6fe7",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 152572,
+        "main_thread": true,
+        "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/tests/live/inspection_fixture.nk"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null,
+    "command": "execute_code",
+    "tool": "execute_nuke_code"
+  },
+  "passed": true,
+  "unique_request_ids": 8
+}

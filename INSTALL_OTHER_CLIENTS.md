@@ -196,6 +196,13 @@ ambiguous result. See the "Field notes" section of `nuke-mcp-guidelines.md`.
 
 ## Local trusted clients
 
+Milestone 3 adds four tools (`inspect_graph`, `inspect_reads`, `validate_reads`,
+`sample_channel_statistics`) for a total of 24. Deploy the matching add-on and
+shared package, then restart both Nuke and external MCP processes. Inspect
+structured coverage, omissions and per-file status; sampled statistics do not
+establish full-image extrema or blackness. See [inspection documentation](docs/inspection.md)
+and the [native qualification report](docs/validation/milestone-3.md).
+
 Protocol v2 supports eight simultaneous clients. Upgrade all clients and the
 add-on together; an older bridge is incompatible and should be restarted.
 
