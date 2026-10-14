@@ -33,3 +33,27 @@ File expressions and registered filename filters remain trusted Nuke code;
 inspection is not a sandbox for an untrusted script. No donor code was copied.
 API references: [File_Knob](https://learn.foundry.com/nuke/developers/latest/pythondevguide/_autosummary/nuke.File_Knob.html)
 and [OutputContext](https://learn.foundry.com/nuke/developers/latest/pythondevguide/_autosummary/nuke.OutputContext.html).
+
+## Channel diagnostics
+
+`sample_channel_statistics(node_path, channels, frame, roi=null,
+max_samples_per_channel=1024)` resolves channel names or layer names into at
+most 16 channels. ROI is `[x,y,width,height]` in integer pixels within the node's
+format. Each channel receives at most 4096 samples. The result reports the
+actual grid, cell size, frame, ROI, sample counts, finite min/max/mean, non-finite
+count, and zero fraction among finite samples. Duplicate channels are measured
+once. A layer that expands beyond the limit is rejected before sampling.
+
+The method is `nuke.Node.sample` with explicit cell widths and heights, which
+uses cubic filtering. `samples_every_pixel` is false: filtered values are not
+individual-pixel extrema, and sampled zero values do not prove a black image.
+Cancellation/deadline checks run between samples; an individual native sample
+cannot be interrupted. Partial statistics are retained on failure. The original
+frame is restored on every exit; restoration failure is an unknown outcome.
+Selection, proxy and project settings are not changed by the tool.
+
+Native fixture: `tests/live/inspection_fixture.nk` contains a 4x4 Constant
+with expected RGBA means `[0.25,0.5,0.75,1]`, an Expression ramp with expected
+red mean `0.5`, two nested Constants with the same short name, and an explicitly
+missing Read sequence. Use a 2x2 grid and tolerance `1e-6` for known signals;
+record actual native results separately rather than substituting offline tests.

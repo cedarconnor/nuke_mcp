@@ -1,0 +1,12 @@
+{
+  "format": [4, 4],
+  "frame": 1001,
+  "tolerance": 0.000001,
+  "signals": {
+    "constant": {"value": 0.25, "expected_mean": 0.25},
+    "ramp": {"expression": "x / width", "expected_mean": 0.5},
+    "alpha": {"value": 1.0, "expected_mean": 1.0},
+    "zero": {"value": 0.0, "expected_zero_fraction": 1.0}
+  },
+  "qualification": "Expected filtered-grid means only; sampled zeros do not prove every pixel is black."
+}

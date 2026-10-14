@@ -36,8 +36,10 @@ async def probe(live=False, port=9877, slow=False):
     runtime = None
     pump = None
     if not live:
-        from tests.mutation_fakes import Host
+        from tests.inspection_fakes import ImageHost as Host
         from nuke_mcp_bridge.batch import execute_batch
+        from nuke_mcp_bridge.inspection import inspect_graph, inspect_reads, validate_reads
+        from nuke_mcp_bridge.diagnostics import sample_channel_statistics
         fake_host = Host()
         fake_host.add('FixtureGrade')
         def missing(**kwargs):
@@ -56,6 +58,10 @@ async def probe(live=False, port=9877, slow=False):
                 op='set_knob', node_path=kwargs['name'], knob=k, value=v)
                 for k,v in kwargs['parameters'].items()], False),
             "batch_edit": lambda **kwargs: execute_batch(fake_host, **kwargs),
+            "inspect_graph": lambda **kwargs: inspect_graph(fake_host, **kwargs),
+            "inspect_reads": lambda **kwargs: inspect_reads(fake_host, **kwargs),
+            "validate_reads": lambda **kwargs: validate_reads(fake_host, **kwargs),
+            "sample_channel_statistics": lambda **kwargs: sample_channel_statistics(fake_host, **kwargs),
             "execute_code": lambda code: {"executed": True, "output": {"probe": "read-only"}},
         }
         runtime = BridgeRuntime(handlers, OperationRegistry(), ManualDispatcher())
@@ -85,7 +91,7 @@ async def probe(live=False, port=9877, slow=False):
                     assert name in tools, name
                     assert tools[name].inputSchema.get("required", []) == required, (name, tools[name].inputSchema)
                 for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit",
-                             "inspect_graph", "inspect_reads", "validate_reads"):
+                             "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics"):
                     assert name in tools, name
                 sessions.append(session)
             capabilities = await asyncio.gather(*(s.call_tool("get_capabilities", {}) for s in sessions))
@@ -115,6 +121,20 @@ async def probe(live=False, port=9877, slow=False):
             if live:
                 assert report["read_only_python"]["data"]["output"]["main_thread"] is True
             if not live:
+                graph = await sessions[0].call_tool('inspect_graph', {'max_nodes':1})
+                assert not graph.isError and data(graph)['outcome']=='not_started', data(graph)
+                assert data(graph)['data']['nodes'][0]['path']=='FixtureGrade'
+                report['inspection'] = data(graph)
+                reads = await sessions[0].call_tool('inspect_reads', {})
+                assert not reads.isError and data(reads)['data']['reads']==[]
+                validated = await sessions[0].call_tool('validate_reads', {'first_frame':-1,'last_frame':1})
+                assert not validated.isError and data(validated)['data']['checked_paths']==0
+                measured = await sessions[0].call_tool('sample_channel_statistics', {
+                    'node_path':'FixtureGrade', 'channels':['rgba.red'], 'frame':1001, 'max_samples_per_channel':4})
+                assert not measured.isError and data(measured)['outcome']=='not_started', data(measured)
+                assert data(measured)['data']['statistics'][0]['mean']==.5
+                assert data(measured)['data']['frame_restored']
+                report['statistics'] = data(measured)
                 changed = await sessions[0].call_tool('modify_node', {
                     'name': 'FixtureGrade', 'parameters': {'label': 'fixture'}})
                 changed_receipt = data(changed)

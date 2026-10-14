@@ -94,6 +94,18 @@ def bridge_tool(mcp):
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
     @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
+    def sample_channel_statistics(node_path: str, channels: list[str], frame: int,
+                                  roi: list[int] | None = None, max_samples_per_channel: int = 1024) -> ToolResult:
+        """Sample up to 16 channels with a filtered grid, at most 4096 samples each.
+
+        ROI is [x,y,width,height]. Sampled extrema and zeros are not a full-image
+        pixel audit. The original frame is restored; partial evidence survives failure.
+        """
+        result = client().call('sample_channel_statistics', dict(node_path=node_path, channels=channels,
+                              frame=frame, roi=roi, max_samples_per_channel=max_samples_per_channel))
+        return to_mcp_result(result, 'Filtered channel statistics: ' + result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
     def inspect_graph(max_nodes: int = 256, max_knobs_per_node: int = 64,
                       recurse_groups: bool = True, selected_only: bool = False) -> ToolResult:
         """Observe full-path graph connections and bounded knob snapshots. Check coverage and omissions."""
