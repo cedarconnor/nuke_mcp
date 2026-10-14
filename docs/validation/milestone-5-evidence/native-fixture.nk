@@ -21,4 +21,3 @@ Constant {
  format "4 4 0 0 4 4 1 MCP_4"
  name MCP_Light
 }
-
