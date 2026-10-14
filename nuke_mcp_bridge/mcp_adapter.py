@@ -93,6 +93,19 @@ def bridge_tool(mcp):
 
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
+    @mcp.tool(output_schema=None)
+    def batch_edit(operations: list[dict], dry_run: bool = True, expected_revision: int | None = None) -> ToolResult:
+        """Preflight 1..100 set_knob/connect/position operations. Dry-run by default.
+
+        Each item has op and node_path. set_knob adds knob/value; connect adds
+        input_index/source_path (null disconnects); position adds x/y.
+        Expected scene revisions are unavailable until a revision provider exists.
+        Apply is non-atomic: earlier successful edits remain after a failure.
+        """
+        result = client().call('batch_edit', dict(operations=operations, dry_run=dry_run,
+                                                expected_revision=expected_revision))
+        return to_mcp_result(result, 'Batch ' + result['state'])
+
     @mcp.tool(output_schema=None, annotations={"readOnlyHint": True})
     def get_capabilities() -> ToolResult:
         """Report current host identity and observable capabilities."""

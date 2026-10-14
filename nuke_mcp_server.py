@@ -464,110 +464,15 @@ def create_node(ctx: Context, node_type: str, name: str = None,
         return 'Error creating node: ' + str(exc)
 
 @bridge_tool(mcp)
-def modify_node(
-    ctx: Context,
-    name: str,
-    parameters: Dict[str, Any] = None,
-    position: List[int] = None,
-    inputs: List[str] = None
-) -> str:
-    """
-    Modify an existing node in the Nuke script with workflow rule enforcement.
-    
-    Parameters:
-    - name: Name of the node to modify
-    - parameters: Optional dictionary of parameter name/value pairs
-    - position: Optional [x, y] position coordinates
-    - inputs: Optional list of node names to connect as inputs
-    """
+def modify_node(ctx: Context, name: str, parameters: Dict[str, Any] = None,
+                position: List[int] = None, inputs: List[str] = None) -> str:
+    """Preflight every requested edit, then apply with per-item readback results."""
     try:
-        # First, get node info to know its type
-        logger.info(f"Getting info for node {name} before modification")
-        nuke = get_nuke_connection()
-        node_info = None
-        try:
-            node_info = nuke.send_command("get_node_info", {"name": name})
-            node_type = node_info.get("type", "unknown")
-        except Exception as e:
-            logger.warning(f"Couldn't get node info for {name}: {str(e)}")
-            node_type = "unknown"
-        
-        # Check workflow rules for modification
-        issues, fixed_parameters = NukeWorkflowRules.validate_node_modification(name, node_type, parameters, position)
-        
-        # Position-related rules if position is being changed
-        position_issues = []
-        if position:
-            position_issues, position = NukeWorkflowRules.validate_node_position(name, position)
-            issues.extend(position_issues)
-        
-        # Connection-related rules if inputs are being changed
-        if inputs:
-            fixed_inputs = list(inputs)  # Create a copy we can modify
-            for i, input_name in enumerate(inputs):
-                if input_name:  # Skip empty connections
-                    connection_issues, fixed_input_index = NukeWorkflowRules.validate_node_connection(input_name, name, i)
-                    issues.extend(connection_issues)
-                    # If the input index was changed, update the inputs list
-                    if fixed_input_index != i:
-                        # Need to handle this carefully since we can't directly modify inputs at an arbitrary index
-                        # This is a simple approach - a more complex one would have to reorder all inputs
-                        if len(fixed_inputs) <= fixed_input_index:
-                            # Extend the list if needed
-                            fixed_inputs.extend([None] * (fixed_input_index - len(fixed_inputs) + 1))
-                        fixed_inputs[fixed_input_index] = input_name
-                        fixed_inputs[i] = None  # Clear the old position
-        else:
-            fixed_inputs = inputs
-        
-        # Apply workflow policy - warn or fix issues
-        warnings = []
-        if issues:
-            warnings = ["Workflow rules applied:"] + issues
-            logger.warning("\n- ".join(warnings))
-            
-        # Apply type-specific fixes if we know the node type
-        if node_type != "unknown" and fixed_parameters:
-            fixed_parameters = NukeWorkflowRules.apply_auto_fixes(node_type, fixed_parameters)
-        
-        logger.info(f"Tool called: modify_node for node {name}")
-        result = nuke.send_command("modify_node", {
-            "name": name,
-            "parameters": fixed_parameters,
-            "position": position,
-            "inputs": fixed_inputs
-        })
-        
-        modified_params = []
-        if parameters:
-            modified_params.extend(parameters.keys())
-        
-        if position:
-            modified_params.append("position")
-        
-        if inputs:
-            modified_params.append("inputs")
-        
-        message = ""
-        if modified_params:
-            message = f"Modified node '{name}' - updated: {', '.join(modified_params)}"
-        else:
-            message = f"Node '{name}' unchanged - no modifications specified"
-            
-        # Add warnings about rule suggestions if any
-        if warnings:
-            message += f"\n\nWorkflow notes:\n- " + "\n- ".join(issues)
-            
-        # Add node-specific suggestions if we know the type
-        if node_type != "unknown":
-            suggestions = NukeWorkflowRules.get_node_type_suggestions(node_type)
-            if suggestions:
-                message += f"\n\nBest practices for {node_type}:\n- " + "\n- ".join(suggestions)
-            
-        return message
-    except Exception as e:
-        logger.error(f"Error in modify_node: {str(e)}")
-        return f"Error modifying node: {str(e)}"
+        result = get_nuke_connection().send_command('modify_node', {
+            'name': name, 'parameters': parameters, 'position': position, 'inputs': inputs})
+        return "Modified node '{0}' - {1} verified edit(s)".format(result.get('path', name), len(result.get('items', [])))
+    except Exception as exc:
+        return 'Error modifying node: ' + str(exc)
 
 @bridge_tool(mcp)
 def delete_node(ctx: Context, name: str) -> str:
@@ -756,7 +661,7 @@ result = auto_layout_nodes()
 output = {{"status": result}}
 """
         
-        result = nuke.send_command("execute_code", {"code": auto_layout_code})
+        result = nuke.send_command("legacy_workflow", {"code": auto_layout_code})
         
         if result.get("executed", False):
             output = result.get("output", {})
@@ -986,7 +891,7 @@ except Exception as e:
         # Execute the code in Nuke
         logger.info(f"Creating workflow template '{template_type}' using execute_code")
         nuke = get_nuke_connection()
-        result = nuke.send_command("execute_code", {"code": create_template_code})
+        result = nuke.send_command("legacy_workflow", {"code": create_template_code})
         
         if result.get("executed", False):
             output = result.get("output", {})
@@ -1176,7 +1081,7 @@ except Exception as e:
 """
         
         # Execute the organization code
-        result = nuke.send_command("execute_code", {"code": organize_code})
+        result = nuke.send_command("legacy_workflow", {"code": organize_code})
         
         if result.get("executed", False):
             output = result.get("output", {})

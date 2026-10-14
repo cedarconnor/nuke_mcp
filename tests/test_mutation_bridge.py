@@ -10,6 +10,18 @@ from nuke_mcp_bridge.protocol import BridgeError
 from tests.mutation_fakes import Host
 
 class BridgeMutationTests(unittest.TestCase):
+    def test_modify_preflights_every_change_before_position_write(self):
+        node = self.host.add('Artist')
+        with self.assertRaises(BridgeError):
+            self.addon.modify_node('Artist', parameters={'missing': 1}, position=[50, 60])
+        self.assertEqual(node.xy, [0, 0])
+
+    def test_compound_legacy_execution_cannot_claim_verified_success(self):
+        self.addon.execute_code = lambda code: {'executed': True, 'output': {'status': 'success'}}
+        with self.assertRaises(BridgeError) as failure:
+            self.addon.legacy_workflow('pass')
+        self.assertEqual(failure.exception.outcome, 'unknown')
+
     def setUp(self):
         self.host = Host()
         self.host.menu = lambda name: SimpleNamespace(addCommand=lambda *args: None)

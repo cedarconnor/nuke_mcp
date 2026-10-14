@@ -44,7 +44,8 @@ class NukeMCPServer:
             return True
         names = ("get_script_info", "create_node", "modify_node", "delete_node",
                  "position_node", "connect_nodes", "render", "viewer_playback",
-                 "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer")
+                 "execute_code", "auto_layout", "get_node_info", "set_frames", "create_viewer",
+                 "batch_edit", "legacy_workflow")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
         handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
@@ -237,64 +238,37 @@ class NukeMCPServer:
         from nuke_mcp_bridge.mutations import create_node
         return create_node(nuke, node_type, name, position, inputs, parameters)
 
+    def batch_edit(self, operations, dry_run=True, expected_revision=None):
+        from nuke_mcp_bridge.batch import execute_batch
+        return execute_batch(nuke, operations, dry_run, expected_revision)
+
     def modify_node(self, name, parameters=None, position=None, inputs=None):
-        """Modify an existing node"""
-        try:
-            # Get the node
-            node = nuke.toNode(name)
-            if not node:
-                raise ValueError(f"Node not found: {name}")
-            
-            # Set position if provided
-            if position:
-                node.setXYpos(position[0], position[1])
-            
-            # Set parameters if provided - only if they exist
-            if parameters:
-                for param_name, param_value in parameters.items():
-                    if param_name in node.knobs():
-                        node[param_name].setValue(param_value)
-                    else:
-                        print(f"Warning: Parameter {param_name} does not exist on {node.Class()}")
-            
-            # Connect inputs if specified - only after other modifications
-            if inputs:
-                for input_idx, input_name in enumerate(inputs):
-                    if input_name:
-                        input_node = nuke.toNode(input_name)
-                        if input_node:
-                            node.setInput(input_idx, input_node)
-                        else:
-                            print(f"Warning: Input node {input_name} not found")
-                    else:
-                        # Disconnect input if None
-                        node.setInput(input_idx, None)
-            
-            # Return updated node information
-            node_info = {
-                "name": node.name(),
-                "type": node.Class(),
-                "position": [node.xpos(), node.ypos()],
-                "parameters": {}
-            }
-            
-            # Include some key parameters in response
-            for knob in node.knobs():
-                try:
-                    if node[knob].visible() and not node[knob].isAnimated():
-                        value = node[knob].value()
-                        # Only include simple parameter types
-                        if isinstance(value, (int, float, str, bool)):
-                            node_info["parameters"][knob] = value
-                except:
-                    pass
-            
-            return node_info
-        except Exception as e:
-            print(f"Error modifying node: {str(e)}")
-            traceback.print_exc()
-            raise Exception(f"Failed to modify node: {str(e)}")
-            
+        from nuke_mcp_bridge.mutations import resolve_node
+        from nuke_mcp_bridge.protocol import BridgeError
+        node = resolve_node(nuke, name)
+        operations = []
+        if parameters is not None:
+            if not isinstance(parameters, dict): raise BridgeError('invalid_request', 'parameters must be an object')
+            operations.extend(dict(op='set_knob', node_path=name, knob=k, value=v) for k,v in parameters.items())
+        if position is not None:
+            if not isinstance(position, (tuple,list)) or len(position) != 2:
+                raise BridgeError('invalid_request', 'Position requires two coordinates')
+            operations.append(dict(op='position', node_path=name, x=position[0], y=position[1]))
+        if inputs is not None:
+            if not isinstance(inputs,list): raise BridgeError('invalid_request', 'inputs must be a list')
+            operations.extend(dict(op='connect', node_path=name, input_index=i, source_path=source)
+                              for i,source in enumerate(inputs))
+        identity = dict(name=node.name(), path=node.fullName(), type=node.Class())
+        result = self.batch_edit(operations, dry_run=False) if operations else {'outcome':'not_started','items':[]}
+        return dict(result, **identity)
+
+    def legacy_workflow(self, code):
+        from nuke_mcp_bridge.protocol import BridgeError
+        result = self.execute_code(code)
+        raise BridgeError('unverified_workflow',
+                          'Legacy workflow ran without full readback; inspect state and do not replay',
+                          'unknown', result)
+
     def delete_node(self, name):
         from nuke_mcp_bridge.mutations import delete_node
         return delete_node(nuke, name)
@@ -469,7 +443,7 @@ output["status"] = result
             """
             
             # Execute the code
-            result = self.execute_code(auto_layout_code)
+            result = self.legacy_workflow(auto_layout_code)
             
             if result.get("executed", False):
                 output = result.get("output", {})

@@ -25,6 +25,8 @@ def probe_capabilities(nuke):
         "license_mode": license_mode,
         "graph_observation": "partial_or_unknown" if nc is True else "unknown",
         "node_class_discovery": "advisory",
-        "tool_groups": ["legacy_core", "capabilities", "operation_status"],
-        "unsupported_tool_groups": ["verified_edits", "shot_manifests", "scene_events"],
+        "tool_groups": ["legacy_core", "capabilities", "operation_status", "verified_edits", "batch_edit"],
+        "unsupported_tool_groups": ["shot_manifests", "scene_events", "scene_revisions"],
+        "edit_limits": {"batch_operations": 100, "static_knobs_only": True,
+                        "legacy_compound_workflows": "unverified", "creation_scope": "root"},
     }

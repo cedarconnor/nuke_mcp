@@ -2,6 +2,7 @@
 import math
 import re
 import threading
+from contextvars import ContextVar
 from .protocol import BridgeError
 
 IDENTIFIER = re.compile(r'[A-Za-z_][A-Za-z0-9_]*\Z')
@@ -11,6 +12,12 @@ BLOCKED = frozenset(('name', 'selected', 'xpos', 'ypos', 'knobChanged', 'onCreat
 NUMERIC = frozenset(('Double_Knob', 'Float_Knob', 'Int_Knob', 'XY_Knob', 'XYZ_Knob',
     'WH_Knob', 'Color_Knob', 'AColor_Knob', 'UV_Knob', 'Scale_Knob'))
 STRINGS = frozenset(('String_Knob', 'Multiline_Eval_String_Knob', 'File_Knob', 'Eval_String_Knob'))
+operation_guard = ContextVar('nuke_edit_guard', default=None)
+
+
+def check_guard():
+    guard = operation_guard.get()
+    if guard is not None: guard()
 
 
 def main_thread():
@@ -114,6 +121,7 @@ def same_value(actual, expected):
 
 def preflight(nuke, operation):
     """Resolve one batch primitive without writing; snapshots are execution-local."""
+    check_guard()
     node = resolve_node(nuke, operation['node_path'])
     kind = operation['op']
     if kind == 'set_knob':
@@ -142,21 +150,30 @@ def apply(nuke, operation):
     node = prepared['node']
     path = node.fullName()
     data = dict(path=path, name=node.name(), before=prepared['before'])
+    started = False
     try:
+        check_guard()
         kind = operation['op']
         if kind == 'set_knob':
             knob, value = prepared['knob'], operation['value']
             if isinstance(value, (tuple, list)):
-                for i, component in enumerate(value): knob.setValue(component, i)
-            else: knob.setValue(value)
+                for i, component in enumerate(value):
+                    check_guard()
+                    started = True
+                    knob.setValue(component, i)
+            else:
+                started = True
+                knob.setValue(value)
             actual = knob.value()
             data.update(knob=operation['knob'], value=actual)
             verified = same_value(actual, value)
         elif kind == 'position':
+            started = True
             node.setXYpos(operation['x'], operation['y'])
             data['position'] = [node.xpos(), node.ypos()]
             verified = data['position'] == [operation['x'], operation['y']]
         else:
+            started = True
             node.setInput(operation['input_index'], prepared['source'])
             actual = node.input(operation['input_index'])
             data.update(input_index=operation['input_index'], source_path=actual.fullName() if actual else None)
@@ -166,7 +183,10 @@ def apply(nuke, operation):
         if not verified:
             raise BridgeError('state_uncertain', 'Edit readback did not match requested state', 'unknown', data)
         return data
-    except BridgeError: raise
+    except BridgeError as exc:
+        if started and exc.outcome == 'not_started':
+            raise BridgeError(exc.code, str(exc), 'unknown', data) from exc
+        raise
     except Exception as exc:
         raise BridgeError('state_uncertain', str(exc), 'unknown', data) from exc
 
@@ -199,6 +219,7 @@ def delete_owned(nuke, node):
 def delete_node(nuke, node_path):
     node = resolve_node(nuke, node_path)
     data = dict(deleted=node.fullName(), type=node.Class())
+    check_guard()
     try:
         delete_owned(nuke, node)
         return data
@@ -227,6 +248,7 @@ def create_node(nuke, node_type, name=None, position=None, inputs=None, paramete
         with nuke.root():
             if nuke.toNode(name) is not None: raise BridgeError('name_conflict', 'Requested name already exists')
     selected = list(nuke.selectedNodes())
+    check_guard()
     node = None
     configuring = False
     result = None

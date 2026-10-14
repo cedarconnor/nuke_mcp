@@ -95,7 +95,7 @@ Recommended test scripts contain fewer than 10 nodes.
 - Patched from upstream commit: `761ea9e45cb8816a85e0a0b55a132d7b454affe3`
 - Local compatibility branch: `codex/nuke-nc-compat`
 
-## Milestone 2 typed edits (in progress)
+## Milestone 2 typed edits and batch preflight
 
 Node creation, deletion, positioning, and connections now use validated host
 primitives. Static knob setters reject callbacks, unsupported types, animation,
@@ -105,3 +105,8 @@ Deletion requires a destruction callback for the exact target handle. Creation
 cleanup can delete only its returned, observable owned handle; failed recovery
 is reported explicitly. Node factories resolve installed classes at execution.
 Backdrop creation also follows this path instead of interpolating raw Python.
+
+Batch edits default to dry-run, validate all items first, use one undo group, and
+retain applied items on failure. Legacy modify uses the same executor. Template,
+layout, and organization tools explicitly report unverified outcomes. Expected
+scene revisions are unavailable until a trustworthy provider is installed.

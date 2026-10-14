@@ -80,7 +80,12 @@ class BridgeRuntime:
         handler = self.handlers.get(command)
         if handler is None:
             raise BridgeError("unknown_command", "Unsupported command: " + command)
-        return handler(**request["params"])
+        from .mutations import operation_guard
+        token = operation_guard.set(lambda: self.registry.check_edit_boundary(request['request_id']))
+        try:
+            return handler(**request["params"])
+        finally:
+            operation_guard.reset(token)
 
     @staticmethod
     def _send(sock, message):

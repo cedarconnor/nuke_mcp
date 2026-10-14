@@ -90,6 +90,14 @@ class OperationRegistry:
                                    "No retained receipt; do not replay a mutation", "unknown")
             return deepcopy(self._entries[request_id]["result"])
 
+    def check_edit_boundary(self, request_id):
+        with self._lock:
+            entry = self._entries[request_id]
+            if entry['cancel'] or self._stopping:
+                raise BridgeError('cancelled', 'Stopped before the next edit')
+            if self.clock() >= entry['deadline']:
+                raise BridgeError('deadline_expired', 'Deadline reached before the next edit')
+
     def cancel(self, request_id):
         with self._lock:
             entry = self._entries.get(request_id)
@@ -200,7 +208,9 @@ class OperationRegistry:
                         entry["job"] = data
                     return
                 result = make_result(req, data=data,
-                                     outcome="not_started" if req["command"] in READ_ONLY else "applied")
+                                     outcome=(data['outcome'] if req['command'] in ('batch_edit', 'modify_node')
+                                              and 'outcome' in data else
+                                              "not_started" if req["command"] in READ_ONLY else "applied"))
             self.record_result(key, result)
         except Exception as exc:
             outcome = exc.outcome if isinstance(exc, BridgeError) else "unknown"

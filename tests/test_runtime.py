@@ -17,6 +17,27 @@ class ManualDispatcher:
 
 
 class RuntimeTests(unittest.TestCase):
+    def test_cancellation_between_batch_writes_preserves_unstarted_tail(self):
+        from tests.mutation_fakes import Host
+        from nuke_mcp_bridge.batch import execute_batch
+        host = Host()
+        a, b = host.add('A'), host.add('B')
+        req = request(self.runtime.registry.instance_id, command='batch_edit', params={
+            'operations': [dict(op='set_knob', node_path=p, knob='gain', value=2) for p in ('A', 'B')],
+            'dry_run': False})
+        original = a['gain'].setValue
+        def cancel_after_write(value, index=None):
+            original(value, index)
+            self.runtime.registry.cancel(req['request_id'])
+        a['gain'].setValue = cancel_after_write
+        self.runtime.handlers['batch_edit'] = lambda **params: execute_batch(host, **params)
+        self.runtime.registry.admit(req)
+        self.runtime.tick()
+        result = self.runtime.registry.lookup(req['request_id'], self.runtime.registry.instance_id)
+        self.assertEqual(a['gain'].value(), 2)
+        self.assertEqual(b['gain'].value(), 1)
+        self.assertEqual(result['outcome'], 'partial')
+
     def setUp(self):
         self.dispatcher = ManualDispatcher()
         self.seen = []

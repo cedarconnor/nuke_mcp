@@ -36,6 +36,10 @@ async def probe(live=False, port=9877, slow=False):
     runtime = None
     pump = None
     if not live:
+        from tests.mutation_fakes import Host
+        from nuke_mcp_bridge.batch import execute_batch
+        fake_host = Host()
+        fake_host.add('FixtureGrade')
         def missing(**kwargs):
             raise BridgeError("node_not_found", "Node not found")
         def render(**kwargs):
@@ -48,7 +52,10 @@ async def probe(live=False, port=9877, slow=False):
             "get_script_info": lambda: {"name": "contract_fixture", "fps": 24, "format": "HD",
                                       "first_frame": 1, "last_frame": 3, "nodes": []},
             "get_node_info": missing, "render": render,
-            "modify_node": lambda **kwargs: {"name": kwargs['name']},
+            "modify_node": lambda **kwargs: execute_batch(fake_host, [dict(
+                op='set_knob', node_path=kwargs['name'], knob=k, value=v)
+                for k,v in kwargs['parameters'].items()], False),
+            "batch_edit": lambda **kwargs: execute_batch(fake_host, **kwargs),
             "execute_code": lambda code: {"executed": True, "output": {"probe": "read-only"}},
         }
         runtime = BridgeRuntime(handlers, OperationRegistry(), ManualDispatcher())
@@ -77,7 +84,7 @@ async def probe(live=False, port=9877, slow=False):
                 for name, required in LEGACY.items():
                     assert name in tools, name
                     assert tools[name].inputSchema.get("required", []) == required, (name, tools[name].inputSchema)
-                for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render"):
+                for name in ("get_capabilities", "get_operation_status", "cancel_operation", "start_render", "batch_edit"):
                     assert name in tools, name
                 sessions.append(session)
             capabilities = await asyncio.gather(*(s.call_tool("get_capabilities", {}) for s in sessions))
@@ -111,9 +118,18 @@ async def probe(live=False, port=9877, slow=False):
                     'name': 'FixtureGrade', 'parameters': {'label': 'fixture'}})
                 changed_receipt = data(changed)
                 assert not changed.isError and changed_receipt['outcome'] == 'applied', changed_receipt
-                assert [r['command'] for r in changed_receipt['operation_receipts']] == ['get_node_info', 'modify_node']
-                assert changed_receipt['request_id'] == changed_receipt['operation_receipts'][-1]['request_id']
-                report['optional_read_then_mutation'] = changed_receipt
+                assert changed_receipt['command'] == 'modify_node'
+                assert changed_receipt['data']['items'][0]['outcome'] == 'applied'
+                report['verified_modify'] = changed_receipt
+                operation = {'op':'set_knob', 'node_path':'FixtureGrade', 'knob':'gain', 'value':2}
+                dry = await sessions[0].call_tool('batch_edit', {'operations':[operation]})
+                assert not dry.isError and data(dry)['outcome'] == 'not_started'
+                assert fake_host.graph['FixtureGrade']['gain'].value() == 1
+                applied = await sessions[0].call_tool('batch_edit', {'operations':[operation], 'dry_run':False})
+                assert not applied.isError and fake_host.graph['FixtureGrade']['gain'].value() == 2
+                refused = await sessions[0].call_tool('batch_edit', {'operations':[operation], 'expected_revision':1})
+                assert refused.isError and data(refused)['error']['code'] == 'revision_unavailable'
+                report['batch'] = {'dry_run':data(dry), 'apply':data(applied), 'revision_refused':data(refused)}
                 accepted = data(await sessions[0].call_tool("start_render", {
                     "write_node": "Write1", "first_frame": 1, "last_frame": 1}))
                 assert accepted["state"] in ("queued", "running")

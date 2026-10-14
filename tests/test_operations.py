@@ -6,6 +6,12 @@ from nuke_mcp_bridge.protocol import BridgeError
 
 
 class OperationTests(unittest.TestCase):
+    def test_batch_dry_run_receipt_is_not_applied(self):
+        req = self.req(command='batch_edit', params={'dry_run': True})
+        self.registry.admit(req)
+        self.registry.tick(lambda r: {'dry_run': True, 'outcome': 'not_started', 'items': []})
+        self.assertEqual(self.registry.lookup(req['request_id'], self.instance)['outcome'], 'not_started')
+
     def setUp(self):
         self.clock = Clock()
         self.instance = str(uuid4())

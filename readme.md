@@ -2,7 +2,7 @@
 
 Control Foundry Nuke from an MCP-compatible assistant. Inspect scripts and nodes, edit connections and parameters, organize graphs, and submit renders through a local bridge.
 
-**Milestone 1 is implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside four new capability and operation-status tools.
+**Milestones 1 and 2 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available alongside five capability, operation-status, and batch-edit tools.
 
 Live two-client communication has been verified on **Windows with Nuke Non-commercial 17.0v4 and external Python 3.11**. See the [validation report](docs/validation/milestone-1.md) for evidence and qualification limits.
 
@@ -63,10 +63,11 @@ See [installation details](INSTALL_OTHER_CLIENTS.md) for additional client setup
 
 ## Tools
 
-The server exposes **19 tools**. The client supplies tool arguments; MCP context is handled internally.
+The server exposes **20 tools**. The client supplies tool arguments; MCP context is handled internally.
 
 | Tool | Purpose |
 | --- | --- |
+| `batch_edit` | Preflight or apply up to 100 typed knob, connection, and position edits; dry-run by default. |
 | `get_capabilities` | Report host version, flavor, observable license mode, and supported tool groups. |
 | `get_script_info` | Inspect current script settings and observable nodes. |
 | `get_node_info` | Inspect a node by `node_name`. |
@@ -87,7 +88,7 @@ The server exposes **19 tools**. The client supplies tool arguments; MCP context
 | `cancel_operation` | Cancel queued work or request cancellation of the owning session's running render. |
 | `execute_nuke_code` | Execute Python in Nuke. This is unrestricted access for trusted local clients. |
 
-The existing editing and template tools are retained; verified mutation readbacks and complete graph observation are planned for later milestones. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
+Typed node edits now validate and read back changes; see [verified edits and batch schema](docs/verified-edits.md). Templates, auto-layout, and organization remain legacy workflows and return an explicit unverified outcome. Complete graph observation remains planned. Consult [workflow guidelines and NC field notes](nuke-mcp-guidelines.md) before building larger graphs.
 
 ## Operation results and rendering
 
@@ -194,7 +195,7 @@ MCP client B <-> main.py process B --/
 
 For new host operations, register the handler in `NukeMCPServer.start()` and route Nuke API work through the runtime's main-thread queue. Preserve structured errors and operation identity through the MCP adapter. Keep socket-thread controls free of Nuke API calls and never add automatic mutation replay.
 
-The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: verified editing, deeper inspection, reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
+The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track the remaining milestones: deeper inspection, reusable assets and script lifecycle, shot/AOV workflows, and scene events. These are planned work, not currently delivered capabilities.
 
 See [patch notes](PATCH_NOTES.md) for compatibility history. This project builds on `dughogan/nuke_mcp`.
 
