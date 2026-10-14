@@ -1,5 +1,15 @@
 # Compatibility patch notes
 
+## Task 14: scene events and optimistic revision checks
+
+Adds `subscribe_events` and `get_events` (37 total tools), per-client filters, bounded history,
+100 ms knob coalescing, explicit gaps, and request attribution through stepped jobs. Revision changes
+are counted before coalescing. Batch edits can reject a stale observed revision while accepting their
+own callbacks; workflow digests now bind observed scene state. NC and degraded observation refuse
+explicit revision guarantees. Stop removes callbacks; restart creates a new event instance.
+Frame events are sampled on the main-thread timer, since Root UI updates may be absent.
+See [event contracts](docs/scene-events.md). Task 15 release qualification remains pending.
+
 ## Milestone 5: manifest-driven production workflows
 
 Adds five tools for schema-v1 manifests, explicit CSV conversion, shot planning/publication,

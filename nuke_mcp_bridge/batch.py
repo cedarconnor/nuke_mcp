@@ -55,32 +55,45 @@ def execute_batch(nuke, operations, dry_run=True, expected_revision=None, revisi
     m.main_thread()
     if type(dry_run) is not bool: raise BridgeError('invalid_request','dry_run must be boolean')
     operations=normalize(operations)
-    def revision_check():
+    def revision_check(allow_owned=False):
         if expected_revision is not None:
-            if type(expected_revision) is not int: raise BridgeError('invalid_request','expected_revision must be integer')
+            if type(expected_revision) is not int or expected_revision < 0: raise BridgeError('invalid_request','expected_revision must be a nonnegative integer')
             if revision_provider is None: raise BridgeError('revision_unavailable','No trustworthy scene revision provider installed')
-            if revision_provider() != expected_revision: raise BridgeError('revision_conflict','Scene revision changed')
+            if hasattr(revision_provider, 'check'):
+                revision_provider.check(expected_revision, allow_owned=allow_owned)
+            elif revision_provider() != expected_revision: raise BridgeError('revision_conflict','Scene revision changed')
     revision_check()
     prepared,items=prepare(nuke,operations)
+    revision_check()
     result={'dry_run':dry_run,'outcome':'not_started','items':items,'atomic':False}
+    if revision_provider is not None and hasattr(revision_provider, 'snapshot'):
+        result['scene_revision']=revision_provider.snapshot()
     if dry_run: return result
     for item in items: item['state']='not_started'
     undo=nuke.Undo()
     undo.begin('Nuke MCP batch edit')
     failure=None
+    inherited_guard=m.operation_guard.get()
+    def edit_boundary():
+        if inherited_guard: inherited_guard()
+        revision_check(allow_owned=True)
+    guard_token=m.operation_guard.set(edit_boundary)
     try:
         for i,op in enumerate(operations):
+            applied=False
             try:
-                revision_check()
+                revision_check(allow_owned=True)
                 current=m.preflight(nuke,op)
                 earlier=prepared[i]
                 if (current['node'] != earlier['node'] or current.get('knob') != earlier.get('knob') or
                     current.get('source') != earlier.get('source') or not m.same_value(current['before'],earlier['before'])):
                     raise BridgeError('state_conflict','Target changed after preflight')
                 data=m.apply(nuke,op)
+                applied=True
                 items[i].update(state='completed',outcome='applied',data=data)
+                revision_check(allow_owned=True)
             except Exception as exc:
-                outcome=exc.outcome if isinstance(exc,BridgeError) else 'unknown'
+                outcome='applied' if applied else exc.outcome if isinstance(exc,BridgeError) else 'unknown'
                 items[i].update(state='failed',outcome=outcome,
                     error={'code':getattr(exc,'code','host_error'),'message':str(exc)},
                     data=exc.data if isinstance(exc,BridgeError) else {})
@@ -89,6 +102,7 @@ def execute_batch(nuke, operations, dry_run=True, expected_revision=None, revisi
                 break
         if failure is None: result['outcome']='applied'
     finally:
+        m.operation_guard.reset(guard_token)
         try: undo.end()
         except Exception as exc:
             result['undo_error']=str(exc)

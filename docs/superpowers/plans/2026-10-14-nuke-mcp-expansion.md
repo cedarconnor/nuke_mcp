@@ -10,7 +10,7 @@
 
 **Spec:** [Nuke MCP reliability and workflow expansion design](../specs/2026-10-14-nuke-mcp-expansion-design.md). Read it before implementing any task.
 
-**Status:** Milestones 1–5 (Tasks 1–13) implemented; Tasks 14–15 remain pending. See `docs/validation/milestone-1.md` through `milestone-5.md` for separate evidence and native qualification limits. Milestones 2–5 remain local on stacked branches. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
+**Status:** Milestones 1–5 and Task 14 implemented; Task 15 release qualification remains pending. See `docs/validation/milestone-1.md` through `milestone-5.md` for separate evidence and native qualification limits. Milestones 2–5 were pushed on `codex/nuke-production-workflows`; Task 14 remains local on `codex/nuke-scene-events`. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
 
 ## Global constraints
 
@@ -375,7 +375,7 @@ self.assertEqual(host.render_count, 0)
 
 **Interfaces:** Produce `EventBuffer(capacity=1000, clock=...)`, `.record(event) -> None`, `.read(after_sequence=0, limit=100, event_types=None) -> dict`, `.revision() -> int`; `install_callbacks(nuke, buffer) -> cleanup_callable`. Public tools: `subscribe_events(event_types)`, `get_events(after_sequence=0, limit=100)`. Install the revision provider consumed by Task 6 and include script/instance identity in workflow plans.
 
-- [ ] Write tests for each supported callback, duplicate registration, bounded ring overflow, 100 ms coalescing, gaps under filtered subscriptions, poll limit 500, recursive callback avoidance, script switch, instance restart, request-origin attribution, and degraded NC observation.
+- [x] Write tests for each supported callback, duplicate registration, bounded ring overflow, 100 ms coalescing, gaps under filtered subscriptions, poll limit 500, recursive callback avoidance, script switch, instance restart, request-origin attribution, and degraded NC observation.
 
 ```python
 planned_revision = events.revision()
@@ -386,10 +386,10 @@ with self.assertRaises(BridgeError):
 self.assertEqual(host.mutation_count, 0)
 ```
 
-- [ ] Run `python -m unittest tests.test_events tests.test_batch tests.test_shots -v`; confirm stale-revision rejection fails before wiring events.
-- [ ] Implement bounded callbacks, monotonic sequence/gap reporting, per-client filters, and revision increments before coalescing. Callbacks perform no sockets/disk/graph scans. Verify revision immediately before changes; return `revision_unavailable` when coverage cannot support the guarantee.
-- [ ] Rerun focused tests, including stop/start callback removal and artist changes during a dry-run/apply gap. Confirm event polling does not create its own graph changes or stdout protocol noise.
-- [ ] Commit as `feat: report scene events and reject stale edits`.
+- [x] Run `python -m unittest tests.test_events tests.test_batch tests.test_shots -v`; confirm stale-revision rejection fails before wiring events.
+- [x] Implement bounded callbacks, monotonic sequence/gap reporting, per-client filters, and revision increments before coalescing. Callbacks perform no sockets/disk/graph scans. Verify revision immediately before changes; return `revision_unavailable` when coverage cannot support the guarantee.
+- [x] Rerun focused tests, including stop/start callback removal and artist changes during a dry-run/apply gap. Confirm event polling does not create its own graph changes or stdout protocol noise.
+- [x] Commit as `feat: report scene events and reject stale edits`.
 
 ### Task 15 Qualification installation and release evidence
 

@@ -60,8 +60,10 @@ input 2 is the explicit mask with its requested channel. Supported operations ar
 Optional Write creates a node only; saving and rendering remain separate.
 
 Channel/knob observations and class discovery are bounded, especially under NC. A plan reserves no
-state. This milestone does not claim a graph revision guarantee or pixel-correct production recipe;
+state. Task 14 adds observed revision stamps; degraded NC coverage still cannot establish a graph revision guarantee or pixel-correct production recipe;
 native numeric reconstruction and artist-viewable render evidence are separate qualification gates.
 
 API semantics were checked against Foundry's [Shuffle reference](https://learn.foundry.com/nuke/content/reference_guide/channel_nodes/shuffle.html)
 and [Grade knob reference](https://learn.foundry.com/nuke/9.0/content/reference_guide/color_nodes/grade.html).
+
+See [scene events](scene-events.md) for plan invalidation after observed changes and coverage limits.

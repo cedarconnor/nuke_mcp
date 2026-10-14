@@ -1,0 +1,348 @@
+{
+  "passed": false,
+  "checks": {
+    "nc_revision_unavailable": true,
+    "revision_edit_refused": true,
+    "root_change": true,
+    "knob_event_attributed": true,
+    "frame_event_sampled": false,
+    "revision_advanced": true,
+    "no_sensitive_payload": true,
+    "restored": true
+  },
+  "receipts": {
+    "identity": {
+      "request_id": "47ff5deb-d086-4aa2-b5d4-3aaf181e4865",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 143280,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task14-host/events_fixture.nk",
+          "disposable": "1",
+          "fps": 24.0,
+          "frame": 0
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "capabilities": {
+      "request_id": "dbe780be-6d1f-4634-9e65-f17ce82c6a20",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "protocol_version": 2,
+        "addon_version": "0.2.0",
+        "pid": 143280,
+        "nuke_version": "17.0v4",
+        "gui": true,
+        "host_flavor": "nuke",
+        "license_mode": "noncommercial",
+        "graph_observation": "partial_or_unknown",
+        "node_class_discovery": "advisory",
+        "tool_groups": [
+          "legacy_core",
+          "capabilities",
+          "operation_status",
+          "verified_edits",
+          "batch_edit",
+          "inspection",
+          "channel_statistics",
+          "toolsets",
+          "script_lifecycle",
+          "project_settings",
+          "shot_workflows",
+          "layered_compositing",
+          "scene_events"
+        ],
+        "toolset_limits": {
+          "nodes": 1000,
+          "selected_paths": 100,
+          "payload_bytes": 16777216,
+          "trusted_code": true,
+          "verification": "observed topology and bounded static knob subset"
+        },
+        "diagnostic_limits": {
+          "channels": 16,
+          "samples_per_channel": 4096,
+          "method": "cubic_filtered_grid"
+        },
+        "inspection_limits": {
+          "nodes": 1000,
+          "knobs_per_node": 128,
+          "channels_per_read": 2048,
+          "evaluated_paths": 10000,
+          "evidence_bytes": 4194304
+        },
+        "workflow_limits": {
+          "shots": 100,
+          "plates_per_shot": 32,
+          "layers": 32,
+          "evaluated_paths": 10000,
+          "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+          "native_pixel_recipe_qualified": false
+        },
+        "scene_events": {
+          "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+          "revision": 23,
+          "script_generation": 1,
+          "revision_available": false,
+          "reasons": [
+            "noncommercial_or_unknown_observation",
+            "callback_read_failed"
+          ],
+          "capacity": 1000,
+          "poll_limit": 500,
+          "coalesce_ms": 100,
+          "delivery": "polling",
+          "frame_observation": "sampled",
+          "revision_scope": "observed changes within this server instance"
+        },
+        "unsupported_tool_groups": [
+          "scene_revisions"
+        ],
+        "edit_limits": {
+          "batch_operations": 100,
+          "static_knobs_only": true,
+          "legacy_compound_workflows": "unverified",
+          "creation_scope": "root"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "subscribe": {
+      "request_id": "f50c8bf4-0dd0-4c01-8fe9-ace0840b5972",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+        "revision": 23,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "event_types": [
+          "frame_changed",
+          "knob_changed"
+        ],
+        "delivery": "polling"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "initial_events": {
+      "request_id": "bae7f543-5ed6-4934-9f84-ac73fc2867d2",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+        "revision": 23,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "events": [
+          {
+            "type": "knob_changed",
+            "sequence": 21,
+            "first_sequence": 2,
+            "revision": 21,
+            "timestamp": 399825.593,
+            "first_timestamp": 399825.593,
+            "count": 20,
+            "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+            "request_id": null
+          }
+        ],
+        "next_sequence": 23,
+        "latest_sequence": 23,
+        "history_gap": false,
+        "event_types": [
+          "frame_changed",
+          "knob_changed"
+        ],
+        "frame_observation": "sampled",
+        "supported_callbacks": [
+          "node_created",
+          "node_deleted",
+          "knob_changed",
+          "script_loaded",
+          "script_saved",
+          "script_closed",
+          "frame_changed"
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "revision_edit": {
+      "request_id": "4bbc4557-9d64-4155-b09d-92a6650b9417",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {
+        "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+        "revision": 23,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ]
+      },
+      "error": {
+        "code": "revision_unavailable",
+        "message": "Scene callback coverage cannot support a revision check"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "root_change": {
+      "request_id": "b6964baa-416f-4528-b1b4-1fc3227ce5e4",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "fps": 25.0,
+          "frame": 1
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "changed_events": {
+      "request_id": "72d9bf25-0f61-44f9-8d76-226b2905076a",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "not_started",
+      "data": {
+        "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+        "revision": 24,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "events": [],
+        "next_sequence": 24,
+        "latest_sequence": 24,
+        "history_gap": false,
+        "event_types": [
+          "frame_changed",
+          "knob_changed"
+        ],
+        "frame_observation": "sampled",
+        "supported_callbacks": [
+          "node_created",
+          "node_deleted",
+          "knob_changed",
+          "script_loaded",
+          "script_saved",
+          "script_closed",
+          "frame_changed"
+        ]
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "restore": {
+      "request_id": "58d46472-93a6-40d2-87f1-48abd4f0cf3e",
+      "client_session_id": "ee1fdb37-6117-4b12-88da-6e3aad0a6d9c",
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "fps": 24.0,
+          "frame": 0
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  },
+  "events": [
+    {
+      "type": "knob_changed",
+      "sequence": 24,
+      "first_sequence": 24,
+      "revision": 24,
+      "timestamp": 399850.031,
+      "first_timestamp": 399850.031,
+      "count": 1,
+      "server_instance_id": "507a5b30-aae0-4532-80a4-34736c4dc65b",
+      "request_id": "b6964baa-416f-4528-b1b4-1fc3227ce5e4",
+      "node_path": "root",
+      "knob": "fps"
+    }
+  ]
+}

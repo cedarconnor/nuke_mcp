@@ -4,7 +4,7 @@ import os
 from . import __version__
 
 
-def probe_capabilities(nuke):
+def probe_capabilities(nuke, events=None):
     env = getattr(nuke, "env", {})
     if env.get("studio", "unknown") is True:
         flavor = "nukestudio"
@@ -25,7 +25,7 @@ def probe_capabilities(nuke):
         "license_mode": license_mode,
         "graph_observation": "partial_or_unknown" if nc is True else "unknown",
         "node_class_discovery": "advisory",
-        "tool_groups": ["legacy_core", "capabilities", "operation_status", "verified_edits", "batch_edit", "inspection", "channel_statistics", "toolsets", "script_lifecycle", "project_settings", "shot_workflows", "layered_compositing"],
+        "tool_groups": ["legacy_core", "capabilities", "operation_status", "verified_edits", "batch_edit", "inspection", "channel_statistics", "toolsets", "script_lifecycle", "project_settings", "shot_workflows", "layered_compositing", "scene_events"],
         "toolset_limits": {"nodes":1000, "selected_paths":100, "payload_bytes":16*1024*1024,
                            "trusted_code":True, "verification":"observed topology and bounded static knob subset"},
         "diagnostic_limits": {"channels":16, "samples_per_channel":4096, "method":"cubic_filtered_grid"},
@@ -33,7 +33,10 @@ def probe_capabilities(nuke):
                               "evaluated_paths":10000, "evidence_bytes":4*1024*1024},
         "workflow_limits": {"shots":100,"plates_per_shot":32,"layers":32,"evaluated_paths":10000,
                             "shot_session_opt_in":"NUKE_MCP_DISPOSABLE_SESSION=1","native_pixel_recipe_qualified":False},
-        "unsupported_tool_groups": ["scene_events", "scene_revisions"],
+        "scene_events": dict(events.snapshot() if events else {'revision_available':False, 'reasons':['callbacks_not_installed']},
+                             capacity=1000, poll_limit=500, coalesce_ms=100, delivery='polling',
+                             frame_observation='sampled', revision_scope='observed changes within this server instance'),
+        "unsupported_tool_groups": [] if events and events.snapshot()['revision_available'] else ["scene_revisions"],
         "edit_limits": {"batch_operations": 100, "static_knobs_only": True,
                         "legacy_compound_workflows": "unverified", "creation_scope": "root"},
     }

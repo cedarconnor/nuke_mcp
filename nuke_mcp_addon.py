@@ -51,8 +51,8 @@ class NukeMCPServer:
                  "plan_shot_setup", "apply_shot_setup", "plan_layered_comp", "build_layered_comp")
         handlers = {name: self._checked_handler(getattr(self, name)) for name in names}
         from nuke_mcp_bridge.capabilities import probe_capabilities
-        handlers["get_capabilities"] = lambda: probe_capabilities(nuke)
-        self.runtime = BridgeRuntime(handlers, OperationRegistry(), QtDispatcher())
+        handlers["get_capabilities"] = lambda: probe_capabilities(nuke, self.runtime.events)
+        self.runtime = BridgeRuntime(handlers, OperationRegistry(), QtDispatcher(), event_host=nuke)
         try:
             self.runtime.start(self.host, self.port)
             self.running = True
@@ -289,7 +289,8 @@ class NukeMCPServer:
 
     def batch_edit(self, operations, dry_run=True, expected_revision=None):
         from nuke_mcp_bridge.batch import execute_batch
-        return execute_batch(nuke, operations, dry_run, expected_revision)
+        return execute_batch(nuke, operations, dry_run, expected_revision,
+                             self.runtime.events if self.runtime else None)
 
     def modify_node(self, name, parameters=None, position=None, inputs=None):
         from nuke_mcp_bridge.mutations import resolve_node

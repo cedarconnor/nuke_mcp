@@ -94,6 +94,22 @@ def bridge_tool(mcp):
 def register_tools(mcp, client):
     """client is a callable returning the shared, lazily connected BridgeClient."""
     @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
+    def subscribe_events(event_types: list[str]) -> ToolResult:
+        """Set this client's polling filter. Empty list selects no events; reconnect resets to all types."""
+        result=client().call('subscribe_events',dict(event_types=event_types))
+        return to_mcp_result(result,'Event subscription: '+result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
+    def get_events(after_sequence: int = 0, limit: int = 100) -> ToolResult:
+        """Poll at most 500 observed events. Track next_sequence, history_gap, and server_instance_id.
+
+        Revisions are optimistic; revision_available=false forbids guaranteed revision edits.
+        Frame notifications are sampled. Events contain no knob values or callback text.
+        """
+        result=client().call('get_events',dict(after_sequence=after_sequence,limit=limit))
+        return to_mcp_result(result,'Scene events: '+result['state'])
+
+    @mcp.tool(output_schema=None, annotations={"readOnlyHint":True})
     def plan_layered_comp(manifest: dict) -> ToolResult:
         """Validate explicit source layers/channels, masks and Merge ordering without graph changes."""
         result=client().call('plan_layered_comp',dict(manifest=manifest))
@@ -203,7 +219,8 @@ def register_tools(mcp, client):
 
         Each item has op and node_path. set_knob adds knob/value; connect adds
         input_index/source_path (null disconnects); position adds x/y.
-        Expected scene revisions are unavailable until a revision provider exists.
+        expected_revision requires trustworthy callback coverage and the current host instance.
+        Read scene_revision from dry-run; NC/unknown coverage returns revision_unavailable.
         Apply is non-atomic: earlier successful edits remain after a failure.
         """
         result = client().call('batch_edit', dict(operations=operations, dry_run=dry_run,

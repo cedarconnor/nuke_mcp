@@ -13,7 +13,7 @@ from .protocol import BridgeError, TERMINAL_STATES, encode_message, make_result,
 
 READ_ONLY = frozenset(("ping", "get_capabilities", "get_script_info", "get_node_info",
                        "inspect_graph", "inspect_reads", "validate_reads", "sample_channel_statistics", "list_toolsets",
-                       "import_shot_csv", "plan_shot_setup", "plan_layered_comp"))
+                       "import_shot_csv", "plan_shot_setup", "plan_layered_comp", "subscribe_events", "get_events"))
 
 
 class OperationRegistry:

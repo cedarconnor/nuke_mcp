@@ -31,6 +31,16 @@ class ShotTests(unittest.TestCase):
         shot['write']['path']='[file dirname [value root.name]]/out.%04d.exr'
     def plan(self):return s.plan_shot_setup(self.host,self.manifest,self.library)
     def apply(self,plan):return s.apply_shot_setup(self.host,self.manifest,plan['digest'],self.library,self.registry)
+    def test_observed_event_invalidates_plan_before_fresh_script_even_when_nc(self):
+        from nuke_mcp_bridge.events import EventBuffer, scene_events
+        buffer=EventBuffer(instance_id=self.registry.instance_id)
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        plan=self.plan()
+        buffer.record({'type':'knob_changed','node_path':'Artist','knob':'gain'})
+        with self.assertRaises(BridgeError) as failure:self.apply(plan)
+        self.assertEqual(failure.exception.code,'stale_plan')
+        self.assertEqual(self.host.script_clear_count,0)
+
     def test_plan_is_readonly_and_two_shot_publication(self):
         second=copy.deepcopy(self.manifest['shots'][0]);second.update(shot_id='sh020',script_path=str(self.root/'sh020.nknc'))
         second['write']['path']=str(self.root/'second.%04d.exr');self.manifest['shots'].append(second)

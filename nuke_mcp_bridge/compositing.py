@@ -7,6 +7,7 @@ from .protocol import BridgeError
 from .scripts import state
 from .shots import host_binding,expand_path,file_fact,set_field
 from .toolsets import selected_scope
+from .events import plan_stamp, check_plan_stamp
 
 COMPONENTS=('red','green','blue','alpha')
 
@@ -37,6 +38,7 @@ def source_evidence(nuke,layer,frame,observed_read=None):
 
 def plan_layered_comp(nuke,manifest):
     main_thread();manifest=manifests.validate_comp_manifest(manifest)
+    scene_revision=plan_stamp()
     frame=nuke.frame();sources=[];scopes=set();masks={}
     for layer in manifest['layers']:
         check_guard();source=source_evidence(nuke,layer,frame)
@@ -64,9 +66,11 @@ def plan_layered_comp(nuke,manifest):
     for cls in required:
         if not callable(getattr(nuke.nodes,cls,None)):raise BridgeError('node_class_unavailable',cls)
     plan={'manifest':manifest,'host':host_binding(nuke),'script':state(nuke),
+          'scene_revision':scene_revision,
           'frame':frame,'group_path':group_path,'scope':scope,'shuffle':shuffle,
           'sources':sources,'masks':masks,'merge_inputs':{'B':0,'A':1,'mask':2},
           'knob_layout':'validated on owned nodes at build; discovery is advisory','errors':[]}
+    check_plan_stamp(scene_revision)
     return dict(plan,digest=manifests.plan_digest(plan))
 
 
@@ -109,6 +113,7 @@ def build_layered_comp(nuke,manifest,plan_digest):
     inherited_guard=operation_guard.get()
     def identity_guard():
         if inherited_guard:inherited_guard()
+        check_plan_stamp(plan['scene_revision'],allow_owned=True)
         if nuke.root()!=root or root.name()!=script or nuke.frame()!=plan['frame']:
             raise BridgeError('script_changed','Script/frame changed during construction','unknown')
     guard_token=operation_guard.set(identity_guard)

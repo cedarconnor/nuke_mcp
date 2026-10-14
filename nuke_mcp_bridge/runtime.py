@@ -2,6 +2,9 @@
 
 import socket
 import threading
+from collections import OrderedDict
+from collections.abc import Iterator
+from contextlib import contextmanager
 
 from . import __version__
 from .protocol import (APPLICATION, PROTOCOL_VERSION, BridgeError, FrameDecoder,
@@ -33,7 +36,7 @@ class QtDispatcher:
 
 
 class BridgeRuntime:
-    def __init__(self, handlers, registry, host_dispatcher):
+    def __init__(self, handlers, registry, host_dispatcher, event_host=None):
         self.handlers = handlers
         self.registry = registry
         self.dispatcher = host_dispatcher
@@ -44,6 +47,11 @@ class BridgeRuntime:
         self._sessions = set()
         self._lock = threading.RLock()
         self._stop = threading.Event()
+        from .events import EventBuffer
+        self.events = EventBuffer(instance_id=registry.instance_id)
+        self.event_host = event_host
+        self._event_cleanup = None
+        self._event_filters = OrderedDict()
 
     def start(self, host="127.0.0.1", port=9877):
         if host not in ("localhost", "127.0.0.1", "::1"):
@@ -59,8 +67,13 @@ class BridgeRuntime:
             server.listen(8)
             server.settimeout(.1)
             self.port = server.getsockname()[1]
+            if self.event_host is not None:
+                from .events import install_callbacks
+                self._event_cleanup = install_callbacks(self.event_host, self.events)
             self.dispatcher.start(self.tick)
         except Exception:
+            if self._event_cleanup:
+                self._event_cleanup()
             server.close()
             raise
         self._server = server
@@ -71,6 +84,8 @@ class BridgeRuntime:
     def tick(self):
         if threading.current_thread() is not threading.main_thread():
             raise RuntimeError("Host queue must run on the main thread")
+        if self._event_cleanup:
+            self._event_cleanup.sample_frame()
         self.registry.tick(self._dispatch)
 
     def _dispatch(self, request):
@@ -78,17 +93,58 @@ class BridgeRuntime:
         if command == "ping":
             return {"pong": True}
         handler = self.handlers.get(command)
+        if command == 'subscribe_events':
+            handler = lambda event_types: self._subscribe(request['client_session_id'], event_types)
+        elif command == 'get_events':
+            with self._lock:
+                event_types = self._event_filters.get(request['client_session_id'])
+            handler = lambda after_sequence=0, limit=100: self.events.read(after_sequence, limit, event_types)
         if handler is None:
             raise BridgeError("unknown_command", "Unsupported command: " + command)
+        with self._request_scope(request):
+            result = handler(**request['params'])
+        if isinstance(result, Iterator):
+            return self._contextual_job(request, result)
+        return result
+
+    def _subscribe(self, session, event_types):
+        from .events import validate_types
+        event_types = validate_types(event_types)
+        with self._lock:
+            self._event_filters[session] = event_types
+            self._event_filters.move_to_end(session)
+            while len(self._event_filters) > 8:
+                self._event_filters.popitem(last=False)
+        return dict(self.events.snapshot(), event_types=event_types, delivery='polling')
+
+    @contextmanager
+    def _request_scope(self, request):
         from .mutations import operation_guard, operation_context
+        from .events import scene_events
         token = operation_guard.set(lambda: self.registry.check_edit_boundary(request['request_id']))
         context_token = operation_context.set({'server_instance_id':self.registry.instance_id,
-                                               'request_id':request['request_id']})
+                                               'request_id':request['request_id'],
+                                               'client_session_id':request['client_session_id']})
+        event_token = scene_events.set(self.events)
         try:
-            return handler(**request["params"])
+            yield
         finally:
+            scene_events.reset(event_token)
             operation_context.reset(context_token)
             operation_guard.reset(token)
+
+    def _contextual_job(self, request, job):
+        try:
+            while True:
+                with self._request_scope(request):
+                    try:
+                        progress = next(job)
+                    except StopIteration as done:
+                        return done.value
+                yield progress
+        finally:
+            with self._request_scope(request):
+                job.close()
 
     @staticmethod
     def _send(sock, message):
@@ -166,6 +222,7 @@ class BridgeRuntime:
                 self._clients.pop(sock, None)
                 if session:
                     self._sessions.discard(session)
+                    self._event_filters.pop(session, None)
 
     def _handle(self, sock, session, message):
         kind = message.get("type")
@@ -198,6 +255,8 @@ class BridgeRuntime:
         # Must be called on the host main thread. Finish generator cleanup there.
         if threading.current_thread() is threading.main_thread():
             self.registry.tick(self._dispatch)
+        if self._event_cleanup:
+            self._event_cleanup()
         self.dispatcher.stop()
         self._stop.set()
         server, self._server = self._server, None
@@ -205,6 +264,7 @@ class BridgeRuntime:
             server.close()
         with self._lock:
             clients = list(self._clients.items())
+            self._event_filters.clear()
         for sock, _ in clients:
             try:
                 sock.shutdown(socket.SHUT_RDWR)

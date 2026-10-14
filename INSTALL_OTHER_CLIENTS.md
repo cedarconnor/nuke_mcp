@@ -196,7 +196,7 @@ ambiguous result. See the "Field notes" section of `nuke-mcp-guidelines.md`.
 
 ## Local trusted clients
 
-Milestones 1–5 expose 35 tools, including inspection, toolsets, lifecycle, and shot/AOV workflows. Deploy the matching add-on and
+Milestones 1–5 and Task 14 expose 37 tools, including inspection, toolsets, lifecycle, and shot/AOV workflows. Deploy the matching add-on and
 shared package, then restart both Nuke and external MCP processes. Inspect
 structured coverage, omissions and per-file status; sampled statistics do not
 establish full-image extrema or blackness. See [inspection documentation](docs/inspection.md)
@@ -229,3 +229,11 @@ replaces it while generating scripts. The option is off by default and is not ne
 or layered Group construction. Use the matching checkout in the host and external MCP processes.
 See [workflow contracts](docs/production-workflows.md) and the
 [native qualification limits](docs/validation/milestone-5.md). No permanent startup change is required.
+
+## Event polling
+
+Use `subscribe_events` separately for each client and `get_events` to poll. Save the returned cursor
+with its server instance ID; reconnect resets subscriptions, and a new host instance resets history.
+Check `history_gap` and revision availability before relying on observations. NC returns
+`revision_unavailable` for guarded batch edits. Upgrade the external server, add-on and shared package
+together, then restart both sides. See [scene event contracts](docs/scene-events.md).

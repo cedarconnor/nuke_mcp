@@ -25,6 +25,28 @@ class CompositingTests(unittest.TestCase):
         self.addCleanup(operation_context.reset,token)
     def plan(self):return c.plan_layered_comp(self.host,self.manifest)
     def build(self,plan):return c.build_layered_comp(self.host,self.manifest,plan['digest'])
+    def test_artist_event_on_unbound_node_invalidates_plan(self):
+        from nuke_mcp_bridge.events import EventBuffer, scene_events
+        buffer=EventBuffer(instance_id='fixture')
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        plan=self.plan()
+        buffer.record({'type':'knob_changed','node_path':'Artist','knob':'gain'})
+        with self.assertRaises(BridgeError) as failure:self.build(plan)
+        self.assertEqual(failure.exception.code,'stale_plan')
+        self.assertEqual(self.host.create_count,0)
+
+    def test_event_during_planning_refuses_inconsistent_snapshot(self):
+        from nuke_mcp_bridge.events import EventBuffer, scene_events
+        buffer=EventBuffer(instance_id='fixture')
+        token=scene_events.set(buffer);self.addCleanup(scene_events.reset,token)
+        channels=self.a.channels
+        def changing():
+            buffer.record({'type':'knob_changed','node_path':'Artist','knob':'gain'})
+            return channels()
+        self.a.channels=changing
+        with self.assertRaises(BridgeError):self.plan()
+        self.assertEqual(self.host.create_count,0)
+
     def test_plus_order_mask_and_preserved_artist_state(self):
         mask=self.host.add('Mask')
         self.manifest['layers'][1].update(mask_node_path='root.Mask',mask_channel='rgba.alpha')

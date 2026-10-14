@@ -39,6 +39,8 @@ async def probe(live=False, port=9877, slow=False):
     temp = None
     if not live:
         from tests.inspection_fakes import ImageHost as Host
+        from tests.event_fakes import EventHost
+        event_host=EventHost(nc=True)
         from nuke_mcp_bridge.batch import execute_batch
         from nuke_mcp_bridge.inspection import inspect_graph, inspect_reads, validate_reads
         from nuke_mcp_bridge.diagnostics import sample_channel_statistics
@@ -93,14 +95,14 @@ async def probe(live=False, port=9877, slow=False):
             "modify_node": lambda **kwargs: execute_batch(fake_host, [dict(
                 op='set_knob', node_path=kwargs['name'], knob=k, value=v)
                 for k,v in kwargs['parameters'].items()], False),
-            "batch_edit": lambda **kwargs: execute_batch(fake_host, **kwargs),
+            "batch_edit": lambda **kwargs: execute_batch(fake_host, revision_provider=runtime.events, **kwargs),
             "inspect_graph": lambda **kwargs: inspect_graph(fake_host, **kwargs),
             "inspect_reads": lambda **kwargs: inspect_reads(fake_host, **kwargs),
             "validate_reads": lambda **kwargs: validate_reads(fake_host, **kwargs),
             "sample_channel_statistics": lambda **kwargs: sample_channel_statistics(fake_host, **kwargs),
             "execute_code": lambda code: {"executed": True, "output": {"probe": "read-only"}},
         }
-        runtime = BridgeRuntime(handlers, OperationRegistry(), ManualDispatcher())
+        runtime = BridgeRuntime(handlers, OperationRegistry(), ManualDispatcher(), event_host=event_host)
         runtime.start(port=0)
         port = runtime.port
         async def tick():
@@ -131,7 +133,8 @@ async def probe(live=False, port=9877, slow=False):
                              "list_toolsets", "save_toolset", "load_toolset", "open_script", "save_script", "set_project_settings",
                              "import_shot_csv","plan_shot_setup","apply_shot_setup","plan_layered_comp","build_layered_comp"):
                     assert name in tools, name
-                assert len(tools)==35
+                assert 'subscribe_events' in tools and 'get_events' in tools
+                assert len(tools)==37
                 assert 'root' not in tools['save_toolset'].inputSchema['properties']
                 assert 'new_disposable_script' not in tools
                 sessions.append(session)
@@ -141,6 +144,26 @@ async def probe(live=False, port=9877, slow=False):
             assert receipts[0]["server_instance_id"] == receipts[1]["server_instance_id"]
             assert receipts[0]["client_session_id"] != receipts[1]["client_session_id"]
             report["capabilities"] = receipts
+            report['events']={}
+            for i, kinds in enumerate((['node_created'], ['node_deleted'])):
+                subscribed=await sessions[i].call_tool('subscribe_events',{'event_types':kinds})
+                assert not subscribed.isError and data(subscribed)['outcome']=='not_started',data(subscribed)
+                report['events']['subscription_'+str(i)]=data(subscribed)
+            if not live:
+                node=event_host.add('EventFixture')
+                event_host.emit('OnCreate',node)
+                event_host.emit('OnDestroy',node)
+            for i in range(2):
+                polled=await sessions[i].call_tool('get_events',{})
+                assert not polled.isError and data(polled)['outcome']=='not_started',data(polled)
+                report['events']['poll_'+str(i)]=data(polled)
+                if not live:
+                    assert [x['type'] for x in data(polled)['data']['events']]==[['node_created'],['node_deleted']][i]
+            if not live:
+                guarded=await sessions[0].call_tool('batch_edit',{'operations':[dict(op='set_knob',node_path='FixtureGrade',knob='gain',value=2)],
+                    'dry_run':False,'expected_revision':runtime.events.revision()})
+                assert guarded.isError and data(guarded)['error']['code']=='revision_unavailable',data(guarded)
+                report['events']['degraded_revision']=data(guarded)
             for _ in range(4):
                 replies = await asyncio.gather(*(s.call_tool("get_script_info", {}) for s in sessions))
                 for i, reply in enumerate(replies):

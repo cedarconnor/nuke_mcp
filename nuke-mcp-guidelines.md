@@ -13,6 +13,10 @@ Shot application is limited to an explicitly disposable clean session and refuse
 files. Layered Groups require observed channels and explicit merge/mask choices. Unknown results
 are not permission to rebuild. See [workflow contracts](docs/production-workflows.md).
 
+Use [event polling](docs/scene-events.md) to detect observed changes. A history gap or changed host
+instance requires fresh inspection. Only use `expected_revision` when coverage is available; NC
+observations do not provide that guarantee. A save event alone does not prove a successful save.
+
 When creating Nuke node graphs or compositing setups via the Nuke MCP interface, please follow these guidelines to prevent crashes:
 
 ## Critical Rules

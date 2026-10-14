@@ -11,6 +11,7 @@ from .mutations import (main_thread, check_guard, operation_guard, operation_con
 from .protocol import BridgeError
 from .scripts import state, script_path, set_project_settings, save_script, open_script, new_disposable_script
 from .toolsets import Library, read_entry, extension, load_toolset
+from .events import plan_stamp, check_plan_stamp
 
 
 RELATIVE_PREFIX='[file dirname [value root.name]]'
@@ -95,6 +96,7 @@ def shot_binding(nuke,shot,library,output,budget):
 
 def plan_shot_setup(nuke,manifest,library_root):
     main_thread();normalized=manifests.validate_shot_manifest(manifest)
+    scene_revision=plan_stamp()
     if not Path(normalized['output_root']).is_absolute():raise BridgeError('invalid_path','output_root must be absolute')
     output=Library(normalized['output_root']);library=Library(library_root)
     if not output.anchor.is_dir():raise BridgeError('missing_directory','output_root must exist')
@@ -111,10 +113,12 @@ def plan_shot_setup(nuke,manifest,library_root):
             raise BridgeError('file_conflict','Shot outputs overlap')
         destinations.update(paths);shots.append(bound)
     plan={'schema_version':1,'manifest':normalized,'host':host,'original_script':state(nuke),
+          'scene_revision':scene_revision,
           'library_root':str(library.anchor),'output_root':str(output.anchor),
           'disposable':os.environ.get('NUKE_MCP_DISPOSABLE_SESSION')=='1','shots':shots,
           'provenance':'source existence, size and mtime; plate contents are not hashed',
           'proposed_nodes':['Read per plate','optional toolset Group','Write'],'errors':[]}
+    check_plan_stamp(scene_revision)
     return dict(plan,digest=manifests.plan_digest(plan))
 
 
@@ -196,6 +200,7 @@ def apply_shot_setup(nuke,manifest,plan_digest,library_root,operations):
     inherited_guard=operation_guard.get()
     def workflow_boundary():
         if inherited_guard:inherited_guard()
+        check_plan_stamp(plan['scene_revision'],allow_owned=True)
         if nuke.root()!=active[0] or nuke.root().name()!=active[1]:
             raise BridgeError('script_changed','Script ownership changed during shot generation','unknown')
     workflow_token=operation_guard.set(workflow_boundary)
