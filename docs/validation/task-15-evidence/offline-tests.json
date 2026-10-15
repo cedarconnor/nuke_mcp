@@ -1,0 +1,9 @@
+{
+  "command": "D:/nuke_mcp/.venv/Scripts/python.exe -m unittest discover -s tests -t . -q",
+  "tests": 221,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "result": "OK",
+  "note": "Post-review implementation; external dependency Authlib deprecation warning is emitted by the test environment."
+}

@@ -50,7 +50,7 @@ The old `tests/smoke_mcp.py --mutate` entry point directs callers to this guarde
 | `two-shot` | Run `tests/live/prepare_workflow_fixture.py D:/fixtures/new-shot-run`, load its workflow fixture. Plans/applies two `.nknc` scripts and verifies original restoration. |
 | `aov-reconstruction` | Separate fresh workflow fixture. Builds one plus reconstruction, compares four sampled channels within 1e-5 and retains an `aov-review.png` render. This is not artist approval. |
 | `event-stale-state` | Fresh minimal Root fixture. Changes FPS once, checks revision advance and rejects an old revision, then restores that field with readback. NC only qualifies refusal of unavailable coverage, not commercial stale-revision coverage. |
-| `slow-render` | Fresh fixture with `MCP_Review` Write resolving at the current frame to a **new file within the future evidence directory**. Prepare an appropriately slow graph in advance. Requires a native render lasting at least 15 seconds, running status, completion and nonempty output. A fast render fails this particular timing gate. |
+| `slow-render` | Fresh fixture with `MCP_Review` Write resolving at the current frame to a **new file within the future evidence directory**. Prepare an appropriately slow graph in advance. Preflight resolves sequence tokens and binds the observed proxy/frame context to submission; changed context is refused. Requires a native render lasting at least 15 seconds, running status, completion and nonempty output. A fast render fails this particular timing gate. |
 
 The helper fixture templates are trusted executable Nuke scripts. Copy them to new directories;
 do not reuse a folder with previous shot outputs, library entries, or preview files. The workflow

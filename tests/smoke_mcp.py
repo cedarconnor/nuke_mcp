@@ -31,30 +31,52 @@ def result_text(result) -> str:
     )
 
 
-async def mutation_probe(session):
+async def mutation_probe(session, before_mutation=None):
     name = 'MCP_SMOKE_' + uuid4().hex
     report = {'name': name, 'passed': False, 'cleanup': 'not_attempted_unverified_creation'}
     created = False
+    uncertain = False
+
+    async def call(name, arguments, mutating=False):
+        nonlocal uncertain
+        if mutating and uncertain:
+            raise RuntimeError('Previous result uncertain; no further fixture mutations')
+        try:
+            if mutating and before_mutation:
+                ownership = await before_mutation()
+                report.setdefault('ownership_checks', []).append(ownership)
+            result = await session.call_tool(name, arguments=arguments)
+        except Exception:
+            # A lost connection or rejected ownership check also forbids guessed cleanup.
+            uncertain = True
+            raise
+        receipt = result.structuredContent
+        if (not isinstance(receipt, dict) or receipt.get('transport_error') or
+                receipt.get('outcome') in ('unknown', 'partial') or
+                receipt.get('state') in ('queued', 'running')):
+            uncertain = True
+        return result
+
     try:
-        result = await session.call_tool('create_node', arguments={
+        result = await call('create_node', {
             'node_type': 'Grade', 'name': name, 'position': [0, 0],
-            'parameters': {'label': 'Temporary MCP smoke test'}})
+            'parameters': {'label': 'Temporary MCP smoke test'}}, mutating=True)
         report['create'] = result.structuredContent
         receipt = checked_receipt(result)
         if receipt['data'].get('path') != name:
             raise RuntimeError('Creation identity uncertain; no guessed cleanup')
         created = True
-        info = await session.call_tool('get_node_info', arguments={'node_name': name})
+        info = await call('get_node_info', {'node_name': name})
         report['inspect'] = info.structuredContent
         checked_receipt(info)
         operations = [
             {'op':'set_knob', 'node_path':'root.' + name, 'knob':'label', 'value':'Verified batch smoke'},
             {'op':'position', 'node_path':'root.' + name, 'x':120, 'y':80},
         ]
-        dry = await session.call_tool('batch_edit', arguments={'operations':operations})
+        dry = await call('batch_edit', {'operations':operations})
         report['batch_dry_run'] = dry.structuredContent
         checked_receipt(dry)
-        applied = await session.call_tool('batch_edit', arguments={'operations':operations, 'dry_run':False})
+        applied = await call('batch_edit', {'operations':operations, 'dry_run':False}, mutating=True)
         report['batch_apply'] = applied.structuredContent
         receipt = checked_receipt(applied)
         if [item['outcome'] for item in receipt['data']['items']] != ['applied', 'applied']:
@@ -63,9 +85,13 @@ async def mutation_probe(session):
     except Exception as exc:
         report['error'] = str(exc)
     finally:
-        if created:
+        if created and uncertain:
+            report['cleanup'] = 'uncertain'
+            report['cleanup_error'] = 'Previous result uncertain; deletion not attempted'
+            report['passed'] = False
+        elif created:
             try:
-                deletion = await session.call_tool('delete_node', arguments={'name': 'root.' + name})
+                deletion = await call('delete_node', {'name': 'root.' + name}, mutating=True)
                 report['delete'] = deletion.structuredContent
                 checked_receipt(deletion)
                 report['cleanup'] = 'verified_deleted'
@@ -86,6 +112,7 @@ async def verify_disposable_session(session, instance, pid, fixture):
     if (identity['server_instance_id'] != instance or facts.get('pid') != pid or
             facts.get('disposable') != '1' or Path(facts.get('path','')).resolve() != fixture.resolve()):
         raise RuntimeError('Disposable fixture identity changed')
+    return {'capabilities': caps, 'identity': identity}
 
 
 async def isolated_mutation_probe(port, instance, pid, fixture):
@@ -95,8 +122,9 @@ async def isolated_mutation_probe(port, instance, pid, fixture):
     async with stdio_client(server) as streams:
         async with ClientSession(*streams) as session:
             await session.initialize()
-            await verify_disposable_session(session, instance, pid, fixture)
-            return await mutation_probe(session)
+            async def guard():
+                return await verify_disposable_session(session, instance, pid, fixture)
+            return await mutation_probe(session, before_mutation=guard)
 
 
 async def smoke_test(mutate: bool = False) -> None:

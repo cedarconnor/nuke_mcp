@@ -1,0 +1,169 @@
+{
+  "status": "completed",
+  "checks": {
+    "edit_readback": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "deleted": {
+      "expected": "verified_deleted",
+      "actual": "not_attempted_unverified_creation",
+      "passed": false
+    }
+  },
+  "cleanup": {
+    "outcome": "unknown"
+  },
+  "evidence": {
+    "name": "MCP_SMOKE_c0af91131e234a139bedc50a4a2ff092",
+    "passed": false,
+    "cleanup": "not_attempted_unverified_creation",
+    "ownership_checks": [
+      {
+        "capabilities": {
+          "request_id": "3ce0db0f-545d-4a85-8cdf-2e17ab1c2df6",
+          "client_session_id": "519bb33e-b37f-4a81-b553-f9858a337d41",
+          "server_instance_id": "f888b588-6f80-4754-898b-6ec4d7c7c2d9",
+          "ok": true,
+          "state": "completed",
+          "outcome": "not_started",
+          "data": {
+            "protocol_version": 2,
+            "addon_version": "0.2.0",
+            "pid": 103064,
+            "nuke_version": "17.0v4",
+            "gui": true,
+            "host_flavor": "nuke",
+            "license_mode": "noncommercial",
+            "graph_observation": "partial_or_unknown",
+            "node_class_discovery": "advisory",
+            "tool_groups": [
+              "legacy_core",
+              "capabilities",
+              "operation_status",
+              "verified_edits",
+              "batch_edit",
+              "inspection",
+              "channel_statistics",
+              "toolsets",
+              "script_lifecycle",
+              "project_settings",
+              "shot_workflows",
+              "layered_compositing",
+              "scene_events"
+            ],
+            "toolset_limits": {
+              "nodes": 1000,
+              "selected_paths": 100,
+              "payload_bytes": 16777216,
+              "trusted_code": true,
+              "verification": "observed topology and bounded static knob subset"
+            },
+            "diagnostic_limits": {
+              "channels": 16,
+              "samples_per_channel": 4096,
+              "method": "cubic_filtered_grid"
+            },
+            "inspection_limits": {
+              "nodes": 1000,
+              "knobs_per_node": 128,
+              "channels_per_read": 2048,
+              "evaluated_paths": 10000,
+              "evidence_bytes": 4194304
+            },
+            "workflow_limits": {
+              "shots": 100,
+              "plates_per_shot": 32,
+              "layers": 32,
+              "evaluated_paths": 10000,
+              "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+              "native_pixel_recipe_qualified": false
+            },
+            "scene_events": {
+              "server_instance_id": "f888b588-6f80-4754-898b-6ec4d7c7c2d9",
+              "revision": 22,
+              "script_generation": 1,
+              "revision_available": false,
+              "reasons": [
+                "noncommercial_or_unknown_observation",
+                "callback_read_failed"
+              ],
+              "capacity": 1000,
+              "poll_limit": 500,
+              "coalesce_ms": 100,
+              "delivery": "polling",
+              "frame_observation": "sampled",
+              "revision_scope": "observed changes within this server instance"
+            },
+            "unsupported_tool_groups": [
+              "scene_revisions"
+            ],
+            "edit_limits": {
+              "batch_operations": 100,
+              "static_knobs_only": true,
+              "legacy_compound_workflows": "unverified",
+              "creation_scope": "root"
+            }
+          },
+          "error": null,
+          "warnings": [],
+          "observation": {
+            "coverage": "unknown",
+            "reason": "not_inspected"
+          },
+          "revision": null
+        },
+        "identity": {
+          "request_id": "5fc20d88-8469-40b6-b7c9-1ab5200997f7",
+          "client_session_id": "519bb33e-b37f-4a81-b553-f9858a337d41",
+          "server_instance_id": "f888b588-6f80-4754-898b-6ec4d7c7c2d9",
+          "ok": true,
+          "state": "completed",
+          "outcome": "applied",
+          "data": {
+            "executed": true,
+            "output": {
+              "pid": 103064,
+              "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-reviewed-verified-edit-host/events_fixture.nk",
+              "disposable": "1"
+            }
+          },
+          "error": null,
+          "warnings": [],
+          "observation": {
+            "coverage": "unknown",
+            "reason": "not_inspected"
+          },
+          "revision": null,
+          "command": "execute_code",
+          "tool": "execute_nuke_code"
+        }
+      }
+    ],
+    "create": {
+      "request_id": "e68a81ae-de55-4a7d-887a-9855b285cb74",
+      "client_session_id": "519bb33e-b37f-4a81-b553-f9858a337d41",
+      "server_instance_id": "f888b588-6f80-4754-898b-6ec4d7c7c2d9",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {
+        "created_path": "MCP_SMOKE_c0af91131e234a139bedc50a4a2ff092"
+      },
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_SMOKE_c0af91131e234a139bedc50a4a2ff092"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "create_node",
+      "tool": "create_node"
+    },
+    "error": "HOST_OPERATION_FAILED: {\"request_id\": \"e68a81ae-de55-4a7d-887a-9855b285cb74\", \"client_session_id\": \"519bb33e-b37f-4a81-b553-f9858a337d41\", \"server_instance_id\": \"f888b588-6f80-4754-898b-6ec4d7c7c2d9\", \"ok\": false, \"state\": \"failed\", \"outcome\": \"unknown\", \"data\": {\"created_path\": \"MCP_SMOKE_c0af91131e234a139bedc50a4a2ff092\"}, \"error\": {\"code\": \"state_uncertain\", \"message\": \"Node lookup unavailable; absence is not established: MCP_SMOKE_c0af91131e234a139bedc50a4a2ff092\"}, \"warnings\": [], \"observation\": {\"coverage\": \"unknown\", \"reason\": \"not_inspected\"}, \"revision\": null, \"command\": \"create_node\", \"tool\": \"create_node\"}"
+  }
+}

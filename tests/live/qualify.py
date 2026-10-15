@@ -277,15 +277,18 @@ class NativeRun:
 
     def render(self, row):
         # The native fixture must already point its sole Write to a NEW file below the evidence folder.
-        facts = self.call('execute_code', code="w=nuke.toNode('MCP_Review')\nassert w is not None and w.Class()=='Write'\noutput['file']=nuke.filename(w)\noutput['frame']=nuke.frame()")
+        facts = self.call('execute_code', code="w=nuke.toNode('MCP_Review')\nassert w is not None and w.Class()=='Write'\noutput['file']=nuke.filename(w,nuke.REPLACE)\noutput['frame']=nuke.frame()\noutput['proxy']=nuke.root().proxy()")
         if not facts['ok']: raise RuntimeError('Render fixture Write unavailable')
         target = Path(facts['data']['output']['file']).resolve()
         if not target.is_relative_to(self.output) or target.exists():
             raise RuntimeError('MCP_Review must resolve to a new file inside --output')
-        self.require_owned()
+        _, context = self.require_owned()
+        planned = facts['data']['output']
+        if any(context[key] != planned[key] for key in ('frame','proxy')):
+            raise RuntimeError('Render frame/proxy context changed before submission')
         start = time.monotonic()
         accepted = self.client.submit('render', {'write_node':'MCP_Review','first_frame':facts['data']['output']['frame'],
-                                                'last_frame':facts['data']['output']['frame']}, timeout_ms=120000)
+                                                'last_frame':planned['frame'], 'proxy_mode':planned['proxy']}, timeout_ms=120000)
         self.receipts.append(accepted)
         current, polls = accepted, []
         while current['state'] in ('queued','running') and time.monotonic()-start < 125:

@@ -10,9 +10,9 @@ Task 15 work is local until separately pushed. Main remains at `59d8ff6`.
 
 ## Verification
 
-- Full offline suite: 217 tests pass, no skips (final review verification follows below).
+- Full offline suite: 221 tests pass, no skips after the review fixes.
 - Real stdio contract: 37 tools, all 15 legacy required-input schemas, two clients, eight
-  correlated reads, and a simulated render lasting 16.14 seconds passed. This is transport
+  correlated reads, and a simulated render lasting 16.11 seconds passed in the final stdio run. This is transport
   evidence, not native pixel evidence.
 - Native read-only default: two clients, legacy schema compatibility and NC coverage/refusal
   checks passed on Windows, Nuke Non-commercial 17.0v4, external Python 3.11.11.
@@ -40,7 +40,7 @@ reproduced that failure before fixing all three proxy calls. The fresh `slow-ren
 report passed. Initial failure evidence remains in `slow-render-ready`; its cleanup label predates
 the stricter unknown-outcome cleanup reducer and is not used as current qualification.
 
-All eleven owned native processes (including early refused starts and the fresh proxy-fix run)
+All thirteen owned native processes (including early refused starts and the post-review render/edit runs)
 were observed exited; unrelated pre-existing Nuke processes were left alone. Per-attempt runner
 reports retain unknown graph cleanup even after process exit. Generated fixture files remain
 under task scratch and evidence directories. No AOV preview or shot publication is claimed.
@@ -50,6 +50,35 @@ read-only/event attempt). These native attempts ran from the implementation work
 Task 15 commit; they do not falsely claim to have run from an already committed release.
 The fixture digest, host instance/PID, request receipts, expected/actual values and cleanup scope
 are retained. Process-close/exit receipts are separate artifacts, not retroactive graph cleanup.
+
+## Independent release review
+
+One independent review covered false-success/cleanup claims, protocol races, mutation ownership,
+render output binding, and workflow publication integration. It found two Important issues:
+
+1. Preflight used the current proxy filename but rendering defaulted to full resolution. Fixed
+   by resolving with `nuke.REPLACE`, binding the same explicit proxy/frame context, and refusing
+   changed context before submission. Regression tests use the actual add-on generator to prove
+   that an existing full-resolution file outside the evidence root remains untouched.
+2. The edit smoke helper could delete after an ambiguous batch timeout or host replacement.
+   It now retains uncertainty across stdio receipts, skips cleanup mutations after ambiguity,
+   and checks instance/PID/script before every mutation, including deletion.
+
+Both were reproduced with failing tests and fixed in one pass. The older smoke test expecting
+deletion after an uncertain dry run was updated to the corrected contract. Full suite: 221/221.
+The task-routing status header was also corrected: its stale Task 15 pending state could cause
+later work to repeat this task. No deferred minor findings remain. No second review was run.
+
+Post-review native evidence is in `slow-render-reviewed`: proxy enabled, concrete
+`proxy.0000.png`, 16.20-second render, no full-resolution file created. This is a controlled
+beforeRender delay, not a performance benchmark or image-quality test. The native edit rerun
+retains its own report; unknown NC creation still prevents a full edit qualification.
+
+The reviewer declined commercial/other-host/artist certification, successful native toolset,
+shot and AOV correctness beyond the failed attempts, an exhaustive historical re-audit, and
+concurrent artist or malicious fixture behavior. Those limits are accepted: real-host and artist
+qualification remain open; inherited defects outside the sampled integration review may remain;
+the runner requires an exclusive host and trusted fixture scripts.
 
 ## Boundaries and decisions
 

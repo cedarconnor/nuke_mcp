@@ -203,7 +203,7 @@ class RenderQualificationTests(unittest.TestCase):
             args=q.parse_args(['--output',str(Path(folder)/'out'),'--pid','42','--fixture',str(fixture)])
             run=q.NativeRun(args,q.prepare_output(args.output));run.instance='i'
             def call(command,params):
-                output=({'file':str(args.output/'new.png'),'frame':1} if 'MCP_Review' in params['code'] else
+                output=({'file':str(args.output/'new.png'),'frame':1,'proxy':False} if 'MCP_Review' in params['code'] else
                         {'pid':42,'path':str(fixture),'disposable':'1','frame':1,'proxy':False})
                 return {'ok':True,'request_id':'r','server_instance_id':'i','outcome':'applied','data':{'output':output}}
             failed={'ok':False,'state':'failed','outcome':'unknown','request_id':'render','server_instance_id':'i',
@@ -212,6 +212,98 @@ class RenderQualificationTests(unittest.TestCase):
                 row={'checks':{},'cleanup':{'outcome':'unknown'}}
                 run.render(row)
             self.assertEqual(row['cleanup']['outcome'],'unknown')
+
+class ReviewedQualificationRegressions(unittest.TestCase):
+    def test_unknown_batch_apply_never_deletes_verified_creation(self):
+        import asyncio
+        from types import SimpleNamespace
+        from tests.smoke_mcp import mutation_probe
+        class Session:
+            def __init__(self):self.calls=[]
+            async def call_tool(self,name,arguments):
+                self.calls.append(name)
+                if name=='create_node':
+                    receipt={'ok':True,'outcome':'applied','data':{'path':arguments['name']}}
+                elif name=='batch_edit' and arguments.get('dry_run') is False:
+                    receipt={'ok':False,'outcome':'unknown','transport_error':True,
+                             'error':{'code':'wait_timeout'},'data':{}}
+                else:receipt={'ok':True,'outcome':'applied','data':{}}
+                return SimpleNamespace(structuredContent=receipt,isError=not receipt['ok'])
+        session=Session();result=asyncio.run(mutation_probe(session))
+        self.assertNotIn('delete_node',session.calls)
+        self.assertEqual(result['cleanup'],'uncertain')
+        self.assertFalse(result['passed'])
+
+    def test_replacement_host_before_cleanup_never_receives_delete(self):
+        import asyncio
+        from types import SimpleNamespace
+        from tests import smoke_mcp
+        import inspect
+        self.assertIn('before_mutation',inspect.signature(smoke_mcp.mutation_probe).parameters,
+                      'Missing per-mutation ownership gate')
+        with tempfile.TemporaryDirectory() as folder:
+            fixture=Path(folder)/'fixture.nk';fixture.write_text('Root {}')
+            class Session:
+                def __init__(self):self.calls=[];self.replaced=False
+                async def call_tool(self,name,arguments):
+                    self.calls.append(name)
+                    data={};instance='replacement' if self.replaced else 'original'
+                    if name=='execute_nuke_code':data={'output':{'pid':42,'path':str(fixture),'disposable':'1'}}
+                    if name=='create_node':data={'path':arguments['name']}
+                    if name=='batch_edit' and arguments.get('dry_run') is False:
+                        data={'items':[{'outcome':'applied'},{'outcome':'applied'}]};self.replaced=True
+                    receipt={'ok':True,'outcome':'applied','data':data,'server_instance_id':instance,'request_id':str(len(self.calls))}
+                    return SimpleNamespace(structuredContent=receipt,isError=False)
+            session=Session()
+            async def guard():return await smoke_mcp.verify_disposable_session(session,'original',42,fixture)
+            result=asyncio.run(smoke_mcp.mutation_probe(session,before_mutation=guard))
+            self.assertNotIn('delete_node',session.calls)
+            self.assertEqual(result['cleanup'],'uncertain')
+            self.assertFalse(result['passed'])
+
+    def test_render_uses_preflight_proxy_mode_and_resolved_frame_filename(self):
+        from tests.test_host_render import HostRenderTests
+        case=HostRenderTests();case.setUp();host,server=case.host,case.server
+        with tempfile.TemporaryDirectory() as folder:
+            base=Path(folder);fixture=base/'fixture.nk';fixture.write_text('Root {}')
+            args=q.parse_args(['--output',str(base/'out'),'--fixture',str(fixture),'--pid','42'])
+            run=q.NativeRun(args,q.prepare_output(args.output));run.instance='i'
+            proxy_target=args.output/'proxy.1001.png';full_target=base/'existing-artist.png';full_target.write_bytes(b'preserve')
+            host.REPLACE=1
+            def filename(node,flags=0):
+                if not host.root().proxy():return str(full_target)
+                return str(proxy_target if flags==host.REPLACE else args.output/'proxy.####.png')
+            host.filename=filename;host.toNode=lambda name:host.node
+            rendered=[]
+            host.execute=lambda node,first,last:rendered.append(host.filename(node,host.REPLACE))
+            def call(command,params):
+                output={};exec(params['code'],{'nuke':host,'output':output})
+                return {'ok':True,'request_id':'r','server_instance_id':'i','outcome':'applied','data':{'output':output}}
+            def submit(command,params,**kwargs):
+                list(server.render(**params))
+                return {'ok':True,'state':'completed','outcome':'applied','request_id':'render','server_instance_id':'i'}
+            with patch.object(run.client,'call',side_effect=call),patch.object(run.client,'submit',side_effect=submit), \
+                 patch.object(run,'require_owned',return_value=({}, {'frame':1001,'proxy':True})), \
+                 patch.object(run,'retained',return_value={'outcome':'retained_disposable'}):
+                row={};run.render(row)
+            self.assertEqual(rendered,[str(proxy_target)])
+            self.assertEqual(row['evidence']['target'],str(proxy_target))
+            self.assertEqual(full_target.read_bytes(),b'preserve')
+            self.assertTrue(host.root().proxy())
+
+    def test_render_refuses_frame_or_proxy_change_before_submission(self):
+        for changed in ({'frame':2,'proxy':False},{'frame':1,'proxy':True}):
+            with self.subTest(changed=changed),tempfile.TemporaryDirectory() as folder:
+                base=Path(folder);fixture=base/'fixture.nk';fixture.write_text('Root {}')
+                args=q.parse_args(['--output',str(base/'out'),'--fixture',str(fixture),'--pid','42'])
+                run=q.NativeRun(args,q.prepare_output(args.output));run.instance='i'
+                facts={'ok':True,'request_id':'r','server_instance_id':'i','outcome':'not_started',
+                       'data':{'output':{'file':str(args.output/'new.png'),'frame':1,'proxy':False}}}
+                with patch.object(run.client,'call',return_value=facts), \
+                     patch.object(run,'require_owned',return_value=({},changed)), \
+                     patch.object(run.client,'submit',return_value={'ok':False,'state':'failed','outcome':'unknown'}) as submit:
+                    with self.assertRaisesRegex(RuntimeError,'context changed'):run.render({})
+                submit.assert_not_called()
 
 
 if __name__ == '__main__': unittest.main()

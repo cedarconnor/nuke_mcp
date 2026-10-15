@@ -10,7 +10,7 @@
 
 **Spec:** [Nuke MCP reliability and workflow expansion design](../specs/2026-10-14-nuke-mcp-expansion-design.md). Read it before implementing any task.
 
-**Status:** Milestones 1–5 and Task 14 implemented; Task 15 release qualification remains pending. See `docs/validation/milestone-1.md` through `milestone-5.md` for separate evidence and native qualification limits. Milestones 2–5 were pushed on `codex/nuke-production-workflows`; Task 14 remains local on `codex/nuke-scene-events`. Six milestones share this ordered plan and its transport, identity, mutation and observation contracts.
+**Status:** All six milestones and Tasks 1–15 are implemented, with bounded NC qualification rather than full production certification. See `docs/validation/task-15.md` for current checks and remaining commercial, native workflow, and artist-review gates. Milestones 2–5 were pushed on `codex/nuke-production-workflows`; Task 14 was pushed on `codex/nuke-scene-events` at `1238ba2`. Task 15 is local on `codex/nuke-release-qualification`. Main remains `59d8ff6`.
 
 ## Global constraints
 
