@@ -1,0 +1,101 @@
+{
+  "status": "completed",
+  "checks": {
+    "completed": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "longer_than_old_timeout": {
+      "expected": ">=15 seconds",
+      "actual": 16.20299999997951,
+      "passed": true
+    },
+    "status_observed": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "output_exists": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "retained_disposable",
+    "owned": true,
+    "receipt": {
+      "request_id": "adddaa2a-711e-4fc1-98f1-4a5b08054780",
+      "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+      "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 158504,
+          "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-proxy-fixed-slow-render-host/events_fixture.nk",
+          "disposable": "1",
+          "frame": 0,
+          "fps": 24.0,
+          "proxy": false,
+          "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-proxy-fixed-slow-render-host\\library"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "note": "Fixture graph and generated files retained for inspection; no rollback or process exit claimed."
+  },
+  "evidence": {
+    "accepted": {
+      "request_id": "ed59a4ea-3144-4790-90b9-c30afe30b614",
+      "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+      "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+      "ok": false,
+      "state": "queued",
+      "outcome": "not_started",
+      "data": {},
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "final": {
+      "request_id": "ed59a4ea-3144-4790-90b9-c30afe30b614",
+      "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+      "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "frames_completed": [
+          0
+        ],
+        "write_nodes": [
+          "MCP_Review"
+        ],
+        "status": "Rendered 1 frame(s)"
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "seconds": 16.20299999997951,
+    "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\docs\\validation\\task-15-evidence\\slow-render-proxy-fixed\\slow.png"
+  }
+}

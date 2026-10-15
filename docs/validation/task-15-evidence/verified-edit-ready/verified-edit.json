@@ -1,0 +1,47 @@
+{
+  "status": "completed",
+  "checks": {
+    "edit_readback": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "deleted": {
+      "expected": "verified_deleted",
+      "actual": "not_attempted_unverified_creation",
+      "passed": false
+    }
+  },
+  "cleanup": {
+    "outcome": "unknown"
+  },
+  "evidence": {
+    "name": "MCP_SMOKE_0a3d3a89002a4fcd99f9301622fd78b4",
+    "passed": false,
+    "cleanup": "not_attempted_unverified_creation",
+    "create": {
+      "request_id": "9faaa1d5-549f-44fc-a029-77a9ea1ed417",
+      "client_session_id": "a85d1310-7824-4436-a4b3-15d62815cd2f",
+      "server_instance_id": "e0b20503-5664-4e34-93f6-65774fe5ba5b",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {
+        "created_path": "MCP_SMOKE_0a3d3a89002a4fcd99f9301622fd78b4"
+      },
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_SMOKE_0a3d3a89002a4fcd99f9301622fd78b4"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "create_node",
+      "tool": "create_node"
+    },
+    "error": "HOST_OPERATION_FAILED: {\"request_id\": \"9faaa1d5-549f-44fc-a029-77a9ea1ed417\", \"client_session_id\": \"a85d1310-7824-4436-a4b3-15d62815cd2f\", \"server_instance_id\": \"e0b20503-5664-4e34-93f6-65774fe5ba5b\", \"ok\": false, \"state\": \"failed\", \"outcome\": \"unknown\", \"data\": {\"created_path\": \"MCP_SMOKE_0a3d3a89002a4fcd99f9301622fd78b4\"}, \"error\": {\"code\": \"state_uncertain\", \"message\": \"Node lookup unavailable; absence is not established: MCP_SMOKE_0a3d3a89002a4fcd99f9301622fd78b4\"}, \"warnings\": [], \"observation\": {\"coverage\": \"unknown\", \"reason\": \"not_inspected\"}, \"revision\": null, \"command\": \"create_node\", \"tool\": \"create_node\"}"
+  }
+}

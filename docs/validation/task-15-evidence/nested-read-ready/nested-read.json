@@ -1,0 +1,1608 @@
+{
+  "status": "completed",
+  "checks": {
+    "nested_paths": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "truncation": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "read_identity": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "missing_sequence": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "state_preserved": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "not_needed"
+  },
+  "evidence": {
+    "passed": false,
+    "checks": {
+      "nested_paths": true,
+      "nc_coverage_label": true,
+      "truncation": false,
+      "read_identity": false,
+      "missing_sequence": false,
+      "state_preserved": true
+    },
+    "receipts": {
+      "before": {
+        "request_id": "f4965d29-dbc9-4f32-807f-c92905d8a8c5",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "pid": 156936,
+            "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-nested-read-host/inspection_fixture.nk",
+            "frame": 0,
+            "proxy": false,
+            "selection": []
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "graph": {
+        "request_id": "745d04d6-0f09-4a4b-8b2e-f9e3a1bde0a0",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [
+            {
+              "path": "MCP_MissingRead",
+              "name": "MCP_MissingRead",
+              "type": "Read",
+              "position": [
+                -40,
+                -39
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "file_type": {
+                  "type": "Enumeration_Knob",
+                  "value": "exr"
+                },
+                "file": {
+                  "type": "File_Knob",
+                  "value": "C:/NUKE_MCP_DISPOSABLE_MISSING/plate.%04d.exr"
+                },
+                "localizationPolicy": {
+                  "type": "Enumeration_Knob",
+                  "value": "fromAutoLocalizePath"
+                },
+                "localizationPriority": {
+                  "type": "Int_Knob",
+                  "value": 0
+                },
+                "proxy": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "first": {
+                  "type": "Int_Knob",
+                  "value": 1
+                },
+                "before": {
+                  "type": "Enumeration_Knob",
+                  "value": "hold"
+                },
+                "last": {
+                  "type": "Int_Knob",
+                  "value": 3
+                },
+                "after": {
+                  "type": "Enumeration_Knob",
+                  "value": "hold"
+                },
+                "frame_mode": {
+                  "type": "Enumeration_Knob",
+                  "value": "expression"
+                },
+                "frame": {
+                  "type": "String_Knob",
+                  "value": ""
+                },
+                "origfirst": {
+                  "type": "Int_Knob",
+                  "value": 1
+                },
+                "origlast": {
+                  "type": "Int_Knob",
+                  "value": 1
+                },
+                "origset": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "on_error": {
+                  "type": "Enumeration_Knob",
+                  "value": "error"
+                },
+                "colorspace": {
+                  "type": "Enumeration_Knob",
+                  "value": "default"
+                },
+                "premultiplied": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "raw": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "auto_alpha": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "offset_negative_display_window": {
+                  "type": "Boolean_Knob",
+                  "value": true
+                },
+                "noprefix": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "edge_pixels": {
+                  "type": "Enumeration_Knob",
+                  "value": "plate detect"
+                },
+                "ignore_part_names": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "sequence": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "metadatafiltermode": {
+                  "type": "Enumeration_Knob",
+                  "value": "keys and values"
+                },
+                "in_colorspace": {
+                  "type": "Enumeration_Knob",
+                  "value": "scene_linear"
+                },
+                "out_colorspace": {
+                  "type": "Enumeration_Knob",
+                  "value": "scene_linear"
+                },
+                "reverse_transform": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "container_codec",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateLocalization",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "cacheLocal",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "proxy_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rescan_range",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "version",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "reload",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "transfer",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "linear",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable_mmap",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "key1",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "value1",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "key2",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "value2",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "key3",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "value3",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "key4",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "value4",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "import sequence",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "edit_num",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "shownmetadata",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "metadatafilter",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "timecode",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "edge_code",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "swap",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": true,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 19
+            },
+            {
+              "path": "GroupB",
+              "name": "GroupB",
+              "type": "Group",
+              "position": [
+                70,
+                -14
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "hide_input": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "group_view_position": {
+                  "type": "Enumeration_Knob",
+                  "value": "top-left"
+                },
+                "show_group_view": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "disable_group_view": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "lock_connections": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "mapsize": {
+                  "type": "WH_Knob",
+                  "value": [
+                    0.15,
+                    0.15
+                  ]
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "export_as_gizmo",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "window",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            },
+            {
+              "path": "GroupB.SameName",
+              "name": "SameName",
+              "type": "Constant",
+              "position": [
+                180,
+                -33
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "color": {
+                  "type": "AColor_Knob",
+                  "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "color_panelDropped": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": true
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "channels",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "full_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "proxy_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "first",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "last",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            },
+            {
+              "path": "GroupA",
+              "name": "GroupA",
+              "type": "Group",
+              "position": [
+                290,
+                -14
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "hide_input": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "group_view_position": {
+                  "type": "Enumeration_Knob",
+                  "value": "top-left"
+                },
+                "show_group_view": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "disable_group_view": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "lock_connections": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "mapsize": {
+                  "type": "WH_Knob",
+                  "value": [
+                    0.15,
+                    0.15
+                  ]
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "export_as_gizmo",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "window",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            },
+            {
+              "path": "GroupA.SameName",
+              "name": "SameName",
+              "type": "Constant",
+              "position": [
+                400,
+                -33
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "color": {
+                  "type": "AColor_Knob",
+                  "value": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                },
+                "color_panelDropped": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": true
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "channels",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "full_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "proxy_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "first",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "last",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            },
+            {
+              "path": "MCP_Ramp",
+              "name": "MCP_Ramp",
+              "type": "Expression",
+              "position": [
+                510,
+                39
+              ],
+              "selected": false,
+              "inputs": [
+                {
+                  "index": 0,
+                  "path": null
+                }
+              ],
+              "parameters": {
+                "temp_name0": {
+                  "type": "String_Knob",
+                  "value": ""
+                },
+                "temp_name1": {
+                  "type": "String_Knob",
+                  "value": ""
+                },
+                "temp_name2": {
+                  "type": "String_Knob",
+                  "value": ""
+                },
+                "temp_name3": {
+                  "type": "String_Knob",
+                  "value": ""
+                },
+                "inject": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "invert_mask": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "fringe": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "maskFromFlag": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "process_mask": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "invert_unpremult": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "enable_mix_luminance": {
+                  "type": "Boolean_Knob",
+                  "value": true
+                },
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "hide_input": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "temp_expr0",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "temp_expr1",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "temp_expr2",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "temp_expr3",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "channel0",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "expr0",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "channel1",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "expr1",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "channel2",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "expr2",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "channel3",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "expr3",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "Mask",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "maskChannelMask",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "maskChannelInput",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "maskFrom",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "maskChannel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "mask",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "unpremult",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "mix_luminance",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "mix",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "enable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            },
+            {
+              "path": "MCP_Constant",
+              "name": "MCP_Constant",
+              "type": "Constant",
+              "position": [
+                510,
+                -33
+              ],
+              "selected": false,
+              "inputs": [],
+              "parameters": {
+                "color": {
+                  "type": "AColor_Knob",
+                  "value": [
+                    0.25,
+                    0.5,
+                    0.75,
+                    1.0
+                  ]
+                },
+                "color_panelDropped": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "label": {
+                  "type": "Multiline_Eval_String_Knob",
+                  "value": ""
+                },
+                "icon": {
+                  "type": "File_Knob",
+                  "value": ""
+                },
+                "cached": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "dope_sheet": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "bookmark": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                },
+                "postage_stamp": {
+                  "type": "Boolean_Knob",
+                  "value": true
+                },
+                "useLifetime": {
+                  "type": "Boolean_Knob",
+                  "value": false
+                }
+              },
+              "omitted_knobs": [
+                {
+                  "name": "channels",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "full_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "proxy_format",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "first",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "last",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "name",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "help",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onCreate",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "onDestroy",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "knobChanged",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "updateUI",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "autolabel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "panel",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "tile_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "gl_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_size",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "note_font_color",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "selected",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "xpos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "ypos",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "indicators",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "rootNodeUpdated",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "disable",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "postage_stamp_frame",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeStart",
+                  "reason": "unsupported_type"
+                },
+                {
+                  "name": "lifetimeEnd",
+                  "reason": "unsupported_type"
+                }
+              ],
+              "errors": [],
+              "truncated": false,
+              "inputs_omitted_by_limit": 0,
+              "knobs_omitted_by_limit": 0
+            }
+          ],
+          "errors": [],
+          "truncated": true,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "partial",
+            "reason": "nc_observation_unreliable"
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "partial",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null
+      },
+      "bounded": {
+        "request_id": "0aa89812-92c2-40ad-a8f2-8d71b1c0b62a",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null
+      },
+      "reads": {
+        "request_id": "ac2e6d9e-ad00-4a68-9104-0d7fac7221e0",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": false,
+        "state": "failed",
+        "outcome": "not_started",
+        "data": {},
+        "error": {
+          "code": "state_uncertain",
+          "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+        },
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "sequence": {
+        "request_id": "d2817d50-66d6-42d5-8938-c5efbdecca93",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": false,
+        "state": "failed",
+        "outcome": "not_started",
+        "data": {},
+        "error": {
+          "code": "state_uncertain",
+          "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+        },
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "after": {
+        "request_id": "f20fd841-73a3-45c1-8b3c-d1c5f24acce2",
+        "client_session_id": "58bd8a53-9c1f-4098-a70e-5b310d20f44d",
+        "server_instance_id": "1350dccd-8c2d-4e9d-902e-df59da0c600e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "pid": 156936,
+            "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-nested-read-host/inspection_fixture.nk",
+            "frame": 0,
+            "proxy": false,
+            "selection": []
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    },
+    "errors": {
+      "reads": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+      },
+      "sequence": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: MCP_MissingRead"
+      }
+    }
+  }
+}

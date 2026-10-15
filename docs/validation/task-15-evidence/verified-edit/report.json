@@ -1,0 +1,124 @@
+{
+  "passed": false,
+  "qualified": [],
+  "unqualified": [
+    "two-clients",
+    "legacy-tools",
+    "slow-render",
+    "verified-edit",
+    "nc-ambiguity",
+    "nested-read",
+    "channel-statistics",
+    "toolset-roundtrip",
+    "two-shot",
+    "aov-reconstruction",
+    "event-stale-state"
+  ],
+  "commercial_qualified": false,
+  "artist_approved": false,
+  "host": {
+    "protocol_version": 2,
+    "addon_version": "0.2.0",
+    "pid": 143916,
+    "nuke_version": "17.0v4",
+    "gui": true,
+    "host_flavor": "nuke",
+    "license_mode": "noncommercial",
+    "graph_observation": "partial_or_unknown",
+    "node_class_discovery": "advisory",
+    "tool_groups": [
+      "legacy_core",
+      "capabilities",
+      "operation_status",
+      "verified_edits",
+      "batch_edit",
+      "inspection",
+      "channel_statistics",
+      "toolsets",
+      "script_lifecycle",
+      "project_settings",
+      "shot_workflows",
+      "layered_compositing",
+      "scene_events"
+    ],
+    "toolset_limits": {
+      "nodes": 1000,
+      "selected_paths": 100,
+      "payload_bytes": 16777216,
+      "trusted_code": true,
+      "verification": "observed topology and bounded static knob subset"
+    },
+    "diagnostic_limits": {
+      "channels": 16,
+      "samples_per_channel": 4096,
+      "method": "cubic_filtered_grid"
+    },
+    "inspection_limits": {
+      "nodes": 1000,
+      "knobs_per_node": 128,
+      "channels_per_read": 2048,
+      "evaluated_paths": 10000,
+      "evidence_bytes": 4194304
+    },
+    "workflow_limits": {
+      "shots": 100,
+      "plates_per_shot": 32,
+      "layers": 32,
+      "evaluated_paths": 10000,
+      "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+      "native_pixel_recipe_qualified": false
+    },
+    "scene_events": {
+      "server_instance_id": "614dab94-fdbd-46a3-9738-abf1192ec155",
+      "revision": 0,
+      "script_generation": 0,
+      "revision_available": false,
+      "reasons": [
+        "noncommercial_or_unknown_observation"
+      ],
+      "capacity": 1000,
+      "poll_limit": 500,
+      "coalesce_ms": 100,
+      "delivery": "polling",
+      "frame_observation": "sampled",
+      "revision_scope": "observed changes within this server instance"
+    },
+    "unsupported_tool_groups": [
+      "scene_revisions"
+    ],
+    "edit_limits": {
+      "batch_operations": 100,
+      "static_knobs_only": true,
+      "legacy_compound_workflows": "unverified",
+      "creation_scope": "root"
+    }
+  },
+  "scenarios": {},
+  "selected": [
+    "verified-edit"
+  ],
+  "error": "Refusing a host other than the specified disposable fixture",
+  "metadata": {
+    "timestamp_utc": "2026-10-15T00:15:24.669942+00:00",
+    "commit": "1238ba2c71f4b8c2efe1cb8527157f8f31ae7b42",
+    "dirty": true,
+    "python": "3.11.11 (remotes/origin/foundry/v3.11.11:42e60506bdd, Jul 23 2025, 10:51:14) [MSC v.1935 64 bit (AMD64)]",
+    "repository": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp",
+    "port": 19887,
+    "fixture": {
+      "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-verified-edit-host\\events_fixture.nk",
+      "sha256": "0c10171ea5ff40f45ffa08a6c5ba40b7f363b04d91a5bbb3bd56988f5f847195",
+      "pid": 143916
+    },
+    "server_instance_id": "614dab94-fdbd-46a3-9738-abf1192ec155",
+    "identity": {
+      "pid": 143916,
+      "path": "Root",
+      "disposable": "1",
+      "frame": 0,
+      "fps": 24.0,
+      "proxy": false
+    }
+  },
+  "cleanup": {}
+}

@@ -14,12 +14,23 @@ class Knob:
         return self.v
 
 
+class FakeRoot(dict):
+    def __init__(self):
+        super().__init__(first_frame=Knob(1), last_frame=Knob(3))
+        self.proxy_value = True
+    def proxy(self):
+        return self.proxy_value
+    def setProxy(self, value):
+        self.proxy_value = value
+
+
 class FakeNuke(ModuleType):
     def __init__(self):
         super().__init__("nuke")
         self.env = {"nc": True}
         self.current = 1001
-        self.proxy_value = True
+        self.root_node = FakeRoot()
+        self.rendered_proxy = []
         self.rendered = []
         self.fail = False
         self.node = SimpleNamespace(Class=lambda: "Write", name=lambda: "Write1")
@@ -31,17 +42,14 @@ class FakeNuke(ModuleType):
         if value is not None:
             self.current = value
         return self.current
-    def proxy(self):
-        return self.proxy_value
-    def setProxy(self, value):
-        self.proxy_value = value
     def execute(self, node, first, last):
         self.current = first
         if self.fail:
             raise RuntimeError("native render failed")
         self.rendered.append(first)
+        self.rendered_proxy.append(self.root().proxy())
     def root(self):
-        return {"first_frame": Knob(1), "last_frame": Knob(3)}
+        return self.root_node
 
 
 class HostRenderTests(unittest.TestCase):
@@ -60,15 +68,16 @@ class HostRenderTests(unittest.TestCase):
         self.assertEqual(next(job)["frames_completed"], [1])
         job.close()
         self.assertEqual(self.host.rendered, [1])
+        self.assertEqual(self.host.rendered_proxy, [False])
         self.assertEqual(self.host.frame(), 1001)
-        self.assertTrue(self.host.proxy())
+        self.assertTrue(self.host.root().proxy())
 
     def test_failure_restores_frame_and_proxy(self):
         self.host.fail = True
         with self.assertRaises(RuntimeError):
             list(self.server.render(write_node="Write1", frame_range="1-3"))
         self.assertEqual(self.host.frame(), 1001)
-        self.assertTrue(self.host.proxy())
+        self.assertTrue(self.host.root().proxy())
 
     def test_explicit_sparse_frames_are_not_rendered_as_contiguous_range(self):
         list(self.server.render(write_node="Write1", frame_range="1,3,5"))
@@ -77,7 +86,7 @@ class HostRenderTests(unittest.TestCase):
     def test_unknown_write_does_not_modify_proxy(self):
         with self.assertRaises(BridgeError):
             list(self.server.render(write_node="missing", first_frame=1, last_frame=2))
-        self.assertTrue(self.host.proxy())
+        self.assertTrue(self.host.root().proxy())
 
     def test_native_nc_environment_rejects_render_all_before_mutation(self):
         class NativeEnvironment(dict):
@@ -90,4 +99,14 @@ class HostRenderTests(unittest.TestCase):
             list(self.server.render(first_frame=1, last_frame=2))
         self.assertEqual(failure.exception.code, 'state_uncertain')
         self.assertEqual(failure.exception.outcome, 'not_started')
-        self.assertTrue(self.host.proxy())
+        self.assertTrue(self.host.root().proxy())
+
+    def test_native_root_proxy_api_renders_and_restores(self):
+        try:
+            list(self.server.render(write_node='Write1', first_frame=1, last_frame=1))
+        except AttributeError as exc:
+            self.fail('Renderer used nonexistent module-level proxy API: '+str(exc))
+        self.assertEqual(self.host.rendered, [1])
+        self.assertEqual(self.host.rendered_proxy, [False])
+        self.assertTrue(self.host.root().proxy())
+        self.assertEqual(self.host.frame(), 1001)

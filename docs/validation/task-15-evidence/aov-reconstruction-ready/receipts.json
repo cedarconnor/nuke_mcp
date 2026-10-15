@@ -1,0 +1,443 @@
+[
+  {
+    "request_id": "2d680095-8f21-47e0-8453-4bd14782f71f",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 154048,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit",
+        "inspection",
+        "channel_statistics",
+        "toolsets",
+        "script_lifecycle",
+        "project_settings",
+        "shot_workflows",
+        "layered_compositing",
+        "scene_events"
+      ],
+      "toolset_limits": {
+        "nodes": 1000,
+        "selected_paths": 100,
+        "payload_bytes": 16777216,
+        "trusted_code": true,
+        "verification": "observed topology and bounded static knob subset"
+      },
+      "diagnostic_limits": {
+        "channels": 16,
+        "samples_per_channel": 4096,
+        "method": "cubic_filtered_grid"
+      },
+      "inspection_limits": {
+        "nodes": 1000,
+        "knobs_per_node": 128,
+        "channels_per_read": 2048,
+        "evaluated_paths": 10000,
+        "evidence_bytes": 4194304
+      },
+      "workflow_limits": {
+        "shots": 100,
+        "plates_per_shot": 32,
+        "layers": 32,
+        "evaluated_paths": 10000,
+        "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+        "native_pixel_recipe_qualified": false
+      },
+      "scene_events": {
+        "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+        "revision": 27,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "capacity": 1000,
+        "poll_limit": 500,
+        "coalesce_ms": 100,
+        "delivery": "polling",
+        "frame_observation": "sampled",
+        "revision_scope": "observed changes within this server instance"
+      },
+      "unsupported_tool_groups": [
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "cd30cc28-b08b-4b9b-b533-94c201676508",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "0fc92c2a-8edc-4653-afef-4afdcbe3f574",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "7812317f-9de8-4c0a-8ab9-ac5318dbc58a",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "80019700-ff0e-40e1-bdad-fe418ac72d1e",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "nodes": [
+          "MCP_Light",
+          "MCP_Review",
+          "MCP_Base"
+        ]
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "e21d5d08-b0ec-48e1-81c2-6519e5da38b3",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "5b0d39e1-9628-4ee1-98ae-2232dfff88b6",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "plate": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/plate.png",
+        "plate_colorspace": "linear",
+        "write": {
+          "file_type": "exr",
+          "datatype": "16 bit half",
+          "compression": "Zip (1 scanline)",
+          "colorspace": "linear",
+          "channels": "rgb"
+        },
+        "color": {
+          "colorManagement": "Nuke"
+        }
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "0af4912b-d104-4fd1-8da1-ba6aad135ee7",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "56b83256-5704-41d3-b49c-6007d8ea6bd2",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "read": [
+          "default",
+          "linear",
+          "sRGB",
+          "rec709",
+          "Cineon",
+          "Gamma1.8",
+          "Gamma2.2",
+          "Gamma2.4",
+          "Gamma2.6",
+          "Panalog",
+          "REDLog",
+          "ViperLog",
+          "AlexaV3LogC",
+          "PLogLin",
+          "SLog",
+          "SLog1",
+          "SLog2",
+          "SLog3",
+          "CLog",
+          "Log3G10",
+          "Log3G12",
+          "HybridLogGamma",
+          "Protune",
+          "BT1886",
+          "st2084",
+          "Blackmagic Film Generation 5",
+          "ARRILogC4",
+          "REDSpace\t\u0007"
+        ],
+        "write": [
+          "default",
+          "linear",
+          "sRGB",
+          "rec709",
+          "Cineon",
+          "Gamma1.8",
+          "Gamma2.2",
+          "Gamma2.4",
+          "Gamma2.6",
+          "Panalog",
+          "REDLog",
+          "ViperLog",
+          "AlexaV3LogC",
+          "PLogLin",
+          "SLog",
+          "SLog1",
+          "SLog2",
+          "SLog3",
+          "CLog",
+          "Log3G10",
+          "Log3G12",
+          "HybridLogGamma",
+          "Protune",
+          "BT1886",
+          "st2084",
+          "Blackmagic Film Generation 5",
+          "ARRILogC4",
+          "REDSpace\t\u0007"
+        ]
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "c4544c45-cdca-4004-90ba-21bb684b413c",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "cdcefaf2-7b56-4534-a938-c0400e3fa90d",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {},
+    "error": {
+      "code": "state_uncertain",
+      "message": "Node lookup unavailable; absence is not established: MCP_Light"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "a2cd5f4c-d97c-4111-b58c-553fa80b83a4",
+    "client_session_id": "c6f4ceba-3ff3-460c-893f-c29582be4876",
+    "server_instance_id": "6711408d-ac75-4478-981e-575d41e5feaf",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 154048,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-aov-reconstruction-host/workflow_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-aov-reconstruction-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  }
+]

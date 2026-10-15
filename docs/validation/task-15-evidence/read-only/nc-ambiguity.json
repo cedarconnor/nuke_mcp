@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "checks": {
+    "coverage_disclosed": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "revision_refused": {
+      "expected": "revision_unavailable",
+      "actual": "revision_unavailable",
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "not_needed"
+  }
+}

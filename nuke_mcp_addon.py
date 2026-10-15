@@ -363,10 +363,10 @@ class NukeMCPServer:
             nodes = nuke.allNodes("Write")
             if not nodes:
                 raise BridgeError("write_node_unavailable", "No observable Write nodes")
-        original_frame, original_proxy = nuke.frame(), nuke.proxy()
+        original_frame, original_proxy = nuke.frame(), nuke.root().proxy()
         completed = []
         try:
-            nuke.setProxy(proxy_mode)
+            nuke.root().setProxy(proxy_mode)
             for frame in frames:
                 for node in nodes:
                     nuke.execute(node, frame, frame)
@@ -376,7 +376,7 @@ class NukeMCPServer:
                        "status": "Rendered {0} frame(s)".format(len(completed))}
         finally:
             try:
-                nuke.setProxy(original_proxy)
+                nuke.root().setProxy(original_proxy)
             finally:
                 nuke.frame(original_frame)
 

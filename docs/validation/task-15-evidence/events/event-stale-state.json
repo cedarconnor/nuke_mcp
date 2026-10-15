@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "checks": {
+    "revision_advanced": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "stale_refused": {
+      "expected": "revision_unavailable",
+      "actual": "revision_unavailable",
+      "passed": true
+    },
+    "restored": {
+      "expected": 24.0,
+      "actual": 24.0,
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "applied",
+    "expected": 24.0,
+    "actual": 24.0,
+    "receipt": {
+      "request_id": "f328728e-fa53-459d-84b9-ea712facdf95",
+      "client_session_id": "0a1fe0f6-600d-4039-8324-b22138f2c4a0",
+      "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "fps": 24.0
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    },
+    "scope": "FPS field only; disposable dirty state retained"
+  },
+  "coverage": "degraded_coverage_refusal_only"
+}

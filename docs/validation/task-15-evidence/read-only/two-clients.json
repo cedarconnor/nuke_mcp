@@ -1,0 +1,951 @@
+{
+  "status": "completed",
+  "checks": {
+    "correlated_reads": {
+      "expected": 8,
+      "actual": 8,
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "not_needed"
+  },
+  "evidence": {
+    "mode": "live",
+    "port": 19887,
+    "calls": [
+      {
+        "request_id": "c1635931-4101-438c-b71d-f772477dc513",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBB9CB0>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "aec4e308-ffd6-4f9b-9d1e-9dae324e961a",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CAABBB0>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "07cbbc14-3111-4e4b-b086-981548e419ba",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBBAAB0>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "ebd51968-a280-4d8e-bbe1-fa67a9e84621",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBB81B0>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "52b913eb-cea4-4079-96da-a9021728e4ee",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBB9950>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "94385b2b-e906-4d32-94fa-3fe440cbd4e9",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBBB470>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "fb2aa6e7-e2b7-44f1-b482-9de35f900bfb",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBBA330>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      },
+      {
+        "request_id": "e0bd2dfe-f875-452a-b614-d09b27123541",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "nodes": [],
+          "errors": [],
+          "truncated": false,
+          "scope": {
+            "recurse_groups": true,
+            "selected_only": false
+          },
+          "observation": {
+            "coverage": "unknown",
+            "reason": "nc_observation_unreliable"
+          },
+          "name": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+          "fps": 24,
+          "format": "<Format object at 0x000001F12CBBBF10>",
+          "first_frame": 1.0,
+          "last_frame": 100.0
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "nc_observation_unreliable"
+        },
+        "revision": null,
+        "command": "get_script_info",
+        "tool": "get_script_info"
+      }
+    ],
+    "capabilities": [
+      {
+        "request_id": "b0f96155-5c57-4159-afa4-5e4a67117f2a",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "protocol_version": 2,
+          "addon_version": "0.2.0",
+          "pid": 156188,
+          "nuke_version": "17.0v4",
+          "gui": true,
+          "host_flavor": "nuke",
+          "license_mode": "noncommercial",
+          "graph_observation": "partial_or_unknown",
+          "node_class_discovery": "advisory",
+          "tool_groups": [
+            "legacy_core",
+            "capabilities",
+            "operation_status",
+            "verified_edits",
+            "batch_edit",
+            "inspection",
+            "channel_statistics",
+            "toolsets",
+            "script_lifecycle",
+            "project_settings",
+            "shot_workflows",
+            "layered_compositing",
+            "scene_events"
+          ],
+          "toolset_limits": {
+            "nodes": 1000,
+            "selected_paths": 100,
+            "payload_bytes": 16777216,
+            "trusted_code": true,
+            "verification": "observed topology and bounded static knob subset"
+          },
+          "diagnostic_limits": {
+            "channels": 16,
+            "samples_per_channel": 4096,
+            "method": "cubic_filtered_grid"
+          },
+          "inspection_limits": {
+            "nodes": 1000,
+            "knobs_per_node": 128,
+            "channels_per_read": 2048,
+            "evaluated_paths": 10000,
+            "evidence_bytes": 4194304
+          },
+          "workflow_limits": {
+            "shots": 100,
+            "plates_per_shot": 32,
+            "layers": 32,
+            "evaluated_paths": 10000,
+            "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+            "native_pixel_recipe_qualified": false
+          },
+          "scene_events": {
+            "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+            "revision": 22,
+            "script_generation": 1,
+            "revision_available": false,
+            "reasons": [
+              "noncommercial_or_unknown_observation",
+              "callback_read_failed"
+            ],
+            "capacity": 1000,
+            "poll_limit": 500,
+            "coalesce_ms": 100,
+            "delivery": "polling",
+            "frame_observation": "sampled",
+            "revision_scope": "observed changes within this server instance"
+          },
+          "unsupported_tool_groups": [
+            "scene_revisions"
+          ],
+          "edit_limits": {
+            "batch_operations": 100,
+            "static_knobs_only": true,
+            "legacy_compound_workflows": "unverified",
+            "creation_scope": "root"
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      {
+        "request_id": "438fbb5c-e050-4a99-8ac8-e79e5ff950db",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "protocol_version": 2,
+          "addon_version": "0.2.0",
+          "pid": 156188,
+          "nuke_version": "17.0v4",
+          "gui": true,
+          "host_flavor": "nuke",
+          "license_mode": "noncommercial",
+          "graph_observation": "partial_or_unknown",
+          "node_class_discovery": "advisory",
+          "tool_groups": [
+            "legacy_core",
+            "capabilities",
+            "operation_status",
+            "verified_edits",
+            "batch_edit",
+            "inspection",
+            "channel_statistics",
+            "toolsets",
+            "script_lifecycle",
+            "project_settings",
+            "shot_workflows",
+            "layered_compositing",
+            "scene_events"
+          ],
+          "toolset_limits": {
+            "nodes": 1000,
+            "selected_paths": 100,
+            "payload_bytes": 16777216,
+            "trusted_code": true,
+            "verification": "observed topology and bounded static knob subset"
+          },
+          "diagnostic_limits": {
+            "channels": 16,
+            "samples_per_channel": 4096,
+            "method": "cubic_filtered_grid"
+          },
+          "inspection_limits": {
+            "nodes": 1000,
+            "knobs_per_node": 128,
+            "channels_per_read": 2048,
+            "evaluated_paths": 10000,
+            "evidence_bytes": 4194304
+          },
+          "workflow_limits": {
+            "shots": 100,
+            "plates_per_shot": 32,
+            "layers": 32,
+            "evaluated_paths": 10000,
+            "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+            "native_pixel_recipe_qualified": false
+          },
+          "scene_events": {
+            "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+            "revision": 22,
+            "script_generation": 1,
+            "revision_available": false,
+            "reasons": [
+              "noncommercial_or_unknown_observation",
+              "callback_read_failed"
+            ],
+            "capacity": 1000,
+            "poll_limit": 500,
+            "coalesce_ms": 100,
+            "delivery": "polling",
+            "frame_observation": "sampled",
+            "revision_scope": "observed changes within this server instance"
+          },
+          "unsupported_tool_groups": [
+            "scene_revisions"
+          ],
+          "edit_limits": {
+            "batch_operations": 100,
+            "static_knobs_only": true,
+            "legacy_compound_workflows": "unverified",
+            "creation_scope": "root"
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    ],
+    "legacy_schemas": {
+      "get_script_info": {
+        "properties": {},
+        "type": "object"
+      },
+      "get_node_info": {
+        "properties": {
+          "node_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "node_name"
+        ],
+        "type": "object"
+      },
+      "create_node": {
+        "properties": {
+          "node_type": {
+            "type": "string"
+          },
+          "name": {
+            "default": null,
+            "type": "string"
+          },
+          "position": {
+            "default": null,
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "inputs": {
+            "default": null,
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "default": null,
+            "type": "object"
+          }
+        },
+        "required": [
+          "node_type"
+        ],
+        "type": "object"
+      },
+      "modify_node": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "default": null,
+            "type": "object"
+          },
+          "position": {
+            "default": null,
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "inputs": {
+            "default": null,
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "delete_node": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "position_node": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "x": {
+            "type": "integer"
+          },
+          "y": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "x",
+          "y"
+        ],
+        "type": "object"
+      },
+      "connect_nodes": {
+        "properties": {
+          "output_node": {
+            "type": "string"
+          },
+          "input_node": {
+            "type": "string"
+          },
+          "input_index": {
+            "default": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "output_node",
+          "input_node"
+        ],
+        "type": "object"
+      },
+      "render": {
+        "properties": {
+          "frame_range": {
+            "default": null,
+            "type": "string"
+          },
+          "write_node": {
+            "default": null,
+            "type": "string"
+          },
+          "proxy_mode": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "viewer_playback": {
+        "properties": {
+          "action": {
+            "default": "play",
+            "type": "string"
+          },
+          "start_frame": {
+            "default": null,
+            "type": "integer"
+          },
+          "end_frame": {
+            "default": null,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "execute_nuke_code": {
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "type": "object"
+      },
+      "auto_layout_nodes": {
+        "properties": {
+          "selected_only": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "set_frames": {
+        "properties": {
+          "first_frame": {
+            "default": null,
+            "type": "integer"
+          },
+          "last_frame": {
+            "default": null,
+            "type": "integer"
+          },
+          "current_frame": {
+            "default": null,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "create_viewer": {
+        "properties": {
+          "input_node": {
+            "default": null,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "create_workflow_template": {
+        "properties": {
+          "template_type": {
+            "type": "string"
+          },
+          "root_position": {
+            "default": null,
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "add_backdrop": {
+            "default": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "template_type"
+        ],
+        "type": "object"
+      },
+      "organize_node_graph": {
+        "properties": {
+          "selected_only": {
+            "default": false,
+            "type": "boolean"
+          },
+          "direction": {
+            "default": "vertical",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "tool_count": 37,
+    "events": {
+      "subscription_0": {
+        "request_id": "380307b3-530b-4f58-87ea-9f2cf26db45e",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+          "revision": 22,
+          "script_generation": 1,
+          "revision_available": false,
+          "reasons": [
+            "noncommercial_or_unknown_observation",
+            "callback_read_failed"
+          ],
+          "event_types": [
+            "node_created"
+          ],
+          "delivery": "polling"
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "subscription_1": {
+        "request_id": "4093a98b-d4a6-4233-b608-f656ecf1953b",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+          "revision": 22,
+          "script_generation": 1,
+          "revision_available": false,
+          "reasons": [
+            "noncommercial_or_unknown_observation",
+            "callback_read_failed"
+          ],
+          "event_types": [
+            "node_deleted"
+          ],
+          "delivery": "polling"
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "poll_0": {
+        "request_id": "0ed9d2e3-495b-40ff-9f18-43ce760feafa",
+        "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+          "revision": 22,
+          "script_generation": 1,
+          "revision_available": false,
+          "reasons": [
+            "noncommercial_or_unknown_observation",
+            "callback_read_failed"
+          ],
+          "events": [
+            {
+              "type": "node_created",
+              "sequence": 21,
+              "first_sequence": 21,
+              "revision": 21,
+              "timestamp": 403916.453,
+              "first_timestamp": 403916.453,
+              "count": 1,
+              "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+              "request_id": null,
+              "node_path": "root"
+            }
+          ],
+          "next_sequence": 22,
+          "latest_sequence": 22,
+          "history_gap": false,
+          "event_types": [
+            "node_created"
+          ],
+          "frame_observation": "sampled",
+          "supported_callbacks": [
+            "node_created",
+            "node_deleted",
+            "knob_changed",
+            "script_loaded",
+            "script_saved",
+            "script_closed",
+            "frame_changed"
+          ]
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "poll_1": {
+        "request_id": "c92b9e44-06c0-416b-9234-eebda7a3d618",
+        "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+          "revision": 22,
+          "script_generation": 1,
+          "revision_available": false,
+          "reasons": [
+            "noncommercial_or_unknown_observation",
+            "callback_read_failed"
+          ],
+          "events": [
+            {
+              "type": "node_deleted",
+              "sequence": 1,
+              "first_sequence": 1,
+              "revision": 1,
+              "timestamp": 403916.437,
+              "first_timestamp": 403916.437,
+              "count": 1,
+              "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+              "request_id": null,
+              "node_path": "root"
+            }
+          ],
+          "next_sequence": 22,
+          "latest_sequence": 22,
+          "history_gap": false,
+          "event_types": [
+            "node_deleted"
+          ],
+          "frame_observation": "sampled",
+          "supported_callbacks": [
+            "node_created",
+            "node_deleted",
+            "knob_changed",
+            "script_loaded",
+            "script_saved",
+            "script_closed",
+            "frame_changed"
+          ]
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    },
+    "expected_error": {
+      "request_id": "ed78fa47-1dec-4d04-86e9-e2bc3f52ca3e",
+      "client_session_id": "e91da65d-1bd6-4967-b781-1b4c050a1b6b",
+      "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+      "ok": false,
+      "state": "failed",
+      "outcome": "not_started",
+      "data": {},
+      "error": {
+        "code": "state_uncertain",
+        "message": "Node lookup unavailable; absence is not established: __MCP_PROBE_ABSENT__"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "get_node_info",
+      "tool": "get_node_info"
+    },
+    "read_only_python": {
+      "request_id": "dc5c91de-39ce-492e-a73c-002ba13092f0",
+      "client_session_id": "54a3176b-631e-440b-af49-9e96a9783aba",
+      "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+      "ok": true,
+      "state": "completed",
+      "outcome": "applied",
+      "data": {
+        "executed": true,
+        "output": {
+          "pid": 156188,
+          "main_thread": true,
+          "script": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk"
+        }
+      },
+      "error": null,
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null,
+      "command": "execute_code",
+      "tool": "execute_nuke_code"
+    },
+    "passed": true,
+    "unique_request_ids": 8
+  }
+}

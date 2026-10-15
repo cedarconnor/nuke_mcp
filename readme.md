@@ -2,9 +2,11 @@
 
 Control Foundry Nuke from an MCP-compatible assistant. Inspect scripts and nodes, edit connections and parameters, organize graphs, and submit renders through a local bridge.
 
-**Milestones 1–5 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available among 37 tools covering verified edits, inspection, toolsets, script lifecycle, and manifest-driven shot/AOV workflows. Task 14 adds scene events and optimistic revision checks. Native qualification limits are recorded below.
+**Milestones 1–5 are implemented:** protocol v2 supports up to eight connected clients, runs Nuke API work on the main thread, and returns structured operation receipts. The existing 15 tools remain available among 37 tools covering verified edits, inspection, toolsets, script lifecycle, and manifest-driven shot/AOV workflows. Task 14 adds scene events and optimistic revision checks; Task 15 adds a guarded qualification runner and deployment evidence. Native qualification limits are recorded below.
 
 Live two-client communication has been verified on **Windows with Nuke Non-commercial 17.0v4 and external Python 3.11**. See the [validation report](docs/validation/milestone-1.md) for evidence and qualification limits.
+
+See [qualification instructions](docs/VALIDATION.md) and [third-party notices](docs/THIRD_PARTY_NOTICES.md) before deployment.
 
 ## Quick start
 
@@ -194,9 +196,16 @@ With Nuke and the panel server running, run the read-only live checks:
 .\.venv\Scripts\python.exe tests/mcp_contract_probe.py --live --output live-two-client.json
 ```
 
-In a disposable script only, `python tests/smoke_mcp.py --mutate` also checks
-creation, batch dry-run/apply, and owned deletion. A failed or uncertain check
-exits nonzero and preserves its receipt; uncertain creation is not retried.
+For a consolidated evidence report, run:
+
+```powershell
+.\.venv\Scripts\python.exe tests/live/qualify.py --output D:/evidence/nuke-read-only
+```
+
+Editing scenarios require `--mutate --disposable --pid PID --fixture ABSOLUTE_PATH` and a fresh
+exclusive fixture session. Unknown cleanup or missing required checks fail the run. See the
+[qualification guide](docs/VALIDATION.md) for all 11 scenarios and cleanup meanings. The previous
+`smoke_mcp.py --mutate` entry point now directs callers to this guarded runner.
 
 ## Troubleshooting
 
@@ -228,7 +237,7 @@ MCP client B <-> main.py process B --/
 
 For new host operations, register the handler in `NukeMCPServer.start()` and route Nuke API work through the runtime's main-thread queue. Preserve structured errors and operation identity through the MCP adapter. Keep socket-thread controls free of Nuke API calls and never add automatic mutation replay.
 
-The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track Milestone 6: Task 14 scene revisions and event polling are implemented; Task 15 release qualification remains pending. The native qualification gaps above are still open.
+The [design](docs/superpowers/specs/2026-10-14-nuke-mcp-expansion-design.md) and [implementation plan](docs/superpowers/plans/2026-10-14-nuke-mcp-expansion.md) track Milestone 6: Task 14 scene revisions and event polling are implemented; Task 15 qualification tooling and deployment documentation are implemented. See the [Task 15 report](docs/validation/task-15.md) for current results; commercial, native workflow, and artist qualification gaps remain explicit.
 
 See [patch notes](PATCH_NOTES.md) for compatibility history. This project builds on `dughogan/nuke_mcp`.
 

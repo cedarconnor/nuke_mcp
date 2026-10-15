@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "qualified": [
+    "event-stale-state"
+  ],
+  "unqualified": [
+    "two-clients",
+    "legacy-tools",
+    "slow-render",
+    "verified-edit",
+    "nc-ambiguity",
+    "nested-read",
+    "channel-statistics",
+    "toolset-roundtrip",
+    "two-shot",
+    "aov-reconstruction"
+  ],
+  "commercial_qualified": false,
+  "artist_approved": false,
+  "host": {
+    "protocol_version": 2,
+    "addon_version": "0.2.0",
+    "pid": 156188,
+    "nuke_version": "17.0v4",
+    "gui": true,
+    "host_flavor": "nuke",
+    "license_mode": "noncommercial",
+    "graph_observation": "partial_or_unknown",
+    "node_class_discovery": "advisory",
+    "tool_groups": [
+      "legacy_core",
+      "capabilities",
+      "operation_status",
+      "verified_edits",
+      "batch_edit",
+      "inspection",
+      "channel_statistics",
+      "toolsets",
+      "script_lifecycle",
+      "project_settings",
+      "shot_workflows",
+      "layered_compositing",
+      "scene_events"
+    ],
+    "toolset_limits": {
+      "nodes": 1000,
+      "selected_paths": 100,
+      "payload_bytes": 16777216,
+      "trusted_code": true,
+      "verification": "observed topology and bounded static knob subset"
+    },
+    "diagnostic_limits": {
+      "channels": 16,
+      "samples_per_channel": 4096,
+      "method": "cubic_filtered_grid"
+    },
+    "inspection_limits": {
+      "nodes": 1000,
+      "knobs_per_node": 128,
+      "channels_per_read": 2048,
+      "evaluated_paths": 10000,
+      "evidence_bytes": 4194304
+    },
+    "workflow_limits": {
+      "shots": 100,
+      "plates_per_shot": 32,
+      "layers": 32,
+      "evaluated_paths": 10000,
+      "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+      "native_pixel_recipe_qualified": false
+    },
+    "scene_events": {
+      "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+      "revision": 22,
+      "script_generation": 1,
+      "revision_available": false,
+      "reasons": [
+        "noncommercial_or_unknown_observation",
+        "callback_read_failed"
+      ],
+      "capacity": 1000,
+      "poll_limit": 500,
+      "coalesce_ms": 100,
+      "delivery": "polling",
+      "frame_observation": "sampled",
+      "revision_scope": "observed changes within this server instance"
+    },
+    "unsupported_tool_groups": [
+      "scene_revisions"
+    ],
+    "edit_limits": {
+      "batch_operations": 100,
+      "static_knobs_only": true,
+      "legacy_compound_workflows": "unverified",
+      "creation_scope": "root"
+    }
+  },
+  "scenarios": {
+    "event-stale-state": {
+      "status": "completed",
+      "checks": {
+        "revision_advanced": {
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        "stale_refused": {
+          "expected": "revision_unavailable",
+          "actual": "revision_unavailable",
+          "passed": true
+        },
+        "restored": {
+          "expected": 24.0,
+          "actual": 24.0,
+          "passed": true
+        }
+      },
+      "cleanup": {
+        "outcome": "applied",
+        "expected": 24.0,
+        "actual": 24.0,
+        "receipt": {
+          "request_id": "f328728e-fa53-459d-84b9-ea712facdf95",
+          "client_session_id": "0a1fe0f6-600d-4039-8324-b22138f2c4a0",
+          "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+          "ok": true,
+          "state": "completed",
+          "outcome": "applied",
+          "data": {
+            "executed": true,
+            "output": {
+              "fps": 24.0
+            }
+          },
+          "error": null,
+          "warnings": [],
+          "observation": {
+            "coverage": "unknown",
+            "reason": "not_inspected"
+          },
+          "revision": null
+        },
+        "scope": "FPS field only; disposable dirty state retained"
+      },
+      "coverage": "degraded_coverage_refusal_only"
+    }
+  },
+  "selected": [
+    "event-stale-state"
+  ],
+  "metadata": {
+    "timestamp_utc": "2026-10-15T00:14:27.808225+00:00",
+    "commit": "1238ba2c71f4b8c2efe1cb8527157f8f31ae7b42",
+    "dirty": true,
+    "python": "3.11.11 (remotes/origin/foundry/v3.11.11:42e60506bdd, Jul 23 2025, 10:51:14) [MSC v.1935 64 bit (AMD64)]",
+    "repository": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp",
+    "port": 19887,
+    "fixture": {
+      "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-events-host\\events_fixture.nk",
+      "sha256": "5387afa61c57d68e0b230c6e36a59bb7773b58ea55d12632f560ad6c074ebd34",
+      "pid": 156188
+    },
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "identity": {
+      "pid": 156188,
+      "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-events-host/events_fixture.nk",
+      "disposable": "1",
+      "frame": 0,
+      "fps": 24.0,
+      "proxy": false
+    }
+  },
+  "cleanup": {
+    "event-stale-state": {
+      "outcome": "applied",
+      "expected": 24.0,
+      "actual": 24.0,
+      "receipt": {
+        "request_id": "f328728e-fa53-459d-84b9-ea712facdf95",
+        "client_session_id": "0a1fe0f6-600d-4039-8324-b22138f2c4a0",
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "fps": 24.0
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "scope": "FPS field only; disposable dirty state retained"
+    }
+  }
+}

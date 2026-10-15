@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "checks": {
+    "nested_paths": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "truncation": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "read_identity": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "missing_sequence": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "state_preserved": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    }
+  },
+  "cleanup": {
+    "outcome": "not_needed"
+  },
+  "evidence": {
+    "passed": false,
+    "checks": {},
+    "receipts": {
+      "before": {
+        "request_id": "42504c24-91b9-4b3a-a406-5752abd9cc85",
+        "client_session_id": "c9599f86-96ff-418c-b8a4-35ca6c697dbb",
+        "server_instance_id": "6b544657-2c6b-4d5b-aa44-58648d8f4761",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "pid": 139496,
+            "script": "Root",
+            "frame": 0,
+            "proxy": false,
+            "selection": []
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    },
+    "error": "Refusing a host other than the owned inspection fixture"
+  }
+}

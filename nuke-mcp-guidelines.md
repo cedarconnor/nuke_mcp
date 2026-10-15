@@ -163,3 +163,14 @@ of the Nodes menu. Common types like `CheckerBoard2` are rejected with
 "Invalid node type". For anything not on the list, create it through
 `execute_nuke_code` with `nuke.nodes.<Class>()` — but note that during an NC
 blackout window (see §1) the returned handle may be `None` there as well.
+
+## Qualification before deployment
+
+Run `tests/live/qualify.py --output <new-absolute-directory>` for scene-read-only checks.
+Treat `qualified` as the selected checks that passed on the recorded host, not as approval of
+other capabilities. Editing probes require a fresh exclusive disposable host and
+`--mutate --disposable --pid <pid> --fixture <absolute-path>`. Never retry an ambiguous mutation;
+retain the receipt and inspect its operation status. `retained_disposable` means fixture changes
+and files are deliberately left for review, not that rollback or host shutdown occurred.
+Use explicit NC `.nknc` save destinations. Render and numeric evidence do not constitute artist
+approval. See [qualification and deployment](docs/VALIDATION.md) for the full procedure.

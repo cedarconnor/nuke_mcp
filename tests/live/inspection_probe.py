@@ -9,8 +9,8 @@ sys.path.insert(0, str(ROOT))
 from nuke_mcp_bridge.client import BridgeClient
 
 
-def probe(pid, port):
-    client = BridgeClient(port=port)
+def probe(pid, port, client_factory=BridgeClient, statistics=True):
+    client = client_factory(port=port)
     report = {'passed':False, 'checks':{}, 'receipts':{}}
     def call(label, command, **params):
         receipt = client.call(command,params)
@@ -42,17 +42,18 @@ output['selection'] = sorted(n.fullName() for n in nuke.selectedNodes())
         report['checks']['read_identity'] = bool(reads and len(reads['reads'])==1 and reads['reads'][0]['path']=='MCP_MissingRead')
         sequence = call('sequence','validate_reads',first_frame=1,last_frame=3,node_paths=['root.MCP_MissingRead'])
         report['checks']['missing_sequence'] = bool(sequence and sequence['checked_paths']>=3 and sequence['missing_paths']==sequence['requested_paths'] and sequence['unknown_paths']==0)
-        constant = call('constant','sample_channel_statistics',node_path='root.MCP_Constant',channels=['rgba'],frame=2,max_samples_per_channel=4)
-        actual = {s['channel']:s['mean'] for s in constant['statistics']} if constant else {}
-        report['checks']['constant_signal'] = bool(constant and constant['complete'] and all(
-            actual.get(c) is not None and abs(actual[c]-v)<=1e-6 for c,v in
-            {'rgba.red':.25,'rgba.green':.5,'rgba.blue':.75,'rgba.alpha':1.}.items()))
-        ramp = call('ramp','sample_channel_statistics',node_path='root.MCP_Ramp',channels=['rgba.red'],frame=3,max_samples_per_channel=4)
-        report['checks']['ramp_signal'] = bool(ramp and ramp['complete'] and abs(ramp['statistics'][0]['mean']-.5)<=1e-6)
-        report['checks']['sample_limits_disclosed'] = bool(constant and ramp and not constant['sampling']['samples_every_pixel'] and not ramp['sampling']['samples_every_pixel'])
+        if statistics:
+            constant = call('constant','sample_channel_statistics',node_path='root.MCP_Constant',channels=['rgba'],frame=2,max_samples_per_channel=4)
+            actual = {s['channel']:s['mean'] for s in constant['statistics']} if constant else {}
+            report['checks']['constant_signal'] = bool(constant and constant['complete'] and all(
+                actual.get(c) is not None and abs(actual[c]-v)<=1e-6 for c,v in
+                {'rgba.red':.25,'rgba.green':.5,'rgba.blue':.75,'rgba.alpha':1.}.items()))
+            ramp = call('ramp','sample_channel_statistics',node_path='root.MCP_Ramp',channels=['rgba.red'],frame=3,max_samples_per_channel=4)
+            report['checks']['ramp_signal'] = bool(ramp and ramp['complete'] and abs(ramp['statistics'][0]['mean']-.5)<=1e-6)
+            report['checks']['sample_limits_disclosed'] = bool(constant and ramp and not constant['sampling']['samples_every_pixel'] and not ramp['sampling']['samples_every_pixel'])
         after = call('after','execute_code',code=snapshot)
         report['checks']['state_preserved'] = bool(after and before==after['output'])
-        report['passed'] = len(report['checks'])==9 and all(report['checks'].values()) and not report.get('errors')
+        report['passed'] = len(report['checks'])==(9 if statistics else 6) and all(report['checks'].values()) and not report.get('errors')
     except Exception as exc:
         report['error'] = str(exc)
     finally: client.close()

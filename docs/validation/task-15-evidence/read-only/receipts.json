@@ -1,0 +1,269 @@
+[
+  {
+    "request_id": "cfd40b90-0d45-4184-b08a-eadc28115218",
+    "client_session_id": "1fff8be4-bbf9-4125-9cb9-934ab6c73d8b",
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 156188,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit",
+        "inspection",
+        "channel_statistics",
+        "toolsets",
+        "script_lifecycle",
+        "project_settings",
+        "shot_workflows",
+        "layered_compositing",
+        "scene_events"
+      ],
+      "toolset_limits": {
+        "nodes": 1000,
+        "selected_paths": 100,
+        "payload_bytes": 16777216,
+        "trusted_code": true,
+        "verification": "observed topology and bounded static knob subset"
+      },
+      "diagnostic_limits": {
+        "channels": 16,
+        "samples_per_channel": 4096,
+        "method": "cubic_filtered_grid"
+      },
+      "inspection_limits": {
+        "nodes": 1000,
+        "knobs_per_node": 128,
+        "channels_per_read": 2048,
+        "evaluated_paths": 10000,
+        "evidence_bytes": 4194304
+      },
+      "workflow_limits": {
+        "shots": 100,
+        "plates_per_shot": 32,
+        "layers": 32,
+        "evaluated_paths": 10000,
+        "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+        "native_pixel_recipe_qualified": false
+      },
+      "scene_events": {
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "revision": 0,
+        "script_generation": 0,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation"
+        ],
+        "capacity": 1000,
+        "poll_limit": 500,
+        "coalesce_ms": 100,
+        "delivery": "polling",
+        "frame_observation": "sampled",
+        "revision_scope": "observed changes within this server instance"
+      },
+      "unsupported_tool_groups": [
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "f2ad2831-1454-4182-9e0c-02337bc91900",
+    "client_session_id": "1fff8be4-bbf9-4125-9cb9-934ab6c73d8b",
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 156188,
+        "path": "Root",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "b5f50710-3f2f-40fc-b72b-ae0de68f6b84",
+    "client_session_id": "1fff8be4-bbf9-4125-9cb9-934ab6c73d8b",
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 156188,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit",
+        "inspection",
+        "channel_statistics",
+        "toolsets",
+        "script_lifecycle",
+        "project_settings",
+        "shot_workflows",
+        "layered_compositing",
+        "scene_events"
+      ],
+      "toolset_limits": {
+        "nodes": 1000,
+        "selected_paths": 100,
+        "payload_bytes": 16777216,
+        "trusted_code": true,
+        "verification": "observed topology and bounded static knob subset"
+      },
+      "diagnostic_limits": {
+        "channels": 16,
+        "samples_per_channel": 4096,
+        "method": "cubic_filtered_grid"
+      },
+      "inspection_limits": {
+        "nodes": 1000,
+        "knobs_per_node": 128,
+        "channels_per_read": 2048,
+        "evaluated_paths": 10000,
+        "evidence_bytes": 4194304
+      },
+      "workflow_limits": {
+        "shots": 100,
+        "plates_per_shot": 32,
+        "layers": 32,
+        "evaluated_paths": 10000,
+        "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+        "native_pixel_recipe_qualified": false
+      },
+      "scene_events": {
+        "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+        "revision": 22,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "capacity": 1000,
+        "poll_limit": 500,
+        "coalesce_ms": 100,
+        "delivery": "polling",
+        "frame_observation": "sampled",
+        "revision_scope": "observed changes within this server instance"
+      },
+      "unsupported_tool_groups": [
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "e026b712-8b07-470e-bc4b-506c7ece36e8",
+    "client_session_id": "1fff8be4-bbf9-4125-9cb9-934ab6c73d8b",
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "nodes": [],
+      "errors": [],
+      "truncated": false,
+      "scope": {
+        "recurse_groups": true,
+        "selected_only": false
+      },
+      "observation": {
+        "coverage": "unknown",
+        "reason": "nc_observation_unreliable"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "nc_observation_unreliable"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "904bcfdc-c844-4050-974f-f0ced811a419",
+    "client_session_id": "1fff8be4-bbf9-4125-9cb9-934ab6c73d8b",
+    "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+    "ok": false,
+    "state": "failed",
+    "outcome": "not_started",
+    "data": {
+      "server_instance_id": "8624c957-c3ba-40b2-aa9f-97b22354342e",
+      "revision": 22,
+      "script_generation": 1,
+      "revision_available": false,
+      "reasons": [
+        "noncommercial_or_unknown_observation",
+        "callback_read_failed"
+      ]
+    },
+    "error": {
+      "code": "revision_unavailable",
+      "message": "Scene callback coverage cannot support a revision check"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  }
+]

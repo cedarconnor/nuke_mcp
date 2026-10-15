@@ -144,6 +144,8 @@ async def probe(live=False, port=9877, slow=False):
             assert receipts[0]["server_instance_id"] == receipts[1]["server_instance_id"]
             assert receipts[0]["client_session_id"] != receipts[1]["client_session_id"]
             report["capabilities"] = receipts
+            report["legacy_schemas"] = {name: tools[name].inputSchema for name in LEGACY}
+            report["tool_count"] = len(tools)
             report['events']={}
             for i, kinds in enumerate((['node_created'], ['node_deleted'])):
                 subscribed=await sessions[i].call_tool('subscribe_events',{'event_types':kinds})

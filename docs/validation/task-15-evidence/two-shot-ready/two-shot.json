@@ -1,0 +1,551 @@
+{
+  "status": "completed",
+  "checks": {
+    "shot_plan": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    "two_shots": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "original_restored": {
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  },
+  "cleanup": {
+    "outcome": "unknown"
+  },
+  "evidence": {
+    "passed": false,
+    "receipts": {
+      "identity": {
+        "request_id": "cceb8506-5b18-422e-bd15-28d44318ffbc",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "pid": 1272,
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/workflow_fixture.nk",
+            "disposable": "1",
+            "nodes": [
+              "MCP_Light",
+              "MCP_Review",
+              "MCP_Base"
+            ]
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "facts": {
+        "request_id": "98180881-8981-44b5-aa9c-fbcf1abc23ac",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "plate": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/plate.png",
+            "plate_colorspace": "linear",
+            "write": {
+              "file_type": "exr",
+              "datatype": "16 bit half",
+              "compression": "Zip (1 scanline)",
+              "colorspace": "linear",
+              "channels": "rgb"
+            },
+            "color": {
+              "colorManagement": "Nuke"
+            }
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "fixture_color_options": {
+        "request_id": "395f9663-a250-47a7-95ed-fdabecee2233",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "read": [
+              "default",
+              "linear",
+              "sRGB",
+              "rec709",
+              "Cineon",
+              "Gamma1.8",
+              "Gamma2.2",
+              "Gamma2.4",
+              "Gamma2.6",
+              "Panalog",
+              "REDLog",
+              "ViperLog",
+              "AlexaV3LogC",
+              "PLogLin",
+              "SLog",
+              "SLog1",
+              "SLog2",
+              "SLog3",
+              "CLog",
+              "Log3G10",
+              "Log3G12",
+              "HybridLogGamma",
+              "Protune",
+              "BT1886",
+              "st2084",
+              "Blackmagic Film Generation 5",
+              "ARRILogC4",
+              "REDSpace\t\u0007"
+            ],
+            "write": [
+              "default",
+              "linear",
+              "sRGB",
+              "rec709",
+              "Cineon",
+              "Gamma1.8",
+              "Gamma2.2",
+              "Gamma2.4",
+              "Gamma2.6",
+              "Panalog",
+              "REDLog",
+              "ViperLog",
+              "AlexaV3LogC",
+              "PLogLin",
+              "SLog",
+              "SLog1",
+              "SLog2",
+              "SLog3",
+              "CLog",
+              "Log3G10",
+              "Log3G12",
+              "HybridLogGamma",
+              "Protune",
+              "BT1886",
+              "st2084",
+              "Blackmagic Film Generation 5",
+              "ARRILogC4",
+              "REDSpace\t\u0007"
+            ]
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "save_original": {
+        "request_id": "152f8ce6-ba46-4543-9224-faf839394d5e",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "before": {
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/workflow_fixture.nk",
+            "modified": false
+          },
+          "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\original.nknc",
+          "save_current": false,
+          "after": {
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/original.nknc",
+            "modified": false
+          },
+          "sha256": "26a064090caac9a0138e565347af2f43e6c387bc4b2b72cea14ba9a51d1b4732",
+          "bytes": 3450
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "shot_plan": {
+        "request_id": "069bf592-303f-4fd9-8300-3657d24cdd70",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "schema_version": 1,
+          "manifest": {
+            "schema_version": 1,
+            "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host",
+            "shots": [
+              {
+                "shot_id": "shot_1",
+                "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.nknc",
+                "plates": [
+                  {
+                    "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/plate.png",
+                    "colorspace": "linear",
+                    "first": 1,
+                    "last": 2
+                  }
+                ],
+                "frame_range": {
+                  "work_first": 1,
+                  "cut_in": 1,
+                  "cut_out": 2,
+                  "work_last": 2
+                },
+                "fps": {
+                  "numerator": 24,
+                  "denominator": 1
+                },
+                "format": {
+                  "width": 4,
+                  "height": 4,
+                  "pixel_aspect": 1.0
+                },
+                "color_settings": {
+                  "colorManagement": "Nuke"
+                },
+                "write": {
+                  "file_type": "exr",
+                  "datatype": "16 bit half",
+                  "compression": "Zip (1 scanline)",
+                  "colorspace": "linear",
+                  "channels": "rgb",
+                  "path": "[file dirname [value root.name]]/shot_1.%04d.exr"
+                }
+              },
+              {
+                "shot_id": "shot_2",
+                "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_2.nknc",
+                "plates": [
+                  {
+                    "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/plate.png",
+                    "colorspace": "linear",
+                    "first": 1,
+                    "last": 2
+                  }
+                ],
+                "frame_range": {
+                  "work_first": 1,
+                  "cut_in": 1,
+                  "cut_out": 2,
+                  "work_last": 2
+                },
+                "fps": {
+                  "numerator": 24,
+                  "denominator": 1
+                },
+                "format": {
+                  "width": 4,
+                  "height": 4,
+                  "pixel_aspect": 1.0
+                },
+                "color_settings": {
+                  "colorManagement": "Nuke"
+                },
+                "write": {
+                  "file_type": "exr",
+                  "datatype": "16 bit half",
+                  "compression": "Zip (1 scanline)",
+                  "colorspace": "linear",
+                  "channels": "rgb",
+                  "path": "[file dirname [value root.name]]/shot_2.%04d.exr"
+                }
+              }
+            ]
+          },
+          "host": {
+            "instance": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+            "version": "17.0v4",
+            "license": ".nknc",
+            "gui": true,
+            "ocio": ""
+          },
+          "original_script": {
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/original.nknc",
+            "modified": false
+          },
+          "scene_revision": {
+            "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+            "revision": 29,
+            "script_generation": 1,
+            "revision_available": false,
+            "reasons": [
+              "noncommercial_or_unknown_observation",
+              "callback_read_failed"
+            ]
+          },
+          "library_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\library",
+          "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host",
+          "disposable": true,
+          "shots": [
+            {
+              "shot_id": "shot_1",
+              "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.nknc",
+              "sources": [
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\plate.png",
+                  "exists": true,
+                  "size": 75,
+                  "mtime_ns": 1792023557937529300,
+                  "frame": 1
+                },
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\plate.png",
+                  "exists": true,
+                  "size": 75,
+                  "mtime_ns": 1792023557937529300,
+                  "frame": 2
+                }
+              ],
+              "writes": [
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.0001.exr",
+                  "exists": false,
+                  "frame": 1
+                },
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.0002.exr",
+                  "exists": false,
+                  "frame": 2
+                }
+              ],
+              "toolset": null
+            },
+            {
+              "shot_id": "shot_2",
+              "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_2.nknc",
+              "sources": [
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\plate.png",
+                  "exists": true,
+                  "size": 75,
+                  "mtime_ns": 1792023557937529300,
+                  "frame": 1
+                },
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\plate.png",
+                  "exists": true,
+                  "size": 75,
+                  "mtime_ns": 1792023557937529300,
+                  "frame": 2
+                }
+              ],
+              "writes": [
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_2.0001.exr",
+                  "exists": false,
+                  "frame": 1
+                },
+                {
+                  "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_2.0002.exr",
+                  "exists": false,
+                  "frame": 2
+                }
+              ],
+              "toolset": null
+            }
+          ],
+          "provenance": "source existence, size and mtime; plate contents are not hashed",
+          "proposed_nodes": [
+            "Read per plate",
+            "optional toolset Group",
+            "Write"
+          ],
+          "errors": [],
+          "digest": "a2727afc1237ec177bc327167fc7c40d5e24987f157ad34f498bda0c2e751af3"
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "shot_apply": {
+        "request_id": "d93a7be2-2eba-4c1f-9fca-24d0e6117150",
+        "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4",
+        "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+        "ok": false,
+        "state": "failed",
+        "outcome": "partial",
+        "data": {
+          "completed": [],
+          "current": {
+            "shot_id": "shot_1",
+            "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.nknc",
+            "published": false,
+            "created_paths": [],
+            "fresh_script": {
+              "before": {
+                "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/original.nknc",
+                "modified": false
+              },
+              "after": {
+                "path": "Root",
+                "modified": false
+              },
+              "graph_coverage": "unknown"
+            }
+          },
+          "restoration": {
+            "ok": true,
+            "receipt": {
+              "before": {
+                "path": "Root",
+                "modified": true
+              },
+              "target": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\original.nknc",
+              "discard_unsaved_changes": true,
+              "after": {
+                "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/original.nknc",
+                "modified": false
+              }
+            }
+          },
+          "request": {
+            "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+            "request_id": "d93a7be2-2eba-4c1f-9fca-24d0e6117150",
+            "client_session_id": "335a66dc-69d1-44ff-a601-3468ffc9e1c4"
+          },
+          "outcome": "partial",
+          "cause": {
+            "path": "Plate_0",
+            "name": "Plate_0",
+            "before": "default (sRGB)",
+            "knob": "colorspace",
+            "value": "linear",
+            "created_path": "Plate_0"
+          }
+        },
+        "error": {
+          "code": "state_uncertain",
+          "message": "Edit readback did not match requested state"
+        },
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    },
+    "checks": {
+      "shot_plan": true,
+      "two_shots": false,
+      "original_restored": true
+    },
+    "shot_manifest": {
+      "schema_version": 1,
+      "output_root": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host",
+      "shots": [
+        {
+          "shot_id": "shot_1",
+          "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_1.nknc",
+          "plates": [
+            {
+              "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/plate.png",
+              "colorspace": "linear",
+              "first": 1,
+              "last": 2
+            }
+          ],
+          "frame_range": {
+            "work_first": 1,
+            "cut_in": 1,
+            "cut_out": 2,
+            "work_last": 2
+          },
+          "fps": {
+            "numerator": 24,
+            "denominator": 1
+          },
+          "format": {
+            "width": 4,
+            "height": 4,
+            "pixel_aspect": 1.0
+          },
+          "color_settings": {
+            "colorManagement": "Nuke"
+          },
+          "write": {
+            "file_type": "exr",
+            "datatype": "16 bit half",
+            "compression": "Zip (1 scanline)",
+            "colorspace": "linear",
+            "channels": "rgb",
+            "path": "[file dirname [value root.name]]/shot_1.%04d.exr"
+          }
+        },
+        {
+          "shot_id": "shot_2",
+          "script_path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-two-shot-host\\shot_2.nknc",
+          "plates": [
+            {
+              "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-two-shot-host/plate.png",
+              "colorspace": "linear",
+              "first": 1,
+              "last": 2
+            }
+          ],
+          "frame_range": {
+            "work_first": 1,
+            "cut_in": 1,
+            "cut_out": 2,
+            "work_last": 2
+          },
+          "fps": {
+            "numerator": 24,
+            "denominator": 1
+          },
+          "format": {
+            "width": 4,
+            "height": 4,
+            "pixel_aspect": 1.0
+          },
+          "color_settings": {
+            "colorManagement": "Nuke"
+          },
+          "write": {
+            "file_type": "exr",
+            "datatype": "16 bit half",
+            "compression": "Zip (1 scanline)",
+            "colorspace": "linear",
+            "channels": "rgb",
+            "path": "[file dirname [value root.name]]/shot_2.%04d.exr"
+          }
+        }
+      ]
+    }
+  }
+}

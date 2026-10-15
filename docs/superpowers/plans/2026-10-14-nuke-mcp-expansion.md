@@ -397,17 +397,17 @@ self.assertEqual(host.mutation_count, 0)
 
 **Interfaces:** CLI `python tests/live/qualify.py --output <absolute-directory>` is read-only by default. `--mutate --disposable` is required for editing fixtures; `--scenario <name>` selects a documented scenario. Evidence records host version/license, commit, instance, fixture metadata, request IDs, expected/actual values, cleanup state, and skipped/unqualified capabilities.
 
-- [ ] Add qualification scenarios for two MCP clients; slow render/status; original 15-tool compatibility; verified edit/readback; NC ambiguity; nested graph/Read inspection; known channel statistics; toolset round-trip; two-shot generation; AOV reconstruction; event stale-state rejection. Tests must fail if a required check is skipped or cleanup is unknown while the aggregate result claims success.
+- [x] Add qualification scenarios for two MCP clients; slow render/status; original 15-tool compatibility; verified edit/readback; NC ambiguity; nested graph/Read inspection; known channel statistics; toolset round-trip; two-shot generation; AOV reconstruction; event stale-state rejection. Tests must fail if a required check is skipped or cleanup is unknown while the aggregate result claims success.
 
 ```python
 self.assertFalse(report['commercial_qualified'])  # NC-only run cannot certify commercial tools.
 self.assertEqual(report['cleanup']['outcome'], 'applied')  # Only when native readback proves it.
 ```
 
-- [ ] Run the qualification report tests with mocked evidence first; verify false-success aggregation is rejected before implementing the report writer.
-- [ ] Implement the opt-in runner and documentation, including coordinated v2 upgrade/rollback, package deployment, host limitations, tool schemas, receipts, and explicit NC `.nknc` workflows. Inspect source licenses if copying code; do not invent an overall project license from donor licenses.
-- [ ] Run the full offline suite, real stdio probe, `git diff --check`, and native scenarios on an authorized disposable host. Record native render evidence separately from artist review. If commercial Nuke is unavailable, deliver the bounded NC result and leave commercial qualification open. Run one independent review of protocol races, mutation ownership, and workflow publication before release delivery.
-- [ ] Commit as `test: qualify expanded Nuke workflows and document deployment`. Report exact tests, gaps, and branch state. Push or deploy only when requested.
+- [x] Run the qualification report tests with mocked evidence first; verify false-success aggregation is rejected before implementing the report writer.
+- [x] Implement the opt-in runner and documentation, including coordinated v2 upgrade/rollback, package deployment, host limitations, tool schemas, receipts, and explicit NC `.nknc` workflows. Inspect source licenses if copying code; do not invent an overall project license from donor licenses.
+- [x] Run the full offline suite, real stdio probe, `git diff --check`, and native scenarios on an authorized disposable host. Record native render evidence separately from artist review. If commercial Nuke is unavailable, deliver the bounded NC result and leave commercial qualification open. Run one independent review of protocol races, mutation ownership, and workflow publication before release delivery.
+- [x] Commit as `test: qualify expanded Nuke workflows and document deployment`. Report exact tests, gaps, and branch state. Push or deploy only when requested.
 
 ## Completion criteria
 

@@ -1,0 +1,241 @@
+[
+  {
+    "request_id": "27a65922-7f1f-40a7-8466-50251a0d234e",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 158504,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit",
+        "inspection",
+        "channel_statistics",
+        "toolsets",
+        "script_lifecycle",
+        "project_settings",
+        "shot_workflows",
+        "layered_compositing",
+        "scene_events"
+      ],
+      "toolset_limits": {
+        "nodes": 1000,
+        "selected_paths": 100,
+        "payload_bytes": 16777216,
+        "trusted_code": true,
+        "verification": "observed topology and bounded static knob subset"
+      },
+      "diagnostic_limits": {
+        "channels": 16,
+        "samples_per_channel": 4096,
+        "method": "cubic_filtered_grid"
+      },
+      "inspection_limits": {
+        "nodes": 1000,
+        "knobs_per_node": 128,
+        "channels_per_read": 2048,
+        "evaluated_paths": 10000,
+        "evidence_bytes": 4194304
+      },
+      "workflow_limits": {
+        "shots": 100,
+        "plates_per_shot": 32,
+        "layers": 32,
+        "evaluated_paths": 10000,
+        "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+        "native_pixel_recipe_qualified": false
+      },
+      "scene_events": {
+        "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+        "revision": 26,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "capacity": 1000,
+        "poll_limit": 500,
+        "coalesce_ms": 100,
+        "delivery": "polling",
+        "frame_observation": "sampled",
+        "revision_scope": "observed changes within this server instance"
+      },
+      "unsupported_tool_groups": [
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "0e022112-fb52-4b94-8dd9-d5b2b0f924c3",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 158504,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-proxy-fixed-slow-render-host/events_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-proxy-fixed-slow-render-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "d7aae732-6bf2-47c8-8140-7fcce7be0144",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 158504,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-proxy-fixed-slow-render-host/events_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-proxy-fixed-slow-render-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "27125a92-fe1a-4f83-b3a1-e4b3619bc0c7",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "file": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/docs/validation/task-15-evidence/slow-render-proxy-fixed/slow.png",
+        "frame": 0
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "1eac1537-153b-425b-be44-488802e5b48e",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 158504,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-proxy-fixed-slow-render-host/events_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-proxy-fixed-slow-render-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "ed59a4ea-3144-4790-90b9-c30afe30b614",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": false,
+    "state": "queued",
+    "outcome": "not_started",
+    "data": {},
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "adddaa2a-711e-4fc1-98f1-4a5b08054780",
+    "client_session_id": "10d4062f-d50e-40fb-89b4-0c7df9f46c15",
+    "server_instance_id": "27e0ab21-470d-4def-af7b-8cc18a8faf3f",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 158504,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-proxy-fixed-slow-render-host/events_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-proxy-fixed-slow-render-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  }
+]

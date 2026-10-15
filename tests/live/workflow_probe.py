@@ -8,8 +8,8 @@ sys.path.insert(0,str(ROOT))
 from nuke_mcp_bridge.client import BridgeClient
 
 
-def probe(pid,port,directory):
-    client=BridgeClient(port=port);folder=Path(directory).resolve()
+def probe(pid,port,directory,client_factory=BridgeClient,scenario=None):
+    client=client_factory(port=port);folder=Path(directory).resolve()
     report={'passed':False,'receipts':{},'checks':{}}
     def call(label,command,**params):
         receipt=client.call(command,params);report['receipts'][label]=receipt;return receipt
@@ -25,41 +25,43 @@ def probe(pid,port,directory):
         if not choices['ok'] or any('linear' not in choices['data']['output'][key] for key in ('read','write')):
             raise RuntimeError('Explicit linear fixture colorspace unavailable; no substitution')
         f['plate_colorspace']='linear';f['write']['colorspace']='linear'
-        original=call('save_original','save_script',path=str(folder/'original.nknc'))
-        if not original['ok']:raise RuntimeError('Could not establish saved-clean original; no workflow attempted')
-        shots=[]
-        for index in (1,2):
-            shots.append({'shot_id':'shot_'+str(index),'script_path':str(folder/('shot_'+str(index)+'.nknc')),
-                'plates':[{'path':f['plate'],'colorspace':f['plate_colorspace'],'first':1,'last':2}],
-                'frame_range':{'work_first':1,'cut_in':1,'cut_out':2,'work_last':2},
-                'fps':{'numerator':24,'denominator':1},'format':{'width':4,'height':4,'pixel_aspect':1.},
-                'color_settings':f['color'],'write':dict(f['write'],path='[file dirname [value root.name]]/shot_'+str(index)+'.%04d.exr')})
-        manifest={'schema_version':1,'output_root':str(folder),'shots':shots}
-        report['shot_manifest']=manifest
-        plan=call('shot_plan','plan_shot_setup',manifest=manifest)
-        report['checks']['shot_plan']=plan['ok']
-        if plan['ok']:
-            applied=call('shot_apply','apply_shot_setup',manifest=manifest,plan_digest=plan['data']['digest'])
-            report['checks']['two_shots']=applied['ok'] and len(applied['data'].get('completed',[]))==2
-            report['checks']['original_restored']=applied['data'].get('restoration',{}).get('ok',False)
-            if not report['checks']['original_restored']:raise RuntimeError('Restoration unavailable; stop native fixture')
-        comp={'schema_version':1,'group_name':'MCP_AOV','layers':[
-            {'id':'base','source_node_path':'root.MCP_Base','channel_layer':'rgba'},
-            {'id':'light','source_node_path':'root.MCP_Light','channel_layer':'rgba','operation':'plus'}]}
-        report['comp_manifest']=comp
-        plan=call('comp_plan','plan_layered_comp',manifest=comp)
-        report['checks']['comp_plan']=plan['ok']
-        if plan['ok']:
-            built=call('comp_build','build_layered_comp',manifest=comp,plan_digest=plan['data']['digest'])
-            report['checks']['comp_build']=built['ok']
-            if built['ok']:
-                numeric=call('numeric','execute_code',code="g=nuke.toNode('MCP_AOV')\na=nuke.toNode('MCP_Base')\nb=nuke.toNode('MCP_Light')\nassert all(x is not None for x in (g,a,b))\noutput['actual']=[g.sample('rgba.'+k,2,2) for k in ('red','green','blue','alpha')]\noutput['expected']=[a.sample('rgba.'+k,2,2)+b.sample('rgba.'+k,2,2) for k in ('red','green','blue','alpha')]")
-                report['checks']['numeric']=numeric['ok'] and all(abs(a-b)<1e-5 for a,b in zip(numeric['data']['output']['actual'],numeric['data']['output']['expected']))
-                # Existing owned fixture Write; no speculative node creation or retry.
-                preview=str(folder/'aov-review.png')
-                rendered=call('preview','execute_code',code="w=nuke.toNode('MCP_Review')\ng=nuke.toNode('MCP_AOV')\nassert w is not None and g is not None\nw.setInput(0,g)\nw['file'].setValue("+repr(preview)+")\nw['file_type'].setValue('png')\nnuke.execute(w,1,1)\noutput['preview']="+repr(preview))
-                report['checks']['preview']=rendered['ok'] and Path(preview).is_file()
-        report['passed']=len(report['checks'])==7 and all(report['checks'].values())
+        if scenario != 'aov-reconstruction':
+            original=call('save_original','save_script',path=str(folder/'original.nknc'))
+            if not original['ok']:raise RuntimeError('Could not establish saved-clean original; no workflow attempted')
+            shots=[]
+            for index in (1,2):
+                shots.append({'shot_id':'shot_'+str(index),'script_path':str(folder/('shot_'+str(index)+'.nknc')),
+                    'plates':[{'path':f['plate'],'colorspace':f['plate_colorspace'],'first':1,'last':2}],
+                    'frame_range':{'work_first':1,'cut_in':1,'cut_out':2,'work_last':2},
+                    'fps':{'numerator':24,'denominator':1},'format':{'width':4,'height':4,'pixel_aspect':1.},
+                    'color_settings':f['color'],'write':dict(f['write'],path='[file dirname [value root.name]]/shot_'+str(index)+'.%04d.exr')})
+            manifest={'schema_version':1,'output_root':str(folder),'shots':shots}
+            report['shot_manifest']=manifest
+            plan=call('shot_plan','plan_shot_setup',manifest=manifest)
+            report['checks']['shot_plan']=plan['ok']
+            if plan['ok']:
+                applied=call('shot_apply','apply_shot_setup',manifest=manifest,plan_digest=plan['data']['digest'])
+                report['checks']['two_shots']=applied['ok'] and len(applied['data'].get('completed',[]))==2
+                report['checks']['original_restored']=applied['data'].get('restoration',{}).get('ok',False)
+                if not report['checks']['original_restored']:raise RuntimeError('Restoration unavailable; stop native fixture')
+        if scenario != 'two-shot':
+            comp={'schema_version':1,'group_name':'MCP_AOV','layers':[
+                {'id':'base','source_node_path':'root.MCP_Base','channel_layer':'rgba'},
+                {'id':'light','source_node_path':'root.MCP_Light','channel_layer':'rgba','operation':'plus'}]}
+            report['comp_manifest']=comp
+            plan=call('comp_plan','plan_layered_comp',manifest=comp)
+            report['checks']['comp_plan']=plan['ok']
+            if plan['ok']:
+                built=call('comp_build','build_layered_comp',manifest=comp,plan_digest=plan['data']['digest'])
+                report['checks']['comp_build']=built['ok']
+                if built['ok']:
+                    numeric=call('numeric','execute_code',code="g=nuke.toNode('MCP_AOV')\na=nuke.toNode('MCP_Base')\nb=nuke.toNode('MCP_Light')\nassert all(x is not None for x in (g,a,b))\noutput['actual']=[g.sample('rgba.'+k,2,2) for k in ('red','green','blue','alpha')]\noutput['expected']=[a.sample('rgba.'+k,2,2)+b.sample('rgba.'+k,2,2) for k in ('red','green','blue','alpha')]")
+                    report['checks']['numeric']=numeric['ok'] and all(abs(a-b)<1e-5 for a,b in zip(numeric['data']['output']['actual'],numeric['data']['output']['expected']))
+                    # Existing owned fixture Write; no speculative node creation or retry.
+                    preview=str(folder/'aov-review.png')
+                    rendered=call('preview','execute_code',code="w=nuke.toNode('MCP_Review')\ng=nuke.toNode('MCP_AOV')\nassert w is not None and g is not None\nw.setInput(0,g)\nw['file'].setValue("+repr(preview)+")\nw['file_type'].setValue('png')\nnuke.execute(w,1,1)\noutput['preview']="+repr(preview))
+                    report['checks']['preview']=rendered['ok'] and Path(preview).is_file()
+        report['passed']=len(report['checks'])==(3 if scenario=='two-shot' else 4 if scenario=='aov-reconstruction' else 7) and all(report['checks'].values())
     except Exception as exc:report['error']=str(exc)
     finally:client.close()
     return report

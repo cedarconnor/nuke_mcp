@@ -9,8 +9,8 @@ sys.path.insert(0,str(ROOT))
 from nuke_mcp_bridge.client import BridgeClient
 
 
-def probe(pid,port,directory):
-    client=BridgeClient(port=port)
+def probe(pid,port,directory,client_factory=BridgeClient):
+    client=client_factory(port=port)
     report={'passed':False,'receipts':{},'checks':{}}
     def call(label,command,**params):
         receipt=client.call(command,params)

@@ -1,5 +1,18 @@
 # Compatibility patch notes
 
+## Task 15: qualification and deployment evidence
+
+Adds `tests/live/qualify.py` with read-only defaults, 11 selectable scenarios, native identity
+guards, expected/actual checks, retained receipts and fail-closed aggregation. Editing requires
+both opt-in flags and a disposable fixture PID/path. Unknown outcomes stop helper mutations;
+missing checks and unknown cleanup cannot pass. Reports distinguish retained disposable artifacts
+from verified field restoration, and never infer commercial or artist approval. The stdio probe
+now records legacy schemas. Deployment/rollback and dependency provenance are documented in
+[VALIDATION](docs/VALIDATION.md) and [THIRD_PARTY_NOTICES](docs/THIRD_PARTY_NOTICES.md).
+See [Task 15 results](docs/validation/task-15.md) for exact native limits. No runtime dependency,
+public tool, or permanent startup change is introduced. Native qualification also exposed and fixed
+render proxy access: Nuke uses `root().proxy()` / `root().setProxy()`, not module-level methods.
+
 ## Task 14: scene events and optimistic revision checks
 
 Adds `subscribe_events` and `get_events` (37 total tools), per-client filters, bounded history,
@@ -8,7 +21,7 @@ are counted before coalescing. Batch edits can reject a stale observed revision 
 own callbacks; workflow digests now bind observed scene state. NC and degraded observation refuse
 explicit revision guarantees. Stop removes callbacks; restart creates a new event instance.
 Frame events are sampled on the main-thread timer, since Root UI updates may be absent.
-See [event contracts](docs/scene-events.md). Task 15 release qualification remains pending.
+See [event contracts](docs/scene-events.md). Task 15 now supplies explicit qualification reports; see the limits above.
 
 ## Milestone 5: manifest-driven production workflows
 

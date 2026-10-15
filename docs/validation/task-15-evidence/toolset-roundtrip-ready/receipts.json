@@ -1,0 +1,413 @@
+[
+  {
+    "request_id": "34a37e12-d2ae-4b20-a724-cd9ce27599c7",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "protocol_version": 2,
+      "addon_version": "0.2.0",
+      "pid": 151196,
+      "nuke_version": "17.0v4",
+      "gui": true,
+      "host_flavor": "nuke",
+      "license_mode": "noncommercial",
+      "graph_observation": "partial_or_unknown",
+      "node_class_discovery": "advisory",
+      "tool_groups": [
+        "legacy_core",
+        "capabilities",
+        "operation_status",
+        "verified_edits",
+        "batch_edit",
+        "inspection",
+        "channel_statistics",
+        "toolsets",
+        "script_lifecycle",
+        "project_settings",
+        "shot_workflows",
+        "layered_compositing",
+        "scene_events"
+      ],
+      "toolset_limits": {
+        "nodes": 1000,
+        "selected_paths": 100,
+        "payload_bytes": 16777216,
+        "trusted_code": true,
+        "verification": "observed topology and bounded static knob subset"
+      },
+      "diagnostic_limits": {
+        "channels": 16,
+        "samples_per_channel": 4096,
+        "method": "cubic_filtered_grid"
+      },
+      "inspection_limits": {
+        "nodes": 1000,
+        "knobs_per_node": 128,
+        "channels_per_read": 2048,
+        "evaluated_paths": 10000,
+        "evidence_bytes": 4194304
+      },
+      "workflow_limits": {
+        "shots": 100,
+        "plates_per_shot": 32,
+        "layers": 32,
+        "evaluated_paths": 10000,
+        "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+        "native_pixel_recipe_qualified": false
+      },
+      "scene_events": {
+        "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+        "revision": 26,
+        "script_generation": 1,
+        "revision_available": false,
+        "reasons": [
+          "noncommercial_or_unknown_observation",
+          "callback_read_failed"
+        ],
+        "capacity": 1000,
+        "poll_limit": 500,
+        "coalesce_ms": 100,
+        "delivery": "polling",
+        "frame_observation": "sampled",
+        "revision_scope": "observed changes within this server instance"
+      },
+      "unsupported_tool_groups": [
+        "scene_revisions"
+      ],
+      "edit_limits": {
+        "batch_operations": 100,
+        "static_knobs_only": true,
+        "legacy_compound_workflows": "unverified",
+        "creation_scope": "root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "df0a705a-189e-419e-8fbf-b4979ac22344",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "a41dc8c5-5b56-4181-ae35-60b2694ec697",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "3e84992b-51cc-4cf4-96fd-a2a920e028c4",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "c4a17158-872f-493e-a1c2-38856c5bd360",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "054056f6-b6f7-4310-b5db-ef9478b30e41",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "selection": [
+          "MCP_Grade"
+        ]
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "4aaa8835-0a79-4a06-afff-60ce69bfc4da",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "bd86f5d7-bd9c-46a2-9a92-6aa981842211",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "not_started",
+    "data": {
+      "dry_run": true,
+      "before": {
+        "fps": 24.0
+      },
+      "requested": {
+        "fps": 30.0
+      },
+      "completed": [],
+      "outcome": "not_started"
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "29d46189-68a4-44a7-a664-3855fc390449",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 24.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "5cd1ba58-18c0-4c21-961d-528861df9c03",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "dry_run": false,
+      "before": {
+        "fps": 24.0,
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "format": {
+          "width": 4,
+          "height": 4,
+          "pixel_aspect": 1.0
+        }
+      },
+      "requested": {
+        "fps": 30.0,
+        "first_frame": 1,
+        "last_frame": 3,
+        "format": {
+          "width": 4,
+          "height": 4,
+          "pixel_aspect": 1.0
+        }
+      },
+      "completed": [
+        "fps",
+        "first_frame",
+        "last_frame",
+        "format"
+      ],
+      "after": {
+        "fps": 30.0,
+        "first_frame": 1.0,
+        "last_frame": 3.0,
+        "format": {
+          "width": 4,
+          "height": 4,
+          "pixel_aspect": 1.0
+        }
+      },
+      "outcome": "applied"
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "66323607-7be5-4c21-b3da-8fcbff87ffa1",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "pid": 151196,
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+        "disposable": "1",
+        "frame": 0,
+        "fps": 30.0,
+        "proxy": false,
+        "library": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-ready-toolset-roundtrip-host\\library"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "09fcd7c0-c3ba-4443-8f4e-2b28dcc12a31",
+    "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+    "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+    "ok": false,
+    "state": "failed",
+    "outcome": "partial",
+    "data": {
+      "name": "roundtrip",
+      "payload": "94aaaffe46b74f2f9751878ef2f6000a.nknc",
+      "published": false
+    },
+    "error": {
+      "code": "state_uncertain",
+      "message": "Selection scope is not observable"
+    },
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  }
+]

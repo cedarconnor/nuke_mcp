@@ -172,13 +172,15 @@ This repository also includes an automated read-only end-to-end check:
 It starts the stdio MCP process, enumerates the tools, calls
 `get_script_info`, and verifies that the response came from live Nuke.
 
-To additionally test reversible node editing in an empty or disposable script:
+For a versioned evidence report, use a new absolute output directory:
 
 ```powershell
-.\.venv\Scripts\python.exe .\tests\smoke_mcp.py --mutate
+.\.venv\Scripts\python.exe tests/live/qualify.py --output D:/evidence/nuke-read-only
 ```
 
-This creates, inspects, and deletes one temporary `Grade` node.
+Editing qualification requires an exclusive disposable process, its PID and exact fixture path,
+plus both `--mutate --disposable`. See [all scenarios and fixture instructions](docs/VALIDATION.md).
+The old `smoke_mcp.py --mutate` command now refuses to edit without those guards.
 
 ## Nuke Non-commercial limits
 
@@ -237,3 +239,28 @@ with its server instance ID; reconnect resets subscriptions, and a new host inst
 Check `history_gap` and revision availability before relying on observations. NC returns
 `revision_unavailable` for guarded batch edits. Upgrade the external server, add-on and shared package
 together, then restart both sides. See [scene event contracts](docs/scene-events.md).
+
+## Coordinated upgrade and rollback
+
+1. Keep the current complete checkout and client configuration as the rollback version. Finish
+   or cancel outstanding operations and inspect their receipts; do not treat client disconnection
+   as cancellation. Save artist work before restarting its host.
+2. Stop the Nuke listener and all external MCP processes. Install a complete new checkout with
+   `main.py`, `nuke_mcp_server.py`, `nuke_mcp_addon.py`, `nuke_mcp_bridge/`, startup examples and
+   dependency requirements. A copied add-on alone cannot run protocol v2.
+3. Create an external Python 3.11 environment and install `requirements.txt`. Point both the
+   Nuke plug-in path (`NUKE_MCP_REPO` or `nuke.pluginAddPath`) and every MCP client at the same
+   checkout. Preserve unrelated startup code and client entries.
+4. Restart Nuke and its listener, then reconnect MCP clients. Python module caches mean copying
+   files over a running host is insufficient. Call `get_capabilities` and run the default
+   `tests/live/qualify.py` report. Verify protocol 2, intended host version, instance, and schemas.
+5. To roll back, stop both sides again, restore both checkout paths and the saved client config,
+   restart both sides, and rerun the read-only check. Never mix a v1 client with a v2 listener.
+   Old operation IDs belong to the old server instance; preserve their evidence separately.
+
+Task 15 does not change permanent startup automatically. The bundled startup examples already
+load the full package and fail clearly when it is missing. Neither upgrade nor rollback modifies
+shot outputs or trusted toolset libraries. Back up those artifacts separately before a deployment.
+Use explicit `.nknc` paths when saving scripts/toolsets in Non-commercial; do not rename a `.nk`
+file to imply conversion. Consult [receipt and evidence semantics](docs/VALIDATION.md) and
+[third-party notices](docs/THIRD_PARTY_NOTICES.md).

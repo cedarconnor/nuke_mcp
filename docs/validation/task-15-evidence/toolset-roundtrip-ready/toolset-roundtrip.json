@@ -1,0 +1,173 @@
+{
+  "status": "completed",
+  "checks": {
+    "toolset_save": {
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    "library_listing": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "toolset_load": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "known_knob_topology": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    "selection": {
+      "expected": true,
+      "actual": null,
+      "passed": false
+    }
+  },
+  "cleanup": {
+    "outcome": "unknown"
+  },
+  "evidence": {
+    "passed": false,
+    "receipts": {
+      "identity": {
+        "request_id": "054056f6-b6f7-4310-b5db-ef9478b30e41",
+        "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+        "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "executed": true,
+          "output": {
+            "pid": 151196,
+            "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/task15-ready-toolset-roundtrip-host/library_fixture.nk",
+            "selection": [
+              "MCP_Grade"
+            ]
+          }
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "settings_dry": {
+        "request_id": "bd86f5d7-bd9c-46a2-9a92-6aa981842211",
+        "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+        "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+        "ok": true,
+        "state": "completed",
+        "outcome": "not_started",
+        "data": {
+          "dry_run": true,
+          "before": {
+            "fps": 24.0
+          },
+          "requested": {
+            "fps": 30.0
+          },
+          "completed": [],
+          "outcome": "not_started"
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "settings_apply": {
+        "request_id": "5cd1ba58-18c0-4c21-961d-528861df9c03",
+        "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+        "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+        "ok": true,
+        "state": "completed",
+        "outcome": "applied",
+        "data": {
+          "dry_run": false,
+          "before": {
+            "fps": 24.0,
+            "first_frame": 1.0,
+            "last_frame": 3.0,
+            "format": {
+              "width": 4,
+              "height": 4,
+              "pixel_aspect": 1.0
+            }
+          },
+          "requested": {
+            "fps": 30.0,
+            "first_frame": 1,
+            "last_frame": 3,
+            "format": {
+              "width": 4,
+              "height": 4,
+              "pixel_aspect": 1.0
+            }
+          },
+          "completed": [
+            "fps",
+            "first_frame",
+            "last_frame",
+            "format"
+          ],
+          "after": {
+            "fps": 30.0,
+            "first_frame": 1.0,
+            "last_frame": 3.0,
+            "format": {
+              "width": 4,
+              "height": 4,
+              "pixel_aspect": 1.0
+            }
+          },
+          "outcome": "applied"
+        },
+        "error": null,
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      },
+      "toolset_save": {
+        "request_id": "09fcd7c0-c3ba-4443-8f4e-2b28dcc12a31",
+        "client_session_id": "4d840e72-8b19-4f1c-8ca3-9a841180561e",
+        "server_instance_id": "7f3f0c51-5396-4815-b0c6-11d0e4ef0749",
+        "ok": false,
+        "state": "failed",
+        "outcome": "partial",
+        "data": {
+          "name": "roundtrip",
+          "payload": "94aaaffe46b74f2f9751878ef2f6000a.nknc",
+          "published": false
+        },
+        "error": {
+          "code": "state_uncertain",
+          "message": "Selection scope is not observable"
+        },
+        "warnings": [],
+        "observation": {
+          "coverage": "unknown",
+          "reason": "not_inspected"
+        },
+        "revision": null
+      }
+    },
+    "checks": {
+      "dry_run": true,
+      "settings": true,
+      "toolset_save": false
+    },
+    "error": "Previous operation uncertain; stop without further fixture calls"
+  }
+}

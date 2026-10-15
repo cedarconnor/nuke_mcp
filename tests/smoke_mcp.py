@@ -3,6 +3,7 @@
 import asyncio
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from uuid import uuid4
@@ -75,6 +76,29 @@ async def mutation_probe(session):
     return report
 
 
+async def verify_disposable_session(session, instance, pid, fixture):
+    caps = checked_receipt(await session.call_tool('get_capabilities', arguments={}))
+    if caps['server_instance_id'] != instance:
+        raise RuntimeError('Disposable host instance changed')
+    identity = checked_receipt(await session.call_tool('execute_nuke_code', arguments={'code':
+        "import os\noutput['pid']=os.getpid()\noutput['path']=nuke.root().name()\noutput['disposable']=os.environ.get('NUKE_MCP_DISPOSABLE_SESSION')"}))
+    facts = identity['data']['output']
+    if (identity['server_instance_id'] != instance or facts.get('pid') != pid or
+            facts.get('disposable') != '1' or Path(facts.get('path','')).resolve() != fixture.resolve()):
+        raise RuntimeError('Disposable fixture identity changed')
+
+
+async def isolated_mutation_probe(port, instance, pid, fixture):
+    """Called only after the qualification runner verifies its disposable fixture."""
+    server = StdioServerParameters(command=sys.executable, args=[str(REPO_ROOT/'main.py')],
+                                   cwd=str(REPO_ROOT), env=dict(os.environ, NUKE_MCP_PORT=str(port)))
+    async with stdio_client(server) as streams:
+        async with ClientSession(*streams) as session:
+            await session.initialize()
+            await verify_disposable_session(session, instance, pid, fixture)
+            return await mutation_probe(session)
+
+
 async def smoke_test(mutate: bool = False) -> None:
     server = StdioServerParameters(
         command=sys.executable,
@@ -125,4 +149,6 @@ if __name__ == "__main__":
         help="Create, inspect, and delete one temporary Grade node.",
     )
     args = parser.parse_args()
-    asyncio.run(smoke_test(mutate=args.mutate))
+    if args.mutate:
+        parser.error('Use tests/live/qualify.py --scenario verified-edit --mutate --disposable --pid PID --fixture PATH --output NEW_DIRECTORY')
+    asyncio.run(smoke_test())

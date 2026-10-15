@@ -1,0 +1,39 @@
+{
+  "accepted": {
+    "request_id": "72d8d8ae-602f-4eba-a701-7e0dd9d0e4b0",
+    "client_session_id": "57631cbf-db0f-4fb8-b0f6-09118291a3e7",
+    "server_instance_id": "c9ba1ab2-9ca5-4c7d-8f93-24a0ccce7b87",
+    "ok": false,
+    "state": "queued",
+    "outcome": "not_started",
+    "data": {},
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  "polls": [
+    {
+      "request_id": "72d8d8ae-602f-4eba-a701-7e0dd9d0e4b0",
+      "client_session_id": "57631cbf-db0f-4fb8-b0f6-09118291a3e7",
+      "server_instance_id": "c9ba1ab2-9ca5-4c7d-8f93-24a0ccce7b87",
+      "ok": false,
+      "state": "failed",
+      "outcome": "unknown",
+      "data": {},
+      "error": {
+        "code": "host_error",
+        "message": "module 'nuke' has no attribute 'proxy'"
+      },
+      "warnings": [],
+      "observation": {
+        "coverage": "unknown",
+        "reason": "not_inspected"
+      },
+      "revision": null
+    }
+  ]
+}

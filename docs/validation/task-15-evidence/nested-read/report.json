@@ -1,0 +1,193 @@
+{
+  "passed": false,
+  "qualified": [],
+  "unqualified": [
+    "two-clients",
+    "legacy-tools",
+    "slow-render",
+    "verified-edit",
+    "nc-ambiguity",
+    "nested-read",
+    "channel-statistics",
+    "toolset-roundtrip",
+    "two-shot",
+    "aov-reconstruction",
+    "event-stale-state"
+  ],
+  "commercial_qualified": false,
+  "artist_approved": false,
+  "host": {
+    "protocol_version": 2,
+    "addon_version": "0.2.0",
+    "pid": 139496,
+    "nuke_version": "17.0v4",
+    "gui": true,
+    "host_flavor": "nuke",
+    "license_mode": "noncommercial",
+    "graph_observation": "partial_or_unknown",
+    "node_class_discovery": "advisory",
+    "tool_groups": [
+      "legacy_core",
+      "capabilities",
+      "operation_status",
+      "verified_edits",
+      "batch_edit",
+      "inspection",
+      "channel_statistics",
+      "toolsets",
+      "script_lifecycle",
+      "project_settings",
+      "shot_workflows",
+      "layered_compositing",
+      "scene_events"
+    ],
+    "toolset_limits": {
+      "nodes": 1000,
+      "selected_paths": 100,
+      "payload_bytes": 16777216,
+      "trusted_code": true,
+      "verification": "observed topology and bounded static knob subset"
+    },
+    "diagnostic_limits": {
+      "channels": 16,
+      "samples_per_channel": 4096,
+      "method": "cubic_filtered_grid"
+    },
+    "inspection_limits": {
+      "nodes": 1000,
+      "knobs_per_node": 128,
+      "channels_per_read": 2048,
+      "evaluated_paths": 10000,
+      "evidence_bytes": 4194304
+    },
+    "workflow_limits": {
+      "shots": 100,
+      "plates_per_shot": 32,
+      "layers": 32,
+      "evaluated_paths": 10000,
+      "shot_session_opt_in": "NUKE_MCP_DISPOSABLE_SESSION=1",
+      "native_pixel_recipe_qualified": false
+    },
+    "scene_events": {
+      "server_instance_id": "6b544657-2c6b-4d5b-aa44-58648d8f4761",
+      "revision": 0,
+      "script_generation": 0,
+      "revision_available": false,
+      "reasons": [
+        "noncommercial_or_unknown_observation"
+      ],
+      "capacity": 1000,
+      "poll_limit": 500,
+      "coalesce_ms": 100,
+      "delivery": "polling",
+      "frame_observation": "sampled",
+      "revision_scope": "observed changes within this server instance"
+    },
+    "unsupported_tool_groups": [
+      "scene_revisions"
+    ],
+    "edit_limits": {
+      "batch_operations": 100,
+      "static_knobs_only": true,
+      "legacy_compound_workflows": "unverified",
+      "creation_scope": "root"
+    }
+  },
+  "scenarios": {
+    "nested-read": {
+      "status": "completed",
+      "checks": {
+        "nested_paths": {
+          "expected": true,
+          "actual": null,
+          "passed": false
+        },
+        "truncation": {
+          "expected": true,
+          "actual": null,
+          "passed": false
+        },
+        "read_identity": {
+          "expected": true,
+          "actual": null,
+          "passed": false
+        },
+        "missing_sequence": {
+          "expected": true,
+          "actual": null,
+          "passed": false
+        },
+        "state_preserved": {
+          "expected": true,
+          "actual": null,
+          "passed": false
+        }
+      },
+      "cleanup": {
+        "outcome": "not_needed"
+      },
+      "evidence": {
+        "passed": false,
+        "checks": {},
+        "receipts": {
+          "before": {
+            "request_id": "42504c24-91b9-4b3a-a406-5752abd9cc85",
+            "client_session_id": "c9599f86-96ff-418c-b8a4-35ca6c697dbb",
+            "server_instance_id": "6b544657-2c6b-4d5b-aa44-58648d8f4761",
+            "ok": true,
+            "state": "completed",
+            "outcome": "applied",
+            "data": {
+              "executed": true,
+              "output": {
+                "pid": 139496,
+                "script": "Root",
+                "frame": 0,
+                "proxy": false,
+                "selection": []
+              }
+            },
+            "error": null,
+            "warnings": [],
+            "observation": {
+              "coverage": "unknown",
+              "reason": "not_inspected"
+            },
+            "revision": null
+          }
+        },
+        "error": "Refusing a host other than the owned inspection fixture"
+      }
+    }
+  },
+  "selected": [
+    "nested-read"
+  ],
+  "metadata": {
+    "timestamp_utc": "2026-10-15T00:16:01.184532+00:00",
+    "commit": "1238ba2c71f4b8c2efe1cb8527157f8f31ae7b42",
+    "dirty": true,
+    "python": "3.11.11 (remotes/origin/foundry/v3.11.11:42e60506bdd, Jul 23 2025, 10:51:14) [MSC v.1935 64 bit (AMD64)]",
+    "repository": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp",
+    "port": 19887,
+    "fixture": {
+      "path": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\task15-nested-read-host\\inspection_fixture.nk",
+      "sha256": "180fbaf732c8402a41a004010c1f653cb999f495c079541f33158105ead551ba",
+      "pid": 139496
+    },
+    "server_instance_id": "6b544657-2c6b-4d5b-aa44-58648d8f4761",
+    "identity": {
+      "pid": 139496,
+      "path": "Root",
+      "disposable": "1",
+      "frame": 0,
+      "fps": 24.0,
+      "proxy": false
+    }
+  },
+  "cleanup": {
+    "nested-read": {
+      "outcome": "not_needed"
+    }
+  }
+}

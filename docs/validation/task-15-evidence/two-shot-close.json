@@ -1,0 +1,21 @@
+{
+  "request_id": "c43a5405-6a82-4f66-a421-7f1df91fedeb",
+  "client_session_id": "3b55801c-1fd5-4248-9597-10cc724bf56a",
+  "server_instance_id": "62faf1e4-1b31-47c3-860f-a96b778e4a42",
+  "ok": true,
+  "state": "completed",
+  "outcome": "applied",
+  "data": {
+    "executed": true,
+    "output": {
+      "close_scheduled": true
+    }
+  },
+  "error": null,
+  "warnings": [],
+  "observation": {
+    "coverage": "unknown",
+    "reason": "not_inspected"
+  },
+  "revision": null
+}
