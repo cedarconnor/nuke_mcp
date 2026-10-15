@@ -166,6 +166,12 @@ The listener is restricted to loopback. Use trusted local clients: the bridge ca
 
 ## Verification and known limits
 
+The follow-up NC diagnosis reproduced missing handles on a **one-node fixture without the
+bridge**: ten repeated lookups succeeded, then lookups returned `None` and enumeration was
+empty. The real bridge reproduced that sequence, with later read-only requests still unable
+to retrieve the node. Small graphs do not avoid NC retrieval limits. See the
+[native diagnosis and evidence](docs/validation/nc-node-retrieval.md).
+
 Task 15 has **221 passing offline tests**, final real stdio checks, and native NC read-only/event
 checks. A controlled 16-second native render passed after correcting the Root proxy API; the
 post-review run also verified proxy output/sequence binding. Native edit, inspection, toolset,
@@ -185,7 +191,7 @@ Native mutation qualification is incomplete. One disposable test verified creati
 
 Commercial Nuke, NukeX/Studio, other platforms and versions, native rendered image correctness, and artist acceptance remain unqualified. The offline long-render test validates operation behavior against a fake host; it is not a native render-quality test.
 
-NC node access can be incomplete or intermittent. An empty node list does not prove an empty graph, and a failed creation may still have changed the script. Read-only inspection can be repeated; an ambiguous mutation must not be retried automatically. See the [recorded validation and receipts](docs/validation/milestone-1.md).
+NC node access can become unavailable after repeated retrievals of the same node. An empty node list does not prove an empty graph, and a failed creation may still have changed the script. Repeating read-only inspection does not guarantee recovery; an ambiguous mutation must not be retried automatically. See the [retrieval diagnosis](docs/validation/nc-node-retrieval.md) and [earlier validation receipts](docs/validation/milestone-1.md).
 
 Run offline tests from the repository root:
 

@@ -8,6 +8,11 @@ on Task 14 commit `1238ba2c71f4b8c2efe1cb8527157f8f31ae7b42`.
 Task 14 was pushed to `origin/codex/nuke-scene-events`; local and remote SHA matched exactly.
 Task 15 work is local until separately pushed. Main remains at `59d8ff6`.
 
+Follow-up: the [NC retrieval investigation](nc-node-retrieval.md) reproduced missing
+handles and empty enumeration on a one-node fixture without the bridge. That narrows
+the observation failure to a native NC constraint; it does not retroactively qualify
+the failed workflow scenarios below.
+
 ## Verification
 
 - Full offline suite: 221 tests pass, no skips after the review fixes.

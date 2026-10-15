@@ -17,152 +17,65 @@ Use [event polling](docs/scene-events.md) to detect observed changes. A history 
 instance requires fresh inspection. Only use `expected_revision` when coverage is available; NC
 observations do not provide that guarantee. A save event alone does not prove a successful save.
 
-When creating Nuke node graphs or compositing setups via the Nuke MCP interface, please follow these guidelines to prevent crashes:
+## Creating and editing nodes
 
-## Critical Rules
+Use typed `create_node`, `modify_node`, and `batch_edit` calls for supported edits.
+Node identifiers must start with a letter or underscore; use a label for descriptive text.
+Use full paths such as `root.Grade1` or `GroupA.Grade1` for existing nodes. Short names
+can be ambiguous when Groups contain nodes with the same name.
 
-1. **Never use numbered prefixes in node names**
-   - ❌ `1_Primary_Grade`, `2_Saturation`
-   - ✅ `Primary_Grade`, `Saturation`
+Inspect the structured receipt before any dependent edit. `unknown` or `partial` means
+stop and retain the request ID, observed paths, and cleanup evidence. Query operation status
+when available. Do not replay creation, delete guessed candidates, or continue building on
+an unverified node. Raw Python creation does not remove NC observation limits or supply
+verified rollback.
 
-2. **Use labels instead of renaming nodes when possible**
-   - Instead of renaming nodes, set their `label` parameter
-   - Example: `node["label"].setValue("Exposure Adjustment")`
+`create_node` validates the requested identifier and resolves its constructor through
+`nuke.nodes`; the old fixed node-type allowlist no longer controls this typed path.
+An available constructor is not evidence that its knobs or behavior are qualified.
+Use [verified edits](docs/verified-edits.md) for supported values and batch behavior.
 
-3. **Create nodes incrementally**
-   - Create and test nodes one at a time
-   - Add connections only after confirming nodes exist
-   - Use `try`/`except` blocks around each node creation
+## Non-commercial node retrieval limits
 
-4. **Simplify node creation**
-   - Start with minimal node trees (3-4 nodes maximum)
-   - Use simpler node types first (Grade, Blur, Transform)
-   - Avoid complex nodes like ColorSpace with string parameters
+Foundry documents a ten-node Python retrieval limit in Nuke Non-commercial.
+[Official NC limitations](https://learn.foundry.com/nuke/17.0v2/content/getting_started/meet_nuke/about_nc.html).
 
-5. **Handle errors gracefully**
-   - Catch exceptions for each operation
-   - Print detailed error information
-   - Avoid allowing one error to crash the entire setup
+A fresh one-node Nuke NC 17.0v4 fixture reproduced the limit on 2026-10-14:
+repeated `toNode("MCP_Constant")` calls returned the same node ten times, then returned
+`None`; subsequent `allNodes()` returned `[]`. This occurred without importing the bridge.
+The same sequence through the bridge also failed after ten successful lookups, and four
+later read-only requests still returned `None`. With bridge callbacks installed in a
+separate startup probe, nine lookups succeeded. These counts describe those runs; they
+are not a guaranteed per-tool allowance or a specification of the host's reset behavior.
+See the [diagnosis and raw traces](docs/validation/nc-node-retrieval.md).
 
-## Node Creation Pattern
+A small graph can therefore become unobservable. Counting distinct nodes or reducing the
+fixture to fewer than ten nodes does not establish reliable readback. The older description
+of intermittent blackouts was an observation, not a diagnosed cause; repeated retrievals
+now provide a minimal reproduction of the missing-handle/empty-enumeration behavior.
 
-```python
-# Safe pattern
-try:
-    # Create node
-    node = nuke.createNode("Grade", inpanel=False)
-    
-    # Set position
-    node.setXYpos(100, 100)
-    
-    # Set label (instead of renaming)
-    node["label"].setValue("Descriptive Label")
-    
-    # Only then modify parameters
-    node["blackpoint"].setValue(0.1)
-    
-    # Only connect to existing nodes
-    if 'previous_node' in locals() and previous_node:
-        node.setInput(0, previous_node)
-        
-    # Store for next connection
-    previous_node = node
-    
-except Exception as e:
-    print(f"Error: {str(e)}")
-```
+- An empty list does not prove an empty graph, and `None` does not prove node absence.
+- Creation can change the graph before later verification becomes unavailable. Preserve
+  an uncertain outcome; no automatic mutation retry or guessed deletion is permitted.
+- Read-only observations may be attempted again, but recovery is not guaranteed. Do not
+  reset the script, split mutations, or remove verification to work around the license limit.
+- Capabilities and revision guarantees remain degraded on NC. Full native edit, toolset,
+  shot, AOV, and commercial revision qualification still require separate host evidence.
 
-## Testing Strategy
+## Multiple clients and Python output
 
-1. Start with a single node creation
-2. Verify it works before proceeding
-3. Add nodes incrementally
-4. Test connections separately from creation
+Protocol v2 supports multiple clients sharing one loopback listener. The old single-client
+restriction was replaced in Milestone 1; two-client native evidence is recorded in
+[the validation report](docs/validation/milestone-1.md). Each client launches its own external
+stdio process. Use matching protocol versions and the intended port/checkouts; see
+[installation](INSTALL_OTHER_CLIENTS.md).
 
-Following these guidelines will help ensure reliable operation of the Nuke MCP interface.
-
-## Field notes from live testing (Nuke Non-commercial 17.0v4, 2026-07-30)
-
-The following behavior was measured end-to-end through this bridge (stdio MCP →
-`nuke_mcp_server.py` → socket → addon in a live Nuke NC GUI session). It goes
-beyond the documented "first 10 nodes" Non-commercial caveat.
-
-### 1. Intermittent Python node-access blackouts
-
-Nuke NC intermittently stops returning node handles to Python, in on/off
-windows that flip between calls. During a blackout, with a 6-node graph:
-
-- `nuke.allNodes()` returns `[]` (not "first 10" — empty).
-- `nuke.toNode("ExistingNode")` returns `None`.
-- `nuke.createNode(...)` **creates the node but returns `None`** — the node
-  appears in the graph with a default name (renaming happens after the
-  return-value check in the addon, so the requested name is never applied).
-
-The same code returns the full, correct node list in an adjacent call. Graph
-state itself is never lost — nodes created during a blackout persist and show
-up when a good window returns.
-
-Per-tool consequences:
-
-- `get_script_info` may report `Total Nodes: 0` on a non-empty script.
-- `get_node_info`, `modify_node`, `delete_node`, `connect_nodes` may fail with
-  "Node not found" for nodes that exist.
-- `create_node` may return "Failed to create node of type X" **while still
-  creating an unnamed node** — check for orphaned default-named nodes
-  (`NoOp1`, `Grade1`, …) after such an error.
-- `auto_layout_nodes` and anything else that enumerates may silently do
-  nothing.
-
-Mitigation:
-
-- Treat an empty enumeration or a "Node not found" as *suspect*, not
-  authoritative. Retry the call; a good window usually appears within a few
-  attempts.
-- After a `create_node` error, re-check the graph before re-creating, or you
-  will accumulate duplicate unnamed nodes.
-- Licensed (commercial) Nuke is expected not to show this behavior; treat
-  everything above as NC-specific until verified there.
-
-### 2. The addon serves exactly one MCP client at a time
-
-`nuke_mcp_addon.py` uses `listen(1)` and a single client slot. Every MCP
-client you register (Claude Code, Claude Desktop, Codex, …) keeps its own
-long-lived `main.py` process with a persistent socket to the addon. The first
-client to connect holds the slot until it disconnects; all other clients get
-"Could not connect to Nuke. Make sure the Nuke addon is running." even though
-the addon is fine.
-
-During testing, four concurrent `main.py` processes were found competing for
-the slot — including two launched with Nuke's bundled `python.exe` instead of
-the repo venv (see `INSTALL_OTHER_CLIENTS.md`; do not use Nuke's Python for
-`main.py`).
-
-Mitigation:
-
-- Register the bridge in **one** MCP client at a time, or expect connect
-  errors in the others while one is active.
-- If connections fail, look for stale bridge processes:
-  `Get-CimInstance Win32_Process -Filter "Name like 'python%'" | Where-Object { $_.CommandLine -match 'nuke_mcp' }`
-  and kill the ones you are not using. Stopping and restarting the server from
-  the NukeMCP panel also drops a stuck client.
-
-### 3. `execute_nuke_code` returns data only via the `output` dict
-
-`print()` inside executed code goes to Nuke's Script Editor, not back to the
-MCP client. Assign into the injected `output` dictionary instead:
+`execute_nuke_code` returns data through the injected `output` dictionary. `print()` writes
+to Nuke's Script Editor. This read-only example remains subject to NC retrieval limits:
 
 ```python
-import nuke
-output["nodes"] = [n.name() for n in nuke.allNodes()]
+output["nodes"] = [node.fullName() for node in nuke.allNodes()]
 ```
-
-### 4. Node types are allowlisted
-
-`create_node` validates against a fixed standard list plus top-level entries
-of the Nodes menu. Common types like `CheckerBoard2` are rejected with
-"Invalid node type". For anything not on the list, create it through
-`execute_nuke_code` with `nuke.nodes.<Class>()` — but note that during an NC
-blackout window (see §1) the returned handle may be `None` there as well.
 
 ## Qualification before deployment
 

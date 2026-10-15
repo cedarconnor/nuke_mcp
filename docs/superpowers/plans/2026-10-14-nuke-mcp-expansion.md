@@ -38,7 +38,7 @@
 | 5 Production workflows | 11–13 | Validated manifests, shot generation, AOV Groups | No overwrite or graph clearing; fixtures reproduce intended topology |
 | 6 Events and delivery | 14–15 | Scene revisions, event polling, qualified release | Offline suite plus separately recorded native and artist checks |
 
-Milestones 1–5 results are recorded in their validation reports; Milestone 6 verification remains pending. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
+Milestones 1–5 results are recorded in their validation reports; Milestone 6 has bounded NC evidence in the Task 14/15 reports, with the listed native and commercial gates still open. Unavailable licensed capabilities are reported as unqualified; they are not silently substituted with mock results. Schedule estimates depend on live Nuke availability and are intentionally not promised here.
 
 ## File responsibilities
 
@@ -408,6 +408,15 @@ self.assertEqual(report['cleanup']['outcome'], 'applied')  # Only when native re
 - [x] Implement the opt-in runner and documentation, including coordinated v2 upgrade/rollback, package deployment, host limitations, tool schemas, receipts, and explicit NC `.nknc` workflows. Inspect source licenses if copying code; do not invent an overall project license from donor licenses.
 - [x] Run the full offline suite, real stdio probe, `git diff --check`, and native scenarios on an authorized disposable host. Record native render evidence separately from artist review. If commercial Nuke is unavailable, deliver the bounded NC result and leave commercial qualification open. Run one independent review of protocol races, mutation ownership, and workflow publication before release delivery.
 - [x] Commit as `test: qualify expanded Nuke workflows and document deployment`. Report exact tests, gaps, and branch state. Push or deploy only when requested.
+
+## Follow-up: native qualification blocker diagnosis
+
+- [x] Reproduce unavailable node lookup independently of the bridge on a fresh one-node NC fixture.
+- [x] Compare bridge callbacks and real bridge requests; retain ordered native traces and process-exit evidence.
+- [x] Correct NC guidance without weakening verification or retrying uncertain mutations. See [diagnosis](../../validation/nc-node-retrieval.md).
+- [ ] Obtain a suitable licensed host and complete the remaining workflow and commercial revision qualification; retain numeric AOV results and an artist-viewable preview. NC exhaustion does not satisfy this gate.
+
+Follow-up evidence and documentation are local on `codex/nuke-nc-observation`, based on Task 15 commit `6cb9b0b`. Main remains unchanged.
 
 ## Completion criteria
 

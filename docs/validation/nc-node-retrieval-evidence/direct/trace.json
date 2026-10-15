@@ -1,0 +1,83 @@
+{
+  "pid": 152616,
+  "mode": "direct",
+  "version": "17.0v4",
+  "nc": true,
+  "fixture": "C:\\Users\\Cedar\\.codex\\worktrees\\nuke-bridge-foundation\\nuke_mcp\\.superpowers\\sdd\\2026-10-14-nuke-mcp-expansion\\nc-lookup-direct\\lookup_fixture.nk",
+  "trace": [
+    {
+      "call": "toNode",
+      "index": 1,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 2,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 3,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 4,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 5,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 6,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 7,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 8,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 9,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 10,
+      "path": "MCP_Constant"
+    },
+    {
+      "call": "toNode",
+      "index": 11,
+      "path": null
+    },
+    {
+      "call": "toNode",
+      "index": 12,
+      "path": null
+    },
+    {
+      "call": "toNode",
+      "index": 13,
+      "path": null
+    },
+    {
+      "call": "toNode",
+      "index": 14,
+      "path": null
+    },
+    {
+      "call": "allNodes",
+      "paths": []
+    }
+  ]
+}

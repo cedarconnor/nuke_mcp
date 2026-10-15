@@ -1,0 +1,249 @@
+[
+  {
+    "request_id": "9cce09e7-668b-4f23-ad5c-761186ee06ed",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": "Root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "f8253737-05d2-44fc-a14d-8b063da35412",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": "Root"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "d881c2a9-544d-493b-ad44-fca419034b1f",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": "C:/Users/Cedar/.codex/worktrees/nuke-bridge-foundation/nuke_mcp/.superpowers/sdd/2026-10-14-nuke-mcp-expansion/nc-lookup-requests/lookup_fixture.nk"
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "601b5189-a4cc-4e68-bacd-ae79d0e59720",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "trace": [
+          {
+            "index": 1,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 2,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 3,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 4,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 5,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 6,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 7,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 8,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 9,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 10,
+            "path": "MCP_Constant"
+          },
+          {
+            "index": 11,
+            "path": null
+          },
+          {
+            "index": 12,
+            "path": null
+          },
+          {
+            "index": 13,
+            "path": null
+          },
+          {
+            "index": 14,
+            "path": null
+          }
+        ],
+        "allNodes": []
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "ac3e59a0-67d6-4a45-8eee-8df1fb3a9409",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": null
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "3bcc7e5b-fc76-42dd-a48e-1d2861e657cc",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": null
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "868f583e-52d6-4f20-a3bf-4d7231dda38d",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": null
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "2fa58637-1f29-48d1-857b-15aba6759496",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "path": null
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  },
+  {
+    "request_id": "971b49a1-8cdc-4f4c-86e9-0e038d8c3e51",
+    "client_session_id": "f80db415-786a-411b-99c3-01b49b08ac82",
+    "server_instance_id": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+    "ok": true,
+    "state": "completed",
+    "outcome": "applied",
+    "data": {
+      "executed": true,
+      "output": {
+        "close_scheduled": true
+      }
+    },
+    "error": null,
+    "warnings": [],
+    "observation": {
+      "coverage": "unknown",
+      "reason": "not_inspected"
+    },
+    "revision": null
+  }
+]

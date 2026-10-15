@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-15T05:11:34.829570+00:00",
+  "runtime_git_head": "6cb9b0b2a282eef342837434ee392bacc77e690f",
+  "runtime_modified": false,
+  "documentation_modified": true,
+  "external_python": "D:/nuke_mcp/.venv/Scripts/python.exe",
+  "files": {
+    "direct/exit.json": "fa487e7112c5dd04a7c996bfc582637e70bce78436520e2ed5f77a0aea4e808f",
+    "direct/launch.json": "c9bba44bd8710eaab957729bfd49a3af66c1e03ed03e8cdc433aaae82eea2a3d",
+    "direct/lookup_fixture.nk": "ccafcf20eea4b117fd2cdf1c1552bd308e6828e6e63c7b1aa3044ff2cd601fc6",
+    "direct/menu.py": "fdc8d6b87f25ae706cb4607e0b7133de6c18374cc7e7026ba7cf0701077a2c25",
+    "direct/trace.json": "dd1d6f6dbdc764c1699520d623fee5fe384f6a5cc071489ea691dc64374f3285",
+    "bridge/exit.json": "8742868c359d06a979925c7f2deab8b20f9c486a4425515b5e3dce473accc42f",
+    "bridge/launch.json": "4ae00c8e640d5659e3d3ccad9030d692b29f0f9a63206998c486cada254da00b",
+    "bridge/lookup_fixture.nk": "ccafcf20eea4b117fd2cdf1c1552bd308e6828e6e63c7b1aa3044ff2cd601fc6",
+    "bridge/menu.py": "fdc8d6b87f25ae706cb4607e0b7133de6c18374cc7e7026ba7cf0701077a2c25",
+    "bridge/trace.json": "6e11c9b5bff9c9c374e9d01f012886422d917367b9a49cd2475b602fa7566ca2",
+    "requests/exit.json": "7590da40df402f289bad275f7e66e7a0ded1b218ce99b66f8320f5557bdcc6d0",
+    "requests/lookup_fixture.nk": "ccafcf20eea4b117fd2cdf1c1552bd308e6828e6e63c7b1aa3044ff2cd601fc6",
+    "requests/menu.py": "f6f1be135e67436e6763892459a1a2190c52ea13819af5314635c739cdd152b0",
+    "requests/pid.json": "0be7f2565b9814de89308e3f3b1800b20a6483e96a1a36b05d339028b9180ad9",
+    "requests/receipts.json": "81db8bac908c26167304d0e50d8bb0b0ef80bdb34c57e75011282500f3394c95",
+    "requests/started.json": "657a6aa5f87ec64db0aea5f29598c8f4f08f347ca4e1dbbaf17f9f0ae594d14a",
+    "requests/trace.json": "1830d745847b9193efecbc3b76b98d0f18b205377d15de3ceaeec1687097ee30",
+    "run-nc-lookup.py": "a310fc35902bb57e8d88c7007c1c770b39901745bae736d59c88f5cd11a52c89",
+    "run-nc-lookup-requests.py": "c0430b4e04809b90bcf19704a3817e5cd8dd8ec1148da67f8acf41d39d6ad230"
+  }
+}

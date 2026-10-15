@@ -31,6 +31,10 @@ Read `observation.coverage`, errors and `truncated` before drawing conclusions.
 NC enumeration remains partial or unknown. An empty result under NC does not
 prove an empty graph. Legacy `get_script_info` and `get_node_info` summarize the
 same bounded structured observations and disclose their coverage.
+Repeated retrievals of a single node can make that node unavailable to Python;
+the limit is not safely modeled as ten distinct nodes. See the
+[one-node native reproduction](validation/nc-node-retrieval.md). Later read-only
+requests did not restore observation in that run.
 
 File expressions and registered filename filters remain trusted Nuke code;
 inspection is not a sandbox for an untrusted script. No donor code was copied.

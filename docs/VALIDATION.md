@@ -3,6 +3,10 @@
 The qualification CLI records evidence against one running Nuke bridge. It never certifies a
 commercial release or artist approval from an NC result. The current results and gaps are in
 [Task 15 evidence](validation/task-15.md); earlier runs remain under `docs/validation/`.
+The [NC retrieval diagnosis](validation/nc-node-retrieval.md) reproduces the missing-handle
+failure without the bridge. A one-node fixture can exhaust retrievals, so reducing fixture
+size alone cannot unblock the outstanding native workflow checks. Repeated read-only calls
+are not a recovery guarantee, and ambiguous mutations must not be replayed.
 
 ## Run the checks
 

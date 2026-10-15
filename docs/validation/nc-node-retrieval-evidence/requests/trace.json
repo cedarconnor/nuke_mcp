@@ -1,0 +1,80 @@
+{
+  "pid": 138368,
+  "instance": "c5eb8547-6ff5-4bcc-b08f-add1342b797b",
+  "batch": {
+    "trace": [
+      {
+        "index": 1,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 2,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 3,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 4,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 5,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 6,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 7,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 8,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 9,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 10,
+        "path": "MCP_Constant"
+      },
+      {
+        "index": 11,
+        "path": null
+      },
+      {
+        "index": 12,
+        "path": null
+      },
+      {
+        "index": 13,
+        "path": null
+      },
+      {
+        "index": 14,
+        "path": null
+      }
+    ],
+    "allNodes": []
+  },
+  "separate_requests": [
+    {
+      "path": null
+    },
+    {
+      "path": null
+    },
+    {
+      "path": null
+    },
+    {
+      "path": null
+    }
+  ],
+  "graph_mutations_requested": false
+}
